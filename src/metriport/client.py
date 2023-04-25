@@ -5,7 +5,7 @@ from backports.cached_property import cached_property
 from .resources.document.client import AsyncDocumentClient, DocumentClient
 
 
-class MetriportApi:
+class Mercoa:
     def __init__(self, *, environment: str, api_key: str):
         self._environment = environment
         self.api_key = api_key
@@ -15,7 +15,7 @@ class MetriportApi:
         return DocumentClient(environment=self._environment, api_key=self.api_key)
 
 
-class AsyncMetriportApi:
+class AsyncMercoa:
     def __init__(self, *, environment: str, api_key: str):
         self._environment = environment
         self.api_key = api_key
