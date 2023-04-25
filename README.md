@@ -1,19 +1,26 @@
 
-# {Company} Python Library
+# Metriport Python Library
 
-[![pypi](https://img.shields.io/pypi/v/{company}.svg)](https://pypi.python.org/pypi/{company})
+[![pypi](https://img.shields.io/pypi/v/metriport.svg)](https://pypi.python.org/pypi/fern-metriport)
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
 
 ## Documentation
 
-API documentation is available at <{docs_url}>.
+API reference documentation is available [here](https://docs.metriport.com/home/welcome).
 
 ## Usage
 
-Check out the [sample app](.sample-app/app.py) which consumes this SDK!
-
 ```python
-TODO
+from metriport.client import Metriport
+
+metriport_client = Metriport(api_key="YOUR_API_KEY")
+
+document = metriport_client.document.get(
+    patient_id='some-patient-id',
+    facility_id='some-facility-id',
+)
+
+print(document)
 ```
 
 ## Beta status
