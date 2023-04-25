@@ -2,11 +2,12 @@
 
 from backports.cached_property import cached_property
 
+from .environment import MercoaEnvironment
 from .resources.document.client import AsyncDocumentClient, DocumentClient
 
 
 class Mercoa:
-    def __init__(self, *, environment: str, api_key: str):
+    def __init__(self, *, environment: MercoaEnvironment = MercoaEnvironment.PRODUCTION, api_key: str):
         self._environment = environment
         self.api_key = api_key
 
@@ -16,7 +17,7 @@ class Mercoa:
 
 
 class AsyncMercoa:
-    def __init__(self, *, environment: str, api_key: str):
+    def __init__(self, *, environment: MercoaEnvironment = MercoaEnvironment.PRODUCTION, api_key: str):
         self._environment = environment
         self.api_key = api_key
 

@@ -9,13 +9,14 @@ import pydantic
 
 from ...core.api_error import ApiError
 from ...core.remove_none_from_headers import remove_none_from_headers
+from ...environment import MercoaEnvironment
 from .types.download_document_response import DownloadDocumentResponse
 from .types.get_documents_response import GetDocumentsResponse
 from .types.trigger_documents_query_response import TriggerDocumentsQueryResponse
 
 
 class DocumentClient:
-    def __init__(self, *, environment: str, api_key: str):
+    def __init__(self, *, environment: MercoaEnvironment = MercoaEnvironment.PRODUCTION, api_key: str):
         self._environment = environment
         self.api_key = api_key
 
@@ -24,7 +25,7 @@ class DocumentClient:
     ) -> GetDocumentsResponse:
         _response = httpx.request(
             "GET",
-            urllib.parse.urljoin(f"{self._environment}/", "medical/v1/document"),
+            urllib.parse.urljoin(f"{self._environment.value}/", "medical/v1/document"),
             params={"patientId": patient_id, "facilityId": facility_id, "forceQuery": force_query},
             headers=remove_none_from_headers({"X-API-Key": self.api_key}),
         )
@@ -39,7 +40,7 @@ class DocumentClient:
     def trigger_query(self, *, patient_id: str, facility_id: str) -> TriggerDocumentsQueryResponse:
         _response = httpx.request(
             "POST",
-            urllib.parse.urljoin(f"{self._environment}/", "medical/v1/document/query"),
+            urllib.parse.urljoin(f"{self._environment.value}/", "medical/v1/document/query"),
             params={"patientId": patient_id, "facilityId": facility_id},
             headers=remove_none_from_headers({"X-API-Key": self.api_key}),
         )
@@ -54,7 +55,7 @@ class DocumentClient:
     def download(self, *, file_name: str) -> DownloadDocumentResponse:
         _response = httpx.request(
             "POST",
-            urllib.parse.urljoin(f"{self._environment}/", "medical/v1/document/downloadUrl"),
+            urllib.parse.urljoin(f"{self._environment.value}/", "medical/v1/document/downloadUrl"),
             params={"fileName": file_name},
             headers=remove_none_from_headers({"X-API-Key": self.api_key}),
         )
@@ -68,7 +69,7 @@ class DocumentClient:
 
 
 class AsyncDocumentClient:
-    def __init__(self, *, environment: str, api_key: str):
+    def __init__(self, *, environment: MercoaEnvironment = MercoaEnvironment.PRODUCTION, api_key: str):
         self._environment = environment
         self.api_key = api_key
 
@@ -78,7 +79,7 @@ class AsyncDocumentClient:
         async with httpx.AsyncClient() as _client:
             _response = await _client.request(
                 "GET",
-                urllib.parse.urljoin(f"{self._environment}/", "medical/v1/document"),
+                urllib.parse.urljoin(f"{self._environment.value}/", "medical/v1/document"),
                 params={"patientId": patient_id, "facilityId": facility_id, "forceQuery": force_query},
                 headers=remove_none_from_headers({"X-API-Key": self.api_key}),
             )
@@ -94,7 +95,7 @@ class AsyncDocumentClient:
         async with httpx.AsyncClient() as _client:
             _response = await _client.request(
                 "POST",
-                urllib.parse.urljoin(f"{self._environment}/", "medical/v1/document/query"),
+                urllib.parse.urljoin(f"{self._environment.value}/", "medical/v1/document/query"),
                 params={"patientId": patient_id, "facilityId": facility_id},
                 headers=remove_none_from_headers({"X-API-Key": self.api_key}),
             )
@@ -110,7 +111,7 @@ class AsyncDocumentClient:
         async with httpx.AsyncClient() as _client:
             _response = await _client.request(
                 "POST",
-                urllib.parse.urljoin(f"{self._environment}/", "medical/v1/document/downloadUrl"),
+                urllib.parse.urljoin(f"{self._environment.value}/", "medical/v1/document/downloadUrl"),
                 params={"fileName": file_name},
                 headers=remove_none_from_headers({"X-API-Key": self.api_key}),
             )
