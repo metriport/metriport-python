@@ -3,6 +3,5 @@
 import enum
 
 
-class MercoaEnvironment(enum.Enum):
-    PRODUCTION = "https://api.metriport.com"
-    SANDBOX = "https://api.sandbox.metriport.com"
+class MetriportEnvironment(enum.Enum):
+    PRODUCTION = "https://api.metriport.com/medical/v1"
