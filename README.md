@@ -8,19 +8,85 @@
 
 API reference documentation is available [here](https://docs.metriport.com/home/welcome).
 
-## Usage
+## Installation
 
+Add this dependency to your project's build file:
+
+```bash
+pip install fern-metriport
+# or
+poetry add fern-metriport
+```
+
+## Usage
 ```python
+from metriport import BaseOrganization, OrgType, Address, UsState
 from metriport.client import Metriport
 
 metriport_client = Metriport(api_key="YOUR_API_KEY")
 
-document = metriport_client.document.get(
-    patient_id='some-patient-id',
-    facility_id='some-facility-id',
-)
+document = metriport_client.medical.organization.create(BaseOrganization(
+  type=OrgType.PostAcuteCare,
+  name="Metriport Inc.",
+  location=Address(
+    addressLine1="2261 Market Street",
+    addressLine2="#4818",
+    city="San Francisco",
+    state=UsState.CA,
+    zip="94114",
+    country="USA",
+  )
+));
+```
 
-print(document)
+## Async Client
+Our Python SDK exports an async client that you can use with asyncio. 
+
+```python
+from metriport import BaseOrganization, OrgType, Address, UsState
+from metriport.client import AsyncMetriport
+
+import asyncio
+
+metriport_client = AsyncMetriport(api_key="YOUR_API_KEY")
+
+async def create_organization():
+  document = metriport_client.medical.organization.create(BaseOrganization(
+      type=OrgType.PostAcuteCare,
+      name="Metriport Inc.",
+      location=Address(
+        addressLine1="2261 Market Street",
+        addressLine2="#4818",
+        city="San Francisco",
+        state=UsState.CA,
+        zip="94114",
+        country="USA",
+      )
+    ));
+
+asyncio.run(create_organization())
+```
+
+## Error Handling
+All exceptions thrown by the SDK will sublcass [ApiError](./src/metriport/core/api_error.py). 
+
+```python
+from metriport.core import ApiError
+from metriport import BadRequestError
+
+try:
+  metriport.medical.patients.get(patient_id='my_id')
+except APIError as e:  
+  # handle any api related error
+```
+
+## Timeouts
+By default, the client is configured to have a timeout of 60 seconds. You can customize this value at client instantiation.
+
+```python
+from moneykit.client import MoneyKit
+
+metriport_client = Metriport(api_key="YOUR_API_KEY", timeout=15)
 ```
 
 ## Beta status
