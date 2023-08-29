@@ -84,7 +84,7 @@ except APIError as e:
 By default, the client is configured to have a timeout of 60 seconds. You can customize this value at client instantiation.
 
 ```python
-from moneykit.client import MoneyKit
+from metriport.client import Metriport
 
 metriport_client = Metriport(api_key="YOUR_API_KEY", timeout=15)
 ```
