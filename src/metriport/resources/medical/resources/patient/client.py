@@ -11,7 +11,6 @@ from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.jsonable_encoder import jsonable_encoder
 from .....core.remove_none_from_dict import remove_none_from_dict
 from .types.base_patient import BasePatient
-from .types.list_patients_response import ListPatientsResponse
 from .types.patient import Patient
 
 # this is used as the default value for optional parameters
@@ -100,12 +99,12 @@ class PatientClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list(self, *, facility_id: typing.Optional[str] = None) -> ListPatientsResponse:
+    def list(self, *, facility_id: str) -> typing.List[Patient]:
         """
         Lists all Patients receiving care at the specified Facility.
 
         Parameters:
-            - facility_id: typing.Optional[str]. The ID of the Facility where the patient is receiving care.
+            - facility_id: str. The ID of the Facility where the patient is receiving care.
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -115,7 +114,7 @@ class PatientClient:
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListPatientsResponse, _response.json())  # type: ignore
+            return pydantic.parse_obj_as(typing.List[Patient], _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -229,12 +228,12 @@ class AsyncPatientClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list(self, *, facility_id: typing.Optional[str] = None) -> ListPatientsResponse:
+    async def list(self, *, facility_id: str) -> typing.List[Patient]:
         """
         Lists all Patients receiving care at the specified Facility.
 
         Parameters:
-            - facility_id: typing.Optional[str]. The ID of the Facility where the patient is receiving care.
+            - facility_id: str. The ID of the Facility where the patient is receiving care.
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -244,7 +243,7 @@ class AsyncPatientClient:
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListPatientsResponse, _response.json())  # type: ignore
+            return pydantic.parse_obj_as(typing.List[Patient], _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

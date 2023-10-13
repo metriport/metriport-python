@@ -12,7 +12,7 @@ from .document import (
     ListDocumentsResponse,
     Progress,
 )
-from .facility import BaseFacility, Facility, ListFacilitiesResponse
+from .facility import BaseFacility, Facility
 from .fhir import (
     ConsolidatedCountResponse,
     Filter,
@@ -31,7 +31,6 @@ from .patient import (
     Contacts,
     DriversLicense,
     FacilityId,
-    ListPatientsResponse,
     Patient,
     Period,
     PersonalIdentifier,
@@ -59,8 +58,6 @@ __all__ = [
     "Filter",
     "GetConsolidatedQueryStatusResponse",
     "ListDocumentsResponse",
-    "ListFacilitiesResponse",
-    "ListPatientsResponse",
     "OrgType",
     "Organization",
     "Patient",

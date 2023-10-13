@@ -11,7 +11,6 @@ from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.jsonable_encoder import jsonable_encoder
 from .types.base_facility import BaseFacility
 from .types.facility import Facility
-from .types.list_facilities_response import ListFacilitiesResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -88,7 +87,7 @@ class FacilityClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list(self) -> ListFacilitiesResponse:
+    def list(self) -> typing.List[Facility]:
         """
         Lists all of your Facilities.
         """
@@ -99,7 +98,7 @@ class FacilityClient:
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListFacilitiesResponse, _response.json())  # type: ignore
+            return pydantic.parse_obj_as(typing.List[Facility], _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -178,7 +177,7 @@ class AsyncFacilityClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list(self) -> ListFacilitiesResponse:
+    async def list(self) -> typing.List[Facility]:
         """
         Lists all of your Facilities.
         """
@@ -189,7 +188,7 @@ class AsyncFacilityClient:
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListFacilitiesResponse, _response.json())  # type: ignore
+            return pydantic.parse_obj_as(typing.List[Facility], _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
