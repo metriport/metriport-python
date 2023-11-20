@@ -4,14 +4,17 @@ import typing
 import urllib.parse
 from json.decoder import JSONDecodeError
 
-import pydantic
-
 from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.remove_none_from_dict import remove_none_from_dict
 from .types.consolidated_count_response import ConsolidatedCountResponse
 from .types.get_consolidated_query_status_response import GetConsolidatedQueryStatusResponse
 from .types.start_consolidated_query_response import StartConsolidatedQueryResponse
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class FhirClient:
@@ -42,11 +45,21 @@ class FhirClient:
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned resources -
                                              formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
                                               no end date filter will be applied.
+                                             ---
+        from metriport.client import Metriport
 
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.fhir.start_consolidated_query(
+            id="12345678",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"patient/{id}/consolidated/query"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/query"
+            ),
             params=remove_none_from_dict({"resources": resources, "dateFrom": date_from, "dateTo": date_to}),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -65,10 +78,21 @@ class FhirClient:
 
         Parameters:
             - id: str. The ID of the Patient
+        ---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.fhir.get_consolidated_query_status(
+            id="12345678",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"patient/{id}/consolidated/query"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/query"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -108,7 +132,9 @@ class FhirClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"patient/{id}/consolidated/count"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/count"
+            ),
             params=remove_none_from_dict({"resources": resources, "dateFrom": date_from, "dateTo": date_to}),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -150,11 +176,21 @@ class AsyncFhirClient:
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned resources -
                                              formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
                                               no end date filter will be applied.
+                                             ---
+        from metriport.client import AsyncMetriport
 
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.fhir.start_consolidated_query(
+            id="12345678",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"patient/{id}/consolidated/query"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/query"
+            ),
             params=remove_none_from_dict({"resources": resources, "dateFrom": date_from, "dateTo": date_to}),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -173,10 +209,21 @@ class AsyncFhirClient:
 
         Parameters:
             - id: str. The ID of the Patient
+        ---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.fhir.get_consolidated_query_status(
+            id="12345678",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"patient/{id}/consolidated/query"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/query"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -216,7 +263,9 @@ class AsyncFhirClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"patient/{id}/consolidated/count"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/count"
+            ),
             params=remove_none_from_dict({"resources": resources, "dateFrom": date_from, "dateTo": date_to}),
             headers=self._client_wrapper.get_headers(),
             timeout=60,

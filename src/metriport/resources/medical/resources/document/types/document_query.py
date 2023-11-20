@@ -3,13 +3,36 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .progress import Progress
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class DocumentQuery(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import (
+        DocumentQuery,
+        DocumentQueryStatus,
+        Progress,
+    )
+
+    DocumentQuery(
+        download=Progress(
+            status=DocumentQueryStatus.COMPLETED,
+            total=100,
+            successful=98,
+            errors=2,
+        ),
+        convert=Progress(
+            status=DocumentQueryStatus.PROCESSING,
+        ),
+    )
+    """
+
     download: typing.Optional[Progress]
     convert: typing.Optional[Progress]
 

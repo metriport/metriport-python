@@ -3,12 +3,25 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class Coding(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import Coding
+
+    Coding(
+        system="http://snomed.info/sct",
+        code="62479008",
+        display="Diagnoses",
+    )
+    """
+
     system: typing.Optional[str] = pydantic.Field(description="Identity of the terminology system.")
     code: typing.Optional[str] = pydantic.Field(description="Symbol in syntax defined by the system.")
     display: typing.Optional[str] = pydantic.Field(description="Representation defined by the system.")

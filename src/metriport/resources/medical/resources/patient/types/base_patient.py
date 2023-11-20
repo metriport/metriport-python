@@ -3,12 +3,15 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .addresses import Addresses
 from .contacts import Contacts
 from .personal_identifier import PersonalIdentifier
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class BasePatient(pydantic.BaseModel):

@@ -3,13 +3,29 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .facility_id import FacilityId
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class Contact(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import Contact
+
+    Contact(
+        phone="1234567899",
+        email="karen@cvspharmacy.com",
+        facility_ids=[
+            "2.16.840.1.113883.3.666.5.2004.4.2005",
+            "2.16.840.1.113883.3.666.123",
+        ],
+    )
+    """
+
     phone: typing.Optional[str] = pydantic.Field(
         description="The Patient's 10 digit phone number, formatted `1234567899`."
     )

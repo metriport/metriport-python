@@ -3,13 +3,28 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .patient_consolidated_data_status import PatientConsolidatedDataStatus
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class GetConsolidatedQueryStatusResponse(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import (
+        GetConsolidatedQueryStatusResponse,
+        PatientConsolidatedDataStatus,
+    )
+
+    GetConsolidatedQueryStatusResponse(
+        status=PatientConsolidatedDataStatus.COMPLETED,
+        message="Trigger a new query by POST /patient/:id/consolidated/query; data will be sent through Webhook",
+    )
+    """
+
     status: PatientConsolidatedDataStatus
     message: typing.Optional[str]
 

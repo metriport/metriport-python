@@ -3,13 +3,29 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ....core.datetime_utils import serialize_datetime
 from .us_state import UsState
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class Address(pydantic.BaseModel):
+    """
+    from metriport import Address, UsState
+
+    Address(
+        address_line_1="2261 Market Street",
+        address_line_2="#4818",
+        city="San Francisco",
+        state=UsState.CA,
+        zip="94114",
+        country="USA",
+    )
+    """
+
     address_line_1: str = pydantic.Field(alias="addressLine1", description="The address.")
     address_line_2: typing.Optional[str] = pydantic.Field(
         alias="addressLine2", description="The address details, for example `#4451`"

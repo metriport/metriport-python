@@ -3,16 +3,17 @@
 import datetime as dt
 import typing
 
-import pydantic
+from ......core.datetime_utils import serialize_datetime
+from .facility import Facility
 
-from ....core.datetime_utils import serialize_datetime
-from .temperature_measurement import TemperatureMeasurement
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
-class Temperature(pydantic.BaseModel):
-    core: typing.Optional[TemperatureMeasurement]
-    delta_celcius: typing.Optional[float]
-    skin: typing.Optional[TemperatureMeasurement]
+class ListFacilitiesResponse(pydantic.BaseModel):
+    facilities: typing.List[Facility]
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

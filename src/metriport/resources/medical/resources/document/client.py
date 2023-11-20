@@ -4,8 +4,6 @@ import typing
 import urllib.parse
 from json.decoder import JSONDecodeError
 
-import pydantic
-
 from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.remove_none_from_dict import remove_none_from_dict
@@ -13,6 +11,11 @@ from .types.conversion_type import ConversionType
 from .types.document_query import DocumentQuery
 from .types.document_url import DocumentUrl
 from .types.list_documents_response import ListDocumentsResponse
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class DocumentClient:
@@ -22,19 +25,15 @@ class DocumentClient:
     def start_query(self, *, patient_id: str, facility_id: str) -> DocumentQuery:
         """
         Triggers a document query for the specified patient across HIEs.
-
         When executed, this endpoint triggers an asynchronous document query across HIEs.
         This is a two step process where the documents will first be downloaded from
         the respective HIE and, if they are C-CDA/XML, then converted to FHIR.
-
         Each process (download, conversion) will contain its own `total` and `status`
         as well as the count for `successful` operations and `errors`.
-
         When the asynchronous document query finishes, it stores new/updated document
         references for future requests and updates the status of download to `completed`.
         Meanwhile, in the background, files will be converted and the convert count will be
         incremented. Once all documents have been converted it too will be marked as `completed`.
-
         If there's no document to be converted, the total will be set to zero and
         the status to `completed`.
 
@@ -42,6 +41,16 @@ class DocumentClient:
             - patient_id: str. The ID of the Patient for which to list available Documents.
 
             - facility_id: str. The ID of the Facility where the patient is receiving care.
+        ---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.document.start_query(
+            patient_id="12345678",
+            facility_id="12345678",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -67,6 +76,15 @@ class DocumentClient:
 
         Parameters:
             - patient_id: str. The ID of the Patient for which to list available Documents.
+        ---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.document.get_query_status(
+            patient_id="12345678",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -95,7 +113,6 @@ class DocumentClient:
         Lists all Documents that can be retrieved for a Patient.
         This endpoint returns the document references available
         at Metriport which are associated with the given Patient.
-
         To start a new document query, see the [Start Document Query endpoint](/api-reference/medical/document/start-query).
 
         Parameters:
@@ -106,6 +123,16 @@ class DocumentClient:
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no start date filter will be applied.
 
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no end date filter will be applied.
+        ---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.document.list(
+            patient_id="12345678",
+            facility_id="12345678",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -136,7 +163,17 @@ class DocumentClient:
 
             - conversion_type: typing.Optional[ConversionType]. The doc type to convert to. Either `html` or `pdf`.
                                                                 This parameter should only be used for converting XML/CDA files.
+                                                                ---
+        from metriport.client import Metriport
+        from metriport.resources.medical import ConversionType
 
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.document.get_url(
+            file_name="x-ray",
+            conversion_type=ConversionType.PDF,
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -161,19 +198,15 @@ class AsyncDocumentClient:
     async def start_query(self, *, patient_id: str, facility_id: str) -> DocumentQuery:
         """
         Triggers a document query for the specified patient across HIEs.
-
         When executed, this endpoint triggers an asynchronous document query across HIEs.
         This is a two step process where the documents will first be downloaded from
         the respective HIE and, if they are C-CDA/XML, then converted to FHIR.
-
         Each process (download, conversion) will contain its own `total` and `status`
         as well as the count for `successful` operations and `errors`.
-
         When the asynchronous document query finishes, it stores new/updated document
         references for future requests and updates the status of download to `completed`.
         Meanwhile, in the background, files will be converted and the convert count will be
         incremented. Once all documents have been converted it too will be marked as `completed`.
-
         If there's no document to be converted, the total will be set to zero and
         the status to `completed`.
 
@@ -181,6 +214,16 @@ class AsyncDocumentClient:
             - patient_id: str. The ID of the Patient for which to list available Documents.
 
             - facility_id: str. The ID of the Facility where the patient is receiving care.
+        ---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.document.start_query(
+            patient_id="12345678",
+            facility_id="12345678",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -206,6 +249,15 @@ class AsyncDocumentClient:
 
         Parameters:
             - patient_id: str. The ID of the Patient for which to list available Documents.
+        ---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.document.get_query_status(
+            patient_id="12345678",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -234,7 +286,6 @@ class AsyncDocumentClient:
         Lists all Documents that can be retrieved for a Patient.
         This endpoint returns the document references available
         at Metriport which are associated with the given Patient.
-
         To start a new document query, see the [Start Document Query endpoint](/api-reference/medical/document/start-query).
 
         Parameters:
@@ -245,6 +296,16 @@ class AsyncDocumentClient:
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no start date filter will be applied.
 
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no end date filter will be applied.
+        ---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.document.list(
+            patient_id="12345678",
+            facility_id="12345678",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -275,7 +336,17 @@ class AsyncDocumentClient:
 
             - conversion_type: typing.Optional[ConversionType]. The doc type to convert to. Either `html` or `pdf`.
                                                                 This parameter should only be used for converting XML/CDA files.
+                                                                ---
+        from metriport.client import AsyncMetriport
+        from metriport.resources.medical import ConversionType
 
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.document.get_url(
+            file_name="x-ray",
+            conversion_type=ConversionType.PDF,
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",

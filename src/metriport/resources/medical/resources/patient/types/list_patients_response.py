@@ -3,15 +3,17 @@
 import datetime as dt
 import typing
 
-import pydantic
+from ......core.datetime_utils import serialize_datetime
+from .patient import Patient
 
-from ....core.datetime_utils import serialize_datetime
-from .heart_rate_variability_measurement import HeartRateVariabilityMeasurement
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
-class HeartRateVariability(pydantic.BaseModel):
-    rmssd: typing.Optional[HeartRateVariabilityMeasurement]
-    sdnn: typing.Optional[HeartRateVariabilityMeasurement]
+class ListPatientsResponse(pydantic.BaseModel):
+    patients: typing.List[Patient]
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

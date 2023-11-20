@@ -2,5 +2,6 @@
 
 from .base_facility import BaseFacility
 from .facility import Facility
+from .list_facilities_response import ListFacilitiesResponse
 
-__all__ = ["BaseFacility", "Facility"]
+__all__ = ["BaseFacility", "Facility", "ListFacilitiesResponse"]

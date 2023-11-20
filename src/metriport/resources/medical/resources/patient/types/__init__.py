@@ -6,6 +6,7 @@ from .contact import Contact
 from .contacts import Contacts
 from .drivers_license import DriversLicense
 from .facility_id import FacilityId
+from .list_patients_response import ListPatientsResponse
 from .patient import Patient
 from .period import Period
 from .personal_identifier import PersonalIdentifier, PersonalIdentifier_DriversLicense
@@ -17,6 +18,7 @@ __all__ = [
     "Contacts",
     "DriversLicense",
     "FacilityId",
+    "ListPatientsResponse",
     "Patient",
     "Period",
     "PersonalIdentifier",

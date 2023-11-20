@@ -3,13 +3,31 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .coding import Coding
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class CodeableConcept(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import CodeableConcept, Coding
+
+    CodeableConcept(
+        coding=[
+            Coding(
+                system="http://snomed.info/sct",
+                code="62479008",
+                display="Diagnoses",
+            )
+        ],
+        text="Diagnoses",
+    )
+    """
+
     coding: typing.Optional[typing.List[Coding]] = pydantic.Field(
         description="Array containing the coding defined by a terminology system."
     )

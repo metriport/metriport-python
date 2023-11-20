@@ -3,13 +3,48 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .codeable_concept import CodeableConcept
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class DocumentReference(pydantic.BaseModel):
+    """
+    import datetime
+
+    from metriport.resources.medical import (
+        CodeableConcept,
+        Coding,
+        DocumentReference,
+    )
+
+    DocumentReference(
+        id="1.2.543.1.34.1.34.134",
+        file_name="CCDA_Diag.xml",
+        location="https://fhir.metriport.com/oauth/fhir/Binary/2.16.840.1.113883.3.777.666.5.700009.969696",
+        description="Patient Diagnoses",
+        status="current",
+        indexed=datetime.datetime.fromisoformat(
+            "2019-09-07 15:50:00+00:00",
+        ),
+        mime_type="application/xml",
+        size=17344007,
+        type=CodeableConcept(
+            coding=[
+                Coding(
+                    system="http://snomed.info/sct",
+                    code="62479008",
+                    display="Diagnoses",
+                )
+            ],
+        ),
+    )
+    """
+
     id: str = pydantic.Field(description="The Document ID.")
     file_name: str = pydantic.Field(alias="fileName", description="Name of the file.")
     location: str = pydantic.Field(description="URL that can be used to retrieve the Document.")

@@ -3,20 +3,26 @@
 import datetime as dt
 import typing
 
-import pydantic
+from ......core.datetime_utils import serialize_datetime
+from .....commons.types.address import Address
+from .org_type import OrgType
 
-from ....core.datetime_utils import serialize_datetime
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
-class SleepDurations(pydantic.BaseModel):
-    total_seconds: typing.Optional[int]
-    awake_seconds: typing.Optional[int]
-    deep_seconds: typing.Optional[int]
-    rem_seconds: typing.Optional[int]
-    light_seconds: typing.Optional[int]
-    in_bed_seconds: typing.Optional[int]
-    time_to_fall_asleep_seconds: typing.Optional[int]
-    no_data_seconds: typing.Optional[int]
+class OrganizationCreate(pydantic.BaseModel):
+    name: str = pydantic.Field(
+        description=(
+            "The name of your organization. \n"
+            "This is usually your legal corporate entity name - \n"
+            "for example `Metriport Inc.`.\n"
+        )
+    )
+    type: OrgType = pydantic.Field(description="The type of your organization.")
+    location: Address
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

@@ -6,7 +6,6 @@ import httpx
 
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import MetriportEnvironment
-from .resources.devices.client import AsyncDevicesClient, DevicesClient
 from .resources.medical.client import AsyncMedicalClient, MedicalClient
 
 
@@ -17,14 +16,14 @@ class Metriport:
         base_url: typing.Optional[str] = None,
         environment: MetriportEnvironment = MetriportEnvironment.PRODUCTION,
         api_key: str,
-        timeout: typing.Optional[float] = 60
+        timeout: typing.Optional[float] = 60,
+        httpx_client: typing.Optional[httpx.Client] = None
     ):
         self._client_wrapper = SyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
             api_key=api_key,
-            httpx_client=httpx.Client(timeout=timeout),
+            httpx_client=httpx.Client(timeout=timeout) if httpx_client is None else httpx_client,
         )
-        self.devices = DevicesClient(client_wrapper=self._client_wrapper)
         self.medical = MedicalClient(client_wrapper=self._client_wrapper)
 
 
@@ -35,14 +34,14 @@ class AsyncMetriport:
         base_url: typing.Optional[str] = None,
         environment: MetriportEnvironment = MetriportEnvironment.PRODUCTION,
         api_key: str,
-        timeout: typing.Optional[float] = 60
+        timeout: typing.Optional[float] = 60,
+        httpx_client: typing.Optional[httpx.AsyncClient] = None
     ):
         self._client_wrapper = AsyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
             api_key=api_key,
-            httpx_client=httpx.AsyncClient(timeout=timeout),
+            httpx_client=httpx.AsyncClient(timeout=timeout) if httpx_client is None else httpx_client,
         )
-        self.devices = AsyncDevicesClient(client_wrapper=self._client_wrapper)
         self.medical = AsyncMedicalClient(client_wrapper=self._client_wrapper)
 
 

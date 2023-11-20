@@ -3,15 +3,42 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .base_facility import BaseFacility
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class Facility(BaseFacility):
+    """
+    from metriport import Address, UsState
+    from metriport.resources.medical import Facility
+
+    Facility(
+        id="2.16.840.1.113883.3.666.123",
+        name="Care Facility, LLC",
+        npi="1234567891",
+        address=Address(
+            address_line_1="2261 Market Street",
+            address_line_2="#4818",
+            city="San Francisco",
+            state=UsState.CA,
+            zip="94114",
+            country="USA",
+        ),
+        tin="12-3456789",
+        active=True,
+    )
+    """
+
     id: str = pydantic.Field(
-        description="The ID assigned to this Facility. This ID will be used to uniquely identify this Facility in medical documents."
+        description=(
+            "The ID assigned to this Facility. This ID will be used \n"
+            "to uniquely identify this Facility in medical documents.\n"
+        )
     )
 
     def json(self, **kwargs: typing.Any) -> str:

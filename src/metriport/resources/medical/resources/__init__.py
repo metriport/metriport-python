@@ -12,18 +12,15 @@ from .document import (
     ListDocumentsResponse,
     Progress,
 )
-from .facility import BaseFacility, Facility
+from .facility import BaseFacility, Facility, ListFacilitiesResponse
 from .fhir import (
     ConsolidatedCountResponse,
     Filter,
     GetConsolidatedQueryStatusResponse,
     PatientConsolidatedDataStatus,
-    ResourceTypeForConsolidation,
-    ResourcesSearchableByPatient,
-    ResourcesSearchableBySubject,
     StartConsolidatedQueryResponse,
 )
-from .organization import BaseOrganization, OrgType, Organization
+from .organization import OrgType, Organization, OrganizationCreate
 from .patient import (
     Addresses,
     BasePatient,
@@ -31,6 +28,7 @@ from .patient import (
     Contacts,
     DriversLicense,
     FacilityId,
+    ListPatientsResponse,
     Patient,
     Period,
     PersonalIdentifier,
@@ -40,7 +38,6 @@ from .patient import (
 __all__ = [
     "Addresses",
     "BaseFacility",
-    "BaseOrganization",
     "BasePatient",
     "CodeableConcept",
     "Coding",
@@ -58,17 +55,17 @@ __all__ = [
     "Filter",
     "GetConsolidatedQueryStatusResponse",
     "ListDocumentsResponse",
+    "ListFacilitiesResponse",
+    "ListPatientsResponse",
     "OrgType",
     "Organization",
+    "OrganizationCreate",
     "Patient",
     "PatientConsolidatedDataStatus",
     "Period",
     "PersonalIdentifier",
     "PersonalIdentifier_DriversLicense",
     "Progress",
-    "ResourceTypeForConsolidation",
-    "ResourcesSearchableByPatient",
-    "ResourcesSearchableBySubject",
     "StartConsolidatedQueryResponse",
     "document",
     "facility",
