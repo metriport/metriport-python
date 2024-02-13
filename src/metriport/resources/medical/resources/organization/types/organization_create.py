@@ -16,8 +16,8 @@ except ImportError:
 class OrganizationCreate(pydantic.BaseModel):
     name: str = pydantic.Field(
         description=(
-            "The name of your organization. \n"
-            "This is usually your legal corporate entity name - \n"
+            "The name of your organization.\n"
+            "This is usually your legal corporate entity name -\n"
             "for example `Metriport Inc.`.\n"
         )
     )

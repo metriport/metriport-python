@@ -10,6 +10,7 @@ from .....core.jsonable_encoder import jsonable_encoder
 from .....core.remove_none_from_dict import remove_none_from_dict
 from .types.base_patient import BasePatient
 from .types.list_patients_response import ListPatientsResponse
+from .types.medical_record_status import MedicalRecordStatus
 from .types.patient import Patient
 
 try:
@@ -38,7 +39,7 @@ class PatientClient:
 
             - request: BasePatient.
         ---
-        from metriport import UsState
+        from metriport import Address, UsState
         from metriport.client import Metriport
         from metriport.resources.medical import (
             BasePatient,
@@ -60,6 +61,16 @@ class PatientClient:
                         type="driversLicense",
                         state=UsState.CA,
                         value="51227265",
+                    )
+                ],
+                address=[
+                    Address(
+                        address_line_1="2261 Market Street",
+                        address_line_2="#4818",
+                        city="San Francisco",
+                        state=UsState.CA,
+                        zip="94114",
+                        country="USA",
                     )
                 ],
             ),
@@ -140,7 +151,7 @@ class PatientClient:
 
     def list(self, *, facility_id: typing.Optional[str] = None) -> ListPatientsResponse:
         """
-        Lists all Patients receiving care at the specified Facility.
+        Lists all Patients receiving care at the specified Facility, or all Patients if no Facility is specified.
 
         Parameters:
             - facility_id: typing.Optional[str]. The ID of the Facility where the patient is receiving care.
@@ -184,6 +195,55 @@ class PatientClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def get_medical_record_summary(self, patient_id: str, *, conversion_type: str) -> str:
+        """
+        Returns the URL for a medical record summary
+
+        Parameters:
+            - patient_id: str. The ID of the Patient.
+
+            - conversion_type: str. The type of conversion to perform. `html` or `pdf`
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "GET",
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{patient_id}/medical-record"
+            ),
+            params=remove_none_from_dict({"conversionType": conversion_type}),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(str, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get_medical_record_summary_status(self, patient_id: str) -> MedicalRecordStatus:
+        """
+        Returns the status of a medical record summary
+
+        Parameters:
+            - patient_id: str. The ID of the Patient.
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "GET",
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{patient_id}/medical-record-status"
+            ),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(MedicalRecordStatus, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncPatientClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -202,7 +262,7 @@ class AsyncPatientClient:
 
             - request: BasePatient.
         ---
-        from metriport import UsState
+        from metriport import Address, UsState
         from metriport.client import AsyncMetriport
         from metriport.resources.medical import (
             BasePatient,
@@ -224,6 +284,16 @@ class AsyncPatientClient:
                         type="driversLicense",
                         state=UsState.CA,
                         value="51227265",
+                    )
+                ],
+                address=[
+                    Address(
+                        address_line_1="2261 Market Street",
+                        address_line_2="#4818",
+                        city="San Francisco",
+                        state=UsState.CA,
+                        zip="94114",
+                        country="USA",
                     )
                 ],
             ),
@@ -304,7 +374,7 @@ class AsyncPatientClient:
 
     async def list(self, *, facility_id: typing.Optional[str] = None) -> ListPatientsResponse:
         """
-        Lists all Patients receiving care at the specified Facility.
+        Lists all Patients receiving care at the specified Facility, or all Patients if no Facility is specified.
 
         Parameters:
             - facility_id: typing.Optional[str]. The ID of the Facility where the patient is receiving care.
@@ -342,6 +412,55 @@ class AsyncPatientClient:
         )
         if 200 <= _response.status_code < 300:
             return
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get_medical_record_summary(self, patient_id: str, *, conversion_type: str) -> str:
+        """
+        Returns the URL for a medical record summary
+
+        Parameters:
+            - patient_id: str. The ID of the Patient.
+
+            - conversion_type: str. The type of conversion to perform. `html` or `pdf`
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "GET",
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{patient_id}/medical-record"
+            ),
+            params=remove_none_from_dict({"conversionType": conversion_type}),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(str, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get_medical_record_summary_status(self, patient_id: str) -> MedicalRecordStatus:
+        """
+        Returns the status of a medical record summary
+
+        Parameters:
+            - patient_id: str. The ID of the Patient.
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "GET",
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{patient_id}/medical-record-status"
+            ),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(MedicalRecordStatus, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

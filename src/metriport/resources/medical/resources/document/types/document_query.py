@@ -35,6 +35,7 @@ class DocumentQuery(pydantic.BaseModel):
 
     download: typing.Optional[Progress]
     convert: typing.Optional[Progress]
+    request_id: typing.Optional[str] = pydantic.Field(alias="requestId", description="The ID of the Document Query.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -47,4 +48,5 @@ class DocumentQuery(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
+        allow_population_by_field_name = True
         json_encoders = {dt.datetime: serialize_datetime}

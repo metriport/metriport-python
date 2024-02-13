@@ -2,6 +2,4 @@
 
 import typing
 
-from .contact import Contact
-
-Contacts = typing.Union[Contact]
+Filters = typing.Dict[str, typing.Optional[str]]

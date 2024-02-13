@@ -25,7 +25,7 @@ class GetConsolidatedQueryStatusResponse(pydantic.BaseModel):
     )
     """
 
-    status: PatientConsolidatedDataStatus
+    status: typing.Optional[PatientConsolidatedDataStatus]
     message: typing.Optional[str]
 
     def json(self, **kwargs: typing.Any) -> str:

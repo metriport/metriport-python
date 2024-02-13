@@ -33,7 +33,7 @@ class Address(pydantic.BaseModel):
     city: str = pydantic.Field(description="The city.")
     state: UsState = pydantic.Field(description="The 2 letter state acronym, for example `CA`")
     zip: str = pydantic.Field(description="Zip must be a string consisting of 5 numbers.")
-    country: str = pydantic.Field(description="Defaults to “USA”")
+    country: typing.Optional[str] = pydantic.Field(description="Defaults to “USA”")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

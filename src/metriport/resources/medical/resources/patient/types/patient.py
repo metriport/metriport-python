@@ -5,6 +5,7 @@ import typing
 
 from ......core.datetime_utils import serialize_datetime
 from .base_patient import BasePatient
+from .facility_id import FacilityId
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
@@ -14,7 +15,7 @@ except ImportError:
 
 class Patient(BasePatient):
     """
-    from metriport import UsState
+    from metriport import Address, UsState
     from metriport.resources.medical import (
         Patient,
         PersonalIdentifier_DriversLicense,
@@ -33,14 +34,28 @@ class Patient(BasePatient):
                 value="51227265",
             )
         ],
+        address=[
+            Address(
+                address_line_1="2261 Market Street",
+                address_line_2="#4818",
+                city="San Francisco",
+                state=UsState.CA,
+                zip="94114",
+                country="USA",
+            )
+        ],
+        facility_ids=["2.16.840.1.113883.3.666.5.2004.4.2005"],
     )
     """
 
     id: str = pydantic.Field(
         description=(
-            "The ID assigned to this Patient. This ID will be used to uniquely \n"
+            "The ID assigned to this Patient. This ID will be used to uniquely\n"
             "identify this Patient in medical documents.\n"
         )
+    )
+    facility_ids: typing.List[FacilityId] = pydantic.Field(
+        alias="facilityIds", description="Array of the IDs of the Facilities where the Patient is receiving care."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

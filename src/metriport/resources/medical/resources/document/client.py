@@ -6,23 +6,32 @@ from json.decoder import JSONDecodeError
 
 from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .....core.jsonable_encoder import jsonable_encoder
 from .....core.remove_none_from_dict import remove_none_from_dict
+from ....fhir.types.document_reference import DocumentReference
+from .types.bulk_get_document_url_query import BulkGetDocumentUrlQuery
 from .types.conversion_type import ConversionType
 from .types.document_query import DocumentQuery
 from .types.document_url import DocumentUrl
-from .types.list_documents_response import ListDocumentsResponse
+from .types.list_document_references import ListDocumentReferences
+from .types.upload_document_response import UploadDocumentResponse
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
 except ImportError:
     import pydantic  # type: ignore
 
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
 
 class DocumentClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def start_query(self, *, patient_id: str, facility_id: str) -> DocumentQuery:
+    def start_query(
+        self, *, patient_id: str, facility_id: str, request: typing.Optional[typing.Dict[str, str]] = None
+    ) -> DocumentQuery:
         """
         Triggers a document query for the specified patient across HIEs.
         When executed, this endpoint triggers an asynchronous document query across HIEs.
@@ -41,6 +50,8 @@ class DocumentClient:
             - patient_id: str. The ID of the Patient for which to list available Documents.
 
             - facility_id: str. The ID of the Facility where the patient is receiving care.
+
+            - request: typing.Optional[typing.Dict[str, str]].
         ---
         from metriport.client import Metriport
 
@@ -50,12 +61,14 @@ class DocumentClient:
         client.medical.document.start_query(
             patient_id="12345678",
             facility_id="12345678",
+            request={"youCan": "putAny", "stringKeyValue": "pairsHere"},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/query"),
             params=remove_none_from_dict({"patientId": patient_id, "facilityId": facility_id}),
+            json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -105,10 +118,10 @@ class DocumentClient:
         self,
         *,
         patient_id: str,
-        facility_id: str,
         date_from: typing.Optional[str] = None,
         date_to: typing.Optional[str] = None,
-    ) -> ListDocumentsResponse:
+        content: typing.Optional[str] = None,
+    ) -> ListDocumentReferences:
         """
         Lists all Documents that can be retrieved for a Patient.
         This endpoint returns the document references available
@@ -118,33 +131,23 @@ class DocumentClient:
         Parameters:
             - patient_id: str. The ID of the Patient for which to list available Documents.
 
-            - facility_id: str. The ID of the Facility where the patient is receiving care.
-
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no start date filter will be applied.
 
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no end date filter will be applied.
-        ---
-        from metriport.client import Metriport
 
-        client = Metriport(
-            api_key="YOUR_API_KEY",
-        )
-        client.medical.document.list(
-            patient_id="12345678",
-            facility_id="12345678",
-        )
+            - content: typing.Optional[str]. Value to search within the document reference and the actual contents of the document (minimum 3 chars).
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document"),
             params=remove_none_from_dict(
-                {"patientId": patient_id, "facilityId": facility_id, "dateFrom": date_from, "dateTo": date_to}
+                {"patientId": patient_id, "dateFrom": date_from, "dateTo": date_to, "content": content}
             ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListDocumentsResponse, _response.json())  # type: ignore
+            return pydantic.parse_obj_as(ListDocumentReferences, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -153,7 +156,7 @@ class DocumentClient:
 
     def get_url(self, *, file_name: str, conversion_type: typing.Optional[ConversionType] = None) -> DocumentUrl:
         """
-        Gets a presigned URL for downloading the specified document.
+        Gets a downloadable URL for downloading the specified document.
         This endpoint returns a URL which you can use to download
         the specified document and/or convert using the file name
         provided from the [List Documents](/api-reference/medical/document/list) endpoint.
@@ -162,8 +165,7 @@ class DocumentClient:
             - file_name: str. The file name of the document
 
             - conversion_type: typing.Optional[ConversionType]. The doc type to convert to. Either `html` or `pdf`.
-                                                                This parameter should only be used for converting XML/CDA files.
-                                                                ---
+                                                                This parameter should only be used for converting XML/CDA files.---
         from metriport.client import Metriport
         from metriport.resources.medical import ConversionType
 
@@ -177,7 +179,7 @@ class DocumentClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/downloadUrl"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/download-url"),
             params=remove_none_from_dict({"fileName": file_name, "conversionType": conversion_type}),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -190,12 +192,126 @@ class DocumentClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def create_document_reference(self, *, patient_id: str, request: DocumentReference) -> UploadDocumentResponse:
+        """
+        Creates a DocumentReference and returns its ID and a URL to use for a medical document upload to our servers.
+
+        Parameters:
+            - patient_id: str. The ID of the Patient for which to list available Documents.
+
+            - request: DocumentReference.
+        ---
+        from metriport.client import Metriport
+        from metriport.resources.fhir import (
+            Attachment,
+            CodeableConcept,
+            Coding,
+            DocumentReference,
+            DocumentReferenceContent,
+            DocumentReferenceContext,
+            Period,
+        )
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.document.create_document_reference(
+            patient_id="12345678",
+            request=DocumentReference(
+                resource_type="DocumentReference",
+                content=[
+                    DocumentReferenceContent(
+                        attachment=Attachment(
+                            title="Burn management Hospital Progress note",
+                        ),
+                    )
+                ],
+                contained=[
+                    {"resourceType": "ExampleResource", "id": "exampleId1"},
+                    {"resourceType": "ExampleResource", "id": "exampleId2"},
+                ],
+                description="Third degree wrist burn treatment",
+                type=CodeableConcept(
+                    text="Burn management Hospital Progress note",
+                    coding=[
+                        Coding(
+                            code="100556-0",
+                            system="http://loinc.org",
+                            display="Burn management Hospital Progress note",
+                        )
+                    ],
+                ),
+                context=DocumentReferenceContext(
+                    period=Period(
+                        start="2023-10-10T14:14:17Z",
+                        end="2023-10-10T15:30:30Z",
+                    ),
+                    facility_type=CodeableConcept(
+                        text="John Snow Clinic - Acute Care Centre",
+                    ),
+                ),
+            ),
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/upload"),
+            params=remove_none_from_dict({"patientId": patient_id}),
+            json=jsonable_encoder(request),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(UploadDocumentResponse, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def start_bulk_get_document_url(self, *, patient_id: str) -> BulkGetDocumentUrlQuery:
+        """
+        Triggers a process to generate a list of download URLs for all of the patient's documents.
+        The status of the process is returned in the response. Initially, it will be `processing`,
+        and when the process is finished, the status will be updated to `completed` or `failed`.
+        If you trigger this endpoint again while the process is still running, you will get a response
+        that reflects the current progress.
+
+        Parameters:
+            - patient_id: str. The ID of the patient for which to initiate the bulk URL generation.
+        ---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.document.start_bulk_get_document_url(
+            patient_id="12345678",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/download-url/bulk"),
+            params=remove_none_from_dict({"patientId": patient_id}),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(BulkGetDocumentUrlQuery, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncDocumentClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def start_query(self, *, patient_id: str, facility_id: str) -> DocumentQuery:
+    async def start_query(
+        self, *, patient_id: str, facility_id: str, request: typing.Optional[typing.Dict[str, str]] = None
+    ) -> DocumentQuery:
         """
         Triggers a document query for the specified patient across HIEs.
         When executed, this endpoint triggers an asynchronous document query across HIEs.
@@ -214,6 +330,8 @@ class AsyncDocumentClient:
             - patient_id: str. The ID of the Patient for which to list available Documents.
 
             - facility_id: str. The ID of the Facility where the patient is receiving care.
+
+            - request: typing.Optional[typing.Dict[str, str]].
         ---
         from metriport.client import AsyncMetriport
 
@@ -223,12 +341,14 @@ class AsyncDocumentClient:
         await client.medical.document.start_query(
             patient_id="12345678",
             facility_id="12345678",
+            request={"youCan": "putAny", "stringKeyValue": "pairsHere"},
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/query"),
             params=remove_none_from_dict({"patientId": patient_id, "facilityId": facility_id}),
+            json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -278,10 +398,10 @@ class AsyncDocumentClient:
         self,
         *,
         patient_id: str,
-        facility_id: str,
         date_from: typing.Optional[str] = None,
         date_to: typing.Optional[str] = None,
-    ) -> ListDocumentsResponse:
+        content: typing.Optional[str] = None,
+    ) -> ListDocumentReferences:
         """
         Lists all Documents that can be retrieved for a Patient.
         This endpoint returns the document references available
@@ -291,33 +411,23 @@ class AsyncDocumentClient:
         Parameters:
             - patient_id: str. The ID of the Patient for which to list available Documents.
 
-            - facility_id: str. The ID of the Facility where the patient is receiving care.
-
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no start date filter will be applied.
 
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned documents - formatted `YYYY-MM-DD` as per ISO 8601. If not provided, no end date filter will be applied.
-        ---
-        from metriport.client import AsyncMetriport
 
-        client = AsyncMetriport(
-            api_key="YOUR_API_KEY",
-        )
-        await client.medical.document.list(
-            patient_id="12345678",
-            facility_id="12345678",
-        )
+            - content: typing.Optional[str]. Value to search within the document reference and the actual contents of the document (minimum 3 chars).
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document"),
             params=remove_none_from_dict(
-                {"patientId": patient_id, "facilityId": facility_id, "dateFrom": date_from, "dateTo": date_to}
+                {"patientId": patient_id, "dateFrom": date_from, "dateTo": date_to, "content": content}
             ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListDocumentsResponse, _response.json())  # type: ignore
+            return pydantic.parse_obj_as(ListDocumentReferences, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -326,7 +436,7 @@ class AsyncDocumentClient:
 
     async def get_url(self, *, file_name: str, conversion_type: typing.Optional[ConversionType] = None) -> DocumentUrl:
         """
-        Gets a presigned URL for downloading the specified document.
+        Gets a downloadable URL for downloading the specified document.
         This endpoint returns a URL which you can use to download
         the specified document and/or convert using the file name
         provided from the [List Documents](/api-reference/medical/document/list) endpoint.
@@ -335,8 +445,7 @@ class AsyncDocumentClient:
             - file_name: str. The file name of the document
 
             - conversion_type: typing.Optional[ConversionType]. The doc type to convert to. Either `html` or `pdf`.
-                                                                This parameter should only be used for converting XML/CDA files.
-                                                                ---
+                                                                This parameter should only be used for converting XML/CDA files.---
         from metriport.client import AsyncMetriport
         from metriport.resources.medical import ConversionType
 
@@ -350,13 +459,125 @@ class AsyncDocumentClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/downloadUrl"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/download-url"),
             params=remove_none_from_dict({"fileName": file_name, "conversionType": conversion_type}),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
             return pydantic.parse_obj_as(DocumentUrl, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def create_document_reference(self, *, patient_id: str, request: DocumentReference) -> UploadDocumentResponse:
+        """
+        Creates a DocumentReference and returns its ID and a URL to use for a medical document upload to our servers.
+
+        Parameters:
+            - patient_id: str. The ID of the Patient for which to list available Documents.
+
+            - request: DocumentReference.
+        ---
+        from metriport.client import AsyncMetriport
+        from metriport.resources.fhir import (
+            Attachment,
+            CodeableConcept,
+            Coding,
+            DocumentReference,
+            DocumentReferenceContent,
+            DocumentReferenceContext,
+            Period,
+        )
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.document.create_document_reference(
+            patient_id="12345678",
+            request=DocumentReference(
+                resource_type="DocumentReference",
+                content=[
+                    DocumentReferenceContent(
+                        attachment=Attachment(
+                            title="Burn management Hospital Progress note",
+                        ),
+                    )
+                ],
+                contained=[
+                    {"resourceType": "ExampleResource", "id": "exampleId1"},
+                    {"resourceType": "ExampleResource", "id": "exampleId2"},
+                ],
+                description="Third degree wrist burn treatment",
+                type=CodeableConcept(
+                    text="Burn management Hospital Progress note",
+                    coding=[
+                        Coding(
+                            code="100556-0",
+                            system="http://loinc.org",
+                            display="Burn management Hospital Progress note",
+                        )
+                    ],
+                ),
+                context=DocumentReferenceContext(
+                    period=Period(
+                        start="2023-10-10T14:14:17Z",
+                        end="2023-10-10T15:30:30Z",
+                    ),
+                    facility_type=CodeableConcept(
+                        text="John Snow Clinic - Acute Care Centre",
+                    ),
+                ),
+            ),
+        )
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/upload"),
+            params=remove_none_from_dict({"patientId": patient_id}),
+            json=jsonable_encoder(request),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(UploadDocumentResponse, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def start_bulk_get_document_url(self, *, patient_id: str) -> BulkGetDocumentUrlQuery:
+        """
+        Triggers a process to generate a list of download URLs for all of the patient's documents.
+        The status of the process is returned in the response. Initially, it will be `processing`,
+        and when the process is finished, the status will be updated to `completed` or `failed`.
+        If you trigger this endpoint again while the process is still running, you will get a response
+        that reflects the current progress.
+
+        Parameters:
+            - patient_id: str. The ID of the patient for which to initiate the bulk URL generation.
+        ---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.document.start_bulk_get_document_url(
+            patient_id="12345678",
+        )
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/document/download-url/bulk"),
+            params=remove_none_from_dict({"patientId": patient_id}),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(BulkGetDocumentUrlQuery, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

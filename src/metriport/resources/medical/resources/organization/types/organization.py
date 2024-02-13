@@ -34,7 +34,7 @@ class Organization(OrganizationCreate):
 
     id: str = pydantic.Field(
         description=(
-            "The ID assigned to your organization. \n"
+            "The ID assigned to your organization.\n"
             "This ID will be used to uniquely identify your organization in medical documents.\n"
         )
     )
