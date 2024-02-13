@@ -3,10 +3,13 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .filter import Filter
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class ConsolidatedCountResponse(pydantic.BaseModel):
@@ -14,7 +17,7 @@ class ConsolidatedCountResponse(pydantic.BaseModel):
     resources: typing.Dict[str, int] = pydantic.Field(
         description=(
             "Object containing resource types as properties and the amount of entries for\n"
-            "the resource as the value (integer). Only resource types with amount \n"
+            "the resource as the value (integer). Only resource types with amount\n"
             "of entries higher than one are included.\n"
         )
     )

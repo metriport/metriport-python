@@ -4,13 +4,17 @@ import typing
 import urllib.parse
 from json.decoder import JSONDecodeError
 
-import pydantic
-
 from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.jsonable_encoder import jsonable_encoder
 from .types.base_facility import BaseFacility
 from .types.facility import Facility
+from .types.list_facilities_response import ListFacilitiesResponse
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -26,10 +30,34 @@ class FacilityClient:
 
         Parameters:
             - request: BaseFacility.
+        ---
+        from metriport import Address, UsState
+        from metriport.client import Metriport
+        from metriport.resources.medical import BaseFacility
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.facility.create(
+            request=BaseFacility(
+                name="Care Facility, LLC",
+                npi="1234567891",
+                address=Address(
+                    address_line_1="2261 Market Street",
+                    address_line_2="#4818",
+                    city="San Francisco",
+                    state=UsState.CA,
+                    zip="94114",
+                    country="USA",
+                ),
+                tin="12-3456789",
+                active=True,
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "facility"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/facility"),
             json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -47,11 +75,20 @@ class FacilityClient:
         Get a Facility in Metriport where your patients receive care.
 
         Parameters:
-            - id: str. The ID assigned to this Facility. This ID will be used to uniquely identify this Facility in medical documents.
+            - id: str. The ID assigned to this Facility. This ID will be used
+                       to uniquely identify this Facility in medical documents.---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.facility.get(
+            id="2.16.840.1.113883.3.666.123",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"facility/{id}"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"medical/v1/facility/{id}"),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -71,10 +108,35 @@ class FacilityClient:
             - id: str. The ID of the Facility.
 
             - request: BaseFacility.
+        ---
+        from metriport import Address, UsState
+        from metriport.client import Metriport
+        from metriport.resources.medical import BaseFacility
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.facility.update(
+            id="2.16.840.1.113883.3.666.123",
+            request=BaseFacility(
+                name="Care Facility, LLC",
+                npi="1234567891",
+                address=Address(
+                    address_line_1="2261 Market Street",
+                    address_line_2="#4818",
+                    city="San Francisco",
+                    state=UsState.CA,
+                    zip="94114",
+                    country="USA",
+                ),
+                tin="12-3456789",
+                active=True,
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"facility/{id}"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"medical/v1/facility/{id}"),
             json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -87,18 +149,26 @@ class FacilityClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list(self) -> typing.List[Facility]:
+    def list(self) -> ListFacilitiesResponse:
         """
         Lists all of your Facilities.
+
+        ---
+        from metriport.client import Metriport
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.facility.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "facility"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/facility"),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(typing.List[Facility], _response.json())  # type: ignore
+            return pydantic.parse_obj_as(ListFacilitiesResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -116,10 +186,34 @@ class AsyncFacilityClient:
 
         Parameters:
             - request: BaseFacility.
+        ---
+        from metriport import Address, UsState
+        from metriport.client import AsyncMetriport
+        from metriport.resources.medical import BaseFacility
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.facility.create(
+            request=BaseFacility(
+                name="Care Facility, LLC",
+                npi="1234567891",
+                address=Address(
+                    address_line_1="2261 Market Street",
+                    address_line_2="#4818",
+                    city="San Francisco",
+                    state=UsState.CA,
+                    zip="94114",
+                    country="USA",
+                ),
+                tin="12-3456789",
+                active=True,
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "facility"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/facility"),
             json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -137,11 +231,20 @@ class AsyncFacilityClient:
         Get a Facility in Metriport where your patients receive care.
 
         Parameters:
-            - id: str. The ID assigned to this Facility. This ID will be used to uniquely identify this Facility in medical documents.
+            - id: str. The ID assigned to this Facility. This ID will be used
+                       to uniquely identify this Facility in medical documents.---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.facility.get(
+            id="2.16.840.1.113883.3.666.123",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"facility/{id}"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"medical/v1/facility/{id}"),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -161,10 +264,35 @@ class AsyncFacilityClient:
             - id: str. The ID of the Facility.
 
             - request: BaseFacility.
+        ---
+        from metriport import Address, UsState
+        from metriport.client import AsyncMetriport
+        from metriport.resources.medical import BaseFacility
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.facility.update(
+            id="2.16.840.1.113883.3.666.123",
+            request=BaseFacility(
+                name="Care Facility, LLC",
+                npi="1234567891",
+                address=Address(
+                    address_line_1="2261 Market Street",
+                    address_line_2="#4818",
+                    city="San Francisco",
+                    state=UsState.CA,
+                    zip="94114",
+                    country="USA",
+                ),
+                tin="12-3456789",
+                active=True,
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"facility/{id}"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"medical/v1/facility/{id}"),
             json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -177,18 +305,26 @@ class AsyncFacilityClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list(self) -> typing.List[Facility]:
+    async def list(self) -> ListFacilitiesResponse:
         """
         Lists all of your Facilities.
+
+        ---
+        from metriport.client import AsyncMetriport
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.facility.list()
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "facility"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/facility"),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(typing.List[Facility], _response.json())  # type: ignore
+            return pydantic.parse_obj_as(ListFacilitiesResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

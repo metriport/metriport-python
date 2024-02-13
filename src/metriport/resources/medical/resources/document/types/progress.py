@@ -3,13 +3,24 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .document_query_status import DocumentQueryStatus
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class Progress(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import DocumentQueryStatus, Progress
+
+    Progress(
+        status=DocumentQueryStatus.PROCESSING,
+    )
+    """
+
     status: DocumentQueryStatus = pydantic.Field(description="The status of querying document references across HIEs.")
     total: typing.Optional[int] = pydantic.Field(description="The total number of documents to be queried.")
     successful: typing.Optional[int] = pydantic.Field(description="The number of documents successfully downloaded.")

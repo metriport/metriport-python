@@ -3,14 +3,23 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class DocumentUrl(pydantic.BaseModel):
     """
     A json object containing the URL will be returned.
+    ---
+    from metriport.resources.medical import DocumentUrl
+
+    DocumentUrl(
+        url="abc123-def456",
+    )
     """
 
     url: typing.Optional[str] = pydantic.Field(description="The presigned URL.")

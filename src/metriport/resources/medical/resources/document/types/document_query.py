@@ -3,15 +3,39 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
 from .progress import Progress
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class DocumentQuery(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import (
+        DocumentQuery,
+        DocumentQueryStatus,
+        Progress,
+    )
+
+    DocumentQuery(
+        download=Progress(
+            status=DocumentQueryStatus.COMPLETED,
+            total=100,
+            successful=98,
+            errors=2,
+        ),
+        convert=Progress(
+            status=DocumentQueryStatus.PROCESSING,
+        ),
+    )
+    """
+
     download: typing.Optional[Progress]
     convert: typing.Optional[Progress]
+    request_id: typing.Optional[str] = pydantic.Field(alias="requestId", description="The ID of the Document Query.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -24,4 +48,5 @@ class DocumentQuery(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
+        allow_population_by_field_name = True
         json_encoders = {dt.datetime: serialize_datetime}

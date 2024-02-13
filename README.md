@@ -1,8 +1,7 @@
-
 # Metriport Python Library
 
-[![pypi](https://img.shields.io/pypi/v/metriport.svg)](https://pypi.python.org/pypi/metriport)
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
+[![pypi](https://img.shields.io/pypi/v/fern-metriport.svg)](https://pypi.python.org/pypi/fern-metriport)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=metriport/metriport-python/readme)
 
 ## Documentation
 

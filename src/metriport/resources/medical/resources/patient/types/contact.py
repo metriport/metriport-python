@@ -3,20 +3,28 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
-from .facility_id import FacilityId
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class Contact(pydantic.BaseModel):
+    """
+    from metriport.resources.medical import Contact
+
+    Contact(
+        phone="1234567899",
+        email="karen@cvspharmacy.com",
+    )
+    """
+
     phone: typing.Optional[str] = pydantic.Field(
         description="The Patient's 10 digit phone number, formatted `1234567899`."
     )
     email: typing.Optional[str] = pydantic.Field(description="The Patient's email address.")
-    facility_ids: typing.List[FacilityId] = pydantic.Field(
-        alias="facilityIds", description="Array of the IDs of the Facilities where the Patient is receiving care."
-    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -29,5 +37,4 @@ class Contact(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
         json_encoders = {dt.datetime: serialize_datetime}

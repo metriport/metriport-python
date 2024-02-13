@@ -3,31 +3,34 @@
 import datetime as dt
 import typing
 
-import pydantic
-
 from ......core.datetime_utils import serialize_datetime
+
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
 
 
 class Filter(pydantic.BaseModel):
     resources: str = pydantic.Field(
         description=(
-            "Comma-separated list of resource types. If not specified on the \n" "request, this will be `all`.\n"
+            "Comma-separated list of resource types. If not specified on the\n" "request, this will be `all`.\n"
         )
     )
     date_from: typing.Optional[str] = pydantic.Field(
         alias="dateFrom",
         description=(
-            "The start date (inclusive) for which to filter returned resources - \n"
-            "formatted `YYYY-MM-DD` as per ISO 8601. If not provided, \n"
+            "The start date (inclusive) for which to filter returned resources -\n"
+            "formatted `YYYY-MM-DD` as per ISO 8601. If not provided,\n"
             "no start date filter will be applied.\n"
         ),
     )
     date_to: typing.Optional[str] = pydantic.Field(
         alias="dateTo",
         description=(
-            "The end date (inclusive) for which to filter returned resources - \n"
+            "The end date (inclusive) for which to filter returned resources -\n"
             "formatted `YYYY-MM-DD` as per ISO 8601. If not provided,\n"
-            "  no end date filter will be applied.\n"
+            "no end date filter will be applied.\n"
         ),
     )
 

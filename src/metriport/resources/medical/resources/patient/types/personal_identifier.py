@@ -18,4 +18,14 @@ class PersonalIdentifier_DriversLicense(DriversLicense):
         allow_population_by_field_name = True
 
 
+"""
+from metriport import UsState
+from metriport.resources.medical import PersonalIdentifier_DriversLicense
+
+PersonalIdentifier_DriversLicense(
+    type="driversLicense",
+    state=UsState.CA,
+    value="51227265",
+)
+"""
 PersonalIdentifier = typing.Union[PersonalIdentifier_DriversLicense]
