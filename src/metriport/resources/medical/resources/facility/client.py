@@ -76,8 +76,7 @@ class FacilityClient:
 
         Parameters:
             - id: str. The ID assigned to this Facility. This ID will be used
-                       to uniquely identify this Facility in medical documents.
-                       ---
+                       to uniquely identify this Facility in medical documents.---
         from metriport.client import Metriport
 
         client = Metriport(
@@ -233,8 +232,7 @@ class AsyncFacilityClient:
 
         Parameters:
             - id: str. The ID assigned to this Facility. This ID will be used
-                       to uniquely identify this Facility in medical documents.
-                       ---
+                       to uniquely identify this Facility in medical documents.---
         from metriport.client import AsyncMetriport
 
         client = AsyncMetriport(

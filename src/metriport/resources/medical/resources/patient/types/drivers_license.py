@@ -5,7 +5,7 @@ import typing
 
 from ......core.datetime_utils import serialize_datetime
 from .....commons.types.us_state import UsState
-from .period import Period
+from .....fhir.types.period import Period
 
 try:
     import pydantic.v1 as pydantic  # type: ignore

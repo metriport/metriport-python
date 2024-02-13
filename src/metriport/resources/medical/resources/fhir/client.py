@@ -6,7 +6,10 @@ from json.decoder import JSONDecodeError
 
 from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .....core.jsonable_encoder import jsonable_encoder
 from .....core.remove_none_from_dict import remove_none_from_dict
+from ....fhir.types.bundle import Bundle
+from .types.consolidated_bundle_upload import ConsolidatedBundleUpload
 from .types.consolidated_count_response import ConsolidatedCountResponse
 from .types.get_consolidated_query_status_response import GetConsolidatedQueryStatusResponse
 from .types.start_consolidated_query_response import StartConsolidatedQueryResponse
@@ -15,6 +18,9 @@ try:
     import pydantic.v1 as pydantic  # type: ignore
 except ImportError:
     import pydantic  # type: ignore
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class FhirClient:
@@ -28,6 +34,8 @@ class FhirClient:
         resources: typing.Optional[str] = None,
         date_from: typing.Optional[str] = None,
         date_to: typing.Optional[str] = None,
+        conversion_type: typing.Optional[str] = None,
+        request: typing.Optional[typing.Dict[str, str]] = None,
     ) -> StartConsolidatedQueryResponse:
         """
         Trigger a consolidated data query for the given patient
@@ -37,15 +45,16 @@ class FhirClient:
 
             - resources: typing.Optional[str]. A comma separated, case sensitive list of resources to be returned.
                                                If none are provided all resources will be included.
-
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned resources -
                                                formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
                                                no start date filter will be applied.
-
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned resources -
                                              formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
-                                              no end date filter will be applied.
-                                             ---
+                                             no end date filter will be applied.
+            - conversion_type: typing.Optional[str]. The doc type to convert to. Either `html` or `pdf`.
+
+            - request: typing.Optional[typing.Dict[str, str]].
+        ---
         from metriport.client import Metriport
 
         client = Metriport(
@@ -60,7 +69,10 @@ class FhirClient:
             urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/query"
             ),
-            params=remove_none_from_dict({"resources": resources, "dateFrom": date_from, "dateTo": date_to}),
+            params=remove_none_from_dict(
+                {"resources": resources, "dateFrom": date_from, "dateTo": date_to, "conversionType": conversion_type}
+            ),
+            json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -104,6 +116,64 @@ class FhirClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def create_patient_consolidated(self, id: str, *, request: ConsolidatedBundleUpload) -> Bundle:
+        """
+        Create Patient's Consolidated Data with a FHIR Bundle.
+
+        Parameters:
+            - id: str. The ID of the Patient
+
+            - request: ConsolidatedBundleUpload.
+        ---
+        from metriport.client import Metriport
+        from metriport.resources.medical import ConsolidatedBundleUpload
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.fhir.create_patient_consolidated(
+            id="12345678",
+            request=ConsolidatedBundleUpload(
+                resource_type="Bundle",
+                type="collection",
+                entry=[
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "code": {"text": "Cancer"},
+                            "valueCodeableConcept": {"text": "NEGATIVE"},
+                            "status": "final",
+                            "category": [
+                                {
+                                    "coding": [
+                                        {
+                                            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                            "code": "laboratory",
+                                        }
+                                    ]
+                                }
+                            ],
+                        }
+                    }
+                ],
+            ),
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "PUT",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated"),
+            json=jsonable_encoder(request),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(Bundle, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
     def count_patient_data(
         self,
         id: str,
@@ -120,15 +190,12 @@ class FhirClient:
 
             - resources: typing.Optional[str]. A comma separated, case sensitive list of resources to be returned.
                                                If none are provided all resources will be included.
-
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned resources -
                                                formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
                                                no start date filter will be applied.
-
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned resources -
                                              formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
-                                              no end date filter will be applied.
-
+                                             no end date filter will be applied.
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -159,6 +226,8 @@ class AsyncFhirClient:
         resources: typing.Optional[str] = None,
         date_from: typing.Optional[str] = None,
         date_to: typing.Optional[str] = None,
+        conversion_type: typing.Optional[str] = None,
+        request: typing.Optional[typing.Dict[str, str]] = None,
     ) -> StartConsolidatedQueryResponse:
         """
         Trigger a consolidated data query for the given patient
@@ -168,15 +237,16 @@ class AsyncFhirClient:
 
             - resources: typing.Optional[str]. A comma separated, case sensitive list of resources to be returned.
                                                If none are provided all resources will be included.
-
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned resources -
                                                formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
                                                no start date filter will be applied.
-
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned resources -
                                              formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
-                                              no end date filter will be applied.
-                                             ---
+                                             no end date filter will be applied.
+            - conversion_type: typing.Optional[str]. The doc type to convert to. Either `html` or `pdf`.
+
+            - request: typing.Optional[typing.Dict[str, str]].
+        ---
         from metriport.client import AsyncMetriport
 
         client = AsyncMetriport(
@@ -191,7 +261,10 @@ class AsyncFhirClient:
             urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated/query"
             ),
-            params=remove_none_from_dict({"resources": resources, "dateFrom": date_from, "dateTo": date_to}),
+            params=remove_none_from_dict(
+                {"resources": resources, "dateFrom": date_from, "dateTo": date_to, "conversionType": conversion_type}
+            ),
+            json=jsonable_encoder(request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -235,6 +308,64 @@ class AsyncFhirClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    async def create_patient_consolidated(self, id: str, *, request: ConsolidatedBundleUpload) -> Bundle:
+        """
+        Create Patient's Consolidated Data with a FHIR Bundle.
+
+        Parameters:
+            - id: str. The ID of the Patient
+
+            - request: ConsolidatedBundleUpload.
+        ---
+        from metriport.client import AsyncMetriport
+        from metriport.resources.medical import ConsolidatedBundleUpload
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.fhir.create_patient_consolidated(
+            id="12345678",
+            request=ConsolidatedBundleUpload(
+                resource_type="Bundle",
+                type="collection",
+                entry=[
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "code": {"text": "Cancer"},
+                            "valueCodeableConcept": {"text": "NEGATIVE"},
+                            "status": "final",
+                            "category": [
+                                {
+                                    "coding": [
+                                        {
+                                            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                            "code": "laboratory",
+                                        }
+                                    ]
+                                }
+                            ],
+                        }
+                    }
+                ],
+            ),
+        )
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "PUT",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"medical/v1/patient/{id}/consolidated"),
+            json=jsonable_encoder(request),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(Bundle, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
     async def count_patient_data(
         self,
         id: str,
@@ -251,15 +382,12 @@ class AsyncFhirClient:
 
             - resources: typing.Optional[str]. A comma separated, case sensitive list of resources to be returned.
                                                If none are provided all resources will be included.
-
             - date_from: typing.Optional[str]. The start date (inclusive) for which to filter returned resources -
                                                formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
                                                no start date filter will be applied.
-
             - date_to: typing.Optional[str]. The end date (inclusive) for which to filter returned resources -
                                              formatted `YYYY-MM-DD` as per ISO 8601. If not provided,
-                                              no end date filter will be applied.
-
+                                             no end date filter will be applied.
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",

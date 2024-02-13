@@ -4,8 +4,8 @@ import datetime as dt
 import typing
 
 from ......core.datetime_utils import serialize_datetime
-from .addresses import Addresses
-from .contacts import Contacts
+from .....commons.types.address import Address
+from .contact import Contact
 from .personal_identifier import PersonalIdentifier
 
 try:
@@ -18,9 +18,9 @@ class BasePatient(pydantic.BaseModel):
     first_name: str = pydantic.Field(
         alias="firstName",
         description=(
-            "The Patient's first name(s). \n"
-            "You may provide a comma/space delimited string to specify \n"
-            "multiple first and last names. For example, the following inputs \n"
+            "The Patient's first name(s).\n"
+            "You may provide a comma/space delimited string to specify\n"
+            "multiple first and last names. For example, the following inputs\n"
             'would be equivalent: "John,Jonathan" & "John Jonathan"\n'
         ),
     )
@@ -31,10 +31,13 @@ class BasePatient(pydantic.BaseModel):
     )
     personal_identifiers: typing.Optional[typing.List[PersonalIdentifier]] = pydantic.Field(
         alias="personalIdentifiers",
-        description=("An array of the Patient's personal IDs, such as a driver's license. \n" "May be empty.\n"),
+        description=("An array of the Patient's personal IDs, such as a driver's license.\n" "May be empty.\n"),
     )
-    address: typing.Optional[Addresses]
-    contact: typing.Optional[Contacts]
+    address: typing.List[Address]
+    contact: typing.Optional[typing.List[Contact]]
+    external_id: typing.Optional[str] = pydantic.Field(
+        alias="externalID", description="An external Patient ID to associate to a Patient in Metriport."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

@@ -36,7 +36,7 @@ class Facility(BaseFacility):
 
     id: str = pydantic.Field(
         description=(
-            "The ID assigned to this Facility. This ID will be used \n"
+            "The ID assigned to this Facility. This ID will be used\n"
             "to uniquely identify this Facility in medical documents.\n"
         )
     )

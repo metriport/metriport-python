@@ -4,7 +4,8 @@ import datetime as dt
 import typing
 
 from ......core.datetime_utils import serialize_datetime
-from .coding import Coding
+from .mapi_webhook_status import MapiWebhookStatus
+from .webhook_document_data_payload import WebhookDocumentDataPayload
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
@@ -12,26 +13,16 @@ except ImportError:
     import pydantic  # type: ignore
 
 
-class CodeableConcept(pydantic.BaseModel):
-    """
-    from metriport.resources.medical import CodeableConcept, Coding
-
-    CodeableConcept(
-        coding=[
-            Coding(
-                system="http://snomed.info/sct",
-                code="62479008",
-                display="Diagnoses",
-            )
-        ],
-        text="Diagnoses",
+class WebhookPatientPayload(pydantic.BaseModel):
+    patient_id: str = pydantic.Field(alias="patientId", description="The ID of the patient.")
+    external_id: typing.Optional[str] = pydantic.Field(
+        alias="externalId", description="The external ID of the patient."
     )
-    """
-
-    coding: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="Array containing the coding defined by a terminology system."
+    type: str = pydantic.Field(description="The type of the webhook.")
+    documents: typing.Optional[typing.List[WebhookDocumentDataPayload]] = pydantic.Field(
+        description="An array of WebhookDocumentDataPayload objects."
     )
-    text: typing.Optional[str] = pydantic.Field(description="Plain text representation of the concept.")
+    status: MapiWebhookStatus = pydantic.Field(description="The status of the webhook.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -44,4 +35,5 @@ class CodeableConcept(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
+        allow_population_by_field_name = True
         json_encoders = {dt.datetime: serialize_datetime}

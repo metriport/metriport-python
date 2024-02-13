@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "metriport"
-version = "8.0.0-alpha1"
+version = "8.0.0-beta"
 description = ""
 readme = "README.md"
 authors = []
