@@ -20,69 +20,84 @@ poetry add metriport
 ## Usage
 ```python
 import os
-from metriport.client import Metriport
-from metriport import commons
-from metriport.resources import medical
-
 from dotenv import load_dotenv
+from metriport.client import Metriport
+from metriport.resources.medical import BasePatient, PersonalIdentifier_DriversLicense
+from metriport import Address, UsState
 
 load_dotenv()
 
-def test_client() -> None:
-    client = Metriport(api_key=get_api_key(), base_url="http://localhost:8080")
-    response = client.medical.organization.create(request=medical.OrganizationCreate(
-      name="my-org", 
-      type=medical.OrgType.ACUTE_CARE, 
-      location=commons.Address(
-        addressLine1="line1",
-        addressLine2="line2",
-        city="New York",
-        state=commons.UsState.NY,
-        country="USA",
-        zip="10003"
+facility_id = os.environ.get("FACILITY_ID")
+api_key = os.environ.get("API_KEY")
+base_url = os.environ.get("BASE_URL") ## optional param to base to client if want to point to sandbox url.
+
+client = Metriport(api_key=api_key)
+patient_data = BasePatient(
+    first_name="John",
+    last_name="Doe",
+    dob="1980-01-01",
+    gender_at_birth="M",
+    personal_identifiers=[
+        PersonalIdentifier_DriversLicense(
+            type="driversLicense",
+            state=UsState.CA,
+            value="12345678",
         )
-      )
-    )
-    print(f"Received response with {response.id}")
-
-
-def get_api_key() -> str:
-    api_key = os.environ.get("METRIPORT_API_KEY")
-    if api_key is None:
-        raise Exception("METRIPORT_API_KEY not found")
-    return api_key
-
-
-if __name__ == "__main__":
-    test_client()
+    ],
+    address=[Address(
+        address_line_1="123 Main St",
+        city="Los Angeles",
+        state=UsState.CA,
+        zip="90001",
+        country="USA"
+    )]
+)
+response = client.medical.patient.create(facility_id=facility_id, request=patient_data)
 ```
 
 ## Async Client
 Our Python SDK exports an async client that you can use with asyncio. 
 
 ```python
-from metriport import BaseOrganization, OrgType, Address, UsState
-from metriport.client import AsyncMetriport
 
+import os
+from dotenv import load_dotenv
+from metriport.client import AsyncMetriport
+from metriport.resources.medical import BasePatient, PersonalIdentifier_DriversLicense
+from metriport import Address, UsState
 import asyncio
+
+load_dotenv()
+
+facility_id = os.environ.get("FACILITY_ID")
+api_key = os.environ.get("API_KEY")
 
 metriport_client = AsyncMetriport(api_key="YOUR_API_KEY")
 
-async def create_organization():
-  document = metriport_client.medical.organization.create(BaseOrganization(
-      type=OrgType.PostAcuteCare,
-      name="Metriport Inc.",
-      location=Address(
-        addressLine1="2261 Market Street",
-        addressLine2="#4818",
-        city="San Francisco",
+async def create_patient():
+  patient_data = BasePatient(
+    first_name="John",
+    last_name="Doe",
+    dob="1980-01-01",
+    gender_at_birth="M",
+    personal_identifiers=[
+        PersonalIdentifier_DriversLicense(
+            type="driversLicense",
+            state=UsState.CA,
+            value="12345678",
+        )
+    ],
+    address=[Address(
+        address_line_1="123 Main St",
+        city="Los Angeles",
         state=UsState.CA,
-        zip="94114",
-        country="USA",
-      )
-    ));
+        zip="90001",
+        country="USA"
+    )]
+  )
+  response = client.medical.patient.create(facility_id=facility_id, request=patient_data)
 
-asyncio.run(create_organization())
+asyncio.run(create_patient())
 ```
 
 ## Error Handling
@@ -90,11 +105,11 @@ All exceptions thrown by the SDK will sublcass [ApiError](./src/metriport/core/a
 
 ```python
 from metriport.core import ApiError
-from metriport import BadRequestError
 
 try:
-  metriport.medical.patients.get(patient_id='my_id')
-except APIError as e:  
+  client.medical.patient.create(facility_id='bad_id', request="bad_req")
+except ApiError as e:  
+  print(e) 
   # handle any api related error
 ```
 
