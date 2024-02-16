@@ -4,10 +4,10 @@ import typing
 import urllib.parse
 from json.decoder import JSONDecodeError
 
-from .....core.api_error import ApiError
-from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from .....core.jsonable_encoder import jsonable_encoder
-from .....core.remove_none_from_dict import remove_none_from_dict
+from ....core.api_error import ApiError
+from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ....core.jsonable_encoder import jsonable_encoder
+from ....core.remove_none_from_dict import remove_none_from_dict
 from ....fhir.types.bundle import Bundle
 from .types.consolidated_bundle_upload import ConsolidatedBundleUpload
 from .types.consolidated_count_response import ConsolidatedCountResponse

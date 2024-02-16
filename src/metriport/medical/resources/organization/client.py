@@ -4,10 +4,10 @@ import typing
 import urllib.parse
 from json.decoder import JSONDecodeError
 
-from .....core.api_error import ApiError
-from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from .....core.jsonable_encoder import jsonable_encoder
-from .....core.remove_none_from_dict import remove_none_from_dict
+from ....core.api_error import ApiError
+from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ....core.jsonable_encoder import jsonable_encoder
+from ....core.remove_none_from_dict import remove_none_from_dict
 from ....commons.types.address import Address
 from .types.org_type import OrgType
 from .types.organization import Organization
