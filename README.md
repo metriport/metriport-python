@@ -22,8 +22,8 @@ poetry add metriport
 import os
 from dotenv import load_dotenv
 from metriport.client import Metriport
-from metriport.resources.medical import BasePatient, PersonalIdentifier_DriversLicense
-from metriport import Address, UsState
+from metriport.medical import BasePatient, PersonalIdentifier_DriversLicense
+from metriport.commons import Address, UsState
 
 load_dotenv()
 
@@ -63,8 +63,8 @@ Our Python SDK exports an async client that you can use with asyncio.
 import os
 from dotenv import load_dotenv
 from metriport.client import AsyncMetriport
-from metriport.resources.medical import BasePatient, PersonalIdentifier_DriversLicense
-from metriport import Address, UsState
+from metriport.medical import BasePatient, PersonalIdentifier_DriversLicense
+from metriport.commons import Address, UsState
 import asyncio
 
 load_dotenv()

@@ -6,7 +6,7 @@ import httpx
 
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import MetriportEnvironment
-from .resources.medical.client import AsyncMedicalClient, MedicalClient
+from .medical.client import AsyncMedicalClient, MedicalClient
 
 
 class Metriport:
