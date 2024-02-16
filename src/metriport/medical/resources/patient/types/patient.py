@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from ......core.datetime_utils import serialize_datetime
+from .....core.datetime_utils import serialize_datetime
 from .base_patient import BasePatient
 from .facility_id import FacilityId
 
