@@ -5,4 +5,4 @@ from . import fhir
 from . import medical
 from .environment import MetriportEnvironment
 
-__all__ = ["Address", "MetriportEnvironment", "commons", "fhir", "medical"]
+__all__ = ["MetriportEnvironment", "commons", "fhir", "medical"]
