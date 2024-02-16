@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .contributor_type import ContributorType
 
 try:

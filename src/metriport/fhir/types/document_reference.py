@@ -5,7 +5,7 @@ import typing
 
 import typing_extensions
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
 from .codeable_concept import CodeableConcept

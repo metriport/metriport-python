@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from .....core.datetime_utils import serialize_datetime
 from .mapi_webhook_status import MapiWebhookStatus
 from .webhook_document_data_payload import WebhookDocumentDataPayload
 

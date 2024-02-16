@@ -5,7 +5,7 @@ import typing
 
 import typing_extensions
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .bundle_entry import BundleEntry
 from .bundle_link import BundleLink
 from .bundle_type import BundleType

@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .bundle_link import BundleLink
 from .bundle_request import BundleRequest
 from .bundle_response import BundleResponse

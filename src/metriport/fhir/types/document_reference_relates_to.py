@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .document_reference_relates_to_code import DocumentReferenceRelatesToCode
 from .extension import Extension
 from .reference import Reference

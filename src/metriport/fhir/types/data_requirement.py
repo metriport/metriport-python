@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .canonical import Canonical
 from .code import Code
 from .positive_int import PositiveInt

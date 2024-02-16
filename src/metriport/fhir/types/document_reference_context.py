@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .codeable_concept import CodeableConcept
 from .extension import Extension
 from .period import Period

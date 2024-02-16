@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from .....core.datetime_utils import serialize_datetime
 from .....fhir.types.bundle import Bundle
 from .consolidated_webhook_status import ConsolidatedWebhookStatus
 from .filters import Filters

@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .data_requirement_sort_direction import DataRequirementSortDirection
 
 try:

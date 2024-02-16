@@ -3,7 +3,7 @@
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from .....core.datetime_utils import serialize_datetime
 from .webhook_metadata_payload import WebhookMetadataPayload
 from .webhook_patient_payload import WebhookPatientPayload
 

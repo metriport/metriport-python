@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import typing
 
-from metriport.core.datetime_utils import serialize_datetime
+from ...core.datetime_utils import serialize_datetime
 from .base_64_binary import Base64Binary
 from .code import Code
 from .date_time import DateTime
