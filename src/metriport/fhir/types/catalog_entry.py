@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .catalog_entry_related_entry import CatalogEntryRelatedEntry
@@ -26,7 +24,7 @@ class CatalogEntry(BaseResource):
     Catalog entries are wrappers that contextualize items included in a catalog.
     """
 
-    resource_type: typing_extensions.Literal["CatalogEntry"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["CatalogEntry"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Used in supporting different identifiers for the same product, e.g. manufacturer code and retailer code."
     )

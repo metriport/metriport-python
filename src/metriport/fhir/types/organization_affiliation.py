@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,7 +22,7 @@ class OrganizationAffiliation(BaseResource):
     Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
     """
 
-    resource_type: typing_extensions.Literal["OrganizationAffiliation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["OrganizationAffiliation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers that are specific to this role."
     )

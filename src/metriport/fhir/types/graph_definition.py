@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -29,7 +27,7 @@ class GraphDefinition(BaseResource):
     A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set.
     """
 
-    resource_type: typing_extensions.Literal["GraphDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["GraphDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this graph definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this graph definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the graph definition is stored on different servers."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -33,7 +31,7 @@ class ImplementationGuide(BaseResource):
     A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
     """
 
-    resource_type: typing_extensions.Literal["ImplementationGuide"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ImplementationGuide"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this implementation guide when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this implementation guide is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the implementation guide is stored on different servers."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .bulk_data_export_deleted import BulkDataExportDeleted
 from .bulk_data_export_error import BulkDataExportError
@@ -27,7 +25,7 @@ class BulkDataExport(pydantic.BaseModel):
     User specific configuration for the Medplum application.
     """
 
-    resource_type: typing_extensions.Literal["BulkDataExport"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["BulkDataExport"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

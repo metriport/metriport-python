@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -32,7 +30,7 @@ class ChargeItemDefinition(BaseResource):
     The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
     """
 
-    resource_type: typing_extensions.Literal["ChargeItemDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ChargeItemDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this charge item definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this charge item definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the charge item definition is stored on different servers."
     )

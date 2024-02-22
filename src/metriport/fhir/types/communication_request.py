@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -27,7 +25,7 @@ class CommunicationRequest(BaseResource):
     A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.
     """
 
-    resource_type: typing_extensions.Literal["CommunicationRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["CommunicationRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this communication request by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )

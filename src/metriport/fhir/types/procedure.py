@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .age import Age
 from .annotation import Annotation
@@ -31,7 +29,7 @@ class Procedure(BaseResource):
     An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
     """
 
-    resource_type: typing_extensions.Literal["Procedure"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Procedure"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this procedure by the performer or other systems which remain constant as the resource is updated and is propagated from server to server."
     )

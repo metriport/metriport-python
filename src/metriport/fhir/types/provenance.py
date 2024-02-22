@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,7 +25,7 @@ class Provenance(BaseResource):
     Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
     """
 
-    resource_type: typing_extensions.Literal["Provenance"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Provenance"] = pydantic.Field(alias="resourceType")
     target: typing.List[Reference] = pydantic.Field(
         description="The Reference(s) that were generated or updated by the activity described in this resource. A provenance can point to more than one target if multiple resources were created/updated by the same activity."
     )

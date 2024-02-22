@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -32,7 +30,7 @@ class Device(BaseResource):
     A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.
     """
 
-    resource_type: typing_extensions.Literal["Device"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Device"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique instance identifiers assigned to a device by manufacturers other organizations or owners."
     )

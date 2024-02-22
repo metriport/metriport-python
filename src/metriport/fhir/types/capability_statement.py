@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -35,7 +33,7 @@ class CapabilityStatement(BaseResource):
     A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
     """
 
-    resource_type: typing_extensions.Literal["CapabilityStatement"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["CapabilityStatement"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this capability statement when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this capability statement is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the capability statement is stored on different servers."
     )

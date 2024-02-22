@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -25,7 +23,7 @@ class QuestionnaireResponse(BaseResource):
     A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.
     """
 
-    resource_type: typing_extensions.Literal["QuestionnaireResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["QuestionnaireResponse"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
         description="A business identifier assigned to a particular completed (or partially completed) questionnaire."
     )

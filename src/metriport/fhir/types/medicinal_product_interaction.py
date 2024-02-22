@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,7 +20,7 @@ class MedicinalProductInteraction(BaseResource):
     The interactions of the medicinal product with other medicinal products, or other forms of interactions.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductInteraction"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductInteraction"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
         description="The medication for which this is a described interaction."
     )

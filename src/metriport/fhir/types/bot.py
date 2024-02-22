@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .bot_audit_event_destination_item import BotAuditEventDestinationItem
@@ -29,7 +27,7 @@ class Bot(pydantic.BaseModel):
     Bot account for automated actions.
     """
 
-    resource_type: typing_extensions.Literal["Bot"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Bot"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

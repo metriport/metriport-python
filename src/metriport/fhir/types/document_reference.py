@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -28,7 +26,7 @@ class DocumentReference(BaseResource):
     A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.
     """
 
-    resource_type: typing_extensions.Literal["DocumentReference"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DocumentReference"] = pydantic.Field(alias="resourceType")
     master_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="masterIdentifier",
         description="Document identifier as assigned by the source of the document. This identifier is specific to this version of the document. This unique identifier may be used elsewhere to identify this version of the document.",

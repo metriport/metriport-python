@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -24,7 +22,7 @@ class VisionPrescription(BaseResource):
     An authorization for the provision of glasses and/or contact lenses to a patient.
     """
 
-    resource_type: typing_extensions.Literal["VisionPrescription"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["VisionPrescription"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this vision prescription."
     )

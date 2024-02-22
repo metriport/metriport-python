@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .attachment import Attachment
@@ -29,7 +27,7 @@ class Media(BaseResource):
     A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference.
     """
 
-    resource_type: typing_extensions.Literal["Media"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Media"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifiers associated with the image - these may include identifiers for the image itself, identifiers for the context of its collection (e.g. series ids) and context ids such as accession numbers or other workflow identifiers."
     )

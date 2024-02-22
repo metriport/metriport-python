@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -30,7 +28,7 @@ class Patient(BaseResource):
     Demographics and other administrative information about an individual or animal receiving care or other health-related services.
     """
 
-    resource_type: typing_extensions.Literal["Patient"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Patient"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="An identifier for this patient.")
     active: typing.Optional[bool] = pydantic.Field(
         description="Whether this patient record is in active use. Many systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules. It is often used to filter patient lists to exclude inactive patients Deceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."

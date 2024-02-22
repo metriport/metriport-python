@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .base_resource import BaseResource
@@ -25,7 +23,7 @@ class Organization(BaseResource):
     A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action. Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
     """
 
-    resource_type: typing_extensions.Literal["Organization"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Organization"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier for the organization that is used to identify the organization across multiple disparate systems."
     )

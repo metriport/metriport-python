@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -27,7 +25,7 @@ class Person(BaseResource):
     Demographics and administrative information about a person independent of a specific health-related context.
     """
 
-    resource_type: typing_extensions.Literal["Person"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Person"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier for a person within a particular scope."
     )

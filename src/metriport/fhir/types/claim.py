@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .claim_accident import ClaimAccident
@@ -36,7 +34,7 @@ class Claim(BaseResource):
     A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.
     """
 
-    resource_type: typing_extensions.Literal["Claim"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Claim"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this claim."
     )

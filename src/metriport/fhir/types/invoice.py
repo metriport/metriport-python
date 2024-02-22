@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -30,7 +28,7 @@ class Invoice(BaseResource):
     Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
     """
 
-    resource_type: typing_extensions.Literal["Invoice"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Invoice"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments."
     )

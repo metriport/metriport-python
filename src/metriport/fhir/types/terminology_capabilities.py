@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -35,7 +33,7 @@ class TerminologyCapabilities(BaseResource):
     A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
     """
 
-    resource_type: typing_extensions.Literal["TerminologyCapabilities"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["TerminologyCapabilities"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this terminology capabilities when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this terminology capabilities is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the terminology capabilities is stored on different servers."
     )

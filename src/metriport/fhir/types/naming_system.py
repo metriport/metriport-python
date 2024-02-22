@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,7 +25,7 @@ class NamingSystem(BaseResource):
     A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc. Represents a "System" used within the Identifier and Coding data types.
     """
 
-    resource_type: typing_extensions.Literal["NamingSystem"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["NamingSystem"] = pydantic.Field(alias="resourceType")
     name: typing.Optional[str] = pydantic.Field(
         description="A natural language name identifying the naming system. This name should be usable as an identifier for the module by machine processing applications such as code generation."
     )

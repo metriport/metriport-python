@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .async_job_status import AsyncJobStatus
 from .code import Code
@@ -24,7 +22,7 @@ class AsyncJob(pydantic.BaseModel):
     Contains details of long running asynchronous/background jobs.
     """
 
-    resource_type: typing_extensions.Literal["AsyncJob"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AsyncJob"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

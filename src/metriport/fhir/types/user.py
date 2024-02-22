@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -23,7 +21,7 @@ class User(pydantic.BaseModel):
     Representation of a human user of the system.
     """
 
-    resource_type: typing_extensions.Literal["User"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["User"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

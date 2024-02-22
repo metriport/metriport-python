@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -33,7 +31,7 @@ class MessageDefinition(BaseResource):
     Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
     """
 
-    resource_type: typing_extensions.Literal["MessageDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MessageDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="The business identifier that is used to reference the MessageDefinition and _is_ expected to be consistent from server to server."
     )

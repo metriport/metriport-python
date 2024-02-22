@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .contact_point import ContactPoint
@@ -23,7 +21,7 @@ class Subscription(BaseResource):
     The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined "channel" so that another system can take an appropriate action.
     """
 
-    resource_type: typing_extensions.Literal["Subscription"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Subscription"] = pydantic.Field(alias="resourceType")
     status: typing.Optional[SubscriptionStatus] = pydantic.Field(
         description="The status of the subscription, which marks the server state for managing the subscription."
     )

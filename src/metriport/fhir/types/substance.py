@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,7 +22,7 @@ class Substance(BaseResource):
     A homogeneous material with a definite composition.
     """
 
-    resource_type: typing_extensions.Literal["Substance"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Substance"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique identifier for the substance."
     )

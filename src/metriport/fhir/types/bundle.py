@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .bundle_entry import BundleEntry
 from .bundle_link import BundleLink
@@ -29,7 +27,7 @@ class Bundle(pydantic.BaseModel):
     A container for a collection of resources.
     """
 
-    resource_type: typing_extensions.Literal["Bundle"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Bundle"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .appointment_participant import AppointmentParticipant
 from .appointment_status import AppointmentStatus
@@ -29,7 +27,7 @@ class Appointment(BaseResource):
     A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).
     """
 
-    resource_type: typing_extensions.Literal["Appointment"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Appointment"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="This records identifiers associated with this appointment concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
     )

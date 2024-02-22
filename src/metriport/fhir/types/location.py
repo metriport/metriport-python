@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .base_resource import BaseResource
@@ -29,7 +27,7 @@ class Location(BaseResource):
     Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.
     """
 
-    resource_type: typing_extensions.Literal["Location"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Location"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique code or number identifying the location to its users."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -26,7 +24,7 @@ class MessageHeader(BaseResource):
     The header for a message exchange that is either requesting or responding to an action. The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
     """
 
-    resource_type: typing_extensions.Literal["MessageHeader"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MessageHeader"] = pydantic.Field(alias="resourceType")
     event_coding: typing.Optional[Coding] = pydantic.Field(
         alias="eventCoding",
         description='Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value "http://terminology.hl7.org/CodeSystem/message-events". Alternatively uri to the EventDefinition.',

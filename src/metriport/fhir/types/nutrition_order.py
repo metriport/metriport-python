@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -30,7 +28,7 @@ class NutritionOrder(BaseResource):
     A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.
     """
 
-    resource_type: typing_extensions.Literal["NutritionOrder"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["NutritionOrder"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifiers assigned to this order by the order sender or by the order receiver."
     )

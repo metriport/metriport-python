@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,7 +20,7 @@ class SubstancePolymer(BaseResource):
     Todo.
     """
 
-    resource_type: typing_extensions.Literal["SubstancePolymer"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SubstancePolymer"] = pydantic.Field(alias="resourceType")
     class_: typing.Optional[CodeableConcept] = pydantic.Field(alias="class", description="Todo.")
     geometry: typing.Optional[CodeableConcept] = pydantic.Field(description="Todo.")
     copolymer_connectivity: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(

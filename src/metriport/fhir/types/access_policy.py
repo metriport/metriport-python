@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .access_policy_ip_access_rule import AccessPolicyIpAccessRule
 from .access_policy_resource import AccessPolicyResource
@@ -25,7 +23,7 @@ class AccessPolicy(pydantic.BaseModel):
     Access Policy for user or user group that defines how entities can or cannot access resources.
     """
 
-    resource_type: typing_extensions.Literal["AccessPolicy"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AccessPolicy"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

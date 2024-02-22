@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -43,7 +41,7 @@ class ExplanationOfBenefit(BaseResource):
     This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.
     """
 
-    resource_type: typing_extensions.Literal["ExplanationOfBenefit"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ExplanationOfBenefit"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this explanation of benefit."
     )

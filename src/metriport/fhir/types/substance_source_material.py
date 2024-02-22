@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,7 +22,7 @@ class SubstanceSourceMaterial(BaseResource):
     Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceSourceMaterial"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SubstanceSourceMaterial"] = pydantic.Field(alias="resourceType")
     source_material_class: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="sourceMaterialClass",
         description="General high level classification of the source material specific to the origin of the material.",

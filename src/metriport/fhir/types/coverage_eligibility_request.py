@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -29,7 +27,7 @@ class CoverageEligibilityRequest(BaseResource):
     The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
     """
 
-    resource_type: typing_extensions.Literal["CoverageEligibilityRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["CoverageEligibilityRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this coverage eligiblity request."
     )

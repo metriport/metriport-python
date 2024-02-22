@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,7 +22,7 @@ class MedicinalProductIndication(BaseResource):
     Indication for the Medicinal Product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductIndication"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductIndication"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
         description="The medication for which this is an indication."
     )

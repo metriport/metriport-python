@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -27,7 +25,7 @@ class Practitioner(BaseResource):
     A person who is directly or indirectly involved in the provisioning of healthcare.
     """
 
-    resource_type: typing_extensions.Literal["Practitioner"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Practitioner"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="An identifier that applies to this person in this role."
     )

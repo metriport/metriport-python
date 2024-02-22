@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .operation_outcome_issue import OperationOutcomeIssue
@@ -20,7 +18,7 @@ class OperationOutcome(BaseResource):
     A collection of error, warning, or information messages that result from a system action.
     """
 
-    resource_type: typing_extensions.Literal["OperationOutcome"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["OperationOutcome"] = pydantic.Field(alias="resourceType")
     issue: typing.List[OperationOutcomeIssue] = pydantic.Field(
         description="An error, warning, or information message that results from a system action."
     )

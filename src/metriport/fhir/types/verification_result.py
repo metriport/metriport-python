@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -27,7 +25,7 @@ class VerificationResult(BaseResource):
     Describes validation requirements, source(s), status and dates for one or more elements.
     """
 
-    resource_type: typing_extensions.Literal["VerificationResult"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["VerificationResult"] = pydantic.Field(alias="resourceType")
     target: typing.Optional[typing.List[Reference]] = pydantic.Field(description="A resource that was validated.")
     target_location: typing.Optional[typing.List[str]] = pydantic.Field(
         alias="targetLocation", description="The fhirpath location(s) within the resource that was validated."

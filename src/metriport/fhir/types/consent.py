@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -28,7 +26,7 @@ class Consent(BaseResource):
     A record of a healthcare consumer’s choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.
     """
 
-    resource_type: typing_extensions.Literal["Consent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Consent"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique identifier for this copy of the Consent Statement."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,7 +24,7 @@ class DocumentManifest(BaseResource):
     A collection of documents compiled for a purpose together with metadata that applies to the collection.
     """
 
-    resource_type: typing_extensions.Literal["DocumentManifest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DocumentManifest"] = pydantic.Field(alias="resourceType")
     master_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="masterIdentifier",
         description="A single identifier that uniquely identifies this manifest. Principally used to refer to the manifest in non-FHIR contexts.",

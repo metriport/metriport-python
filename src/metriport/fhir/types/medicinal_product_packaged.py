@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -25,7 +23,7 @@ class MedicinalProductPackaged(BaseResource):
     A medicinal product in a container or package.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductPackaged"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductPackaged"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="Unique identifier.")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
         description="The product with this is a pack for."

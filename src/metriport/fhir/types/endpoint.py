@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -28,7 +26,7 @@ class Endpoint(BaseResource):
     The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.
     """
 
-    resource_type: typing_extensions.Literal["Endpoint"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Endpoint"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier for the organization that is used to identify the endpoint across multiple disparate systems."
     )

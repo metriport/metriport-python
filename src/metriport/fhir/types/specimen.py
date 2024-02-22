@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -28,7 +26,7 @@ class Specimen(BaseResource):
     A sample to be used for analysis.
     """
 
-    resource_type: typing_extensions.Literal["Specimen"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Specimen"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="Id for specimen.")
     accession_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="accessionIdentifier",

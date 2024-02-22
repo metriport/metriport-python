@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -31,7 +29,7 @@ class EventDefinition(BaseResource):
     The EventDefinition resource provides a reusable description of when a particular event can occur.
     """
 
-    resource_type: typing_extensions.Literal["EventDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["EventDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this event definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this event definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the event definition is stored on different servers."
     )

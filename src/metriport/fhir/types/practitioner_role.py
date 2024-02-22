@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,7 +24,7 @@ class PractitionerRole(BaseResource):
     A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
     """
 
-    resource_type: typing_extensions.Literal["PractitionerRole"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PractitionerRole"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business Identifiers that are specific to a role/location."
     )

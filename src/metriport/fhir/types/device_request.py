@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -30,7 +28,7 @@ class DeviceRequest(BaseResource):
     Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.
     """
 
-    resource_type: typing_extensions.Literal["DeviceRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DeviceRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifiers assigned to this order by the orderer or by the receiver."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .age import Age
 from .annotation import Annotation
@@ -29,7 +27,7 @@ class Condition(BaseResource):
     A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.
     """
 
-    resource_type: typing_extensions.Literal["Condition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Condition"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this condition by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )
