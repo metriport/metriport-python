@@ -22,10 +22,12 @@ class AgentChannel(pydantic.BaseModel):
         description="The channel endpoint definition including protocol and network binding details."
     )
     target_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="targetReference", description="The target resource where channel messages will be delivered."
+        alias="targetReference",
+        default=None,
+        description="The target resource where channel messages will be delivered.",
     )
     target_url: typing.Optional[Url] = pydantic.Field(
-        alias="targetUrl", description="The target resource where channel messages will be delivered."
+        alias="targetUrl", default=None, description="The target resource where channel messages will be delivered."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

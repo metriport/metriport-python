@@ -22,22 +22,31 @@ class ContactPoint(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     system: typing.Optional[ContactPointSystem] = pydantic.Field(
-        description="Telecommunications form for contact point - what communications system is required to make use of the contact."
+        default=None,
+        description="Telecommunications form for contact point - what communications system is required to make use of the contact.",
     )
     value: typing.Optional[str] = pydantic.Field(
-        description="The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address)."
+        default=None,
+        description="The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).",
     )
-    use: typing.Optional[ContactPointUse] = pydantic.Field(description="Identifies the purpose for the contact point.")
+    use: typing.Optional[ContactPointUse] = pydantic.Field(
+        default=None, description="Identifies the purpose for the contact point."
+    )
     rank: typing.Optional[PositiveInt] = pydantic.Field(
-        description="Specifies a preferred order in which to use a set of contacts. ContactPoints with lower rank values are more preferred than those with higher rank values."
+        default=None,
+        description="Specifies a preferred order in which to use a set of contacts. ContactPoints with lower rank values are more preferred than those with higher rank values.",
     )
-    period: typing.Optional[Period] = pydantic.Field(description="Time period when the contact point was/is in use.")
+    period: typing.Optional[Period] = pydantic.Field(
+        default=None, description="Time period when the contact point was/is in use."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

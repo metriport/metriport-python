@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .identifier import Identifier
@@ -23,13 +21,15 @@ class ResearchSubject(BaseResource):
     A physical entity which is the primary unit of operational and/or administrative interest in a study.
     """
 
-    resource_type: typing_extensions.Literal["ResearchSubject"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ResearchSubject"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifiers assigned to this research subject for a study."
+        default=None, description="Identifiers assigned to this research subject for a study."
     )
-    status: typing.Optional[ResearchSubjectStatus] = pydantic.Field(description="The current state of the subject.")
+    status: typing.Optional[ResearchSubjectStatus] = pydantic.Field(
+        default=None, description="The current state of the subject."
+    )
     period: typing.Optional[Period] = pydantic.Field(
-        description="The dates the subject began and ended their participation in the study."
+        default=None, description="The dates the subject began and ended their participation in the study."
     )
     study: Reference = pydantic.Field(description="Reference to the study the subject is participating in.")
     individual: Reference = pydantic.Field(
@@ -37,14 +37,16 @@ class ResearchSubject(BaseResource):
     )
     assigned_arm: typing.Optional[str] = pydantic.Field(
         alias="assignedArm",
+        default=None,
         description="The name of the arm in the study the subject is expected to follow as part of this study.",
     )
     actual_arm: typing.Optional[str] = pydantic.Field(
         alias="actualArm",
+        default=None,
         description="The name of the arm in the study the subject actually followed as part of this study.",
     )
     consent: typing.Optional[Reference] = pydantic.Field(
-        description="A record of the patient's informed agreement to participate in the study."
+        default=None, description="A record of the patient's informed agreement to participate in the study."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -20,32 +20,39 @@ class TriggerDefinition(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
-    type: typing.Optional[TriggerDefinitionType] = pydantic.Field(description="The type of triggering event.")
+    type: typing.Optional[TriggerDefinitionType] = pydantic.Field(
+        default=None, description="The type of triggering event."
+    )
     name: typing.Optional[str] = pydantic.Field(
-        description="A formal name for the event. This may be an absolute URI that identifies the event formally (e.g. from a trigger registry), or a simple relative URI that identifies the event in a local context."
+        default=None,
+        description="A formal name for the event. This may be an absolute URI that identifies the event formally (e.g. from a trigger registry), or a simple relative URI that identifies the event in a local context.",
     )
     timing_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="timingTiming", description="The timing of the event (if this is a periodic trigger)."
+        alias="timingTiming", default=None, description="The timing of the event (if this is a periodic trigger)."
     )
     timing_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="timingReference", description="The timing of the event (if this is a periodic trigger)."
+        alias="timingReference", default=None, description="The timing of the event (if this is a periodic trigger)."
     )
     timing_date: typing.Optional[str] = pydantic.Field(
-        alias="timingDate", description="The timing of the event (if this is a periodic trigger)."
+        alias="timingDate", default=None, description="The timing of the event (if this is a periodic trigger)."
     )
     timing_date_time: typing.Optional[str] = pydantic.Field(
-        alias="timingDateTime", description="The timing of the event (if this is a periodic trigger)."
+        alias="timingDateTime", default=None, description="The timing of the event (if this is a periodic trigger)."
     )
     data: typing.Optional[typing.List[DataRequirement]] = pydantic.Field(
-        description="The triggering data of the event (if this is a data trigger). If more than one data is requirement is specified, then all the data requirements must be true."
+        default=None,
+        description="The triggering data of the event (if this is a data trigger). If more than one data is requirement is specified, then all the data requirements must be true.",
     )
     condition: typing.Optional[Expression] = pydantic.Field(
-        description="A boolean-valued expression that is evaluated in the context of the container of the trigger definition and returns whether or not the trigger fires."
+        default=None,
+        description="A boolean-valued expression that is evaluated in the context of the container of the trigger definition and returns whether or not the trigger fires.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

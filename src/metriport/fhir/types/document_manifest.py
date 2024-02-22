@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,43 +24,52 @@ class DocumentManifest(BaseResource):
     A collection of documents compiled for a purpose together with metadata that applies to the collection.
     """
 
-    resource_type: typing_extensions.Literal["DocumentManifest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DocumentManifest"] = pydantic.Field(alias="resourceType")
     master_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="masterIdentifier",
+        default=None,
         description="A single identifier that uniquely identifies this manifest. Principally used to refer to the manifest in non-FHIR contexts.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Other identifiers associated with the document manifest, including version independent identifiers."
+        default=None,
+        description="Other identifiers associated with the document manifest, including version independent identifiers.",
     )
     status: typing.Optional[DocumentManifestStatus] = pydantic.Field(
-        description="The status of this document manifest."
+        default=None, description="The status of this document manifest."
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The code specifying the type of clinical activity that resulted in placing the associated content into the DocumentManifest."
+        default=None,
+        description="The code specifying the type of clinical activity that resulted in placing the associated content into the DocumentManifest.",
     )
     subject: typing.Optional[Reference] = pydantic.Field(
-        description="Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case)."
+        default=None,
+        description="Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).",
     )
     created: typing.Optional[DateTime] = pydantic.Field(
-        description="When the document manifest was created for submission to the server (not necessarily the same thing as the actual resource last modified time, since it may be modified, replicated, etc.)."
+        default=None,
+        description="When the document manifest was created for submission to the server (not necessarily the same thing as the actual resource last modified time, since it may be modified, replicated, etc.).",
     )
     author: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Identifies who is the author of the manifest. Manifest author is not necessarly the author of the references included."
+        default=None,
+        description="Identifies who is the author of the manifest. Manifest author is not necessarly the author of the references included.",
     )
     recipient: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="A patient, practitioner, or organization for which this set of documents is intended."
+        default=None,
+        description="A patient, practitioner, or organization for which this set of documents is intended.",
     )
     source: typing.Optional[Uri] = pydantic.Field(
-        description="Identifies the source system, application, or software that produced the document manifest."
+        default=None,
+        description="Identifies the source system, application, or software that produced the document manifest.",
     )
     description: typing.Optional[str] = pydantic.Field(
-        description='Human-readable description of the source document. This is sometimes known as the "title".'
+        default=None,
+        description='Human-readable description of the source document. This is sometimes known as the "title".',
     )
     content: typing.List[Reference] = pydantic.Field(
         description="The list of Resources that consist of the parts of this manifest."
     )
     related: typing.Optional[typing.List[DocumentManifestRelated]] = pydantic.Field(
-        description="Related identifiers or resources associated with the DocumentManifest."
+        default=None, description="Related identifiers or resources associated with the DocumentManifest."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

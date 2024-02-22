@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,38 +25,47 @@ class DeviceMetric(BaseResource):
     Describes a measurement, calculation or setting capability of a medical device.
     """
 
-    resource_type: typing_extensions.Literal["DeviceMetric"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DeviceMetric"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Unique instance identifiers assigned to a device by the device or gateway software, manufacturers, other organizations or owners. For example: handle ID."
+        default=None,
+        description="Unique instance identifiers assigned to a device by the device or gateway software, manufacturers, other organizations or owners. For example: handle ID.",
     )
     type: CodeableConcept = pydantic.Field(
         description="Describes the type of the metric. For example: Heart Rate, PEEP Setting, etc."
     )
     unit: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Describes the unit that an observed value determined for this metric will have. For example: Percent, Seconds, etc."
+        default=None,
+        description="Describes the unit that an observed value determined for this metric will have. For example: Percent, Seconds, etc.",
     )
     source: typing.Optional[Reference] = pydantic.Field(
-        description="Describes the link to the Device that this DeviceMetric belongs to and that contains administrative device information such as manufacturer, serial number, etc."
+        default=None,
+        description="Describes the link to the Device that this DeviceMetric belongs to and that contains administrative device information such as manufacturer, serial number, etc.",
     )
     parent: typing.Optional[Reference] = pydantic.Field(
-        description="Describes the link to the Device that this DeviceMetric belongs to and that provide information about the location of this DeviceMetric in the containment structure of the parent Device. An example would be a Device that represents a Channel. This reference can be used by a client application to distinguish DeviceMetrics that have the same type, but should be interpreted based on their containment location."
+        default=None,
+        description="Describes the link to the Device that this DeviceMetric belongs to and that provide information about the location of this DeviceMetric in the containment structure of the parent Device. An example would be a Device that represents a Channel. This reference can be used by a client application to distinguish DeviceMetrics that have the same type, but should be interpreted based on their containment location.",
     )
     operational_status: typing.Optional[DeviceMetricOperationalStatus] = pydantic.Field(
         alias="operationalStatus",
+        default=None,
         description="Indicates current operational state of the device. For example: On, Off, Standby, etc.",
     )
     color: typing.Optional[DeviceMetricColor] = pydantic.Field(
-        description="Describes the color representation for the metric. This is often used to aid clinicians to track and identify parameter types by color. In practice, consider a Patient Monitor that has ECG/HR and Pleth for example; the parameters are displayed in different characteristic colors, such as HR-blue, BP-green, and PR and SpO2- magenta."
+        default=None,
+        description="Describes the color representation for the metric. This is often used to aid clinicians to track and identify parameter types by color. In practice, consider a Patient Monitor that has ECG/HR and Pleth for example; the parameters are displayed in different characteristic colors, such as HR-blue, BP-green, and PR and SpO2- magenta.",
     )
     category: typing.Optional[DeviceMetricCategory] = pydantic.Field(
-        description="Indicates the category of the observation generation process. A DeviceMetric can be for example a setting, measurement, or calculation."
+        default=None,
+        description="Indicates the category of the observation generation process. A DeviceMetric can be for example a setting, measurement, or calculation.",
     )
     measurement_period: typing.Optional[Timing] = pydantic.Field(
         alias="measurementPeriod",
+        default=None,
         description="Describes the measurement repetition time. This is not necessarily the same as the update period. The measurement repetition time can range from milliseconds up to hours. An example for a measurement repetition time in the range of milliseconds is the sampling rate of an ECG. An example for a measurement repetition time in the range of hours is a NIBP that is triggered automatically every hour. The update period may be different than the measurement repetition time, if the device does not update the published observed value with the same frequency as it was measured.",
     )
     calibration: typing.Optional[typing.List[DeviceMetricCalibration]] = pydantic.Field(
-        description="Describes the calibrations that have been performed or that are required to be performed."
+        default=None,
+        description="Describes the calibrations that have been performed or that are required to be performed.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

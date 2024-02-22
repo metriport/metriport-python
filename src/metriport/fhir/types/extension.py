@@ -20,212 +20,264 @@ class Extension(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     url: typing.Optional[Uri] = pydantic.Field(
-        description="Source of the definition for the extension code - a logical name or a URL."
+        default=None, description="Source of the definition for the extension code - a logical name or a URL."
     )
     value_base_64_binary: typing.Optional[str] = pydantic.Field(
         alias="valueBase64Binary",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_boolean: typing.Optional[bool] = pydantic.Field(
         alias="valueBoolean",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_canonical: typing.Optional[str] = pydantic.Field(
         alias="valueCanonical",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_code: typing.Optional[str] = pydantic.Field(
         alias="valueCode",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_date: typing.Optional[str] = pydantic.Field(
         alias="valueDate",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_date_time: typing.Optional[str] = pydantic.Field(
         alias="valueDateTime",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_decimal: typing.Optional[float] = pydantic.Field(
         alias="valueDecimal",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_id: typing.Optional[str] = pydantic.Field(
         alias="valueId",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_instant: typing.Optional[str] = pydantic.Field(
         alias="valueInstant",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_integer: typing.Optional[float] = pydantic.Field(
         alias="valueInteger",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_markdown: typing.Optional[str] = pydantic.Field(
         alias="valueMarkdown",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_oid: typing.Optional[str] = pydantic.Field(
         alias="valueOid",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_positive_int: typing.Optional[float] = pydantic.Field(
         alias="valuePositiveInt",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_string: typing.Optional[str] = pydantic.Field(
         alias="valueString",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_time: typing.Optional[str] = pydantic.Field(
         alias="valueTime",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="valueUnsignedInt",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_uri: typing.Optional[str] = pydantic.Field(
         alias="valueUri",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_url: typing.Optional[str] = pydantic.Field(
         alias="valueUrl",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_uuid: typing.Optional[str] = pydantic.Field(
         alias="valueUuid",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_address: typing.Optional[Address] = pydantic.Field(
         alias="valueAddress",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_age: typing.Optional[Age] = pydantic.Field(
         alias="valueAge",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_annotation: typing.Optional[Annotation] = pydantic.Field(
         alias="valueAnnotation",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_attachment: typing.Optional[Attachment] = pydantic.Field(
         alias="valueAttachment",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="valueCodeableConcept",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_coding: typing.Optional[Coding] = pydantic.Field(
         alias="valueCoding",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_contact_point: typing.Optional[ContactPoint] = pydantic.Field(
         alias="valueContactPoint",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_count: typing.Optional[Count] = pydantic.Field(
         alias="valueCount",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_distance: typing.Optional[Distance] = pydantic.Field(
         alias="valueDistance",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_duration: typing.Optional[Duration] = pydantic.Field(
         alias="valueDuration",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_human_name: typing.Optional[HumanName] = pydantic.Field(
         alias="valueHumanName",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="valueIdentifier",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_money: typing.Optional[Money] = pydantic.Field(
         alias="valueMoney",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_period: typing.Optional[Period] = pydantic.Field(
         alias="valuePeriod",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="valueQuantity",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_range: typing.Optional[Range] = pydantic.Field(
         alias="valueRange",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_ratio: typing.Optional[Ratio] = pydantic.Field(
         alias="valueRatio",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_reference: typing.Optional[Reference] = pydantic.Field(
         alias="valueReference",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_sampled_data: typing.Optional[SampledData] = pydantic.Field(
         alias="valueSampledData",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_signature: typing.Optional[Signature] = pydantic.Field(
         alias="valueSignature",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_timing: typing.Optional[Timing] = pydantic.Field(
         alias="valueTiming",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_contact_detail: typing.Optional[ContactDetail] = pydantic.Field(
         alias="valueContactDetail",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_contributor: typing.Optional[Contributor] = pydantic.Field(
         alias="valueContributor",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_data_requirement: typing.Optional[DataRequirement] = pydantic.Field(
         alias="valueDataRequirement",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_expression: typing.Optional[Expression] = pydantic.Field(
         alias="valueExpression",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_parameter_definition: typing.Optional[ParameterDefinition] = pydantic.Field(
         alias="valueParameterDefinition",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_related_artifact: typing.Optional[RelatedArtifact] = pydantic.Field(
         alias="valueRelatedArtifact",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_trigger_definition: typing.Optional[TriggerDefinition] = pydantic.Field(
         alias="valueTriggerDefinition",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_usage_context: typing.Optional[UsageContext] = pydantic.Field(
         alias="valueUsageContext",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_dosage: typing.Optional[Dosage] = pydantic.Field(
         alias="valueDosage",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_meta: typing.Optional[Meta] = pydantic.Field(
         alias="valueMeta",
+        default=None,
         description="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
 

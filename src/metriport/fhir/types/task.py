@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -33,101 +31,120 @@ class Task(BaseResource):
     A task to be performed.
     """
 
-    resource_type: typing_extensions.Literal["Task"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Task"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="The business identifier for this task."
+        default=None, description="The business identifier for this task."
     )
     instantiates_canonical: typing.Optional[Canonical] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a _FHIR_-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this Task.",
     )
     instantiates_uri: typing.Optional[Uri] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an _externally_ maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this Task.",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description='BasedOn refers to a higher-level authorization that triggered the creation of the task. It references a "request" resource such as a ServiceRequest, MedicationRequest, ServiceRequest, CarePlan, etc. which is distinct from the "request" resource the task is seeking to fulfill. This latter resource is referenced by FocusOn. For example, based on a ServiceRequest (= BasedOn), a task is created to fulfill a procedureRequest ( = FocusOn ) to collect a specimen from a patient.',
     )
     group_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="groupIdentifier",
+        default=None,
         description="An identifier that links together multiple tasks and other requests that were created in the same context.",
     )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="partOf", description="Task that this particular task is part of."
+        alias="partOf", default=None, description="Task that this particular task is part of."
     )
-    status: typing.Optional[TaskStatus] = pydantic.Field(description="The current status of the task.")
+    status: typing.Optional[TaskStatus] = pydantic.Field(default=None, description="The current status of the task.")
     status_reason: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="statusReason", description="An explanation as to why this task is held, failed, was refused, etc."
+        alias="statusReason",
+        default=None,
+        description="An explanation as to why this task is held, failed, was refused, etc.",
     )
     business_status: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="businessStatus", description="Contains business-specific nuances of the business state."
+        alias="businessStatus", default=None, description="Contains business-specific nuances of the business state."
     )
     intent: typing.Optional[TaskIntent] = pydantic.Field(
-        description='Indicates the "level" of actionability associated with the Task, i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.'
+        default=None,
+        description='Indicates the "level" of actionability associated with the Task, i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.',
     )
     priority: typing.Optional[Code] = pydantic.Field(
-        description="Indicates how quickly the Task should be addressed with respect to other requests."
+        default=None, description="Indicates how quickly the Task should be addressed with respect to other requests."
     )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="A name or code (or both) briefly describing what the task involves."
+        default=None, description="A name or code (or both) briefly describing what the task involves."
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="A free-text description of what is to be performed."
+        default=None, description="A free-text description of what is to be performed."
     )
     focus: typing.Optional[Reference] = pydantic.Field(
-        description="The request being actioned or the resource being manipulated by this task."
+        default=None, description="The request being actioned or the resource being manipulated by this task."
     )
     for_: typing.Optional[Reference] = pydantic.Field(
         alias="for",
+        default=None,
         description="The entity who benefits from the performance of the service specified in the task (e.g., the patient).",
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The healthcare event (e.g. a patient and healthcare provider interaction) during which this task was created."
+        default=None,
+        description="The healthcare event (e.g. a patient and healthcare provider interaction) during which this task was created.",
     )
     execution_period: typing.Optional[Period] = pydantic.Field(
         alias="executionPeriod",
+        default=None,
         description="Identifies the time action was first taken against the task (start) and/or the time final action was taken against the task prior to marking it as completed (end).",
     )
     authored_on: typing.Optional[DateTime] = pydantic.Field(
-        alias="authoredOn", description="The date and time this task was created."
+        alias="authoredOn", default=None, description="The date and time this task was created."
     )
     last_modified: typing.Optional[DateTime] = pydantic.Field(
-        alias="lastModified", description="The date and time of last modification to this task."
+        alias="lastModified", default=None, description="The date and time of last modification to this task."
     )
-    requester: typing.Optional[Reference] = pydantic.Field(description="The creator of the task.")
+    requester: typing.Optional[Reference] = pydantic.Field(default=None, description="The creator of the task.")
     performer_type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="performerType", description="The kind of participant that should perform the task."
+        alias="performerType", default=None, description="The kind of participant that should perform the task."
     )
     owner: typing.Optional[Reference] = pydantic.Field(
-        description="Individual organization or Device currently responsible for task execution."
+        default=None, description="Individual organization or Device currently responsible for task execution."
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="Principal physical location where the this task is performed."
+        default=None, description="Principal physical location where the this task is performed."
     )
     reason_code: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="reasonCode", description="A description or code indicating why this task needs to be performed."
+        alias="reasonCode",
+        default=None,
+        description="A description or code indicating why this task needs to be performed.",
     )
     reason_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="reasonReference", description="A resource reference indicating why this task needs to be performed."
+        alias="reasonReference",
+        default=None,
+        description="A resource reference indicating why this task needs to be performed.",
     )
     insurance: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Insurance plans, coverage extensions, pre-authorizations and/or pre-determinations that may be relevant to the Task."
+        default=None,
+        description="Insurance plans, coverage extensions, pre-authorizations and/or pre-determinations that may be relevant to the Task.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Free-text information captured about the task as it progresses."
+        default=None, description="Free-text information captured about the task as it progresses."
     )
     relevant_history: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="relevantHistory",
+        default=None,
         description="Links to Provenance records for past versions of this Task that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the task.",
     )
     restriction: typing.Optional[TaskRestriction] = pydantic.Field(
-        description="If the Task.focus is a request resource and the task is seeking fulfillment (i.e. is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned."
+        default=None,
+        description="If the Task.focus is a request resource and the task is seeking fulfillment (i.e. is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.",
     )
     input: typing.Optional[typing.List[TaskInput]] = pydantic.Field(
-        description="Additional information that may be needed in the execution of the task."
+        default=None, description="Additional information that may be needed in the execution of the task."
     )
-    output: typing.Optional[typing.List[TaskOutput]] = pydantic.Field(description="Outputs produced by the Task.")
+    output: typing.Optional[typing.List[TaskOutput]] = pydantic.Field(
+        default=None, description="Outputs produced by the Task."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

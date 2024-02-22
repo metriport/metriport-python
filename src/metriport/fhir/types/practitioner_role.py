@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,52 +24,58 @@ class PractitionerRole(BaseResource):
     A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
     """
 
-    resource_type: typing_extensions.Literal["PractitionerRole"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PractitionerRole"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business Identifiers that are specific to a role/location."
+        default=None, description="Business Identifiers that are specific to a role/location."
     )
     active: typing.Optional[bool] = pydantic.Field(
-        description="Whether this practitioner role record is in active use."
+        default=None, description="Whether this practitioner role record is in active use."
     )
     period: typing.Optional[Period] = pydantic.Field(
-        description="The period during which the person is authorized to act as a practitioner in these role(s) for the organization."
+        default=None,
+        description="The period during which the person is authorized to act as a practitioner in these role(s) for the organization.",
     )
     practitioner: typing.Optional[Reference] = pydantic.Field(
-        description="Practitioner that is able to provide the defined services for the organization."
+        default=None, description="Practitioner that is able to provide the defined services for the organization."
     )
     organization: typing.Optional[Reference] = pydantic.Field(
-        description="The organization where the Practitioner performs the roles associated."
+        default=None, description="The organization where the Practitioner performs the roles associated."
     )
     code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Roles which this practitioner is authorized to perform for the organization."
+        default=None, description="Roles which this practitioner is authorized to perform for the organization."
     )
     specialty: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Specific specialty of the practitioner."
+        default=None, description="Specific specialty of the practitioner."
     )
     location: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The location(s) at which this practitioner provides care."
+        default=None, description="The location(s) at which this practitioner provides care."
     )
     healthcare_service: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="healthcareService",
+        default=None,
         description="The list of healthcare services that this worker provides for this role's Organization/Location(s).",
     )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="Contact details that are specific to the role/location/service."
+        default=None, description="Contact details that are specific to the role/location/service."
     )
     available_time: typing.Optional[typing.List[PractitionerRoleAvailableTime]] = pydantic.Field(
         alias="availableTime",
+        default=None,
         description="A collection of times the practitioner is available or performing this role at the location and/or healthcareservice.",
     )
     not_available: typing.Optional[typing.List[PractitionerRoleNotAvailable]] = pydantic.Field(
         alias="notAvailable",
+        default=None,
         description="The practitioner is not available or performing this role during this period of time due to the provided reason.",
     )
     availability_exceptions: typing.Optional[str] = pydantic.Field(
         alias="availabilityExceptions",
+        default=None,
         description="A description of site availability exceptions, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as details in the available Times and not available Times.",
     )
     endpoint: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Technical endpoints providing access to services operated for the practitioner with this role."
+        default=None,
+        description="Technical endpoints providing access to services operated for the practitioner with this role.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

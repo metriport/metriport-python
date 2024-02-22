@@ -19,23 +19,27 @@ class AccessPolicyResource(pydantic.BaseModel):
     """
 
     compartment: typing.Optional[Reference] = pydantic.Field(
-        description="DEPRECATED Optional compartment restriction for the resource type."
+        default=None, description="DEPRECATED Optional compartment restriction for the resource type."
     )
     criteria: typing.Optional[str] = pydantic.Field(
-        description="The rules that the server should use to determine which resources to allow."
+        default=None, description="The rules that the server should use to determine which resources to allow."
     )
     readonly: typing.Optional[bool] = pydantic.Field(
-        description="Optional flag to indicate that the resource type is read-only."
+        default=None, description="Optional flag to indicate that the resource type is read-only."
     )
     hidden_fields: typing.Optional[typing.List[str]] = pydantic.Field(
-        alias="hiddenFields", description="Optional list of hidden fields. Hidden fields are not readable or writeable."
+        alias="hiddenFields",
+        default=None,
+        description="Optional list of hidden fields. Hidden fields are not readable or writeable.",
     )
     readonly_fields: typing.Optional[typing.List[str]] = pydantic.Field(
         alias="readonlyFields",
+        default=None,
         description="Optional list of read-only fields. Read-only fields are readable but not writeable.",
     )
     write_constraint: typing.Optional[typing.List[Expression]] = pydantic.Field(
         alias="writeConstraint",
+        default=None,
         description="Invariants that must be satisfied for the resource to be written. Can include %before and %after placeholders to refer to the resource before and after the updates are applied.",
     )
 

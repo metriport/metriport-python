@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -23,42 +21,54 @@ class ClientApplication(pydantic.BaseModel):
     Medplum client application for automated access.
     """
 
-    resource_type: typing_extensions.Literal["ClientApplication"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ClientApplication"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
-    name: typing.Optional[str] = pydantic.Field(description="A name associated with the ClientApplication.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
+    name: typing.Optional[str] = pydantic.Field(
+        default=None, description="A name associated with the ClientApplication."
+    )
     description: typing.Optional[str] = pydantic.Field(
-        description="A summary, characterization or explanation of the ClientApplication."
+        default=None, description="A summary, characterization or explanation of the ClientApplication."
     )
     secret: typing.Optional[str] = pydantic.Field(
-        description="Client secret string used to verify the identity of a client."
+        default=None, description="Client secret string used to verify the identity of a client."
     )
     jwks_uri: typing.Optional[Uri] = pydantic.Field(
         alias="jwksUri",
+        default=None,
         description="Optional JWKS URI for public key verification of JWTs issued by the authorization server (client_secret_jwt).",
     )
     redirect_uri: typing.Optional[Uri] = pydantic.Field(
         alias="redirectUri",
+        default=None,
         description="Optional redirect URI used when redirecting a client back to the client application.",
     )
     launch_uri: typing.Optional[Uri] = pydantic.Field(
-        alias="launchUri", description="Optional launch URI for SMART EHR launch sequence."
+        alias="launchUri", default=None, description="Optional launch URI for SMART EHR launch sequence."
     )
     pkce_optional: typing.Optional[bool] = pydantic.Field(
         alias="pkceOptional",
+        default=None,
         description="Flag to make PKCE optional for this client application. PKCE is required by default for compliance with Smart App Launch. It can be disabled for compatibility with legacy client applications.",
     )
     identity_provider: typing.Optional[IdentityProvider] = pydantic.Field(
-        alias="identityProvider", description="Optional external Identity Provider (IdP) for the client application."
+        alias="identityProvider",
+        default=None,
+        description="Optional external Identity Provider (IdP) for the client application.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

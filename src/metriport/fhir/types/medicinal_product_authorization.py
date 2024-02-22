@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -28,51 +26,62 @@ class MedicinalProductAuthorization(BaseResource):
     The regulatory authorization of a medicinal product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductAuthorization"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductAuthorization"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifier for the marketing authorization, as assigned by a regulator."
+        default=None, description="Business identifier for the marketing authorization, as assigned by a regulator."
     )
-    subject: typing.Optional[Reference] = pydantic.Field(description="The medicinal product that is being authorized.")
+    subject: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="The medicinal product that is being authorized."
+    )
     country: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The country in which the marketing authorization has been granted."
+        default=None, description="The country in which the marketing authorization has been granted."
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Jurisdiction within a country."
+        default=None, description="Jurisdiction within a country."
     )
-    status: typing.Optional[CodeableConcept] = pydantic.Field(description="The status of the marketing authorization.")
+    status: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="The status of the marketing authorization."
+    )
     status_date: typing.Optional[DateTime] = pydantic.Field(
-        alias="statusDate", description="The date at which the given status has become applicable."
+        alias="statusDate", default=None, description="The date at which the given status has become applicable."
     )
     restore_date: typing.Optional[DateTime] = pydantic.Field(
         alias="restoreDate",
+        default=None,
         description="The date when a suspended the marketing or the marketing authorization of the product is anticipated to be restored.",
     )
     validity_period: typing.Optional[Period] = pydantic.Field(
         alias="validityPeriod",
+        default=None,
         description="The beginning of the time period in which the marketing authorization is in the specific status shall be specified A complete date consisting of day, month and year shall be specified using the ISO 8601 date format.",
     )
     data_exclusivity_period: typing.Optional[Period] = pydantic.Field(
         alias="dataExclusivityPeriod",
+        default=None,
         description="A period of time after authorization before generic product applicatiosn can be submitted.",
     )
     date_of_first_authorization: typing.Optional[DateTime] = pydantic.Field(
         alias="dateOfFirstAuthorization",
+        default=None,
         description="The date when the first authorization was granted by a Medicines Regulatory Agency.",
     )
     international_birth_date: typing.Optional[DateTime] = pydantic.Field(
         alias="internationalBirthDate",
+        default=None,
         description="Date of first marketing authorization for a company's new medicinal product in any country in the World.",
     )
     legal_basis: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="legalBasis", description="The legal framework against which this authorization is granted."
+        alias="legalBasis", default=None, description="The legal framework against which this authorization is granted."
     )
     jurisdictional_authorization: typing.Optional[
         typing.List[MedicinalProductAuthorizationJurisdictionalAuthorization]
-    ] = pydantic.Field(alias="jurisdictionalAuthorization", description="Authorization in areas within a country.")
-    holder: typing.Optional[Reference] = pydantic.Field(description="Marketing Authorization Holder.")
-    regulator: typing.Optional[Reference] = pydantic.Field(description="Medicines Regulatory Agency.")
+    ] = pydantic.Field(
+        alias="jurisdictionalAuthorization", default=None, description="Authorization in areas within a country."
+    )
+    holder: typing.Optional[Reference] = pydantic.Field(default=None, description="Marketing Authorization Holder.")
+    regulator: typing.Optional[Reference] = pydantic.Field(default=None, description="Medicines Regulatory Agency.")
     procedure: typing.Optional[MedicinalProductAuthorizationProcedure] = pydantic.Field(
-        description="The regulatory procedure for granting or amending a marketing authorization."
+        default=None, description="The regulatory procedure for granting or amending a marketing authorization."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

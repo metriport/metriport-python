@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -29,34 +27,40 @@ class RelatedPerson(BaseResource):
     Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.
     """
 
-    resource_type: typing_extensions.Literal["RelatedPerson"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["RelatedPerson"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier for a person within a particular scope."
+        default=None, description="Identifier for a person within a particular scope."
     )
-    active: typing.Optional[bool] = pydantic.Field(description="Whether this related person record is in active use.")
+    active: typing.Optional[bool] = pydantic.Field(
+        default=None, description="Whether this related person record is in active use."
+    )
     patient: Reference = pydantic.Field(description="The patient this person is related to.")
     relationship: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The nature of the relationship between a patient and the related person."
+        default=None, description="The nature of the relationship between a patient and the related person."
     )
-    name: typing.Optional[typing.List[HumanName]] = pydantic.Field(description="A name associated with the person.")
+    name: typing.Optional[typing.List[HumanName]] = pydantic.Field(
+        default=None, description="A name associated with the person."
+    )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="A contact detail for the person, e.g. a telephone number or an email address."
+        default=None, description="A contact detail for the person, e.g. a telephone number or an email address."
     )
     gender: typing.Optional[RelatedPersonGender] = pydantic.Field(
-        description="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes."
+        default=None,
+        description="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
     )
     birth_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="birthDate", description="The date on which the related person was born."
+        alias="birthDate", default=None, description="The date on which the related person was born."
     )
     address: typing.Optional[typing.List[Address]] = pydantic.Field(
-        description="Address where the related person can be contacted or visited."
+        default=None, description="Address where the related person can be contacted or visited."
     )
-    photo: typing.Optional[typing.List[Attachment]] = pydantic.Field(description="Image of the person.")
+    photo: typing.Optional[typing.List[Attachment]] = pydantic.Field(default=None, description="Image of the person.")
     period: typing.Optional[Period] = pydantic.Field(
-        description="The period of time during which this relationship is or was active. If there are no dates defined, then the interval is unknown."
+        default=None,
+        description="The period of time during which this relationship is or was active. If there are no dates defined, then the interval is unknown.",
     )
     communication: typing.Optional[typing.List[RelatedPersonCommunication]] = pydantic.Field(
-        description="A language which may be used to communicate with about the patient's health."
+        default=None, description="A language which may be used to communicate with about the patient's health."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -21,35 +21,47 @@ class Address(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
-    use: typing.Optional[AddressUse] = pydantic.Field(description="The purpose of this address.")
+    use: typing.Optional[AddressUse] = pydantic.Field(default=None, description="The purpose of this address.")
     type: typing.Optional[AddressType] = pydantic.Field(
-        description="Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both."
+        default=None,
+        description="Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both.",
     )
     text: typing.Optional[str] = pydantic.Field(
-        description="Specifies the entire address as it should be displayed e.g. on a postal label. This may be provided instead of or as well as the specific parts."
+        default=None,
+        description="Specifies the entire address as it should be displayed e.g. on a postal label. This may be provided instead of or as well as the specific parts.",
     )
     line: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information."
+        default=None,
+        description="This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information.",
     )
     city: typing.Optional[str] = pydantic.Field(
-        description="The name of the city, town, suburb, village or other community or delivery center."
+        default=None, description="The name of the city, town, suburb, village or other community or delivery center."
     )
-    district: typing.Optional[str] = pydantic.Field(description="The name of the administrative area (county).")
+    district: typing.Optional[str] = pydantic.Field(
+        default=None, description="The name of the administrative area (county)."
+    )
     state: typing.Optional[str] = pydantic.Field(
-        description="Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes)."
+        default=None,
+        description="Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes).",
     )
     postal_code: typing.Optional[str] = pydantic.Field(
-        alias="postalCode", description="A postal code designating a region defined by the postal service."
+        alias="postalCode",
+        default=None,
+        description="A postal code designating a region defined by the postal service.",
     )
     country: typing.Optional[str] = pydantic.Field(
-        description="Country - a nation as commonly understood or generally accepted."
+        default=None, description="Country - a nation as commonly understood or generally accepted."
     )
-    period: typing.Optional[Period] = pydantic.Field(description="Time period when address was/is in use.")
+    period: typing.Optional[Period] = pydantic.Field(
+        default=None, description="Time period when address was/is in use."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

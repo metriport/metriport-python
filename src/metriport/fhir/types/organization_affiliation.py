@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,43 +22,46 @@ class OrganizationAffiliation(BaseResource):
     Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
     """
 
-    resource_type: typing_extensions.Literal["OrganizationAffiliation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["OrganizationAffiliation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers that are specific to this role."
+        default=None, description="Business identifiers that are specific to this role."
     )
     active: typing.Optional[bool] = pydantic.Field(
-        description="Whether this organization affiliation record is in active use."
+        default=None, description="Whether this organization affiliation record is in active use."
     )
     period: typing.Optional[Period] = pydantic.Field(
-        description="The period during which the participatingOrganization is affiliated with the primary organization."
+        default=None,
+        description="The period during which the participatingOrganization is affiliated with the primary organization.",
     )
     organization: typing.Optional[Reference] = pydantic.Field(
-        description="Organization where the role is available (primary organization/has members)."
+        default=None, description="Organization where the role is available (primary organization/has members)."
     )
     participating_organization: typing.Optional[Reference] = pydantic.Field(
         alias="participatingOrganization",
+        default=None,
         description="The Participating Organization provides/performs the role(s) defined by the code to the Primary Organization (e.g. providing services or is a member of).",
     )
     network: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Health insurance provider network in which the participatingOrganization provides the role's services (if defined) at the indicated locations (if defined)."
+        default=None,
+        description="Health insurance provider network in which the participatingOrganization provides the role's services (if defined) at the indicated locations (if defined).",
     )
     code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Definition of the role the participatingOrganization plays in the association."
+        default=None, description="Definition of the role the participatingOrganization plays in the association."
     )
     specialty: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Specific specialty of the participatingOrganization in the context of the role."
+        default=None, description="Specific specialty of the participatingOrganization in the context of the role."
     )
     location: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The location(s) at which the role occurs."
+        default=None, description="The location(s) at which the role occurs."
     )
     healthcare_service: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="healthcareService", description="Healthcare services provided through the role."
+        alias="healthcareService", default=None, description="Healthcare services provided through the role."
     )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="Contact details at the participatingOrganization relevant to this Affiliation."
+        default=None, description="Contact details at the participatingOrganization relevant to this Affiliation."
     )
     endpoint: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Technical endpoints providing access to services operated for this role."
+        default=None, description="Technical endpoints providing access to services operated for this role."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

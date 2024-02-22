@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -27,35 +25,40 @@ class Practitioner(BaseResource):
     A person who is directly or indirectly involved in the provisioning of healthcare.
     """
 
-    resource_type: typing_extensions.Literal["Practitioner"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Practitioner"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="An identifier that applies to this person in this role."
+        default=None, description="An identifier that applies to this person in this role."
     )
-    active: typing.Optional[bool] = pydantic.Field(description="Whether this practitioner's record is in active use.")
+    active: typing.Optional[bool] = pydantic.Field(
+        default=None, description="Whether this practitioner's record is in active use."
+    )
     name: typing.Optional[typing.List[HumanName]] = pydantic.Field(
-        description="The name(s) associated with the practitioner."
+        default=None, description="The name(s) associated with the practitioner."
     )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="A contact detail for the practitioner, e.g. a telephone number or an email address."
+        default=None, description="A contact detail for the practitioner, e.g. a telephone number or an email address."
     )
     address: typing.Optional[typing.List[Address]] = pydantic.Field(
+        default=None,
         description=(
             "Address(es) of the practitioner that are not role specific (typically home address).\n"
             "Work addresses are not typically entered in this property as they are usually role dependent.\n"
-        )
+        ),
     )
     gender: typing.Optional[PractitionerGender] = pydantic.Field(
-        description="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes."
+        default=None,
+        description="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
     )
     birth_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="birthDate", description="The date of birth for the practitioner."
+        alias="birthDate", default=None, description="The date of birth for the practitioner."
     )
-    photo: typing.Optional[typing.List[Attachment]] = pydantic.Field(description="Image of the person.")
+    photo: typing.Optional[typing.List[Attachment]] = pydantic.Field(default=None, description="Image of the person.")
     qualification: typing.Optional[typing.List[PractitionerQualification]] = pydantic.Field(
-        description="The official certifications, training, and licenses that authorize or otherwise pertain to the provision of care by the practitioner. For example, a medical license issued by a medical board authorizing the practitioner to practice medicine within a certian locality."
+        default=None,
+        description="The official certifications, training, and licenses that authorize or otherwise pertain to the provision of care by the practitioner. For example, a medical license issued by a medical board authorizing the practitioner to practice medicine within a certian locality.",
     )
     communication: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A language the practitioner can use in patient communication."
+        default=None, description="A language the practitioner can use in patient communication."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

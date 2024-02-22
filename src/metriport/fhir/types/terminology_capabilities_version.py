@@ -20,29 +20,36 @@ class TerminologyCapabilitiesVersion(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     code: typing.Optional[str] = pydantic.Field(
-        description="For version-less code systems, there should be a single version with no identifier."
+        default=None, description="For version-less code systems, there should be a single version with no identifier."
     )
     is_default: typing.Optional[bool] = pydantic.Field(
-        alias="isDefault", description="If this is the default version for this code system."
+        alias="isDefault", default=None, description="If this is the default version for this code system."
     )
     compositional: typing.Optional[bool] = pydantic.Field(
-        description="If the compositional grammar defined by the code system is supported."
+        default=None, description="If the compositional grammar defined by the code system is supported."
     )
-    language: typing.Optional[typing.List[Code]] = pydantic.Field(description="Language Displays supported.")
+    language: typing.Optional[typing.List[Code]] = pydantic.Field(
+        default=None, description="Language Displays supported."
+    )
     filter: typing.Optional[typing.List[TerminologyCapabilitiesFilter]] = pydantic.Field(
-        description="Filter Properties supported."
+        default=None, description="Filter Properties supported."
     )
-    property: typing.Optional[typing.List[Code]] = pydantic.Field(description="Properties supported for $lookup.")
+    property: typing.Optional[typing.List[Code]] = pydantic.Field(
+        default=None, description="Properties supported for $lookup."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

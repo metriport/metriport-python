@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -25,27 +23,34 @@ class UserConfiguration(pydantic.BaseModel):
     User specific configuration for the Medplum application.
     """
 
-    resource_type: typing_extensions.Literal["UserConfiguration"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["UserConfiguration"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
-    name: typing.Optional[str] = pydantic.Field(description="A name associated with the UserConfiguration.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
+    name: typing.Optional[str] = pydantic.Field(
+        default=None, description="A name associated with the UserConfiguration."
+    )
     menu: typing.Optional[typing.List[UserConfigurationMenu]] = pydantic.Field(
-        description="Optional menu of shortcuts to URLs."
+        default=None, description="Optional menu of shortcuts to URLs."
     )
     search: typing.Optional[typing.List[UserConfigurationSearch]] = pydantic.Field(
-        description="Shortcut links to URLs."
+        default=None, description="Shortcut links to URLs."
     )
     option: typing.Optional[typing.List[UserConfigurationOption]] = pydantic.Field(
-        description="User options that control the display of the application."
+        default=None, description="User options that control the display of the application."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

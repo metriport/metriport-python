@@ -22,50 +22,53 @@ class QuestionnaireInitial(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     value_boolean: typing.Optional[bool] = pydantic.Field(
-        alias="valueBoolean", description="The actual value to for an initial answer."
+        alias="valueBoolean", default=None, description="The actual value to for an initial answer."
     )
     value_decimal: typing.Optional[float] = pydantic.Field(
-        alias="valueDecimal", description="The actual value to for an initial answer."
+        alias="valueDecimal", default=None, description="The actual value to for an initial answer."
     )
     value_integer: typing.Optional[float] = pydantic.Field(
-        alias="valueInteger", description="The actual value to for an initial answer."
+        alias="valueInteger", default=None, description="The actual value to for an initial answer."
     )
     value_date: typing.Optional[str] = pydantic.Field(
-        alias="valueDate", description="The actual value to for an initial answer."
+        alias="valueDate", default=None, description="The actual value to for an initial answer."
     )
     value_date_time: typing.Optional[str] = pydantic.Field(
-        alias="valueDateTime", description="The actual value to for an initial answer."
+        alias="valueDateTime", default=None, description="The actual value to for an initial answer."
     )
     value_time: typing.Optional[str] = pydantic.Field(
-        alias="valueTime", description="The actual value to for an initial answer."
+        alias="valueTime", default=None, description="The actual value to for an initial answer."
     )
     value_string: typing.Optional[str] = pydantic.Field(
-        alias="valueString", description="The actual value to for an initial answer."
+        alias="valueString", default=None, description="The actual value to for an initial answer."
     )
     value_uri: typing.Optional[str] = pydantic.Field(
-        alias="valueUri", description="The actual value to for an initial answer."
+        alias="valueUri", default=None, description="The actual value to for an initial answer."
     )
     value_attachment: typing.Optional[Attachment] = pydantic.Field(
-        alias="valueAttachment", description="The actual value to for an initial answer."
+        alias="valueAttachment", default=None, description="The actual value to for an initial answer."
     )
     value_coding: typing.Optional[Coding] = pydantic.Field(
-        alias="valueCoding", description="The actual value to for an initial answer."
+        alias="valueCoding", default=None, description="The actual value to for an initial answer."
     )
     value_quantity: typing.Optional[Quantity] = pydantic.Field(
-        alias="valueQuantity", description="The actual value to for an initial answer."
+        alias="valueQuantity", default=None, description="The actual value to for an initial answer."
     )
     value_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="valueReference", description="The actual value to for an initial answer."
+        alias="valueReference", default=None, description="The actual value to for an initial answer."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

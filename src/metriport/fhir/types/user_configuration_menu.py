@@ -19,7 +19,7 @@ class UserConfigurationMenu(pydantic.BaseModel):
 
     title: str = pydantic.Field(description="Title of the menu.")
     link: typing.Optional[typing.List[UserConfigurationMenuLink]] = pydantic.Field(
-        description="Shortcut links to URLs."
+        default=None, description="Shortcut links to URLs."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

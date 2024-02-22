@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -27,28 +25,37 @@ class Person(BaseResource):
     Demographics and administrative information about a person independent of a specific health-related context.
     """
 
-    resource_type: typing_extensions.Literal["Person"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Person"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier for a person within a particular scope."
+        default=None, description="Identifier for a person within a particular scope."
     )
-    name: typing.Optional[typing.List[HumanName]] = pydantic.Field(description="A name associated with the person.")
+    name: typing.Optional[typing.List[HumanName]] = pydantic.Field(
+        default=None, description="A name associated with the person."
+    )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="A contact detail for the person, e.g. a telephone number or an email address."
+        default=None, description="A contact detail for the person, e.g. a telephone number or an email address."
     )
-    gender: typing.Optional[PersonGender] = pydantic.Field(description="Administrative Gender.")
+    gender: typing.Optional[PersonGender] = pydantic.Field(default=None, description="Administrative Gender.")
     birth_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="birthDate", description="The birth date for the person."
+        alias="birthDate", default=None, description="The birth date for the person."
     )
-    address: typing.Optional[typing.List[Address]] = pydantic.Field(description="One or more addresses for the person.")
+    address: typing.Optional[typing.List[Address]] = pydantic.Field(
+        default=None, description="One or more addresses for the person."
+    )
     photo: typing.Optional[Attachment] = pydantic.Field(
-        description="An image that can be displayed as a thumbnail of the person to enhance the identification of the individual."
+        default=None,
+        description="An image that can be displayed as a thumbnail of the person to enhance the identification of the individual.",
     )
     managing_organization: typing.Optional[Reference] = pydantic.Field(
-        alias="managingOrganization", description="The organization that is the custodian of the person record."
+        alias="managingOrganization",
+        default=None,
+        description="The organization that is the custodian of the person record.",
     )
-    active: typing.Optional[bool] = pydantic.Field(description="Whether this person's record is in active use.")
+    active: typing.Optional[bool] = pydantic.Field(
+        default=None, description="Whether this person's record is in active use."
+    )
     link: typing.Optional[typing.List[PersonLink]] = pydantic.Field(
-        description="Link to a resource that concerns the same actual person."
+        default=None, description="Link to a resource that concerns the same actual person."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

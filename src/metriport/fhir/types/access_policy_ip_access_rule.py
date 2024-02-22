@@ -18,7 +18,8 @@ class AccessPolicyIpAccessRule(pydantic.BaseModel):
     """
 
     name: typing.Optional[str] = pydantic.Field(
-        description="Friendly name that will make it easy for you to identify the IP Access Rule in the future."
+        default=None,
+        description="Friendly name that will make it easy for you to identify the IP Access Rule in the future.",
     )
     value: str = pydantic.Field(
         description="An IP Access rule will apply a certain action to incoming traffic based on the visitor IP address or IP range."

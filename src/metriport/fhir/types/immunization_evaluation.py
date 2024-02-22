@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -24,19 +22,20 @@ class ImmunizationEvaluation(BaseResource):
     Describes a comparison of an immunization event against published recommendations to determine if the administration is "valid" in relation to those recommendations.
     """
 
-    resource_type: typing_extensions.Literal["ImmunizationEvaluation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ImmunizationEvaluation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this immunization evaluation record."
+        default=None, description="A unique identifier assigned to this immunization evaluation record."
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="Indicates the current status of the evaluation of the vaccination administration event."
+        default=None,
+        description="Indicates the current status of the evaluation of the vaccination administration event.",
     )
     patient: Reference = pydantic.Field(description="The individual for whom the evaluation is being done.")
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date the evaluation of the vaccine administration event was performed."
+        default=None, description="The date the evaluation of the vaccine administration event was performed."
     )
     authority: typing.Optional[Reference] = pydantic.Field(
-        description="Indicates the authority who published the protocol (e.g. ACIP)."
+        default=None, description="Indicates the authority who published the protocol (e.g. ACIP)."
     )
     target_disease: CodeableConcept = pydantic.Field(
         alias="targetDisease", description="The vaccine preventable disease the dose is being evaluated against."
@@ -50,23 +49,27 @@ class ImmunizationEvaluation(BaseResource):
     )
     dose_status_reason: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="doseStatusReason",
+        default=None,
         description="Provides an explanation as to why the vaccine administration event is valid or not relative to the published recommendations.",
     )
-    description: typing.Optional[str] = pydantic.Field(description="Additional information about the evaluation.")
+    description: typing.Optional[str] = pydantic.Field(
+        default=None, description="Additional information about the evaluation."
+    )
     series: typing.Optional[str] = pydantic.Field(
-        description="One possible path to achieve presumed immunity against a disease - within the context of an authority."
+        default=None,
+        description="One possible path to achieve presumed immunity against a disease - within the context of an authority.",
     )
     dose_number_positive_int: typing.Optional[float] = pydantic.Field(
-        alias="doseNumberPositiveInt", description="Nominal position in a series."
+        alias="doseNumberPositiveInt", default=None, description="Nominal position in a series."
     )
     dose_number_string: typing.Optional[str] = pydantic.Field(
-        alias="doseNumberString", description="Nominal position in a series."
+        alias="doseNumberString", default=None, description="Nominal position in a series."
     )
     series_doses_positive_int: typing.Optional[float] = pydantic.Field(
-        alias="seriesDosesPositiveInt", description="The recommended number of doses to achieve immunity."
+        alias="seriesDosesPositiveInt", default=None, description="The recommended number of doses to achieve immunity."
     )
     series_doses_string: typing.Optional[str] = pydantic.Field(
-        alias="seriesDosesString", description="The recommended number of doses to achieve immunity."
+        alias="seriesDosesString", default=None, description="The recommended number of doses to achieve immunity."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

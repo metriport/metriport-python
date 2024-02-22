@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,19 +20,23 @@ class Basic(BaseResource):
     Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification.
     """
 
-    resource_type: typing_extensions.Literal["Basic"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Basic"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier assigned to the resource for business purposes, outside the context of FHIR."
+        default=None,
+        description="Identifier assigned to the resource for business purposes, outside the context of FHIR.",
     )
     code: CodeableConcept = pydantic.Field(
         description="Identifies the 'type' of resource - equivalent to the resource name for other resources."
     )
     subject: typing.Optional[Reference] = pydantic.Field(
-        description='Identifies the patient, practitioner, device or any other resource that is the "focus" of this resource.'
+        default=None,
+        description='Identifies the patient, practitioner, device or any other resource that is the "focus" of this resource.',
     )
-    created: typing.Optional[dt.date] = pydantic.Field(description="Identifies when the resource was first created.")
+    created: typing.Optional[dt.date] = pydantic.Field(
+        default=None, description="Identifies when the resource was first created."
+    )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="Indicates who was responsible for creating the resource instance."
+        default=None, description="Indicates who was responsible for creating the resource instance."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

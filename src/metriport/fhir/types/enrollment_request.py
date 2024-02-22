@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -23,19 +21,23 @@ class EnrollmentRequest(BaseResource):
     This resource provides the insurance enrollment details to the insurer regarding a specified coverage.
     """
 
-    resource_type: typing_extensions.Literal["EnrollmentRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["EnrollmentRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="The Response business identifier."
+        default=None, description="The Response business identifier."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
-    created: typing.Optional[DateTime] = pydantic.Field(description="The date when this resource was created.")
-    insurer: typing.Optional[Reference] = pydantic.Field(description="The Insurer who is target of the request.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
+    created: typing.Optional[DateTime] = pydantic.Field(
+        default=None, description="The date when this resource was created."
+    )
+    insurer: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="The Insurer who is target of the request."
+    )
     provider: typing.Optional[Reference] = pydantic.Field(
-        description="The practitioner who is responsible for the services rendered to the patient."
+        default=None, description="The practitioner who is responsible for the services rendered to the patient."
     )
-    candidate: typing.Optional[Reference] = pydantic.Field(description="Patient Resource.")
+    candidate: typing.Optional[Reference] = pydantic.Field(default=None, description="Patient Resource.")
     coverage: typing.Optional[Reference] = pydantic.Field(
-        description="Reference to the program or plan identification, underwriter or payor."
+        default=None, description="Reference to the program or plan identification, underwriter or payor."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

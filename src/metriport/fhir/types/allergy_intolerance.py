@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .age import Age
 from .allergy_intolerance_category_item import AllergyIntoleranceCategoryItem
@@ -31,72 +29,85 @@ class AllergyIntolerance(BaseResource):
     Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance.
     """
 
-    resource_type: typing_extensions.Literal["AllergyIntolerance"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AllergyIntolerance"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers assigned to this AllergyIntolerance by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Business identifiers assigned to this AllergyIntolerance by the performer or other systems which remain constant as the resource is updated and propagates from server to server.",
     )
     clinical_status: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="clinicalStatus", description="The clinical status of the allergy or intolerance."
+        alias="clinicalStatus", default=None, description="The clinical status of the allergy or intolerance."
     )
     verification_status: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="verificationStatus",
+        default=None,
         description="Assertion about certainty associated with the propensity, or potential risk, of a reaction to the identified substance (including pharmaceutical product).",
     )
     type: typing.Optional[AllergyIntoleranceType] = pydantic.Field(
-        description="Identification of the underlying physiological mechanism for the reaction risk."
+        default=None, description="Identification of the underlying physiological mechanism for the reaction risk."
     )
     category: typing.Optional[typing.List[AllergyIntoleranceCategoryItem]] = pydantic.Field(
-        description="Category of the identified substance."
+        default=None, description="Category of the identified substance."
     )
     criticality: typing.Optional[AllergyIntoleranceCriticality] = pydantic.Field(
-        description="Estimate of the potential clinical harm, or seriousness, of the reaction to the identified substance."
+        default=None,
+        description="Estimate of the potential clinical harm, or seriousness, of the reaction to the identified substance.",
     )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description='Code for an allergy or intolerance statement (either a positive or a negated/excluded statement). This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk (e.g., "Latex"), an allergy or intolerance condition (e.g., "Latex allergy"), or a negated/excluded code for a specific substance or class (e.g., "No latex allergy") or a general or categorical negated statement (e.g., "No known allergy", "No known drug allergies"). Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the \'code\' and ignore the \'reaction.substance\'. If a receiving system is unable to confirm that AllergyIntolerance.reaction.substance falls within the semantic scope of AllergyIntolerance.code, then the receiving system should ignore AllergyIntolerance.reaction.substance.'
+        default=None,
+        description='Code for an allergy or intolerance statement (either a positive or a negated/excluded statement). This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk (e.g., "Latex"), an allergy or intolerance condition (e.g., "Latex allergy"), or a negated/excluded code for a specific substance or class (e.g., "No latex allergy") or a general or categorical negated statement (e.g., "No known allergy", "No known drug allergies"). Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the \'code\' and ignore the \'reaction.substance\'. If a receiving system is unable to confirm that AllergyIntolerance.reaction.substance falls within the semantic scope of AllergyIntolerance.code, then the receiving system should ignore AllergyIntolerance.reaction.substance.',
     )
     patient: Reference = pydantic.Field(description="The patient who has the allergy or intolerance.")
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The encounter when the allergy or intolerance was asserted."
+        default=None, description="The encounter when the allergy or intolerance was asserted."
     )
     onset_date_time: typing.Optional[str] = pydantic.Field(
         alias="onsetDateTime",
+        default=None,
         description="Estimated or actual date, date-time, or age when allergy or intolerance was identified.",
     )
     onset_age: typing.Optional[Age] = pydantic.Field(
         alias="onsetAge",
+        default=None,
         description="Estimated or actual date, date-time, or age when allergy or intolerance was identified.",
     )
     onset_period: typing.Optional[Period] = pydantic.Field(
         alias="onsetPeriod",
+        default=None,
         description="Estimated or actual date, date-time, or age when allergy or intolerance was identified.",
     )
     onset_range: typing.Optional[Range] = pydantic.Field(
         alias="onsetRange",
+        default=None,
         description="Estimated or actual date, date-time, or age when allergy or intolerance was identified.",
     )
     onset_string: typing.Optional[str] = pydantic.Field(
         alias="onsetString",
+        default=None,
         description="Estimated or actual date, date-time, or age when allergy or intolerance was identified.",
     )
     recorded_date: typing.Optional[DateTime] = pydantic.Field(
         alias="recordedDate",
+        default=None,
         description="The recordedDate represents when this particular AllergyIntolerance record was created in the system, which is often a system-generated date.",
     )
     recorder: typing.Optional[Reference] = pydantic.Field(
-        description="Individual who recorded the record and takes responsibility for its content."
+        default=None, description="Individual who recorded the record and takes responsibility for its content."
     )
     asserter: typing.Optional[Reference] = pydantic.Field(
-        description="The source of the information about the allergy that is recorded."
+        default=None, description="The source of the information about the allergy that is recorded."
     )
     last_occurrence: typing.Optional[DateTime] = pydantic.Field(
         alias="lastOccurrence",
+        default=None,
         description="Represents the date and/or time of the last known occurrence of a reaction event.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Additional narrative about the propensity for the Adverse Reaction, not captured in other fields."
+        default=None,
+        description="Additional narrative about the propensity for the Adverse Reaction, not captured in other fields.",
     )
     reaction: typing.Optional[typing.List[AllergyIntoleranceReaction]] = pydantic.Field(
-        description="Details about each adverse reaction event linked to exposure to the identified substance."
+        default=None,
+        description="Details about each adverse reaction event linked to exposure to the identified substance.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

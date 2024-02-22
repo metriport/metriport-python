@@ -26,52 +26,67 @@ class ContractAsset(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    scope: typing.Optional[CodeableConcept] = pydantic.Field(description="Differentiates the kind of the asset .")
+    scope: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="Differentiates the kind of the asset ."
+    )
     type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Target entity type about which the term may be concerned."
+        default=None, description="Target entity type about which the term may be concerned."
     )
     type_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="typeReference", description="Associated entities."
+        alias="typeReference", default=None, description="Associated entities."
     )
     subtype: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="May be a subtype or part of an offered asset."
+        default=None, description="May be a subtype or part of an offered asset."
     )
     relationship: typing.Optional[Coding] = pydantic.Field(
-        description="Specifies the applicability of the term to an asset resource instance, and instances it refers to orinstances that refer to it, and/or are owned by the offeree."
+        default=None,
+        description="Specifies the applicability of the term to an asset resource instance, and instances it refers to orinstances that refer to it, and/or are owned by the offeree.",
     )
-    context: typing.Optional[typing.List[ContractContext]] = pydantic.Field(description="Circumstance of the asset.")
+    context: typing.Optional[typing.List[ContractContext]] = pydantic.Field(
+        default=None, description="Circumstance of the asset."
+    )
     condition: typing.Optional[str] = pydantic.Field(
-        description="Description of the quality and completeness of the asset that imay be a factor in its valuation."
+        default=None,
+        description="Description of the quality and completeness of the asset that imay be a factor in its valuation.",
     )
     period_type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="periodType", description="Type of Asset availability for use or ownership."
+        alias="periodType", default=None, description="Type of Asset availability for use or ownership."
     )
-    period: typing.Optional[typing.List[Period]] = pydantic.Field(description="Asset relevant contractual time period.")
+    period: typing.Optional[typing.List[Period]] = pydantic.Field(
+        default=None, description="Asset relevant contractual time period."
+    )
     use_period: typing.Optional[typing.List[Period]] = pydantic.Field(
-        alias="usePeriod", description="Time period of asset use."
+        alias="usePeriod", default=None, description="Time period of asset use."
     )
     text: typing.Optional[str] = pydantic.Field(
-        description="Clause or question text (Prose Object) concerning the asset in a linked form, such as a QuestionnaireResponse used in the formation of the contract."
+        default=None,
+        description="Clause or question text (Prose Object) concerning the asset in a linked form, such as a QuestionnaireResponse used in the formation of the contract.",
     )
     link_id: typing.Optional[typing.List[str]] = pydantic.Field(
         alias="linkId",
+        default=None,
         description="Id [identifier??] of the clause or question text about the asset in the referenced form or QuestionnaireResponse.",
     )
-    answer: typing.Optional[typing.List[ContractAnswer]] = pydantic.Field(description="Response to assets.")
+    answer: typing.Optional[typing.List[ContractAnswer]] = pydantic.Field(
+        default=None, description="Response to assets."
+    )
     security_label_number: typing.Optional[typing.List[UnsignedInt]] = pydantic.Field(
-        alias="securityLabelNumber", description="Security labels that protects the asset."
+        alias="securityLabelNumber", default=None, description="Security labels that protects the asset."
     )
     valued_item: typing.Optional[typing.List[ContractValuedItem]] = pydantic.Field(
-        alias="valuedItem", description="Contract Valued Item List."
+        alias="valuedItem", default=None, description="Contract Valued Item List."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

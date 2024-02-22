@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -30,90 +28,100 @@ class DeviceRequest(BaseResource):
     Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.
     """
 
-    resource_type: typing_extensions.Literal["DeviceRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DeviceRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifiers assigned to this order by the orderer or by the receiver."
+        default=None, description="Identifiers assigned to this order by the orderer or by the receiver."
     )
     instantiates_canonical: typing.Optional[typing.List[Canonical]] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a FHIR-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this DeviceRequest.",
     )
     instantiates_uri: typing.Optional[typing.List[Uri]] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an externally maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this DeviceRequest.",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="basedOn", description="Plan/proposal/order fulfilled by this request."
+        alias="basedOn", default=None, description="Plan/proposal/order fulfilled by this request."
     )
     prior_request: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="priorRequest",
+        default=None,
         description="The request takes the place of the referenced completed or terminated request(s).",
     )
     group_identifier: typing.Optional[Identifier] = pydantic.Field(
-        alias="groupIdentifier", description="Composite request this is part of."
+        alias="groupIdentifier", default=None, description="Composite request this is part of."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the request.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the request.")
     intent: typing.Optional[Code] = pydantic.Field(
-        description="Whether the request is a proposal, plan, an original order or a reflex order."
+        default=None, description="Whether the request is a proposal, plan, an original order or a reflex order."
     )
     priority: typing.Optional[Code] = pydantic.Field(
-        description="Indicates how quickly the {{title}} should be addressed with respect to other requests."
+        default=None,
+        description="Indicates how quickly the {{title}} should be addressed with respect to other requests.",
     )
     code_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="codeReference", description="The details of the device to be used."
+        alias="codeReference", default=None, description="The details of the device to be used."
     )
     code_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="codeCodeableConcept", description="The details of the device to be used."
+        alias="codeCodeableConcept", default=None, description="The details of the device to be used."
     )
     parameter: typing.Optional[typing.List[DeviceRequestParameter]] = pydantic.Field(
-        description="Specific parameters for the ordered item. For example, the prism value for lenses."
+        default=None, description="Specific parameters for the ordered item. For example, the prism value for lenses."
     )
     subject: Reference = pydantic.Field(description="The patient who will use the device.")
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="An encounter that provides additional context in which this request is made."
+        default=None, description="An encounter that provides additional context in which this request is made."
     )
     occurrence_date_time: typing.Optional[str] = pydantic.Field(
         alias="occurrenceDateTime",
+        default=None,
         description='The timing schedule for the use of the device. The Schedule data type allows many different expressions, for example. "Every 8 hours"; "Three times a day"; "1/2 an hour before breakfast for 10 days from 23-Dec 2011:"; "15 Oct 2013, 17 Oct 2013 and 1 Nov 2013".',
     )
     occurrence_period: typing.Optional[Period] = pydantic.Field(
         alias="occurrencePeriod",
+        default=None,
         description='The timing schedule for the use of the device. The Schedule data type allows many different expressions, for example. "Every 8 hours"; "Three times a day"; "1/2 an hour before breakfast for 10 days from 23-Dec 2011:"; "15 Oct 2013, 17 Oct 2013 and 1 Nov 2013".',
     )
     occurrence_timing: typing.Optional[Timing] = pydantic.Field(
         alias="occurrenceTiming",
+        default=None,
         description='The timing schedule for the use of the device. The Schedule data type allows many different expressions, for example. "Every 8 hours"; "Three times a day"; "1/2 an hour before breakfast for 10 days from 23-Dec 2011:"; "15 Oct 2013, 17 Oct 2013 and 1 Nov 2013".',
     )
     authored_on: typing.Optional[DateTime] = pydantic.Field(
-        alias="authoredOn", description="When the request transitioned to being actionable."
+        alias="authoredOn", default=None, description="When the request transitioned to being actionable."
     )
     requester: typing.Optional[Reference] = pydantic.Field(
-        description="The individual who initiated the request and has responsibility for its activation."
+        default=None, description="The individual who initiated the request and has responsibility for its activation."
     )
     performer_type: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="performerType", description="Desired type of performer for doing the diagnostic testing."
+        alias="performerType", default=None, description="Desired type of performer for doing the diagnostic testing."
     )
     performer: typing.Optional[Reference] = pydantic.Field(
-        description="The desired performer for doing the diagnostic testing."
+        default=None, description="The desired performer for doing the diagnostic testing."
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="reasonCode", description="Reason or justification for the use of this device."
+        alias="reasonCode", default=None, description="Reason or justification for the use of this device."
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="reasonReference", description="Reason or justification for the use of this device."
+        alias="reasonReference", default=None, description="Reason or justification for the use of this device."
     )
     insurance: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Insurance plans, coverage extensions, pre-authorizations and/or pre-determinations that may be required for delivering the requested service."
+        default=None,
+        description="Insurance plans, coverage extensions, pre-authorizations and/or pre-determinations that may be required for delivering the requested service.",
     )
     supporting_info: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="supportingInfo",
+        default=None,
         description="Additional clinical information about the patient that may influence the request fulfilment. For example, this may include where on the subject's body the device will be used (i.e. the target site).",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Details about this request that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement."
+        default=None,
+        description="Details about this request that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement.",
     )
     relevant_history: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="relevantHistory", description="Key events in the history of the request."
+        alias="relevantHistory", default=None, description="Key events in the history of the request."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

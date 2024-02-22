@@ -22,40 +22,46 @@ class PaymentReconciliationDetail(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="Unique identifier for the current payment item for the referenced payable."
+        default=None, description="Unique identifier for the current payment item for the referenced payable."
     )
     predecessor: typing.Optional[Identifier] = pydantic.Field(
-        description="Unique identifier for the prior payment item for the referenced payable."
+        default=None, description="Unique identifier for the prior payment item for the referenced payable."
     )
     type: CodeableConcept = pydantic.Field(description="Code to indicate the nature of the payment.")
     request: typing.Optional[Reference] = pydantic.Field(
-        description="A resource, such as a Claim, the evaluation of which could lead to payment."
+        default=None, description="A resource, such as a Claim, the evaluation of which could lead to payment."
     )
     submitter: typing.Optional[Reference] = pydantic.Field(
-        description="The party which submitted the claim or financial transaction."
+        default=None, description="The party which submitted the claim or financial transaction."
     )
     response: typing.Optional[Reference] = pydantic.Field(
-        description="A resource, such as a ClaimResponse, which contains a commitment to payment."
+        default=None, description="A resource, such as a ClaimResponse, which contains a commitment to payment."
     )
     date: typing.Optional[dt.date] = pydantic.Field(
-        description="The date from the response resource containing a commitment to pay."
+        default=None, description="The date from the response resource containing a commitment to pay."
     )
     responsible: typing.Optional[Reference] = pydantic.Field(
-        description="A reference to the individual who is responsible for inquiries regarding the response and its payment."
+        default=None,
+        description="A reference to the individual who is responsible for inquiries regarding the response and its payment.",
     )
-    payee: typing.Optional[Reference] = pydantic.Field(description="The party which is receiving the payment.")
+    payee: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="The party which is receiving the payment."
+    )
     amount: typing.Optional[Money] = pydantic.Field(
-        description="The monetary amount allocated from the total payment to the payable."
+        default=None, description="The monetary amount allocated from the total payment to the payable."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

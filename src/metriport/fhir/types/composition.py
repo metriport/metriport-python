@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -29,50 +27,60 @@ class Composition(BaseResource):
     A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).
     """
 
-    resource_type: typing_extensions.Literal["Composition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Composition"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="A version-independent identifier for the Composition. This identifier stays constant as the composition is changed over time."
+        default=None,
+        description="A version-independent identifier for the Composition. This identifier stays constant as the composition is changed over time.",
     )
     status: typing.Optional[CompositionStatus] = pydantic.Field(
-        description="The workflow/clinical status of this composition. The status is a marker for the clinical standing of the document."
+        default=None,
+        description="The workflow/clinical status of this composition. The status is a marker for the clinical standing of the document.",
     )
     type: CodeableConcept = pydantic.Field(
         description="Specifies the particular kind of composition (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the composition."
     )
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A categorization for the type of the composition - helps for indexing and searching. This may be implied by or derived from the code specified in the Composition Type."
+        default=None,
+        description="A categorization for the type of the composition - helps for indexing and searching. This may be implied by or derived from the code specified in the Composition Type.",
     )
     subject: typing.Optional[Reference] = pydantic.Field(
-        description="Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (e.g. a machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure)."
+        default=None,
+        description="Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (e.g. a machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).",
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="Describes the clinical encounter or type of care this documentation is associated with."
+        default=None,
+        description="Describes the clinical encounter or type of care this documentation is associated with.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The composition editing time, when the composition was last logically changed by the author."
+        default=None,
+        description="The composition editing time, when the composition was last logically changed by the author.",
     )
     author: typing.List[Reference] = pydantic.Field(
         description="Identifies who is responsible for the information in the composition, not necessarily who typed it in."
     )
-    title: typing.Optional[str] = pydantic.Field(description="Official human-readable label for the composition.")
+    title: typing.Optional[str] = pydantic.Field(
+        default=None, description="Official human-readable label for the composition."
+    )
     confidentiality: typing.Optional[Code] = pydantic.Field(
-        description="The code specifying the level of confidentiality of the Composition."
+        default=None, description="The code specifying the level of confidentiality of the Composition."
     )
     attester: typing.Optional[typing.List[CompositionAttester]] = pydantic.Field(
-        description="A participant who has attested to the accuracy of the composition/document."
+        default=None, description="A participant who has attested to the accuracy of the composition/document."
     )
     custodian: typing.Optional[Reference] = pydantic.Field(
-        description="Identifies the organization or group who is responsible for ongoing maintenance of and access to the composition/document information."
+        default=None,
+        description="Identifies the organization or group who is responsible for ongoing maintenance of and access to the composition/document information.",
     )
     relates_to: typing.Optional[typing.List[CompositionRelatesTo]] = pydantic.Field(
         alias="relatesTo",
+        default=None,
         description="Relationships that this composition has with other compositions or documents that already exist.",
     )
     event: typing.Optional[typing.List[CompositionEvent]] = pydantic.Field(
-        description="The clinical service, such as a colonoscopy or an appendectomy, being documented."
+        default=None, description="The clinical service, such as a colonoscopy or an appendectomy, being documented."
     )
     section: typing.Optional[typing.List[CompositionSection]] = pydantic.Field(
-        description="The root of the sections that make up the composition."
+        default=None, description="The root of the sections that make up the composition."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

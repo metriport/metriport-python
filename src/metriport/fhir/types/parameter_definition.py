@@ -21,27 +21,34 @@ class ParameterDefinition(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     name: typing.Optional[Code] = pydantic.Field(
-        description="The name of the parameter used to allow access to the value of the parameter in evaluation contexts."
+        default=None,
+        description="The name of the parameter used to allow access to the value of the parameter in evaluation contexts.",
     )
-    use: typing.Optional[Code] = pydantic.Field(description="Whether the parameter is input or output for the module.")
+    use: typing.Optional[Code] = pydantic.Field(
+        default=None, description="Whether the parameter is input or output for the module."
+    )
     min: typing.Optional[int] = pydantic.Field(
-        description="The minimum number of times this parameter SHALL appear in the request or response."
+        default=None, description="The minimum number of times this parameter SHALL appear in the request or response."
     )
     max: typing.Optional[str] = pydantic.Field(
-        description="The maximum number of times this element is permitted to appear in the request or response."
+        default=None,
+        description="The maximum number of times this element is permitted to appear in the request or response.",
     )
     documentation: typing.Optional[str] = pydantic.Field(
-        description="A brief discussion of what the parameter is for and how it is used by the module."
+        default=None, description="A brief discussion of what the parameter is for and how it is used by the module."
     )
-    type: typing.Optional[Code] = pydantic.Field(description="The type of the parameter.")
+    type: typing.Optional[Code] = pydantic.Field(default=None, description="The type of the parameter.")
     profile: typing.Optional[Canonical] = pydantic.Field(
-        description="If specified, this indicates a profile that the input data must conform to, or that the output data will conform to."
+        default=None,
+        description="If specified, this indicates a profile that the input data must conform to, or that the output data will conform to.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

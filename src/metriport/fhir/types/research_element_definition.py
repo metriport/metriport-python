@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -34,113 +32,143 @@ class ResearchElementDefinition(BaseResource):
     The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
     """
 
-    resource_type: typing_extensions.Literal["ResearchElementDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ResearchElementDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this research element definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this research element definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the research element definition is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this research element definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this research element definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the research element definition is stored on different servers.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this research element definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this research element definition when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the research element definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the research element definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts."
+        default=None,
+        description="The identifier that is used to identify this version of the research element definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the research element definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the research element definition. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the research element definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the research element definition."
+        default=None, description="A short, descriptive, user-friendly title for the research element definition."
     )
     short_title: typing.Optional[str] = pydantic.Field(
         alias="shortTitle",
+        default=None,
         description="The short title provides an alternate title for use in informal descriptive contexts where the full, formal title is not necessary.",
     )
     subtitle: typing.Optional[str] = pydantic.Field(
-        description="An explanatory or alternate title for the ResearchElementDefinition giving additional information about its content."
+        default=None,
+        description="An explanatory or alternate title for the ResearchElementDefinition giving additional information about its content.",
     )
     status: typing.Optional[ResearchElementDefinitionStatus] = pydantic.Field(
-        description="The status of this research element definition. Enables tracking the life-cycle of the content."
+        default=None,
+        description="The status of this research element definition. Enables tracking the life-cycle of the content.",
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this research element definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this research element definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     subject_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="subjectCodeableConcept",
+        default=None,
         description="The intended subjects for the ResearchElementDefinition. If this element is not provided, a Patient subject is assumed, but the subject of the ResearchElementDefinition can be anything.",
     )
     subject_reference: typing.Optional[Reference] = pydantic.Field(
         alias="subjectReference",
+        default=None,
         description="The intended subjects for the ResearchElementDefinition. If this element is not provided, a Patient subject is assumed, but the subject of the ResearchElementDefinition can be anything.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the research element definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the research element definition changes."
+        default=None,
+        description="The date (and optionally time) when the research element definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the research element definition changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the research element definition."
+        default=None,
+        description="The name of the organization or individual that published the research element definition.",
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the research element definition from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the research element definition from a consumer's perspective.",
     )
     comment: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="A human-readable string to clarify or explain concepts about the resource."
+        default=None, description="A human-readable string to clarify or explain concepts about the resource."
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate research element definition instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the research element definition is intended to be used."
+        default=None,
+        description="A legal or geographic region in which the research element definition is intended to be used.",
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this research element definition is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this research element definition is needed and why it has been designed as it has.",
     )
     usage: typing.Optional[str] = pydantic.Field(
-        description="A detailed description, from a clinical perspective, of how the ResearchElementDefinition is used."
+        default=None,
+        description="A detailed description, from a clinical perspective, of how the ResearchElementDefinition is used.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the research element definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the research element definition."
+        default=None,
+        description="A copyright statement relating to the research element definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the research element definition.",
     )
     approval_date: typing.Optional[dt.date] = pydantic.Field(
         alias="approvalDate",
+        default=None,
         description="The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.",
     )
     last_review_date: typing.Optional[dt.date] = pydantic.Field(
         alias="lastReviewDate",
+        default=None,
         description="The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.",
     )
     effective_period: typing.Optional[Period] = pydantic.Field(
         alias="effectivePeriod",
+        default=None,
         description="The period during which the research element definition content was or is planned to be in active use.",
     )
     topic: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Descriptive topics related to the content of the ResearchElementDefinition. Topics provide a high-level categorization grouping types of ResearchElementDefinitions that can be useful for filtering and searching."
+        default=None,
+        description="Descriptive topics related to the content of the ResearchElementDefinition. Topics provide a high-level categorization grouping types of ResearchElementDefinitions that can be useful for filtering and searching.",
     )
     author: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individiual or organization primarily involved in the creation and maintenance of the content."
+        default=None,
+        description="An individiual or organization primarily involved in the creation and maintenance of the content.",
     )
     editor: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization primarily responsible for internal coherence of the content."
+        default=None,
+        description="An individual or organization primarily responsible for internal coherence of the content.",
     )
     reviewer: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization primarily responsible for review of some aspect of the content."
+        default=None,
+        description="An individual or organization primarily responsible for review of some aspect of the content.",
     )
     endorser: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization responsible for officially endorsing the content for use in some setting."
+        default=None,
+        description="An individual or organization responsible for officially endorsing the content for use in some setting.",
     )
     related_artifact: typing.Optional[typing.List[RelatedArtifact]] = pydantic.Field(
         alias="relatedArtifact",
+        default=None,
         description="Related artifacts such as additional documentation, justification, or bibliographic references.",
     )
     library: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        description="A reference to a Library resource containing the formal logic used by the ResearchElementDefinition."
+        default=None,
+        description="A reference to a Library resource containing the formal logic used by the ResearchElementDefinition.",
     )
     type: typing.Optional[ResearchElementDefinitionType] = pydantic.Field(
-        description="The type of research element, a population, an exposure, or an outcome."
+        default=None, description="The type of research element, a population, an exposure, or an outcome."
     )
     variable_type: typing.Optional[ResearchElementDefinitionVariableType] = pydantic.Field(
-        alias="variableType", description="The type of the outcome (e.g. Dichotomous, Continuous, or Descriptive)."
+        alias="variableType",
+        default=None,
+        description="The type of the outcome (e.g. Dichotomous, Continuous, or Descriptive).",
     )
     characteristic: typing.List[ResearchElementDefinitionCharacteristic] = pydantic.Field(
         description='A characteristic that defines the members of the research element. Multiple characteristics are applied with "and" semantics.'

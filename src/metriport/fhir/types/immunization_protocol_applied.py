@@ -20,35 +20,42 @@ class ImmunizationProtocolApplied(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     series: typing.Optional[str] = pydantic.Field(
-        description="One possible path to achieve presumed immunity against a disease - within the context of an authority."
+        default=None,
+        description="One possible path to achieve presumed immunity against a disease - within the context of an authority.",
     )
     authority: typing.Optional[Reference] = pydantic.Field(
-        description="Indicates the authority who published the protocol (e.g. ACIP) that is being followed."
+        default=None,
+        description="Indicates the authority who published the protocol (e.g. ACIP) that is being followed.",
     )
     target_disease: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="targetDisease", description="The vaccine preventable disease the dose is being administered against."
+        alias="targetDisease",
+        default=None,
+        description="The vaccine preventable disease the dose is being administered against.",
     )
     dose_number_positive_int: typing.Optional[float] = pydantic.Field(
-        alias="doseNumberPositiveInt", description="Nominal position in a series."
+        alias="doseNumberPositiveInt", default=None, description="Nominal position in a series."
     )
     dose_number_string: typing.Optional[str] = pydantic.Field(
-        alias="doseNumberString", description="Nominal position in a series."
+        alias="doseNumberString", default=None, description="Nominal position in a series."
     )
     series_doses_positive_int: typing.Optional[float] = pydantic.Field(
-        alias="seriesDosesPositiveInt", description="The recommended number of doses to achieve immunity."
+        alias="seriesDosesPositiveInt", default=None, description="The recommended number of doses to achieve immunity."
     )
     series_doses_string: typing.Optional[str] = pydantic.Field(
-        alias="seriesDosesString", description="The recommended number of doses to achieve immunity."
+        alias="seriesDosesString", default=None, description="The recommended number of doses to achieve immunity."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

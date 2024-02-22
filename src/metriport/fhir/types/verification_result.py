@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -27,46 +25,59 @@ class VerificationResult(BaseResource):
     Describes validation requirements, source(s), status and dates for one or more elements.
     """
 
-    resource_type: typing_extensions.Literal["VerificationResult"] = pydantic.Field(alias="resourceType")
-    target: typing.Optional[typing.List[Reference]] = pydantic.Field(description="A resource that was validated.")
+    resource_type: typing.Literal["VerificationResult"] = pydantic.Field(alias="resourceType")
+    target: typing.Optional[typing.List[Reference]] = pydantic.Field(
+        default=None, description="A resource that was validated."
+    )
     target_location: typing.Optional[typing.List[str]] = pydantic.Field(
-        alias="targetLocation", description="The fhirpath location(s) within the resource that was validated."
+        alias="targetLocation",
+        default=None,
+        description="The fhirpath location(s) within the resource that was validated.",
     )
     need: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The frequency with which the target must be validated (none; initial; periodic)."
+        default=None, description="The frequency with which the target must be validated (none; initial; periodic)."
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="The validation status of the target (attested; validated; in process; requires revalidation; validation failed; revalidation failed)."
+        default=None,
+        description="The validation status of the target (attested; validated; in process; requires revalidation; validation failed; revalidation failed).",
     )
     status_date: typing.Optional[DateTime] = pydantic.Field(
-        alias="statusDate", description="When the validation status was updated."
+        alias="statusDate", default=None, description="When the validation status was updated."
     )
     validation_type: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="validationType",
+        default=None,
         description="What the target is validated against (nothing; primary source; multiple sources).",
     )
     validation_process: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="validationProcess",
+        default=None,
         description="The primary process by which the target is validated (edit check; value set; primary source; multiple sources; standalone; in context).",
     )
-    frequency: typing.Optional[Timing] = pydantic.Field(description="Frequency of revalidation.")
+    frequency: typing.Optional[Timing] = pydantic.Field(default=None, description="Frequency of revalidation.")
     last_performed: typing.Optional[DateTime] = pydantic.Field(
-        alias="lastPerformed", description="The date/time validation was last completed (including failed validations)."
+        alias="lastPerformed",
+        default=None,
+        description="The date/time validation was last completed (including failed validations).",
     )
     next_scheduled: typing.Optional[dt.date] = pydantic.Field(
-        alias="nextScheduled", description="The date when target is next validated, if appropriate."
+        alias="nextScheduled", default=None, description="The date when target is next validated, if appropriate."
     )
     failure_action: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="failureAction", description="The result if validation fails (fatal; warning; record only; none)."
+        alias="failureAction",
+        default=None,
+        description="The result if validation fails (fatal; warning; record only; none).",
     )
     primary_source: typing.Optional[typing.List[VerificationResultPrimarySource]] = pydantic.Field(
-        alias="primarySource", description="Information about the primary source(s) involved in validation."
+        alias="primarySource",
+        default=None,
+        description="Information about the primary source(s) involved in validation.",
     )
     attestation: typing.Optional[VerificationResultAttestation] = pydantic.Field(
-        description="Information about the entity attesting to information."
+        default=None, description="Information about the entity attesting to information."
     )
     validator: typing.Optional[typing.List[VerificationResultValidator]] = pydantic.Field(
-        description="Information about the entity validating information."
+        default=None, description="Information about the entity validating information."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

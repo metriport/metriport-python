@@ -28,68 +28,86 @@ class QuestionnaireItem(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     link_id: typing.Optional[str] = pydantic.Field(
         alias="linkId",
+        default=None,
         description="An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource.",
     )
     definition: typing.Optional[Uri] = pydantic.Field(
-        description="This element is a URI that refers to an [[[ElementDefinition]]] that provides information about this item, including information that might otherwise be included in the instance of the Questionnaire resource. A detailed description of the construction of the URI is shown in Comments, below. If this element is present then the following element values MAY be derived from the Element Definition if the corresponding elements of this Questionnaire resource instance have no value: _ code (ElementDefinition.code) _ type (ElementDefinition.type) _ required (ElementDefinition.min) _ repeats (ElementDefinition.max) _ maxLength (ElementDefinition.maxLength) _ answerValueSet (ElementDefinition.binding) \* options (ElementDefinition.binding)."
+        default=None,
+        description="This element is a URI that refers to an [[[ElementDefinition]]] that provides information about this item, including information that might otherwise be included in the instance of the Questionnaire resource. A detailed description of the construction of the URI is shown in Comments, below. If this element is present then the following element values MAY be derived from the Element Definition if the corresponding elements of this Questionnaire resource instance have no value: _ code (ElementDefinition.code) _ type (ElementDefinition.type) _ required (ElementDefinition.min) _ repeats (ElementDefinition.max) _ maxLength (ElementDefinition.maxLength) _ answerValueSet (ElementDefinition.binding) \* options (ElementDefinition.binding).",
     )
     code: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers)."
+        default=None,
+        description="A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers).",
     )
     prefix: typing.Optional[str] = pydantic.Field(
-        description="A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire."
+        default=None,
+        description="A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire.",
     )
     text: typing.Optional[str] = pydantic.Field(
-        description="The name of a section, the text of a question or text content for a display item."
+        default=None, description="The name of a section, the text of a question or text content for a display item."
     )
     type: typing.Optional[QuestionnaireItemType] = pydantic.Field(
-        description="The type of questionnaire item this is - whether text for display, a grouping of other items or a particular type of data to be captured (string, integer, coded choice, etc.)."
+        default=None,
+        description="The type of questionnaire item this is - whether text for display, a grouping of other items or a particular type of data to be captured (string, integer, coded choice, etc.).",
     )
     enable_when: typing.Optional[typing.List[QuestionnaireEnableWhen]] = pydantic.Field(
         alias="enableWhen",
+        default=None,
         description="A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true.",
     )
     enable_behavior: typing.Optional[QuestionnaireItemEnableBehavior] = pydantic.Field(
         alias="enableBehavior",
+        default=None,
         description="Controls how multiple enableWhen values are interpreted - whether all or any must be true.",
     )
     required: typing.Optional[bool] = pydantic.Field(
-        description='An indication, if true, that the item must be present in a "completed" QuestionnaireResponse. If false, the item may be skipped when answering the questionnaire.'
+        default=None,
+        description='An indication, if true, that the item must be present in a "completed" QuestionnaireResponse. If false, the item may be skipped when answering the questionnaire.',
     )
     repeats: typing.Optional[bool] = pydantic.Field(
-        description="An indication, if true, that the item may occur multiple times in the response, collecting multiple answers for questions or multiple sets of answers for groups."
+        default=None,
+        description="An indication, if true, that the item may occur multiple times in the response, collecting multiple answers for questions or multiple sets of answers for groups.",
     )
     read_only: typing.Optional[bool] = pydantic.Field(
         alias="readOnly",
+        default=None,
         description="An indication, when true, that the value cannot be changed by a human respondent to the Questionnaire.",
     )
     max_length: typing.Optional[int] = pydantic.Field(
         alias="maxLength",
+        default=None,
         description='The maximum number of characters that are permitted in the answer to be considered a "valid" QuestionnaireResponse.',
     )
     answer_value_set: typing.Optional[Canonical] = pydantic.Field(
         alias="answerValueSet",
+        default=None,
         description='A reference to a value set containing a list of codes representing permitted answers for a "choice" or "open-choice" question.',
     )
     answer_option: typing.Optional[typing.List[QuestionnaireAnswerOption]] = pydantic.Field(
-        alias="answerOption", description='One of the permitted answers for a "choice" or "open-choice" question.'
+        alias="answerOption",
+        default=None,
+        description='One of the permitted answers for a "choice" or "open-choice" question.',
     )
     initial: typing.Optional[typing.List[QuestionnaireInitial]] = pydantic.Field(
-        description="One or more values that should be pre-populated in the answer when initially rendering the questionnaire for user input."
+        default=None,
+        description="One or more values that should be pre-populated in the answer when initially rendering the questionnaire for user input.",
     )
     item: typing.Optional[typing.List[QuestionnaireItem]] = pydantic.Field(
-        description="Text, questions and other groups to be nested beneath a question or group."
+        default=None, description="Text, questions and other groups to be nested beneath a question or group."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

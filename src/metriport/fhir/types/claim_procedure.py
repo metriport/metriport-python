@@ -22,34 +22,39 @@ class ClaimProcedure(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     sequence: typing.Optional[PositiveInt] = pydantic.Field(
-        description="A number to uniquely identify procedure entries."
+        default=None, description="A number to uniquely identify procedure entries."
     )
     type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="When the condition was observed or the relative ranking."
+        default=None, description="When the condition was observed or the relative ranking."
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="Date and optionally time the procedure was performed."
+        default=None, description="Date and optionally time the procedure was performed."
     )
     procedure_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="procedureCodeableConcept",
+        default=None,
         description="The code or reference to a Procedure resource which identifies the clinical intervention performed.",
     )
     procedure_reference: typing.Optional[Reference] = pydantic.Field(
         alias="procedureReference",
+        default=None,
         description="The code or reference to a Procedure resource which identifies the clinical intervention performed.",
     )
     udi: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Unique Device Identifiers associated with this line item."
+        default=None, description="Unique Device Identifiers associated with this line item."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

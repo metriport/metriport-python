@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -28,62 +26,78 @@ class ImagingStudy(BaseResource):
     Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context. A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.
     """
 
-    resource_type: typing_extensions.Literal["ImagingStudy"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ImagingStudy"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifiers for the ImagingStudy such as DICOM Study Instance UID, and Accession Number."
+        default=None,
+        description="Identifiers for the ImagingStudy such as DICOM Study Instance UID, and Accession Number.",
     )
-    status: typing.Optional[ImagingStudyStatus] = pydantic.Field(description="The current state of the ImagingStudy.")
+    status: typing.Optional[ImagingStudyStatus] = pydantic.Field(
+        default=None, description="The current state of the ImagingStudy."
+    )
     modality: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="A list of all the series.modality values that are actual acquisition modalities, i.e. those in the DICOM Context Group 29 (value set OID 1.2.840.10008.6.1.19)."
+        default=None,
+        description="A list of all the series.modality values that are actual acquisition modalities, i.e. those in the DICOM Context Group 29 (value set OID 1.2.840.10008.6.1.19).",
     )
     subject: Reference = pydantic.Field(description="The subject, typically a patient, of the imaging study.")
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The healthcare event (e.g. a patient and healthcare provider interaction) during which this ImagingStudy is made."
+        default=None,
+        description="The healthcare event (e.g. a patient and healthcare provider interaction) during which this ImagingStudy is made.",
     )
-    started: typing.Optional[DateTime] = pydantic.Field(description="Date and time the study started.")
+    started: typing.Optional[DateTime] = pydantic.Field(default=None, description="Date and time the study started.")
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description="A list of the diagnostic requests that resulted in this imaging study being performed.",
     )
-    referrer: typing.Optional[Reference] = pydantic.Field(description="The requesting/referring physician.")
+    referrer: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="The requesting/referring physician."
+    )
     interpreter: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Who read the study and interpreted the images or other content."
+        default=None, description="Who read the study and interpreted the images or other content."
     )
     endpoint: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.connectionType."
+        default=None,
+        description="The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.connectionType.",
     )
     number_of_series: typing.Optional[UnsignedInt] = pydantic.Field(
         alias="numberOfSeries",
+        default=None,
         description="Number of Series in the Study. This value given may be larger than the number of series elements this Resource contains due to resource availability, security, or other factors. This element should be present if any series elements are present.",
     )
     number_of_instances: typing.Optional[UnsignedInt] = pydantic.Field(
         alias="numberOfInstances",
+        default=None,
         description="Number of SOP Instances in Study. This value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present.",
     )
     procedure_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="procedureReference", description="The procedure which this ImagingStudy was part of."
+        alias="procedureReference", default=None, description="The procedure which this ImagingStudy was part of."
     )
     procedure_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="procedureCode", description="The code for the performed procedure type."
+        alias="procedureCode", default=None, description="The code for the performed procedure type."
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="The principal physical location where the ImagingStudy was performed."
+        default=None, description="The principal physical location where the ImagingStudy was performed."
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="reasonCode",
+        default=None,
         description="Description of clinical condition indicating why the ImagingStudy was requested.",
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="reasonReference", description="Indicates another resource whose existence justifies this Study."
+        alias="reasonReference",
+        default=None,
+        description="Indicates another resource whose existence justifies this Study.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Per the recommended DICOM mapping, this element is derived from the Study Description attribute (0008,1030). Observations or findings about the imaging study should be recorded in another resource, e.g. Observation, and not in this element."
+        default=None,
+        description="Per the recommended DICOM mapping, this element is derived from the Study Description attribute (0008,1030). Observations or findings about the imaging study should be recorded in another resource, e.g. Observation, and not in this element.",
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="The Imaging Manager description of the study. Institution-generated description or classification of the Study (component) performed."
+        default=None,
+        description="The Imaging Manager description of the study. Institution-generated description or classification of the Study (component) performed.",
     )
     series: typing.Optional[typing.List[ImagingStudySeries]] = pydantic.Field(
-        description="Each study has one or more series of images or other content."
+        default=None, description="Each study has one or more series of images or other content."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -26,48 +26,57 @@ class ConsentProvision(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     type: typing.Optional[ConsentProvisionType] = pydantic.Field(
-        description="Action to take - permit or deny - when the rule conditions are met. Not permitted in root rule, required in all nested rules."
+        default=None,
+        description="Action to take - permit or deny - when the rule conditions are met. Not permitted in root rule, required in all nested rules.",
     )
-    period: typing.Optional[Period] = pydantic.Field(description="The timeframe in this rule is valid.")
+    period: typing.Optional[Period] = pydantic.Field(default=None, description="The timeframe in this rule is valid.")
     actor: typing.Optional[typing.List[ConsentActor]] = pydantic.Field(
-        description="Who or what is controlled by this rule. Use group to identify a set of actors by some property they share (e.g. 'admitting officers')."
+        default=None,
+        description="Who or what is controlled by this rule. Use group to identify a set of actors by some property they share (e.g. 'admitting officers').",
     )
     action: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Actions controlled by this Rule."
+        default=None, description="Actions controlled by this Rule."
     )
     security_label: typing.Optional[typing.List[Coding]] = pydantic.Field(
         alias="securityLabel",
+        default=None,
         description="A security label, comprised of 0..\* security label fields (Privacy tags), which define which resources are controlled by this exception.",
     )
     purpose: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="The context of the activities a user is taking - why the user is accessing the data - that are controlled by this rule."
+        default=None,
+        description="The context of the activities a user is taking - why the user is accessing the data - that are controlled by this rule.",
     )
     class_: typing.Optional[typing.List[Coding]] = pydantic.Field(
         alias="class",
+        default=None,
         description="The class of information covered by this rule. The type can be a FHIR resource type, a profile on a type, or a CDA document, or some other type that indicates what sort of information the consent relates to.",
     )
     code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="If this code is found in an instance, then the rule applies."
+        default=None, description="If this code is found in an instance, then the rule applies."
     )
     data_period: typing.Optional[Period] = pydantic.Field(
         alias="dataPeriod",
+        default=None,
         description="Clinical or Operational Relevant period of time that bounds the data controlled by this rule.",
     )
     data: typing.Optional[typing.List[ConsentData]] = pydantic.Field(
-        description="The resources controlled by this rule if specific resources are referenced."
+        default=None, description="The resources controlled by this rule if specific resources are referenced."
     )
     provision: typing.Optional[typing.List[ConsentProvision]] = pydantic.Field(
-        description="Rules which provide exceptions to the base rule or subrules."
+        default=None, description="Rules which provide exceptions to the base rule or subrules."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

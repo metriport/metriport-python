@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .date_time import DateTime
@@ -29,41 +27,48 @@ class TestReport(BaseResource):
     A summary of information based on the results of executing a TestScript.
     """
 
-    resource_type: typing_extensions.Literal["TestReport"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["TestReport"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="Identifier for the TestScript assigned for external purposes outside the context of FHIR."
+        default=None,
+        description="Identifier for the TestScript assigned for external purposes outside the context of FHIR.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A free text natural language name identifying the executed TestScript."
+        default=None, description="A free text natural language name identifying the executed TestScript."
     )
-    status: typing.Optional[TestReportStatus] = pydantic.Field(description="The current state of this test report.")
+    status: typing.Optional[TestReportStatus] = pydantic.Field(
+        default=None, description="The current state of this test report."
+    )
     test_script: Reference = pydantic.Field(
         alias="testScript",
         description="Ideally this is an absolute URL that is used to identify the version-specific TestScript that was executed, matching the `TestScript.url`.",
     )
     result: typing.Optional[TestReportResult] = pydantic.Field(
-        description="The overall result from the execution of the TestScript."
+        default=None, description="The overall result from the execution of the TestScript."
     )
     score: typing.Optional[Decimal] = pydantic.Field(
-        description="The final score (percentage of tests passed) resulting from the execution of the TestScript."
+        default=None,
+        description="The final score (percentage of tests passed) resulting from the execution of the TestScript.",
     )
     tester: typing.Optional[str] = pydantic.Field(
-        description="Name of the tester producing this report (Organization or individual)."
+        default=None, description="Name of the tester producing this report (Organization or individual)."
     )
     issued: typing.Optional[DateTime] = pydantic.Field(
-        description="When the TestScript was executed and this TestReport was generated."
+        default=None, description="When the TestScript was executed and this TestReport was generated."
     )
     participant: typing.Optional[typing.List[TestReportParticipant]] = pydantic.Field(
-        description="A participant in the test execution, either the execution engine, a client, or a server."
+        default=None,
+        description="A participant in the test execution, either the execution engine, a client, or a server.",
     )
     setup: typing.Optional[TestReportSetup] = pydantic.Field(
-        description="The results of the series of required setup operations before the tests were executed."
+        default=None,
+        description="The results of the series of required setup operations before the tests were executed.",
     )
     test: typing.Optional[typing.List[TestReportTest]] = pydantic.Field(
-        description="A test executed from the test script."
+        default=None, description="A test executed from the test script."
     )
     teardown: typing.Optional[TestReportTeardown] = pydantic.Field(
-        description="The results of the series of operations required to clean up after all the tests were executed (successfully or otherwise)."
+        default=None,
+        description="The results of the series of operations required to clean up after all the tests were executed (successfully or otherwise).",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

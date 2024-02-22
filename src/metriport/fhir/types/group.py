@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,37 +24,40 @@ class Group(BaseResource):
     Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
     """
 
-    resource_type: typing_extensions.Literal["Group"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Group"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique business identifier for this group."
+        default=None, description="A unique business identifier for this group."
     )
     active: typing.Optional[bool] = pydantic.Field(
-        description="Indicates whether the record for the group is available for use or is merely being retained for historical purposes."
+        default=None,
+        description="Indicates whether the record for the group is available for use or is merely being retained for historical purposes.",
     )
     type: typing.Optional[GroupType] = pydantic.Field(
-        description="Identifies the broad classification of the kind of resources the group includes."
+        default=None, description="Identifies the broad classification of the kind of resources the group includes."
     )
     actual: typing.Optional[bool] = pydantic.Field(
-        description="If true, indicates that the resource refers to a specific group of real individuals. If false, the group defines a set of intended individuals."
+        default=None,
+        description="If true, indicates that the resource refers to a specific group of real individuals. If false, the group defines a set of intended individuals.",
     )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description='Provides a specific type of resource the group includes; e.g. "cow", "syringe", etc.'
+        default=None, description='Provides a specific type of resource the group includes; e.g. "cow", "syringe", etc.'
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A label assigned to the group for human identification and communication."
+        default=None, description="A label assigned to the group for human identification and communication."
     )
     quantity: typing.Optional[UnsignedInt] = pydantic.Field(
-        description="A count of the number of resource instances that are part of the group."
+        default=None, description="A count of the number of resource instances that are part of the group."
     )
     managing_entity: typing.Optional[Reference] = pydantic.Field(
         alias="managingEntity",
+        default=None,
         description="Entity responsible for defining and maintaining Group characteristics and/or registered members.",
     )
     characteristic: typing.Optional[typing.List[GroupCharacteristic]] = pydantic.Field(
-        description="Identifies traits whose presence r absence is shared by members of the group."
+        default=None, description="Identifies traits whose presence r absence is shared by members of the group."
     )
     member: typing.Optional[typing.List[GroupMember]] = pydantic.Field(
-        description="Identifies the resource instances that are members of the group."
+        default=None, description="Identifies the resource instances that are members of the group."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

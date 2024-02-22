@@ -23,38 +23,46 @@ class MedicinalProductPharmaceuticalRouteOfAdministration(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     code: CodeableConcept = pydantic.Field(description="Coded expression for the route.")
     first_dose: typing.Optional[Quantity] = pydantic.Field(
         alias="firstDose",
+        default=None,
         description="The first dose (dose quantity) administered in humans can be specified, for a product under investigation, using a numerical value and its unit of measurement.",
     )
     max_single_dose: typing.Optional[Quantity] = pydantic.Field(
         alias="maxSingleDose",
+        default=None,
         description="The maximum single dose that can be administered as per the protocol of a clinical trial can be specified using a numerical value and its unit of measurement.",
     )
     max_dose_per_day: typing.Optional[Quantity] = pydantic.Field(
         alias="maxDosePerDay",
+        default=None,
         description="The maximum dose per day (maximum dose quantity to be administered in any one 24-h period) that can be administered as per the protocol referenced in the clinical trial authorisation.",
     )
     max_dose_per_treatment_period: typing.Optional[Ratio] = pydantic.Field(
         alias="maxDosePerTreatmentPeriod",
+        default=None,
         description="The maximum dose per treatment period that can be administered as per the protocol referenced in the clinical trial authorisation.",
     )
     max_treatment_period: typing.Optional[Duration] = pydantic.Field(
         alias="maxTreatmentPeriod",
+        default=None,
         description="The maximum treatment period during which an Investigational Medicinal Product can be administered as per the protocol referenced in the clinical trial authorisation.",
     )
     target_species: typing.Optional[typing.List[MedicinalProductPharmaceuticalTargetSpecies]] = pydantic.Field(
-        alias="targetSpecies", description="A species for which this route applies."
+        alias="targetSpecies", default=None, description="A species for which this route applies."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

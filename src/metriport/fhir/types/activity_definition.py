@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .activity_definition_dynamic_value import ActivityDefinitionDynamicValue
 from .activity_definition_participant import ActivityDefinitionParticipant
@@ -40,184 +38,232 @@ class ActivityDefinition(BaseResource):
     This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context.
     """
 
-    resource_type: typing_extensions.Literal["ActivityDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ActivityDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this activity definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this activity definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the activity definition is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this activity definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this activity definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the activity definition is stored on different servers.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this activity definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this activity definition when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the activity definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the activity definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active assets."
+        default=None,
+        description="The identifier that is used to identify this version of the activity definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the activity definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active assets.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the activity definition. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the activity definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the activity definition."
+        default=None, description="A short, descriptive, user-friendly title for the activity definition."
     )
     subtitle: typing.Optional[str] = pydantic.Field(
-        description="An explanatory or alternate title for the activity definition giving additional information about its content."
+        default=None,
+        description="An explanatory or alternate title for the activity definition giving additional information about its content.",
     )
     status: typing.Optional[ActivityDefinitionStatus] = pydantic.Field(
-        description="The status of this activity definition. Enables tracking the life-cycle of the content."
+        default=None,
+        description="The status of this activity definition. Enables tracking the life-cycle of the content.",
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this activity definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this activity definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     subject_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="subjectCodeableConcept",
+        default=None,
         description="A code or group definition that describes the intended subject of the activity being defined.",
     )
     subject_reference: typing.Optional[Reference] = pydantic.Field(
         alias="subjectReference",
+        default=None,
         description="A code or group definition that describes the intended subject of the activity being defined.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the activity definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the activity definition changes."
+        default=None,
+        description="The date (and optionally time) when the activity definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the activity definition changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the activity definition."
+        default=None, description="The name of the organization or individual that published the activity definition."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the activity definition from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the activity definition from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate activity definition instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the activity definition is intended to be used."
+        default=None,
+        description="A legal or geographic region in which the activity definition is intended to be used.",
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this activity definition is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this activity definition is needed and why it has been designed as it has.",
     )
     usage: typing.Optional[str] = pydantic.Field(
-        description="A detailed description of how the activity definition is used from a clinical perspective."
+        default=None,
+        description="A detailed description of how the activity definition is used from a clinical perspective.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the activity definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the activity definition."
+        default=None,
+        description="A copyright statement relating to the activity definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the activity definition.",
     )
     approval_date: typing.Optional[dt.date] = pydantic.Field(
         alias="approvalDate",
+        default=None,
         description="The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.",
     )
     last_review_date: typing.Optional[dt.date] = pydantic.Field(
         alias="lastReviewDate",
+        default=None,
         description="The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.",
     )
     effective_period: typing.Optional[Period] = pydantic.Field(
         alias="effectivePeriod",
+        default=None,
         description="The period during which the activity definition content was or is planned to be in active use.",
     )
     topic: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Descriptive topics related to the content of the activity. Topics provide a high-level categorization of the activity that can be useful for filtering and searching."
+        default=None,
+        description="Descriptive topics related to the content of the activity. Topics provide a high-level categorization of the activity that can be useful for filtering and searching.",
     )
     author: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individiual or organization primarily involved in the creation and maintenance of the content."
+        default=None,
+        description="An individiual or organization primarily involved in the creation and maintenance of the content.",
     )
     editor: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization primarily responsible for internal coherence of the content."
+        default=None,
+        description="An individual or organization primarily responsible for internal coherence of the content.",
     )
     reviewer: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization primarily responsible for review of some aspect of the content."
+        default=None,
+        description="An individual or organization primarily responsible for review of some aspect of the content.",
     )
     endorser: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization responsible for officially endorsing the content for use in some setting."
+        default=None,
+        description="An individual or organization responsible for officially endorsing the content for use in some setting.",
     )
     related_artifact: typing.Optional[typing.List[RelatedArtifact]] = pydantic.Field(
         alias="relatedArtifact",
+        default=None,
         description="Related artifacts such as additional documentation, justification, or bibliographic references.",
     )
     library: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        description="A reference to a Library resource containing any formal logic used by the activity definition."
+        default=None,
+        description="A reference to a Library resource containing any formal logic used by the activity definition.",
     )
     kind: typing.Optional[Code] = pydantic.Field(
-        description="A description of the kind of resource the activity definition is representing. For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest. Typically, but not always, this is a Request resource."
+        default=None,
+        description="A description of the kind of resource the activity definition is representing. For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest. Typically, but not always, this is a Request resource.",
     )
     profile: typing.Optional[Canonical] = pydantic.Field(
-        description="A profile to which the target of the activity definition is expected to conform."
+        default=None, description="A profile to which the target of the activity definition is expected to conform."
     )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Detailed description of the type of activity; e.g. What lab test, what procedure, what kind of encounter."
+        default=None,
+        description="Detailed description of the type of activity; e.g. What lab test, what procedure, what kind of encounter.",
     )
     intent: typing.Optional[Code] = pydantic.Field(
-        description="Indicates the level of authority/intentionality associated with the activity and where the request should fit into the workflow chain."
+        default=None,
+        description="Indicates the level of authority/intentionality associated with the activity and where the request should fit into the workflow chain.",
     )
     priority: typing.Optional[Code] = pydantic.Field(
-        description="Indicates how quickly the activity should be addressed with respect to other requests."
+        default=None,
+        description="Indicates how quickly the activity should be addressed with respect to other requests.",
     )
     do_not_perform: typing.Optional[bool] = pydantic.Field(
         alias="doNotPerform",
+        default=None,
         description="Set this to true if the definition is to indicate that a particular activity should NOT be performed. If true, this element should be interpreted to reinforce a negative coding. For example NPO as a code with a doNotPerform of true would still indicate to NOT perform the action.",
     )
     timing_timing: typing.Optional[Timing] = pydantic.Field(
         alias="timingTiming",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     timing_date_time: typing.Optional[str] = pydantic.Field(
         alias="timingDateTime",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     timing_age: typing.Optional[Age] = pydantic.Field(
-        alias="timingAge", description="The period, timing or frequency upon which the described activity is to occur."
+        alias="timingAge",
+        default=None,
+        description="The period, timing or frequency upon which the described activity is to occur.",
     )
     timing_period: typing.Optional[Period] = pydantic.Field(
         alias="timingPeriod",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     timing_range: typing.Optional[Range] = pydantic.Field(
         alias="timingRange",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     timing_duration: typing.Optional[Duration] = pydantic.Field(
         alias="timingDuration",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc."
+        default=None,
+        description="Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc.",
     )
     participant: typing.Optional[typing.List[ActivityDefinitionParticipant]] = pydantic.Field(
-        description="Indicates who should participate in performing the action described."
+        default=None, description="Indicates who should participate in performing the action described."
     )
     product_reference: typing.Optional[Reference] = pydantic.Field(
         alias="productReference",
+        default=None,
         description="Identifies the food, drug or other product being consumed or supplied in the activity.",
     )
     product_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="productCodeableConcept",
+        default=None,
         description="Identifies the food, drug or other product being consumed or supplied in the activity.",
     )
     quantity: typing.Optional[Quantity] = pydantic.Field(
-        description="Identifies the quantity expected to be consumed at once (per dose, per meal, etc.)."
+        default=None, description="Identifies the quantity expected to be consumed at once (per dose, per meal, etc.)."
     )
     dosage: typing.Optional[typing.List[Dosage]] = pydantic.Field(
-        description="Provides detailed dosage instructions in the same way that they are described for MedicationRequest resources."
+        default=None,
+        description="Provides detailed dosage instructions in the same way that they are described for MedicationRequest resources.",
     )
     body_site: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="bodySite",
+        default=None,
         description="Indicates the sites on the subject's body where the procedure should be performed (I.e. the target sites).",
     )
     specimen_requirement: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="specimenRequirement",
+        default=None,
         description="Defines specimen requirements for the action to be performed, such as required specimens for a lab test.",
     )
     observation_requirement: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="observationRequirement",
+        default=None,
         description="Defines observation requirements for the action to be performed, such as body weight or surface area.",
     )
     observation_result_requirement: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="observationResultRequirement",
+        default=None,
         description="Defines the observations that are expected to be produced by the action.",
     )
     transform: typing.Optional[Canonical] = pydantic.Field(
-        description="A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input."
+        default=None,
+        description="A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input.",
     )
     dynamic_value: typing.Optional[typing.List[ActivityDefinitionDynamicValue]] = pydantic.Field(
         alias="dynamicValue",
+        default=None,
         description="Dynamic values that will be evaluated to produce values for elements of the resulting resource. For example, if the dosage of a medication must be computed based on the patient's weight, a dynamic value would be used to specify an expression that calculated the weight, and the path on the request resource that would contain the result.",
     )
 

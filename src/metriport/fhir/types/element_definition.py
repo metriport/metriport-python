@@ -61,783 +61,978 @@ class ElementDefinition(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     path: typing.Optional[str] = pydantic.Field(
-        description='The path identifies the element and is expressed as a "."-separated list of ancestor elements, beginning with the name of the resource or extension.'
+        default=None,
+        description='The path identifies the element and is expressed as a "."-separated list of ancestor elements, beginning with the name of the resource or extension.',
     )
     representation: typing.Optional[typing.List[ElementDefinitionRepresentationItem]] = pydantic.Field(
-        description="Codes that define how this element is represented in instances, when the deviation varies from the normal case."
+        default=None,
+        description="Codes that define how this element is represented in instances, when the deviation varies from the normal case.",
     )
     slice_name: typing.Optional[str] = pydantic.Field(
         alias="sliceName",
+        default=None,
         description="The name of this element definition slice, when slicing is working. The name must be a token with no dots or spaces. This is a unique name referring to a specific set of constraints applied to this element, used to provide a name to different slices of the same element.",
     )
     slice_is_constraining: typing.Optional[bool] = pydantic.Field(
         alias="sliceIsConstraining",
+        default=None,
         description="If true, indicates that this slice definition is constraining a slice definition with the same name in an inherited profile. If false, the slice is not overriding any slice in an inherited profile. If missing, the slice might or might not be overriding a slice in an inherited profile, depending on the sliceName.",
     )
     label: typing.Optional[str] = pydantic.Field(
-        description="A single preferred label which is the text to display beside the element indicating its meaning or to use to prompt for the element in a user display or form."
+        default=None,
+        description="A single preferred label which is the text to display beside the element indicating its meaning or to use to prompt for the element in a user display or form.",
     )
     code: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="A code that has the same meaning as the element in a particular terminology."
+        default=None, description="A code that has the same meaning as the element in a particular terminology."
     )
     slicing: typing.Optional[ElementDefinitionSlicing] = pydantic.Field(
-        description="Indicates that the element is sliced into a set of alternative definitions (i.e. in a structure definition, there are multiple different constraints on a single element in the base resource). Slicing can be used in any resource that has cardinality ..\* on the base resource, or any resource with a choice of types. The set of slices is any elements that come after this in the element sequence that have the same path, until a shorter path occurs (the shorter path terminates the set)."
+        default=None,
+        description="Indicates that the element is sliced into a set of alternative definitions (i.e. in a structure definition, there are multiple different constraints on a single element in the base resource). Slicing can be used in any resource that has cardinality ..\* on the base resource, or any resource with a choice of types. The set of slices is any elements that come after this in the element sequence that have the same path, until a shorter path occurs (the shorter path terminates the set).",
     )
     short: typing.Optional[str] = pydantic.Field(
-        description="A concise description of what this element means (e.g. for use in autogenerated summaries)."
+        default=None,
+        description="A concise description of what this element means (e.g. for use in autogenerated summaries).",
     )
     definition: typing.Optional[Markdown] = pydantic.Field(
-        description="Provides a complete explanation of the meaning of the data element for human readability. For the case of elements derived from existing elements (e.g. constraints), the definition SHALL be consistent with the base definition, but convey the meaning of the element in the particular context of use of the resource. (Note: The text you are reading is specified in ElementDefinition.definition)."
+        default=None,
+        description="Provides a complete explanation of the meaning of the data element for human readability. For the case of elements derived from existing elements (e.g. constraints), the definition SHALL be consistent with the base definition, but convey the meaning of the element in the particular context of use of the resource. (Note: The text you are reading is specified in ElementDefinition.definition).",
     )
     comment: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanatory notes and implementation guidance about the data element, including notes about how to use the data properly, exceptions to proper use, etc. (Note: The text you are reading is specified in ElementDefinition.comment)."
+        default=None,
+        description="Explanatory notes and implementation guidance about the data element, including notes about how to use the data properly, exceptions to proper use, etc. (Note: The text you are reading is specified in ElementDefinition.comment).",
     )
     requirements: typing.Optional[Markdown] = pydantic.Field(
-        description="This element is for traceability of why the element was created and why the constraints exist as they do. This may be used to point to source materials or specifications that drove the structure of this element."
+        default=None,
+        description="This element is for traceability of why the element was created and why the constraints exist as they do. This may be used to point to source materials or specifications that drove the structure of this element.",
     )
     alias: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="Identifies additional names by which this element might also be known."
+        default=None, description="Identifies additional names by which this element might also be known."
     )
     min: typing.Optional[UnsignedInt] = pydantic.Field(
-        description="The minimum number of times this element SHALL appear in the instance."
+        default=None, description="The minimum number of times this element SHALL appear in the instance."
     )
     max: typing.Optional[str] = pydantic.Field(
-        description="The maximum number of times this element is permitted to appear in the instance."
+        default=None, description="The maximum number of times this element is permitted to appear in the instance."
     )
     base: typing.Optional[ElementDefinitionBase] = pydantic.Field(
-        description="Information about the base definition of the element, provided to make it unnecessary for tools to trace the deviation of the element through the derived and related profiles. When the element definition is not the original definition of an element - i.g. either in a constraint on another type, or for elements from a super type in a snap shot - then the information in provided in the element definition may be different to the base definition. On the original definition of the element, it will be same."
+        default=None,
+        description="Information about the base definition of the element, provided to make it unnecessary for tools to trace the deviation of the element through the derived and related profiles. When the element definition is not the original definition of an element - i.g. either in a constraint on another type, or for elements from a super type in a snap shot - then the information in provided in the element definition may be different to the base definition. On the original definition of the element, it will be same.",
     )
     content_reference: typing.Optional[Uri] = pydantic.Field(
         alias="contentReference",
+        default=None,
         description="Identifies an element defined elsewhere in the definition whose content rules should be applied to the current element. ContentReferences bring across all the rules that are in the ElementDefinition for the element, including definitions, cardinality constraints, bindings, invariants etc.",
     )
     type: typing.Optional[typing.List[ElementDefinitionType]] = pydantic.Field(
-        description="The data type or resource that the value of this element is permitted to be."
+        default=None, description="The data type or resource that the value of this element is permitted to be."
     )
     default_value_base_64_binary: typing.Optional[str] = pydantic.Field(
         alias="defaultValueBase64Binary",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_boolean: typing.Optional[bool] = pydantic.Field(
         alias="defaultValueBoolean",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_canonical: typing.Optional[str] = pydantic.Field(
         alias="defaultValueCanonical",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_code: typing.Optional[str] = pydantic.Field(
         alias="defaultValueCode",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_date: typing.Optional[str] = pydantic.Field(
         alias="defaultValueDate",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_date_time: typing.Optional[str] = pydantic.Field(
         alias="defaultValueDateTime",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_decimal: typing.Optional[float] = pydantic.Field(
         alias="defaultValueDecimal",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_id: typing.Optional[str] = pydantic.Field(
         alias="defaultValueId",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_instant: typing.Optional[str] = pydantic.Field(
         alias="defaultValueInstant",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_integer: typing.Optional[float] = pydantic.Field(
         alias="defaultValueInteger",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_markdown: typing.Optional[str] = pydantic.Field(
         alias="defaultValueMarkdown",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_oid: typing.Optional[str] = pydantic.Field(
         alias="defaultValueOid",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_positive_int: typing.Optional[float] = pydantic.Field(
         alias="defaultValuePositiveInt",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_string: typing.Optional[str] = pydantic.Field(
         alias="defaultValueString",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_time: typing.Optional[str] = pydantic.Field(
         alias="defaultValueTime",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="defaultValueUnsignedInt",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_uri: typing.Optional[str] = pydantic.Field(
         alias="defaultValueUri",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_url: typing.Optional[str] = pydantic.Field(
         alias="defaultValueUrl",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_uuid: typing.Optional[str] = pydantic.Field(
         alias="defaultValueUuid",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_address: typing.Optional[Address] = pydantic.Field(
         alias="defaultValueAddress",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_age: typing.Optional[Age] = pydantic.Field(
         alias="defaultValueAge",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_annotation: typing.Optional[Annotation] = pydantic.Field(
         alias="defaultValueAnnotation",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_attachment: typing.Optional[Attachment] = pydantic.Field(
         alias="defaultValueAttachment",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="defaultValueCodeableConcept",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_coding: typing.Optional[Coding] = pydantic.Field(
         alias="defaultValueCoding",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_contact_point: typing.Optional[ContactPoint] = pydantic.Field(
         alias="defaultValueContactPoint",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_count: typing.Optional[Count] = pydantic.Field(
         alias="defaultValueCount",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_distance: typing.Optional[Distance] = pydantic.Field(
         alias="defaultValueDistance",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_duration: typing.Optional[Duration] = pydantic.Field(
         alias="defaultValueDuration",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_human_name: typing.Optional[HumanName] = pydantic.Field(
         alias="defaultValueHumanName",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="defaultValueIdentifier",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_money: typing.Optional[Money] = pydantic.Field(
         alias="defaultValueMoney",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_period: typing.Optional[Period] = pydantic.Field(
         alias="defaultValuePeriod",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="defaultValueQuantity",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_range: typing.Optional[Range] = pydantic.Field(
         alias="defaultValueRange",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_ratio: typing.Optional[Ratio] = pydantic.Field(
         alias="defaultValueRatio",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_reference: typing.Optional[Reference] = pydantic.Field(
         alias="defaultValueReference",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_sampled_data: typing.Optional[SampledData] = pydantic.Field(
         alias="defaultValueSampledData",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_signature: typing.Optional[Signature] = pydantic.Field(
         alias="defaultValueSignature",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_timing: typing.Optional[Timing] = pydantic.Field(
         alias="defaultValueTiming",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_contact_detail: typing.Optional[ContactDetail] = pydantic.Field(
         alias="defaultValueContactDetail",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_contributor: typing.Optional[Contributor] = pydantic.Field(
         alias="defaultValueContributor",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_data_requirement: typing.Optional[DataRequirement] = pydantic.Field(
         alias="defaultValueDataRequirement",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_expression: typing.Optional[Expression] = pydantic.Field(
         alias="defaultValueExpression",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_parameter_definition: typing.Optional[ParameterDefinition] = pydantic.Field(
         alias="defaultValueParameterDefinition",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_related_artifact: typing.Optional[RelatedArtifact] = pydantic.Field(
         alias="defaultValueRelatedArtifact",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_trigger_definition: typing.Optional[TriggerDefinition] = pydantic.Field(
         alias="defaultValueTriggerDefinition",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_usage_context: typing.Optional[UsageContext] = pydantic.Field(
         alias="defaultValueUsageContext",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_dosage: typing.Optional[Dosage] = pydantic.Field(
         alias="defaultValueDosage",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     default_value_meta: typing.Optional[Meta] = pydantic.Field(
         alias="defaultValueMeta",
+        default=None,
         description="The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').",
     )
     meaning_when_missing: typing.Optional[Markdown] = pydantic.Field(
         alias="meaningWhenMissing",
+        default=None,
         description="The Implicit meaning that is to be understood when this element is missing (e.g. 'when this element is missing, the period is ongoing').",
     )
     order_meaning: typing.Optional[str] = pydantic.Field(
         alias="orderMeaning",
+        default=None,
         description="If present, indicates that the order of the repeating element has meaning and describes what that meaning is. If absent, it means that the order of the element has no meaning.",
     )
     fixed_base_64_binary: typing.Optional[str] = pydantic.Field(
         alias="fixedBase64Binary",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_boolean: typing.Optional[bool] = pydantic.Field(
         alias="fixedBoolean",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_canonical: typing.Optional[str] = pydantic.Field(
         alias="fixedCanonical",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_code: typing.Optional[str] = pydantic.Field(
         alias="fixedCode",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_date: typing.Optional[str] = pydantic.Field(
         alias="fixedDate",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_date_time: typing.Optional[str] = pydantic.Field(
         alias="fixedDateTime",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_decimal: typing.Optional[float] = pydantic.Field(
         alias="fixedDecimal",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_id: typing.Optional[str] = pydantic.Field(
         alias="fixedId",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_instant: typing.Optional[str] = pydantic.Field(
         alias="fixedInstant",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_integer: typing.Optional[float] = pydantic.Field(
         alias="fixedInteger",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_markdown: typing.Optional[str] = pydantic.Field(
         alias="fixedMarkdown",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_oid: typing.Optional[str] = pydantic.Field(
         alias="fixedOid",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_positive_int: typing.Optional[float] = pydantic.Field(
         alias="fixedPositiveInt",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_string: typing.Optional[str] = pydantic.Field(
         alias="fixedString",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_time: typing.Optional[str] = pydantic.Field(
         alias="fixedTime",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="fixedUnsignedInt",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_uri: typing.Optional[str] = pydantic.Field(
         alias="fixedUri",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_url: typing.Optional[str] = pydantic.Field(
         alias="fixedUrl",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_uuid: typing.Optional[str] = pydantic.Field(
         alias="fixedUuid",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_address: typing.Optional[Address] = pydantic.Field(
         alias="fixedAddress",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_age: typing.Optional[Age] = pydantic.Field(
         alias="fixedAge",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_annotation: typing.Optional[Annotation] = pydantic.Field(
         alias="fixedAnnotation",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_attachment: typing.Optional[Attachment] = pydantic.Field(
         alias="fixedAttachment",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="fixedCodeableConcept",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_coding: typing.Optional[Coding] = pydantic.Field(
         alias="fixedCoding",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_contact_point: typing.Optional[ContactPoint] = pydantic.Field(
         alias="fixedContactPoint",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_count: typing.Optional[Count] = pydantic.Field(
         alias="fixedCount",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_distance: typing.Optional[Distance] = pydantic.Field(
         alias="fixedDistance",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_duration: typing.Optional[Duration] = pydantic.Field(
         alias="fixedDuration",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_human_name: typing.Optional[HumanName] = pydantic.Field(
         alias="fixedHumanName",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="fixedIdentifier",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_money: typing.Optional[Money] = pydantic.Field(
         alias="fixedMoney",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_period: typing.Optional[Period] = pydantic.Field(
         alias="fixedPeriod",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="fixedQuantity",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_range: typing.Optional[Range] = pydantic.Field(
         alias="fixedRange",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_ratio: typing.Optional[Ratio] = pydantic.Field(
         alias="fixedRatio",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_reference: typing.Optional[Reference] = pydantic.Field(
         alias="fixedReference",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_sampled_data: typing.Optional[SampledData] = pydantic.Field(
         alias="fixedSampledData",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_signature: typing.Optional[Signature] = pydantic.Field(
         alias="fixedSignature",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_timing: typing.Optional[Timing] = pydantic.Field(
         alias="fixedTiming",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_contact_detail: typing.Optional[ContactDetail] = pydantic.Field(
         alias="fixedContactDetail",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_contributor: typing.Optional[Contributor] = pydantic.Field(
         alias="fixedContributor",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_data_requirement: typing.Optional[DataRequirement] = pydantic.Field(
         alias="fixedDataRequirement",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_expression: typing.Optional[Expression] = pydantic.Field(
         alias="fixedExpression",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_parameter_definition: typing.Optional[ParameterDefinition] = pydantic.Field(
         alias="fixedParameterDefinition",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_related_artifact: typing.Optional[RelatedArtifact] = pydantic.Field(
         alias="fixedRelatedArtifact",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_trigger_definition: typing.Optional[TriggerDefinition] = pydantic.Field(
         alias="fixedTriggerDefinition",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_usage_context: typing.Optional[UsageContext] = pydantic.Field(
         alias="fixedUsageContext",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_dosage: typing.Optional[Dosage] = pydantic.Field(
         alias="fixedDosage",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     fixed_meta: typing.Optional[Meta] = pydantic.Field(
         alias="fixedMeta",
+        default=None,
         description="Specifies a value that SHALL be exactly the value for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.",
     )
     pattern_base_64_binary: typing.Optional[str] = pydantic.Field(
         alias="patternBase64Binary",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_boolean: typing.Optional[bool] = pydantic.Field(
         alias="patternBoolean",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_canonical: typing.Optional[str] = pydantic.Field(
         alias="patternCanonical",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_code: typing.Optional[str] = pydantic.Field(
         alias="patternCode",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_date: typing.Optional[str] = pydantic.Field(
         alias="patternDate",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_date_time: typing.Optional[str] = pydantic.Field(
         alias="patternDateTime",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_decimal: typing.Optional[float] = pydantic.Field(
         alias="patternDecimal",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_id: typing.Optional[str] = pydantic.Field(
         alias="patternId",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_instant: typing.Optional[str] = pydantic.Field(
         alias="patternInstant",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_integer: typing.Optional[float] = pydantic.Field(
         alias="patternInteger",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_markdown: typing.Optional[str] = pydantic.Field(
         alias="patternMarkdown",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_oid: typing.Optional[str] = pydantic.Field(
         alias="patternOid",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_positive_int: typing.Optional[float] = pydantic.Field(
         alias="patternPositiveInt",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_string: typing.Optional[str] = pydantic.Field(
         alias="patternString",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_time: typing.Optional[str] = pydantic.Field(
         alias="patternTime",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="patternUnsignedInt",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_uri: typing.Optional[str] = pydantic.Field(
         alias="patternUri",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_url: typing.Optional[str] = pydantic.Field(
         alias="patternUrl",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_uuid: typing.Optional[str] = pydantic.Field(
         alias="patternUuid",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_address: typing.Optional[Address] = pydantic.Field(
         alias="patternAddress",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_age: typing.Optional[Age] = pydantic.Field(
         alias="patternAge",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_annotation: typing.Optional[Annotation] = pydantic.Field(
         alias="patternAnnotation",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_attachment: typing.Optional[Attachment] = pydantic.Field(
         alias="patternAttachment",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="patternCodeableConcept",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_coding: typing.Optional[Coding] = pydantic.Field(
         alias="patternCoding",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_contact_point: typing.Optional[ContactPoint] = pydantic.Field(
         alias="patternContactPoint",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_count: typing.Optional[Count] = pydantic.Field(
         alias="patternCount",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_distance: typing.Optional[Distance] = pydantic.Field(
         alias="patternDistance",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_duration: typing.Optional[Duration] = pydantic.Field(
         alias="patternDuration",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_human_name: typing.Optional[HumanName] = pydantic.Field(
         alias="patternHumanName",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="patternIdentifier",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_money: typing.Optional[Money] = pydantic.Field(
         alias="patternMoney",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_period: typing.Optional[Period] = pydantic.Field(
         alias="patternPeriod",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="patternQuantity",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_range: typing.Optional[Range] = pydantic.Field(
         alias="patternRange",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_ratio: typing.Optional[Ratio] = pydantic.Field(
         alias="patternRatio",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_reference: typing.Optional[Reference] = pydantic.Field(
         alias="patternReference",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_sampled_data: typing.Optional[SampledData] = pydantic.Field(
         alias="patternSampledData",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_signature: typing.Optional[Signature] = pydantic.Field(
         alias="patternSignature",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_timing: typing.Optional[Timing] = pydantic.Field(
         alias="patternTiming",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_contact_detail: typing.Optional[ContactDetail] = pydantic.Field(
         alias="patternContactDetail",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_contributor: typing.Optional[Contributor] = pydantic.Field(
         alias="patternContributor",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_data_requirement: typing.Optional[DataRequirement] = pydantic.Field(
         alias="patternDataRequirement",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_expression: typing.Optional[Expression] = pydantic.Field(
         alias="patternExpression",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_parameter_definition: typing.Optional[ParameterDefinition] = pydantic.Field(
         alias="patternParameterDefinition",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_related_artifact: typing.Optional[RelatedArtifact] = pydantic.Field(
         alias="patternRelatedArtifact",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_trigger_definition: typing.Optional[TriggerDefinition] = pydantic.Field(
         alias="patternTriggerDefinition",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_usage_context: typing.Optional[UsageContext] = pydantic.Field(
         alias="patternUsageContext",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_dosage: typing.Optional[Dosage] = pydantic.Field(
         alias="patternDosage",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     pattern_meta: typing.Optional[Meta] = pydantic.Field(
         alias="patternMeta",
+        default=None,
         description="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example. When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly. When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array. When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e., 1. If primitive: it must match exactly the pattern value 2. If a complex object: it must match (recursively) the pattern value 3. If an array: it must match (recursively) the pattern value.",
     )
     example: typing.Optional[typing.List[ElementDefinitionExample]] = pydantic.Field(
-        description="A sample value for this element demonstrating the type of information that would typically be found in the element."
+        default=None,
+        description="A sample value for this element demonstrating the type of information that would typically be found in the element.",
     )
     min_value_date: typing.Optional[str] = pydantic.Field(
         alias="minValueDate",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_date_time: typing.Optional[str] = pydantic.Field(
         alias="minValueDateTime",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_instant: typing.Optional[str] = pydantic.Field(
         alias="minValueInstant",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_time: typing.Optional[str] = pydantic.Field(
         alias="minValueTime",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_decimal: typing.Optional[float] = pydantic.Field(
         alias="minValueDecimal",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_integer: typing.Optional[float] = pydantic.Field(
         alias="minValueInteger",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_positive_int: typing.Optional[float] = pydantic.Field(
         alias="minValuePositiveInt",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="minValueUnsignedInt",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     min_value_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="minValueQuantity",
+        default=None,
         description="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_date: typing.Optional[str] = pydantic.Field(
         alias="maxValueDate",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_date_time: typing.Optional[str] = pydantic.Field(
         alias="maxValueDateTime",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_instant: typing.Optional[str] = pydantic.Field(
         alias="maxValueInstant",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_time: typing.Optional[str] = pydantic.Field(
         alias="maxValueTime",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_decimal: typing.Optional[float] = pydantic.Field(
         alias="maxValueDecimal",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_integer: typing.Optional[float] = pydantic.Field(
         alias="maxValueInteger",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_positive_int: typing.Optional[float] = pydantic.Field(
         alias="maxValuePositiveInt",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="maxValueUnsignedInt",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_value_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="maxValueQuantity",
+        default=None,
         description="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
     )
     max_length: typing.Optional[int] = pydantic.Field(
         alias="maxLength",
+        default=None,
         description="Indicates the maximum length in characters that is permitted to be present in conformant instances and which is expected to be supported by conformant consumers that support the element.",
     )
     condition: typing.Optional[typing.List[Id]] = pydantic.Field(
-        description="A reference to an invariant that may make additional statements about the cardinality or value in the instance."
+        default=None,
+        description="A reference to an invariant that may make additional statements about the cardinality or value in the instance.",
     )
     constraint: typing.Optional[typing.List[ElementDefinitionConstraint]] = pydantic.Field(
-        description="Formal constraints such as co-occurrence and other constraints that can be computationally evaluated within the context of the instance."
+        default=None,
+        description="Formal constraints such as co-occurrence and other constraints that can be computationally evaluated within the context of the instance.",
     )
     must_support: typing.Optional[bool] = pydantic.Field(
         alias="mustSupport",
+        default=None,
         description='If true, implementations that produce or consume resources SHALL provide "support" for the element in some meaningful way. If false, the element may be ignored and not supported. If false, whether to populate or use the data element in any way is at the discretion of the implementation.',
     )
     is_modifier: typing.Optional[bool] = pydantic.Field(
         alias="isModifier",
+        default=None,
         description="If true, the value of this element affects the interpretation of the element or resource that contains it, and the value of the element cannot be ignored. Typically, this is used for status, negation and qualification codes. The effect of this is that the element cannot be ignored by systems: they SHALL either recognize the element and process it, and/or a pre-determination has been made that it is not relevant to their particular system.",
     )
     is_modifier_reason: typing.Optional[str] = pydantic.Field(
         alias="isModifierReason",
+        default=None,
         description="Explains how that element affects the interpretation of the resource or element that contains it.",
     )
     is_summary: typing.Optional[bool] = pydantic.Field(
         alias="isSummary",
+        default=None,
         description="Whether the element should be included if a client requests a search with the parameter \_summary=true.",
     )
     binding: typing.Optional[ElementDefinitionBinding] = pydantic.Field(
-        description="Binds to a value set if this element is coded (code, Coding, CodeableConcept, Quantity), or the data types (string, uri)."
+        default=None,
+        description="Binds to a value set if this element is coded (code, Coding, CodeableConcept, Quantity), or the data types (string, uri).",
     )
     mapping: typing.Optional[typing.List[ElementDefinitionMapping]] = pydantic.Field(
-        description="Identifies a concept from an external specification that roughly corresponds to this element."
+        default=None,
+        description="Identifies a concept from an external specification that roughly corresponds to this element.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

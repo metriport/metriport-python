@@ -25,13 +25,16 @@ class ObservationComponent(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     code: CodeableConcept = pydantic.Field(
@@ -39,57 +42,70 @@ class ObservationComponent(pydantic.BaseModel):
     )
     value_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="valueQuantity",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="valueCodeableConcept",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_string: typing.Optional[str] = pydantic.Field(
         alias="valueString",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_boolean: typing.Optional[bool] = pydantic.Field(
         alias="valueBoolean",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_integer: typing.Optional[float] = pydantic.Field(
         alias="valueInteger",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_range: typing.Optional[Range] = pydantic.Field(
         alias="valueRange",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_ratio: typing.Optional[Ratio] = pydantic.Field(
         alias="valueRatio",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_sampled_data: typing.Optional[SampledData] = pydantic.Field(
         alias="valueSampledData",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_time: typing.Optional[str] = pydantic.Field(
         alias="valueTime",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_date_time: typing.Optional[str] = pydantic.Field(
         alias="valueDateTime",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     value_period: typing.Optional[Period] = pydantic.Field(
         alias="valuePeriod",
+        default=None,
         description="The information determined as a result of making the observation, if the information has a simple value.",
     )
     data_absent_reason: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="dataAbsentReason",
+        default=None,
         description="Provides a reason why the expected value in the element Observation.component.value[x] is missing.",
     )
     interpretation: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A categorical assessment of an observation value. For example, high, low, normal."
+        default=None, description="A categorical assessment of an observation value. For example, high, low, normal."
     )
     reference_range: typing.Optional[typing.List[ObservationReferenceRange]] = pydantic.Field(
         alias="referenceRange",
+        default=None,
         description="Guidance on how to interpret the value by comparison to a normal or recommended range.",
     )
 

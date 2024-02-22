@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -25,32 +23,35 @@ class PaymentNotice(BaseResource):
     This resource provides the status of the payment for goods and services rendered, and the request and response resource references.
     """
 
-    resource_type: typing_extensions.Literal["PaymentNotice"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PaymentNotice"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this payment notice."
+        default=None, description="A unique identifier assigned to this payment notice."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
     request: typing.Optional[Reference] = pydantic.Field(
-        description="Reference of resource for which payment is being made."
+        default=None, description="Reference of resource for which payment is being made."
     )
     response: typing.Optional[Reference] = pydantic.Field(
-        description="Reference of response to resource for which payment is being made."
+        default=None, description="Reference of response to resource for which payment is being made."
     )
-    created: typing.Optional[DateTime] = pydantic.Field(description="The date when this resource was created.")
+    created: typing.Optional[DateTime] = pydantic.Field(
+        default=None, description="The date when this resource was created."
+    )
     provider: typing.Optional[Reference] = pydantic.Field(
-        description="The practitioner who is responsible for the services rendered to the patient."
+        default=None, description="The practitioner who is responsible for the services rendered to the patient."
     )
     payment: Reference = pydantic.Field(description="A reference to the payment which is the subject of this notice.")
     payment_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="paymentDate", description="The date when the above payment action occurred."
+        alias="paymentDate", default=None, description="The date when the above payment action occurred."
     )
     payee: typing.Optional[Reference] = pydantic.Field(
-        description="The party who will receive or has received payment that is the subject of this notification."
+        default=None,
+        description="The party who will receive or has received payment that is the subject of this notification.",
     )
     recipient: Reference = pydantic.Field(description="The party who is notified of the payment status.")
     amount: Money = pydantic.Field(description="The amount sent to the payee.")
     payment_status: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="paymentStatus", description="A code indicating whether payment has been sent or cleared."
+        alias="paymentStatus", default=None, description="A code indicating whether payment has been sent or cleared."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

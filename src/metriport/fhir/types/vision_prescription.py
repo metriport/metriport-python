@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -24,20 +22,21 @@ class VisionPrescription(BaseResource):
     An authorization for the provision of glasses and/or contact lenses to a patient.
     """
 
-    resource_type: typing_extensions.Literal["VisionPrescription"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["VisionPrescription"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this vision prescription."
+        default=None, description="A unique identifier assigned to this vision prescription."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
-    created: typing.Optional[DateTime] = pydantic.Field(description="The date this resource was created.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
+    created: typing.Optional[DateTime] = pydantic.Field(default=None, description="The date this resource was created.")
     patient: Reference = pydantic.Field(
         description="A resource reference to the person to whom the vision prescription applies."
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="A reference to a resource that identifies the particular occurrence of contact between patient and health care provider during which the prescription was issued."
+        default=None,
+        description="A reference to a resource that identifies the particular occurrence of contact between patient and health care provider during which the prescription was issued.",
     )
     date_written: typing.Optional[DateTime] = pydantic.Field(
-        alias="dateWritten", description="The date (and perhaps time) when the prescription was written."
+        alias="dateWritten", default=None, description="The date (and perhaps time) when the prescription was written."
     )
     prescriber: Reference = pydantic.Field(
         description="The healthcare professional responsible for authorizing the prescription."

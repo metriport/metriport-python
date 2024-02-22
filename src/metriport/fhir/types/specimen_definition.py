@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,24 +20,26 @@ class SpecimenDefinition(BaseResource):
     A kind of specimen with associated set of requirements.
     """
 
-    resource_type: typing_extensions.Literal["SpecimenDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SpecimenDefinition"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="A business identifier associated with the kind of specimen."
+        default=None, description="A business identifier associated with the kind of specimen."
     )
     type_collected: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="typeCollected", description="The kind of material to be collected."
+        alias="typeCollected", default=None, description="The kind of material to be collected."
     )
     patient_preparation: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="patientPreparation", description="Preparation of the patient for specimen collection."
+        alias="patientPreparation", default=None, description="Preparation of the patient for specimen collection."
     )
     time_aspect: typing.Optional[str] = pydantic.Field(
-        alias="timeAspect", description="Time aspect of specimen collection (duration or offset)."
+        alias="timeAspect", default=None, description="Time aspect of specimen collection (duration or offset)."
     )
     collection: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The action to be performed for collecting the specimen."
+        default=None, description="The action to be performed for collecting the specimen."
     )
     type_tested: typing.Optional[typing.List[SpecimenDefinitionTypeTested]] = pydantic.Field(
-        alias="typeTested", description="Specimen conditioned in a container as expected by the testing laboratory."
+        alias="typeTested",
+        default=None,
+        description="Specimen conditioned in a container as expected by the testing laboratory.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

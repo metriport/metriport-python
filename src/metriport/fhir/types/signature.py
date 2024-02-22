@@ -22,32 +22,38 @@ class Signature(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     type: typing.List[Coding] = pydantic.Field(
         description="An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document."
     )
-    when: typing.Optional[Instant] = pydantic.Field(description="When the digital signature was signed.")
+    when: typing.Optional[Instant] = pydantic.Field(default=None, description="When the digital signature was signed.")
     who: Reference = pydantic.Field(
         description="A reference to an application-usable description of the identity that signed (e.g. the signature used their private key)."
     )
     on_behalf_of: typing.Optional[Reference] = pydantic.Field(
         alias="onBehalfOf",
+        default=None,
         description="A reference to an application-usable description of the identity that is represented by the signature.",
     )
     target_format: typing.Optional[Code] = pydantic.Field(
         alias="targetFormat",
+        default=None,
         description="A mime type that indicates the technical format of the target resources signed by the signature.",
     )
     sig_format: typing.Optional[Code] = pydantic.Field(
         alias="sigFormat",
+        default=None,
         description="A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jose for JWS, and image/\* for a graphical image of a signature, etc.",
     )
     data: typing.Optional[Base64Binary] = pydantic.Field(
-        description="The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty."
+        default=None,
+        description="The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

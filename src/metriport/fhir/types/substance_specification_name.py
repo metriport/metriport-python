@@ -23,36 +23,44 @@ class SubstanceSpecificationName(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    name: typing.Optional[str] = pydantic.Field(description="The actual name.")
-    type: typing.Optional[CodeableConcept] = pydantic.Field(description="Name type.")
-    status: typing.Optional[CodeableConcept] = pydantic.Field(description="The status of the name.")
-    preferred: typing.Optional[bool] = pydantic.Field(description="If this is the preferred name for this substance.")
-    language: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(description="Language of the name.")
+    name: typing.Optional[str] = pydantic.Field(default=None, description="The actual name.")
+    type: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="Name type.")
+    status: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="The status of the name.")
+    preferred: typing.Optional[bool] = pydantic.Field(
+        default=None, description="If this is the preferred name for this substance."
+    )
+    language: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
+        default=None, description="Language of the name."
+    )
     domain: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The use context of this name for example if there is a different name a drug active ingredient as opposed to a food colour additive."
+        default=None,
+        description="The use context of this name for example if there is a different name a drug active ingredient as opposed to a food colour additive.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The jurisdiction where this name applies."
+        default=None, description="The jurisdiction where this name applies."
     )
     synonym: typing.Optional[typing.List[SubstanceSpecificationName]] = pydantic.Field(
-        description="A synonym of this name."
+        default=None, description="A synonym of this name."
     )
     translation: typing.Optional[typing.List[SubstanceSpecificationName]] = pydantic.Field(
-        description="A translation for this name."
+        default=None, description="A translation for this name."
     )
     official: typing.Optional[typing.List[SubstanceSpecificationOfficial]] = pydantic.Field(
-        description="Details of the official nature of this name."
+        default=None, description="Details of the official nature of this name."
     )
-    source: typing.Optional[typing.List[Reference]] = pydantic.Field(description="Supporting literature.")
+    source: typing.Optional[typing.List[Reference]] = pydantic.Field(default=None, description="Supporting literature.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

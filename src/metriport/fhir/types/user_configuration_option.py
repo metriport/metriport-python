@@ -22,22 +22,27 @@ class UserConfigurationOption(pydantic.BaseModel):
     id: Id = pydantic.Field(description="The unique identifier of the option.")
     value_boolean: typing.Optional[bool] = pydantic.Field(
         alias="valueBoolean",
+        default=None,
         description="Value of option - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_code: typing.Optional[Code] = pydantic.Field(
         alias="valueCode",
+        default=None,
         description="Value of option - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_decimal: typing.Optional[Decimal] = pydantic.Field(
         alias="valueDecimal",
+        default=None,
         description="Value of option - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_integer: typing.Optional[int] = pydantic.Field(
         alias="valueInteger",
+        default=None,
         description="Value of option - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_string: typing.Optional[str] = pydantic.Field(
         alias="valueString",
+        default=None,
         description="Value of option - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
 

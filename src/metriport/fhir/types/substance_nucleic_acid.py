@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -21,24 +19,28 @@ class SubstanceNucleicAcid(BaseResource):
     Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceNucleicAcid"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SubstanceNucleicAcid"] = pydantic.Field(alias="resourceType")
     sequence_type: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="sequenceType",
+        default=None,
         description="The type of the sequence shall be specified based on a controlled vocabulary.",
     )
     number_of_subunits: typing.Optional[int] = pydantic.Field(
         alias="numberOfSubunits",
+        default=None,
         description="The number of linear sequences of nucleotides linked through phosphodiester bonds shall be described. Subunits would be strands of nucleic acids that are tightly associated typically through Watson-Crick base pairing. NOTE: If not specified in the reference source, the assumption is that there is 1 subunit.",
     )
     area_of_hybridisation: typing.Optional[str] = pydantic.Field(
         alias="areaOfHybridisation",
+        default=None,
         description="The area of hybridisation shall be described if applicable for double stranded RNA or DNA. The number associated with the subunit followed by the number associated to the residue shall be specified in increasing order. The underscore “” shall be used as separator as follows: “Subunitnumber Residue”.",
     )
     oligo_nucleotide_type: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="oligoNucleotideType", description="(TBC)."
+        alias="oligoNucleotideType", default=None, description="(TBC)."
     )
     subunit: typing.Optional[typing.List[SubstanceNucleicAcidSubunit]] = pydantic.Field(
-        description="Subunits are listed in order of decreasing length; sequences of the same length will be ordered by molecular weight; subunits that have identical sequences will be repeated multiple times."
+        default=None,
+        description="Subunits are listed in order of decreasing length; sequences of the same length will be ordered by molecular weight; subunits that have identical sequences will be repeated multiple times.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

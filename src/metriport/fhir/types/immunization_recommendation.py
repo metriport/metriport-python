@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .date_time import DateTime
@@ -23,16 +21,16 @@ class ImmunizationRecommendation(BaseResource):
     A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule with optional supporting justification.
     """
 
-    resource_type: typing_extensions.Literal["ImmunizationRecommendation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ImmunizationRecommendation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this particular recommendation record."
+        default=None, description="A unique identifier assigned to this particular recommendation record."
     )
     patient: Reference = pydantic.Field(description="The patient the recommendation(s) are for.")
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date the immunization recommendation(s) were created."
+        default=None, description="The date the immunization recommendation(s) were created."
     )
     authority: typing.Optional[Reference] = pydantic.Field(
-        description="Indicates the authority who published the protocol (e.g. ACIP)."
+        default=None, description="Indicates the authority who published the protocol (e.g. ACIP)."
     )
     recommendation: typing.List[ImmunizationRecommendationRecommendation] = pydantic.Field(
         description="Vaccine administration recommendations."

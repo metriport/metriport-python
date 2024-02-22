@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -26,44 +24,51 @@ class MessageHeader(BaseResource):
     The header for a message exchange that is either requesting or responding to an action. The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
     """
 
-    resource_type: typing_extensions.Literal["MessageHeader"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MessageHeader"] = pydantic.Field(alias="resourceType")
     event_coding: typing.Optional[Coding] = pydantic.Field(
         alias="eventCoding",
+        default=None,
         description='Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value "http://terminology.hl7.org/CodeSystem/message-events". Alternatively uri to the EventDefinition.',
     )
     event_uri: typing.Optional[str] = pydantic.Field(
         alias="eventUri",
+        default=None,
         description='Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value "http://terminology.hl7.org/CodeSystem/message-events". Alternatively uri to the EventDefinition.',
     )
     destination: typing.Optional[typing.List[MessageHeaderDestination]] = pydantic.Field(
-        description="The destination application which the message is intended for."
+        default=None, description="The destination application which the message is intended for."
     )
     sender: typing.Optional[Reference] = pydantic.Field(
-        description="Identifies the sending system to allow the use of a trust relationship."
+        default=None, description="Identifies the sending system to allow the use of a trust relationship."
     )
     enterer: typing.Optional[Reference] = pydantic.Field(
-        description="The person or device that performed the data entry leading to this message. When there is more than one candidate, pick the most proximal to the message. Can provide other enterers in extensions."
+        default=None,
+        description="The person or device that performed the data entry leading to this message. When there is more than one candidate, pick the most proximal to the message. Can provide other enterers in extensions.",
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="The logical author of the message - the person or device that decided the described event should happen. When there is more than one candidate, pick the most proximal to the MessageHeader. Can provide other authors in extensions."
+        default=None,
+        description="The logical author of the message - the person or device that decided the described event should happen. When there is more than one candidate, pick the most proximal to the MessageHeader. Can provide other authors in extensions.",
     )
     source: MessageHeaderSource = pydantic.Field(
         description="The source application from which this message originated."
     )
     responsible: typing.Optional[Reference] = pydantic.Field(
-        description="The person or organization that accepts overall responsibility for the contents of the message. The implication is that the message event happened under the policies of the responsible party."
+        default=None,
+        description="The person or organization that accepts overall responsibility for the contents of the message. The implication is that the message event happened under the policies of the responsible party.",
     )
     reason: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Coded indication of the cause for the event - indicates a reason for the occurrence of the event that is a focus of this message."
+        default=None,
+        description="Coded indication of the cause for the event - indicates a reason for the occurrence of the event that is a focus of this message.",
     )
     response: typing.Optional[MessageHeaderResponse] = pydantic.Field(
-        description="Information about the message that this message is a response to. Only present if this message is a response."
+        default=None,
+        description="Information about the message that this message is a response to. Only present if this message is a response.",
     )
     focus: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The actual data of the message - a reference to the root/focus class of the event."
+        default=None, description="The actual data of the message - a reference to the root/focus class of the event."
     )
     definition: typing.Optional[Canonical] = pydantic.Field(
-        description="Permanent link to the MessageDefinition for this message."
+        default=None, description="Permanent link to the MessageDefinition for this message."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

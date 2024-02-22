@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,19 +20,21 @@ class MedicinalProductUndesirableEffect(BaseResource):
     Describe the undesirable effects of the medicinal product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductUndesirableEffect"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductUndesirableEffect"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The medication for which this is an indication."
+        default=None, description="The medication for which this is an indication."
     )
     symptom_condition_effect: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="symptomConditionEffect", description="The symptom, condition or undesirable effect."
+        alias="symptomConditionEffect", default=None, description="The symptom, condition or undesirable effect."
     )
-    classification: typing.Optional[CodeableConcept] = pydantic.Field(description="Classification of the effect.")
+    classification: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="Classification of the effect."
+    )
     frequency_of_occurrence: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="frequencyOfOccurrence", description="The frequency of occurrence of the effect."
+        alias="frequencyOfOccurrence", default=None, description="The frequency of occurrence of the effect."
     )
     population: typing.Optional[typing.List[Population]] = pydantic.Field(
-        description="The population group to which this applies."
+        default=None, description="The population group to which this applies."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -19,49 +19,62 @@ class Dosage(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     sequence: typing.Optional[int] = pydantic.Field(
-        description="Indicates the order in which the dosage instructions should be applied or interpreted."
+        default=None,
+        description="Indicates the order in which the dosage instructions should be applied or interpreted.",
     )
-    text: typing.Optional[str] = pydantic.Field(description="Free text dosage instructions e.g. SIG.")
+    text: typing.Optional[str] = pydantic.Field(default=None, description="Free text dosage instructions e.g. SIG.")
     additional_instruction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="additionalInstruction",
+        default=None,
         description='Supplemental instructions to the patient on how to take the medication (e.g. "with meals" or"take half to one hour before food") or warnings for the patient about the medication (e.g. "may cause drowsiness" or "avoid exposure of skin to direct sunlight or sunlamps").',
     )
     patient_instruction: typing.Optional[str] = pydantic.Field(
-        alias="patientInstruction", description="Instructions in terms that are understood by the patient or consumer."
+        alias="patientInstruction",
+        default=None,
+        description="Instructions in terms that are understood by the patient or consumer.",
     )
-    timing: typing.Optional[Timing] = pydantic.Field(description="When medication should be administered.")
+    timing: typing.Optional[Timing] = pydantic.Field(
+        default=None, description="When medication should be administered."
+    )
     as_needed_boolean: typing.Optional[bool] = pydantic.Field(
         alias="asNeededBoolean",
+        default=None,
         description="Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).",
     )
     as_needed_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="asNeededCodeableConcept",
+        default=None,
         description="Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).",
     )
-    site: typing.Optional[CodeableConcept] = pydantic.Field(description="Body site to administer to.")
-    route: typing.Optional[CodeableConcept] = pydantic.Field(description="How drug should enter body.")
-    method: typing.Optional[CodeableConcept] = pydantic.Field(description="Technique for administering medication.")
+    site: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="Body site to administer to.")
+    route: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="How drug should enter body.")
+    method: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="Technique for administering medication."
+    )
     dose_and_rate: typing.Optional[typing.List[DosageDoseAndRate]] = pydantic.Field(
-        alias="doseAndRate", description="The amount of medication administered."
+        alias="doseAndRate", default=None, description="The amount of medication administered."
     )
     max_dose_per_period: typing.Optional[Ratio] = pydantic.Field(
-        alias="maxDosePerPeriod", description="Upper limit on medication per unit of time."
+        alias="maxDosePerPeriod", default=None, description="Upper limit on medication per unit of time."
     )
     max_dose_per_administration: typing.Optional[Quantity] = pydantic.Field(
-        alias="maxDosePerAdministration", description="Upper limit on medication per administration."
+        alias="maxDosePerAdministration", default=None, description="Upper limit on medication per administration."
     )
     max_dose_per_lifetime: typing.Optional[Quantity] = pydantic.Field(
-        alias="maxDosePerLifetime", description="Upper limit on medication per lifetime of the patient."
+        alias="maxDosePerLifetime", default=None, description="Upper limit on medication per lifetime of the patient."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

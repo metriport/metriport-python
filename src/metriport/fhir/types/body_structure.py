@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -23,26 +21,28 @@ class BodyStructure(BaseResource):
     Record details about an anatomical structure. This resource may be used when a coded concept does not provide the necessary detail needed for the use case.
     """
 
-    resource_type: typing_extensions.Literal["BodyStructure"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["BodyStructure"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier for this instance of the anatomical structure."
+        default=None, description="Identifier for this instance of the anatomical structure."
     )
-    active: typing.Optional[bool] = pydantic.Field(description="Whether this body site is in active use.")
+    active: typing.Optional[bool] = pydantic.Field(default=None, description="Whether this body site is in active use.")
     morphology: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The kind of structure being represented by the body structure at `BodyStructure.location`. This can define both normal and abnormal morphologies."
+        default=None,
+        description="The kind of structure being represented by the body structure at `BodyStructure.location`. This can define both normal and abnormal morphologies.",
     )
     location: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The anatomical location or region of the specimen, lesion, or body structure."
+        default=None, description="The anatomical location or region of the specimen, lesion, or body structure."
     )
     location_qualifier: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="locationQualifier",
+        default=None,
         description="Qualifier to refine the anatomical location. These include qualifiers for laterality, relative location, directionality, number, and plane.",
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="A summary, characterization or explanation of the body structure."
+        default=None, description="A summary, characterization or explanation of the body structure."
     )
     image: typing.Optional[typing.List[Attachment]] = pydantic.Field(
-        description="Image or images used to identify a location."
+        default=None, description="Image or images used to identify a location."
     )
     patient: Reference = pydantic.Field(description="The person to which the body site belongs.")
 

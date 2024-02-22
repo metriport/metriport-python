@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -33,96 +31,115 @@ class ChargeItem(BaseResource):
     The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.
     """
 
-    resource_type: typing_extensions.Literal["ChargeItem"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ChargeItem"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifiers assigned to this event performer or other systems."
+        default=None, description="Identifiers assigned to this event performer or other systems."
     )
     definition_uri: typing.Optional[typing.List[Uri]] = pydantic.Field(
         alias="definitionUri",
+        default=None,
         description="References the (external) source of pricing information, rules of application for the code this ChargeItem uses.",
     )
     definition_canonical: typing.Optional[typing.List[Canonical]] = pydantic.Field(
         alias="definitionCanonical",
+        default=None,
         description="References the source of pricing information, rules of application for the code this ChargeItem uses.",
     )
-    status: typing.Optional[ChargeItemStatus] = pydantic.Field(description="The current state of the ChargeItem.")
+    status: typing.Optional[ChargeItemStatus] = pydantic.Field(
+        default=None, description="The current state of the ChargeItem."
+    )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="partOf", description="ChargeItems can be grouped to larger ChargeItems covering the whole set."
+        alias="partOf",
+        default=None,
+        description="ChargeItems can be grouped to larger ChargeItems covering the whole set.",
     )
     code: CodeableConcept = pydantic.Field(description="A code that identifies the charge, like a billing code.")
     subject: Reference = pydantic.Field(
         description="The individual or set of individuals the action is being or was performed on."
     )
     context: typing.Optional[Reference] = pydantic.Field(
-        description="The encounter or episode of care that establishes the context for this event."
+        default=None, description="The encounter or episode of care that establishes the context for this event."
     )
     occurrence_date_time: typing.Optional[str] = pydantic.Field(
-        alias="occurrenceDateTime", description="Date/time(s) or duration when the charged service was applied."
+        alias="occurrenceDateTime",
+        default=None,
+        description="Date/time(s) or duration when the charged service was applied.",
     )
     occurrence_period: typing.Optional[Period] = pydantic.Field(
-        alias="occurrencePeriod", description="Date/time(s) or duration when the charged service was applied."
+        alias="occurrencePeriod",
+        default=None,
+        description="Date/time(s) or duration when the charged service was applied.",
     )
     occurrence_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="occurrenceTiming", description="Date/time(s) or duration when the charged service was applied."
+        alias="occurrenceTiming",
+        default=None,
+        description="Date/time(s) or duration when the charged service was applied.",
     )
     performer: typing.Optional[typing.List[ChargeItemPerformer]] = pydantic.Field(
-        description="Indicates who or what performed or participated in the charged service."
+        default=None, description="Indicates who or what performed or participated in the charged service."
     )
     performing_organization: typing.Optional[Reference] = pydantic.Field(
-        alias="performingOrganization", description="The organization requesting the service."
+        alias="performingOrganization", default=None, description="The organization requesting the service."
     )
     requesting_organization: typing.Optional[Reference] = pydantic.Field(
-        alias="requestingOrganization", description="The organization performing the service."
+        alias="requestingOrganization", default=None, description="The organization performing the service."
     )
     cost_center: typing.Optional[Reference] = pydantic.Field(
-        alias="costCenter", description="The financial cost center permits the tracking of charge attribution."
+        alias="costCenter",
+        default=None,
+        description="The financial cost center permits the tracking of charge attribution.",
     )
     quantity: typing.Optional[Quantity] = pydantic.Field(
-        description="Quantity of which the charge item has been serviced."
+        default=None, description="Quantity of which the charge item has been serviced."
     )
     bodysite: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The anatomical location where the related service has been applied."
+        default=None, description="The anatomical location where the related service has been applied."
     )
     factor_override: typing.Optional[Decimal] = pydantic.Field(
         alias="factorOverride",
+        default=None,
         description="Factor overriding the factor determined by the rules associated with the code.",
     )
     price_override: typing.Optional[Money] = pydantic.Field(
         alias="priceOverride",
+        default=None,
         description="Total price of the charge overriding the list price associated with the code.",
     )
     override_reason: typing.Optional[str] = pydantic.Field(
         alias="overrideReason",
+        default=None,
         description="If the list price or the rule-based factor associated with the code is overridden, this attribute can capture a text to indicate the reason for this action.",
     )
     enterer: typing.Optional[Reference] = pydantic.Field(
-        description="The device, practitioner, etc. who entered the charge item."
+        default=None, description="The device, practitioner, etc. who entered the charge item."
     )
     entered_date: typing.Optional[DateTime] = pydantic.Field(
-        alias="enteredDate", description="Date the charge item was entered."
+        alias="enteredDate", default=None, description="Date the charge item was entered."
     )
     reason: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Describes why the event occurred in coded or textual form."
+        default=None, description="Describes why the event occurred in coded or textual form."
     )
     service: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Indicated the rendered service that caused this charge."
+        default=None, description="Indicated the rendered service that caused this charge."
     )
     product_reference: typing.Optional[Reference] = pydantic.Field(
         alias="productReference",
+        default=None,
         description="Identifies the device, food, drug or other product being charged either by type code or reference to an instance.",
     )
     product_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="productCodeableConcept",
+        default=None,
         description="Identifies the device, food, drug or other product being charged either by type code or reference to an instance.",
     )
     account: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Account into which this ChargeItems belongs."
+        default=None, description="Account into which this ChargeItems belongs."
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Comments made about the event by the performer, subject or other participants."
+        default=None, description="Comments made about the event by the performer, subject or other participants."
     )
     supporting_information: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="supportingInformation", description="Further information supporting this charge."
+        alias="supportingInformation", default=None, description="Further information supporting this charge."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

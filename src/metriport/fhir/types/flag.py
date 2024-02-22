@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,13 +22,15 @@ class Flag(BaseResource):
     Prospective warnings of potential issues when providing care to the patient.
     """
 
-    resource_type: typing_extensions.Literal["Flag"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Flag"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers assigned to this flag by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Business identifiers assigned to this flag by the performer or other systems which remain constant as the resource is updated and propagates from server to server.",
     )
-    status: typing.Optional[FlagStatus] = pydantic.Field(description="Supports basic workflow.")
+    status: typing.Optional[FlagStatus] = pydantic.Field(default=None, description="Supports basic workflow.")
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Allows a flag to be divided into different categories like clinical, administrative etc. Intended to be used as a means of filtering which flags are displayed to particular user or in a given context."
+        default=None,
+        description="Allows a flag to be divided into different categories like clinical, administrative etc. Intended to be used as a means of filtering which flags are displayed to particular user or in a given context.",
     )
     code: CodeableConcept = pydantic.Field(
         description="The coded value or textual component of the flag to display to the user."
@@ -39,13 +39,14 @@ class Flag(BaseResource):
         description="The patient, location, group, organization, or practitioner etc. this is about record this flag is associated with."
     )
     period: typing.Optional[Period] = pydantic.Field(
-        description="The period of time from the activation of the flag to inactivation of the flag. If the flag is active, the end of the period should be unspecified."
+        default=None,
+        description="The period of time from the activation of the flag to inactivation of the flag. If the flag is active, the end of the period should be unspecified.",
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="This alert is only relevant during the encounter."
+        default=None, description="This alert is only relevant during the encounter."
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="The person, organization or device that created the flag."
+        default=None, description="The person, organization or device that created the flag."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

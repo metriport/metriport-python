@@ -27,85 +27,105 @@ class CarePlanDetail(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     kind: typing.Optional[Code] = pydantic.Field(
-        description="A description of the kind of resource the in-line definition of a care plan activity is representing. The CarePlan.activity.detail is an in-line definition when a resource is not referenced using CarePlan.activity.reference. For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest."
+        default=None,
+        description="A description of the kind of resource the in-line definition of a care plan activity is representing. The CarePlan.activity.detail is an in-line definition when a resource is not referenced using CarePlan.activity.reference. For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest.",
     )
     instantiates_canonical: typing.Optional[typing.List[Canonical]] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a FHIR-defined protocol, guideline, questionnaire or other definition that is adhered to in whole or in part by this CarePlan activity.",
     )
     instantiates_uri: typing.Optional[typing.List[Uri]] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an externally maintained protocol, guideline, questionnaire or other definition that is adhered to in whole or in part by this CarePlan activity.",
     )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Detailed description of the type of planned activity; e.g. what lab test, what procedure, what kind of encounter."
+        default=None,
+        description="Detailed description of the type of planned activity; e.g. what lab test, what procedure, what kind of encounter.",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="reasonCode",
+        default=None,
         description="Provides the rationale that drove the inclusion of this particular activity as part of the plan or the reason why the activity was prohibited.",
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Indicates another resource, such as the health condition(s), whose existence justifies this request and drove the inclusion of this particular activity as part of the plan.",
     )
     goal: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Internal reference that identifies the goals that this activity is intended to contribute towards meeting."
+        default=None,
+        description="Internal reference that identifies the goals that this activity is intended to contribute towards meeting.",
     )
     status: typing.Optional[CarePlanDetailStatus] = pydantic.Field(
-        description="Identifies what progress is being made for the specific activity."
+        default=None, description="Identifies what progress is being made for the specific activity."
     )
     status_reason: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="statusReason",
+        default=None,
         description="Provides reason why the activity isn't yet started, is on hold, was cancelled, etc.",
     )
     do_not_perform: typing.Optional[bool] = pydantic.Field(
         alias="doNotPerform",
+        default=None,
         description="If true, indicates that the described activity is one that must NOT be engaged in when following the plan. If false, or missing, indicates that the described activity is one that should be engaged in when following the plan.",
     )
     scheduled_timing: typing.Optional[Timing] = pydantic.Field(
         alias="scheduledTiming",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     scheduled_period: typing.Optional[Period] = pydantic.Field(
         alias="scheduledPeriod",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     scheduled_string: typing.Optional[str] = pydantic.Field(
         alias="scheduledString",
+        default=None,
         description="The period, timing or frequency upon which the described activity is to occur.",
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc."
+        default=None,
+        description="Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc.",
     )
     performer: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Identifies who's expected to be involved in the activity."
+        default=None, description="Identifies who's expected to be involved in the activity."
     )
     product_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="productCodeableConcept",
+        default=None,
         description="Identifies the food, drug or other product to be consumed or supplied in the activity.",
     )
     product_reference: typing.Optional[Reference] = pydantic.Field(
         alias="productReference",
+        default=None,
         description="Identifies the food, drug or other product to be consumed or supplied in the activity.",
     )
     daily_amount: typing.Optional[Quantity] = pydantic.Field(
-        alias="dailyAmount", description="Identifies the quantity expected to be consumed in a given day."
+        alias="dailyAmount", default=None, description="Identifies the quantity expected to be consumed in a given day."
     )
     quantity: typing.Optional[Quantity] = pydantic.Field(
-        description="Identifies the quantity expected to be supplied, administered or consumed by the subject."
+        default=None,
+        description="Identifies the quantity expected to be supplied, administered or consumed by the subject.",
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="This provides a textual description of constraints on the intended activity occurrence, including relation to other activities. It may also include objectives, pre-conditions and end-conditions. Finally, it may convey specifics about the activity such as body site, method, route, etc."
+        default=None,
+        description="This provides a textual description of constraints on the intended activity occurrence, including relation to other activities. It may also include objectives, pre-conditions and end-conditions. Finally, it may convey specifics about the activity such as body site, method, route, etc.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

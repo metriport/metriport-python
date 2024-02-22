@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .access_policy_ip_access_rule import AccessPolicyIpAccessRule
 from .access_policy_resource import AccessPolicyResource
@@ -25,27 +23,34 @@ class AccessPolicy(pydantic.BaseModel):
     Access Policy for user or user group that defines how entities can or cannot access resources.
     """
 
-    resource_type: typing_extensions.Literal["AccessPolicy"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AccessPolicy"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
-    name: typing.Optional[str] = pydantic.Field(description="A name associated with the AccessPolicy.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
+    name: typing.Optional[str] = pydantic.Field(default=None, description="A name associated with the AccessPolicy.")
     compartment: typing.Optional[Reference] = pydantic.Field(
-        description="Optional compartment for newly created resources. If this field is set, any resources created by a user with this access policy will automatically be included in the specified compartment."
+        default=None,
+        description="Optional compartment for newly created resources. If this field is set, any resources created by a user with this access policy will automatically be included in the specified compartment.",
     )
     resource: typing.Optional[typing.List[AccessPolicyResource]] = pydantic.Field(
-        description="Access details for a resource type."
+        default=None, description="Access details for a resource type."
     )
     ip_access_rule: typing.Optional[typing.List[AccessPolicyIpAccessRule]] = pydantic.Field(
         alias="ipAccessRule",
+        default=None,
         description="Use IP Access Rules to allowlist, block, and challenge traffic based on the visitor IP address.",
     )
 

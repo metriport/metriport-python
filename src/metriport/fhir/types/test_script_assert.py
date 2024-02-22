@@ -24,71 +24,87 @@ class TestScriptAssert(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     label: typing.Optional[str] = pydantic.Field(
-        description="The label would be used for tracking/logging purposes by test engines."
+        default=None, description="The label would be used for tracking/logging purposes by test engines."
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="The description would be used by test engines for tracking and reporting purposes."
+        default=None, description="The description would be used by test engines for tracking and reporting purposes."
     )
     direction: typing.Optional[TestScriptAssertDirection] = pydantic.Field(
-        description="The direction to use for the assertion."
+        default=None, description="The direction to use for the assertion."
     )
     compare_to_source_id: typing.Optional[str] = pydantic.Field(
         alias="compareToSourceId",
+        default=None,
         description='Id of the source fixture used as the contents to be evaluated by either the "source/expression" or "sourceId/path" definition.',
     )
     compare_to_source_expression: typing.Optional[str] = pydantic.Field(
         alias="compareToSourceExpression",
+        default=None,
         description="The FHIRPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both.",
     )
     compare_to_source_path: typing.Optional[str] = pydantic.Field(
         alias="compareToSourcePath",
+        default=None,
         description="XPath or JSONPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both.",
     )
     content_type: typing.Optional[Code] = pydantic.Field(
         alias="contentType",
+        default=None,
         description="The mime-type contents to compare against the request or response message 'Content-Type' header.",
     )
     expression: typing.Optional[str] = pydantic.Field(
-        description="The FHIRPath expression to be evaluated against the request or response message contents - HTTP headers and payload."
+        default=None,
+        description="The FHIRPath expression to be evaluated against the request or response message contents - HTTP headers and payload.",
     )
     header_field: typing.Optional[str] = pydantic.Field(
-        alias="headerField", description="The HTTP header field name e.g. 'Location'."
+        alias="headerField", default=None, description="The HTTP header field name e.g. 'Location'."
     )
     minimum_id: typing.Optional[str] = pydantic.Field(
         alias="minimumId",
+        default=None,
         description="The ID of a fixture. Asserts that the response contains at a minimum the fixture specified by minimumId.",
     )
     navigation_links: typing.Optional[bool] = pydantic.Field(
         alias="navigationLinks",
+        default=None,
         description="Whether or not the test execution performs validation on the bundle navigation links.",
     )
     operator: typing.Optional[TestScriptAssertOperator] = pydantic.Field(
-        description="The operator type defines the conditional behavior of the assert. If not defined, the default is equals."
+        default=None,
+        description="The operator type defines the conditional behavior of the assert. If not defined, the default is equals.",
     )
     path: typing.Optional[str] = pydantic.Field(
-        description="The XPath or JSONPath expression to be evaluated against the fixture representing the response received from server."
+        default=None,
+        description="The XPath or JSONPath expression to be evaluated against the fixture representing the response received from server.",
     )
     request_method: typing.Optional[TestScriptAssertRequestMethod] = pydantic.Field(
         alias="requestMethod",
+        default=None,
         description="The request method or HTTP operation code to compare against that used by the client system under test.",
     )
     request_url: typing.Optional[str] = pydantic.Field(
-        alias="requestURL", description="The value to use in a comparison against the request URL path string."
+        alias="requestURL",
+        default=None,
+        description="The value to use in a comparison against the request URL path string.",
     )
     resource: typing.Optional[Code] = pydantic.Field(
-        description="The type of the resource. See http://build.fhir.org/resourcelist.html."
+        default=None, description="The type of the resource. See http://build.fhir.org/resourcelist.html."
     )
     response: typing.Optional[TestScriptAssertResponse] = pydantic.Field(
+        default=None,
         description=(
             "okay \n"
             " created \n"
@@ -102,20 +118,23 @@ class TestScriptAssert(pydantic.BaseModel):
             " gone \n"
             " preconditionFailed \n"
             " unprocessable.\n"
-        )
+        ),
     )
     response_code: typing.Optional[str] = pydantic.Field(
-        alias="responseCode", description="The value of the HTTP response code to be tested."
+        alias="responseCode", default=None, description="The value of the HTTP response code to be tested."
     )
     source_id: typing.Optional[Id] = pydantic.Field(
-        alias="sourceId", description="Fixture to evaluate the XPath/JSONPath expression or the headerField against."
+        alias="sourceId",
+        default=None,
+        description="Fixture to evaluate the XPath/JSONPath expression or the headerField against.",
     )
     validate_profile_id: typing.Optional[Id] = pydantic.Field(
-        alias="validateProfileId", description="The ID of the Profile to validate against."
+        alias="validateProfileId", default=None, description="The ID of the Profile to validate against."
     )
-    value: typing.Optional[str] = pydantic.Field(description="The value to compare to.")
+    value: typing.Optional[str] = pydantic.Field(default=None, description="The value to compare to.")
     warning_only: typing.Optional[bool] = pydantic.Field(
         alias="warningOnly",
+        default=None,
         description="Whether or not the test execution will produce a warning only on error for this assert.",
     )
 

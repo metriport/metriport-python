@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -30,54 +28,70 @@ class Patient(BaseResource):
     Demographics and other administrative information about an individual or animal receiving care or other health-related services.
     """
 
-    resource_type: typing_extensions.Literal["Patient"] = pydantic.Field(alias="resourceType")
-    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="An identifier for this patient.")
-    active: typing.Optional[bool] = pydantic.Field(
-        description="Whether this patient record is in active use. Many systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules. It is often used to filter patient lists to exclude inactive patients Deceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+    resource_type: typing.Literal["Patient"] = pydantic.Field(alias="resourceType")
+    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
+        default=None, description="An identifier for this patient."
     )
-    name: typing.Optional[typing.List[HumanName]] = pydantic.Field(description="A name associated with the individual.")
+    active: typing.Optional[bool] = pydantic.Field(
+        default=None,
+        description="Whether this patient record is in active use. Many systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules. It is often used to filter patient lists to exclude inactive patients Deceased patients may also be marked as inactive for the same reasons, but may be active for some time after death.",
+    )
+    name: typing.Optional[typing.List[HumanName]] = pydantic.Field(
+        default=None, description="A name associated with the individual."
+    )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
+        default=None,
+        description="A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.",
     )
     gender: typing.Optional[PatientGender] = pydantic.Field(
-        description="Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+        default=None,
+        description="Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.",
     )
     birth_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="birthDate", description="The date of birth for the individual."
+        alias="birthDate", default=None, description="The date of birth for the individual."
     )
     deceased_boolean: typing.Optional[bool] = pydantic.Field(
-        alias="deceasedBoolean", description="Indicates if the individual is deceased or not."
+        alias="deceasedBoolean", default=None, description="Indicates if the individual is deceased or not."
     )
     deceased_date_time: typing.Optional[str] = pydantic.Field(
-        alias="deceasedDateTime", description="Indicates if the individual is deceased or not."
+        alias="deceasedDateTime", default=None, description="Indicates if the individual is deceased or not."
     )
-    address: typing.Optional[typing.List[Address]] = pydantic.Field(description="An address for the individual.")
+    address: typing.Optional[typing.List[Address]] = pydantic.Field(
+        default=None, description="An address for the individual."
+    )
     marital_status: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="maritalStatus", description="This field contains a patient's most recent marital (civil) status."
+        alias="maritalStatus",
+        default=None,
+        description="This field contains a patient's most recent marital (civil) status.",
     )
     multiple_birth_boolean: typing.Optional[bool] = pydantic.Field(
         alias="multipleBirthBoolean",
+        default=None,
         description="Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer).",
     )
     multiple_birth_integer: typing.Optional[float] = pydantic.Field(
         alias="multipleBirthInteger",
+        default=None,
         description="Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer).",
     )
-    photo: typing.Optional[typing.List[Attachment]] = pydantic.Field(description="Image of the patient.")
+    photo: typing.Optional[typing.List[Attachment]] = pydantic.Field(default=None, description="Image of the patient.")
     contact: typing.Optional[typing.List[PatientContact]] = pydantic.Field(
-        description="A contact party (e.g. guardian, partner, friend) for the patient."
+        default=None, description="A contact party (e.g. guardian, partner, friend) for the patient."
     )
     communication: typing.Optional[typing.List[PatientCommunication]] = pydantic.Field(
-        description="A language which may be used to communicate with the patient about his or her health."
+        default=None,
+        description="A language which may be used to communicate with the patient about his or her health.",
     )
     general_practitioner: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="generalPractitioner", description="Patient's nominated care provider."
+        alias="generalPractitioner", default=None, description="Patient's nominated care provider."
     )
     managing_organization: typing.Optional[Reference] = pydantic.Field(
-        alias="managingOrganization", description="Organization that is the custodian of the patient record."
+        alias="managingOrganization",
+        default=None,
+        description="Organization that is the custodian of the patient record.",
     )
     link: typing.Optional[typing.List[PatientLink]] = pydantic.Field(
-        description="Link to another patient resource that concerns the same actual patient."
+        default=None, description="Link to another patient resource that concerns the same actual patient."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

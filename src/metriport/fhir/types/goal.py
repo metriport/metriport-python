@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -25,22 +23,25 @@ class Goal(BaseResource):
     Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.
     """
 
-    resource_type: typing_extensions.Literal["Goal"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Goal"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers assigned to this goal by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Business identifiers assigned to this goal by the performer or other systems which remain constant as the resource is updated and propagates from server to server.",
     )
     lifecycle_status: typing.Optional[GoalLifecycleStatus] = pydantic.Field(
-        alias="lifecycleStatus", description="The state of the goal throughout its lifecycle."
+        alias="lifecycleStatus", default=None, description="The state of the goal throughout its lifecycle."
     )
     achievement_status: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="achievementStatus",
+        default=None,
         description="Describes the progression, or lack thereof, towards the goal against the target.",
     )
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Indicates a category the goal falls within."
+        default=None, description="Indicates a category the goal falls within."
     )
     priority: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Identifies the mutually agreed level of importance associated with reaching/sustaining the goal."
+        default=None,
+        description="Identifies the mutually agreed level of importance associated with reaching/sustaining the goal.",
     )
     description: CodeableConcept = pydantic.Field(
         description='Human-readable and/or coded description of a specific desired objective of care, such as "control blood pressure" or "negotiate an obstacle course" or "dance with child at wedding".'
@@ -49,34 +50,45 @@ class Goal(BaseResource):
         description="Identifies the patient, group or organization for whom the goal is being established."
     )
     start_date: typing.Optional[str] = pydantic.Field(
-        alias="startDate", description="The date or event after which the goal should begin being pursued."
+        alias="startDate",
+        default=None,
+        description="The date or event after which the goal should begin being pursued.",
     )
     start_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="startCodeableConcept", description="The date or event after which the goal should begin being pursued."
+        alias="startCodeableConcept",
+        default=None,
+        description="The date or event after which the goal should begin being pursued.",
     )
     target: typing.Optional[typing.List[GoalTarget]] = pydantic.Field(
-        description="Indicates what should be done by when."
+        default=None, description="Indicates what should be done by when."
     )
     status_date: typing.Optional[dt.date] = pydantic.Field(
         alias="statusDate",
+        default=None,
         description="Identifies when the current status. I.e. When initially created, when achieved, when cancelled, etc.",
     )
     status_reason: typing.Optional[str] = pydantic.Field(
-        alias="statusReason", description="Captures the reason for the current status."
+        alias="statusReason", default=None, description="Captures the reason for the current status."
     )
     expressed_by: typing.Optional[Reference] = pydantic.Field(
-        alias="expressedBy", description="Indicates whose goal this is - patient goal, practitioner goal, etc."
+        alias="expressedBy",
+        default=None,
+        description="Indicates whose goal this is - patient goal, practitioner goal, etc.",
     )
     addresses: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The identified conditions and other health record elements that are intended to be addressed by the goal."
+        default=None,
+        description="The identified conditions and other health record elements that are intended to be addressed by the goal.",
     )
-    note: typing.Optional[typing.List[Annotation]] = pydantic.Field(description="Any comments related to the goal.")
+    note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
+        default=None, description="Any comments related to the goal."
+    )
     outcome_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="outcomeCode",
+        default=None,
         description="Identifies the change (or lack of change) at the point when the status of the goal is assessed.",
     )
     outcome_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="outcomeReference", description="Details of what's changed (or not changed)."
+        alias="outcomeReference", default=None, description="Details of what's changed (or not changed)."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

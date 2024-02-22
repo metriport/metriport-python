@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -32,17 +30,19 @@ class Encounter(BaseResource):
     An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
     """
 
-    resource_type: typing_extensions.Literal["Encounter"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Encounter"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier(s) by which this encounter is known."
+        default=None, description="Identifier(s) by which this encounter is known."
     )
     status: typing.Optional[EncounterStatus] = pydantic.Field(
+        default=None,
         description=(
             "planned \n" " arrived \n" " triaged \n" " in-progress \n" " onleave \n" " finished \n" " cancelled +.\n"
-        )
+        ),
     )
     status_history: typing.Optional[typing.List[EncounterStatusHistory]] = pydantic.Field(
         alias="statusHistory",
+        default=None,
         description="The status history permits the encounter resource to contain the status history without needing to read through the historical versions of the resource, or even have the server store them.",
     )
     class_: Coding = pydantic.Field(
@@ -51,60 +51,77 @@ class Encounter(BaseResource):
     )
     class_history: typing.Optional[typing.List[EncounterClassHistory]] = pydantic.Field(
         alias="classHistory",
+        default=None,
         description="The class history permits the tracking of the encounters transitions without needing to go through the resource history. This would be used for a case where an admission starts of as an emergency encounter, then transitions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kind of discharge from emergency to inpatient.",
     )
     type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation)."
+        default=None,
+        description="Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation).",
     )
     service_type: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="serviceType", description="Broad categorization of the service that is to be provided (e.g. cardiology)."
+        alias="serviceType",
+        default=None,
+        description="Broad categorization of the service that is to be provided (e.g. cardiology).",
     )
-    priority: typing.Optional[CodeableConcept] = pydantic.Field(description="Indicates the urgency of the encounter.")
-    subject: typing.Optional[Reference] = pydantic.Field(description="The patient or group present at the encounter.")
+    priority: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="Indicates the urgency of the encounter."
+    )
+    subject: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="The patient or group present at the encounter."
+    )
     episode_of_care: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="episodeOfCare",
+        default=None,
         description="Where a specific encounter should be classified as a part of a specific episode(s) of care this field should be used. This association can facilitate grouping of related encounters together for a specific purpose, such as government reporting, issue tracking, association via a common problem. The association is recorded on the encounter as these are typically created after the episode of care and grouped on entry rather than editing the episode of care to append another encounter to it (the episode of care could span years).",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description="The request this encounter satisfies (e.g. incoming referral or procedure request).",
     )
     participant: typing.Optional[typing.List[EncounterParticipant]] = pydantic.Field(
-        description="The list of people responsible for providing the service."
+        default=None, description="The list of people responsible for providing the service."
     )
     appointment: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The appointment that scheduled this encounter."
+        default=None, description="The appointment that scheduled this encounter."
     )
-    period: typing.Optional[Period] = pydantic.Field(description="The start and end time of the encounter.")
+    period: typing.Optional[Period] = pydantic.Field(
+        default=None, description="The start and end time of the encounter."
+    )
     length: typing.Optional[Duration] = pydantic.Field(
-        description="Quantity of time the encounter lasted. This excludes the time during leaves of absence."
+        default=None,
+        description="Quantity of time the encounter lasted. This excludes the time during leaves of absence.",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="reasonCode",
+        default=None,
         description="Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.",
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.",
     )
     diagnosis: typing.Optional[typing.List[EncounterDiagnosis]] = pydantic.Field(
-        description="The list of diagnosis relevant to this encounter."
+        default=None, description="The list of diagnosis relevant to this encounter."
     )
     account: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The set of accounts that may be used for billing for this Encounter."
+        default=None, description="The set of accounts that may be used for billing for this Encounter."
     )
     hospitalization: typing.Optional[EncounterHospitalization] = pydantic.Field(
-        description="Details about the admission to a healthcare service."
+        default=None, description="Details about the admission to a healthcare service."
     )
     location: typing.Optional[typing.List[EncounterLocation]] = pydantic.Field(
-        description="List of locations where the patient has been during this encounter."
+        default=None, description="List of locations where the patient has been during this encounter."
     )
     service_provider: typing.Optional[Reference] = pydantic.Field(
         alias="serviceProvider",
+        default=None,
         description="The organization that is primarily responsible for this Encounter's services. This MAY be the same as the organization on the Patient record, however it could be different, such as if the actor performing the services was from an external organization (which may be billed seperately) for an external consultation. Refer to the example bundle showing an abbreviated set of Encounters for a colonoscopy.",
     )
     part_of: typing.Optional[Reference] = pydantic.Field(
         alias="partOf",
+        default=None,
         description="Another Encounter of which this encounter is a part of (administratively or in time).",
     )
 

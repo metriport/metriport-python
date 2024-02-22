@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -33,119 +31,146 @@ class Contract(BaseResource):
     Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
     """
 
-    resource_type: typing_extensions.Literal["Contract"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Contract"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Unique identifier for this Contract or a derivative that references a Source Contract."
+        default=None,
+        description="Unique identifier for this Contract or a derivative that references a Source Contract.",
     )
     url: typing.Optional[Uri] = pydantic.Field(
-        description="Canonical identifier for this contract, represented as a URI (globally unique)."
+        default=None, description="Canonical identifier for this contract, represented as a URI (globally unique)."
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="An edition identifier used for business purposes to label business significant variants."
+        default=None,
+        description="An edition identifier used for business purposes to label business significant variants.",
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
     legal_state: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="legalState",
+        default=None,
         description="Legal states of the formation of a legal instrument, which is a formally executed written document that can be formally attributed to its author, records and formally expresses a legally enforceable act, process, or contractual duty, obligation, or right, and therefore evidences that act, process, or agreement.",
     )
     instantiates_canonical: typing.Optional[Reference] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a FHIR-defined Contract Definition that is adhered to in whole or part by this Contract.",
     )
     instantiates_uri: typing.Optional[Uri] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an externally maintained definition that is adhered to in whole or in part by this Contract.",
     )
     content_derivative: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="contentDerivative",
+        default=None,
         description="The minimal content derived from the basal information source at a specific stage in its lifecycle.",
     )
-    issued: typing.Optional[DateTime] = pydantic.Field(description="When this Contract was issued.")
+    issued: typing.Optional[DateTime] = pydantic.Field(default=None, description="When this Contract was issued.")
     applies: typing.Optional[Period] = pydantic.Field(
-        description="Relevant time or time-period when this Contract is applicable."
+        default=None, description="Relevant time or time-period when this Contract is applicable."
     )
     expiration_type: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="expirationType",
+        default=None,
         description="Event resulting in discontinuation or termination of this Contract instance by one or more parties to the contract.",
     )
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The target entity impacted by or of interest to parties to the agreement."
+        default=None, description="The target entity impacted by or of interest to parties to the agreement."
     )
     authority: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="A formally or informally recognized grouping of people, principals, organizations, or jurisdictions formed for the purpose of achieving some form of collective action such as the promulgation, administration and enforcement of contracts and policies."
+        default=None,
+        description="A formally or informally recognized grouping of people, principals, organizations, or jurisdictions formed for the purpose of achieving some form of collective action such as the promulgation, administration and enforcement of contracts and policies.",
     )
     domain: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Recognized governance framework or system operating with a circumscribed scope in accordance with specified principles, policies, processes or procedures for managing rights, actions, or behaviors of parties or principals relative to resources."
+        default=None,
+        description="Recognized governance framework or system operating with a circumscribed scope in accordance with specified principles, policies, processes or procedures for managing rights, actions, or behaviors of parties or principals relative to resources.",
     )
     site: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Sites in which the contract is complied with, exercised, or in force."
+        default=None, description="Sites in which the contract is complied with, exercised, or in force."
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying this Contract definition, derivative, or instance in any legal state. Provides additional information about its content. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying this Contract definition, derivative, or instance in any legal state. Provides additional information about its content. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for this Contract definition, derivative, or instance in any legal state.t giving additional information about its content."
+        default=None,
+        description="A short, descriptive, user-friendly title for this Contract definition, derivative, or instance in any legal state.t giving additional information about its content.",
     )
     subtitle: typing.Optional[str] = pydantic.Field(
-        description="An explanatory or alternate user-friendly title for this Contract definition, derivative, or instance in any legal state.t giving additional information about its content."
+        default=None,
+        description="An explanatory or alternate user-friendly title for this Contract definition, derivative, or instance in any legal state.t giving additional information about its content.",
     )
     alias: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="Alternative representation of the title for this Contract definition, derivative, or instance in any legal state., e.g., a domain specific contract number related to legislation."
+        default=None,
+        description="Alternative representation of the title for this Contract definition, derivative, or instance in any legal state., e.g., a domain specific contract number related to legislation.",
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="The individual or organization that authored the Contract definition, derivative, or instance in any legal state."
+        default=None,
+        description="The individual or organization that authored the Contract definition, derivative, or instance in any legal state.",
     )
     scope: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="A selector of legal concerns for this Contract definition, derivative, or instance in any legal state."
+        default=None,
+        description="A selector of legal concerns for this Contract definition, derivative, or instance in any legal state.",
     )
     topic_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="topicCodeableConcept",
+        default=None,
         description="Narrows the range of legal concerns to focus on the achievement of specific contractual objectives.",
     )
     topic_reference: typing.Optional[Reference] = pydantic.Field(
         alias="topicReference",
+        default=None,
         description="Narrows the range of legal concerns to focus on the achievement of specific contractual objectives.",
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="A high-level category for the legal instrument, whether constructed as a Contract definition, derivative, or instance in any legal state. Provides additional information about its content within the context of the Contract's scope to distinguish the kinds of systems that would be interested in the contract."
+        default=None,
+        description="A high-level category for the legal instrument, whether constructed as a Contract definition, derivative, or instance in any legal state. Provides additional information about its content within the context of the Contract's scope to distinguish the kinds of systems that would be interested in the contract.",
     )
     sub_type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="subType",
+        default=None,
         description="Sub-category for the Contract that distinguishes the kinds of systems that would be interested in the Contract within the context of the Contract's scope.",
     )
     content_definition: typing.Optional[ContractContentDefinition] = pydantic.Field(
         alias="contentDefinition",
+        default=None,
         description="Precusory content developed with a focus and intent of supporting the formation a Contract instance, which may be associated with and transformable into a Contract.",
     )
     term: typing.Optional[typing.List[ContractTerm]] = pydantic.Field(
-        description="One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups."
+        default=None,
+        description="One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups.",
     )
     supporting_info: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="supportingInfo",
+        default=None,
         description="Information that may be needed by/relevant to the performer in their execution of this term action.",
     )
     relevant_history: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="relevantHistory",
+        default=None,
         description="Links to Provenance records for past versions of this Contract definition, derivative, or instance, which identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the Contract. The Provence.entity indicates the target that was changed in the update. http://build.fhir.org/provenance-definitions.html#Provenance.entity.",
     )
     signer: typing.Optional[typing.List[ContractSigner]] = pydantic.Field(
-        description="Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness."
+        default=None,
+        description="Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness.",
     )
     friendly: typing.Optional[typing.List[ContractFriendly]] = pydantic.Field(
-        description='The "patient friendly language" versionof the Contract in whole or in parts. "Patient friendly language" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement.'
+        default=None,
+        description='The "patient friendly language" versionof the Contract in whole or in parts. "Patient friendly language" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement.',
     )
     legal: typing.Optional[typing.List[ContractLegal]] = pydantic.Field(
-        description="List of Legal expressions or representations of this Contract."
+        default=None, description="List of Legal expressions or representations of this Contract."
     )
     rule: typing.Optional[typing.List[ContractRule]] = pydantic.Field(
-        description="List of Computable Policy Rule Language Representations of this Contract."
+        default=None, description="List of Computable Policy Rule Language Representations of this Contract."
     )
     legally_binding_attachment: typing.Optional[Attachment] = pydantic.Field(
         alias="legallyBindingAttachment",
+        default=None,
         description='Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the "source of truth" and which would be the basis for legal action related to enforcement of this Contract.',
     )
     legally_binding_reference: typing.Optional[Reference] = pydantic.Field(
         alias="legallyBindingReference",
+        default=None,
         description='Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the "source of truth" and which would be the basis for legal action related to enforcement of this Contract.',
     )
 

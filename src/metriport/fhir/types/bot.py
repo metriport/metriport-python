@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .bot_audit_event_destination_item import BotAuditEventDestinationItem
@@ -29,57 +27,69 @@ class Bot(pydantic.BaseModel):
     Bot account for automated actions.
     """
 
-    resource_type: typing_extensions.Literal["Bot"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Bot"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
-    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="An identifier for this bot.")
-    name: typing.Optional[str] = pydantic.Field(description="A name associated with the Bot.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
+    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
+        default=None, description="An identifier for this bot."
+    )
+    name: typing.Optional[str] = pydantic.Field(default=None, description="A name associated with the Bot.")
     description: typing.Optional[str] = pydantic.Field(
-        description="A summary, characterization or explanation of the Bot."
+        default=None, description="A summary, characterization or explanation of the Bot."
     )
     runtime_version: typing.Optional[BotRuntimeVersion] = pydantic.Field(
         alias="runtimeVersion",
+        default=None,
         description="The identifier of the bot runtime environment (i.e., vmcontext, awslambda, etc).",
     )
-    photo: typing.Optional[Attachment] = pydantic.Field(description="Image of the bot.")
+    photo: typing.Optional[Attachment] = pydantic.Field(default=None, description="Image of the bot.")
     cron_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="cronTiming", description="A schedule for the bot to be executed."
+        alias="cronTiming", default=None, description="A schedule for the bot to be executed."
     )
     cron_string: typing.Optional[str] = pydantic.Field(
-        alias="cronString", description="A schedule for the bot to be executed."
+        alias="cronString", default=None, description="A schedule for the bot to be executed."
     )
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description='A code that classifies the service for searching, sorting and display purposes (e.g. "Surgical Procedure").'
+        default=None,
+        description='A code that classifies the service for searching, sorting and display purposes (e.g. "Surgical Procedure").',
     )
     run_as_user: typing.Optional[bool] = pydantic.Field(
-        alias="runAsUser", description="Optional flag to indicate that the bot should be run as the user."
+        alias="runAsUser", default=None, description="Optional flag to indicate that the bot should be run as the user."
     )
     audit_event_trigger: typing.Optional[BotAuditEventTrigger] = pydantic.Field(
         alias="auditEventTrigger",
+        default=None,
         description="Criteria for creating an AuditEvent as a result of the bot invocation. Possible values are 'always', 'never', 'on-error', or 'on-output'. Default value is 'always'.",
     )
     audit_event_destination: typing.Optional[typing.List[BotAuditEventDestinationItem]] = pydantic.Field(
         alias="auditEventDestination",
+        default=None,
         description="The destination system in which the AuditEvent is to be sent. Possible values are 'log' or 'resource'. Default value is 'resource'.",
     )
     source_code: typing.Optional[Attachment] = pydantic.Field(
-        alias="sourceCode", description="Bot logic in original source code form written by developers."
+        alias="sourceCode", default=None, description="Bot logic in original source code form written by developers."
     )
     executable_code: typing.Optional[Attachment] = pydantic.Field(
         alias="executableCode",
+        default=None,
         description="Bot logic in executable form as a result of compiling and bundling source code.",
     )
     code: typing.Optional[str] = pydantic.Field(
-        description="DEPRECATED Bot logic script. Use Bot.sourceCode or Bot.executableCode instead."
+        default=None, description="DEPRECATED Bot logic script. Use Bot.sourceCode or Bot.executableCode instead."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -21,10 +21,12 @@ class ProjectMembershipAccessParameter(pydantic.BaseModel):
     name: Code = pydantic.Field(description="The unique name of the parameter.")
     value_string: typing.Optional[str] = pydantic.Field(
         alias="valueString",
+        default=None,
         description="Value of the parameter - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
     value_reference: typing.Optional[Reference] = pydantic.Field(
         alias="valueReference",
+        default=None,
         description="Value of the parameter - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
     )
 

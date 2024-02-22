@@ -29,48 +29,62 @@ class ContractTerm(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="Unique identifier for this particular Contract Provision."
+        default=None, description="Unique identifier for this particular Contract Provision."
     )
-    issued: typing.Optional[DateTime] = pydantic.Field(description="When this Contract Provision was issued.")
+    issued: typing.Optional[DateTime] = pydantic.Field(
+        default=None, description="When this Contract Provision was issued."
+    )
     applies: typing.Optional[Period] = pydantic.Field(
-        description="Relevant time or time-period when this Contract Provision is applicable."
+        default=None, description="Relevant time or time-period when this Contract Provision is applicable."
     )
     topic_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="topicCodeableConcept", description="The entity that the term applies to."
+        alias="topicCodeableConcept", default=None, description="The entity that the term applies to."
     )
     topic_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="topicReference", description="The entity that the term applies to."
+        alias="topicReference", default=None, description="The entity that the term applies to."
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="A legal clause or condition contained within a contract that requires one or both parties to perform a particular requirement by some specified time or prevents one or both parties from performing a particular requirement by some specified time."
+        default=None,
+        description="A legal clause or condition contained within a contract that requires one or both parties to perform a particular requirement by some specified time or prevents one or both parties from performing a particular requirement by some specified time.",
     )
     sub_type: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="subType", description="A specialized legal clause or condition based on overarching contract type."
+        alias="subType",
+        default=None,
+        description="A specialized legal clause or condition based on overarching contract type.",
     )
-    text: typing.Optional[str] = pydantic.Field(description="Statement of a provision in a policy or a contract.")
+    text: typing.Optional[str] = pydantic.Field(
+        default=None, description="Statement of a provision in a policy or a contract."
+    )
     security_label: typing.Optional[typing.List[ContractSecurityLabel]] = pydantic.Field(
         alias="securityLabel",
+        default=None,
         description="Security labels that protect the handling of information about the term and its elements, which may be specifically identified..",
     )
     offer: ContractOffer = pydantic.Field(
         description="The matter of concern in the context of this provision of the agrement."
     )
-    asset: typing.Optional[typing.List[ContractAsset]] = pydantic.Field(description="Contract Term Asset List.")
+    asset: typing.Optional[typing.List[ContractAsset]] = pydantic.Field(
+        default=None, description="Contract Term Asset List."
+    )
     action: typing.Optional[typing.List[ContractAction]] = pydantic.Field(
-        description="An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
+        default=None,
+        description="An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place.",
     )
     group: typing.Optional[typing.List[ContractTerm]] = pydantic.Field(
-        description="Nested group of Contract Provisions."
+        default=None, description="Nested group of Contract Provisions."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

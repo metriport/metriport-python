@@ -21,26 +21,31 @@ class Identifier(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
-    use: typing.Optional[IdentifierUse] = pydantic.Field(description="The purpose of this identifier.")
+    use: typing.Optional[IdentifierUse] = pydantic.Field(default=None, description="The purpose of this identifier.")
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="A coded type for the identifier that can be used to determine which identifier to use for a specific purpose."
+        default=None,
+        description="A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
     )
     system: typing.Optional[Uri] = pydantic.Field(
-        description="Establishes the namespace for the value - that is, a URL that describes a set values that are unique."
+        default=None,
+        description="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
     value: typing.Optional[str] = pydantic.Field(
-        description="The portion of the identifier typically relevant to the user and which is unique within the context of the system."
+        default=None,
+        description="The portion of the identifier typically relevant to the user and which is unique within the context of the system.",
     )
     period: typing.Optional[Period] = pydantic.Field(
-        description="Time period during which identifier is/was valid for use."
+        default=None, description="Time period during which identifier is/was valid for use."
     )
     assigner: typing.Optional[Reference] = pydantic.Field(
-        description="Organization that issued/manages the identifier."
+        default=None, description="Organization that issued/manages the identifier."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,17 +20,17 @@ class SubstancePolymer(BaseResource):
     Todo.
     """
 
-    resource_type: typing_extensions.Literal["SubstancePolymer"] = pydantic.Field(alias="resourceType")
-    class_: typing.Optional[CodeableConcept] = pydantic.Field(alias="class", description="Todo.")
-    geometry: typing.Optional[CodeableConcept] = pydantic.Field(description="Todo.")
+    resource_type: typing.Literal["SubstancePolymer"] = pydantic.Field(alias="resourceType")
+    class_: typing.Optional[CodeableConcept] = pydantic.Field(alias="class", default=None, description="Todo.")
+    geometry: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="Todo.")
     copolymer_connectivity: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="copolymerConnectivity", description="Todo."
+        alias="copolymerConnectivity", default=None, description="Todo."
     )
-    modification: typing.Optional[typing.List[str]] = pydantic.Field(description="Todo.")
+    modification: typing.Optional[typing.List[str]] = pydantic.Field(default=None, description="Todo.")
     monomer_set: typing.Optional[typing.List[SubstancePolymerMonomerSet]] = pydantic.Field(
-        alias="monomerSet", description="Todo."
+        alias="monomerSet", default=None, description="Todo."
     )
-    repeat: typing.Optional[typing.List[SubstancePolymerRepeat]] = pydantic.Field(description="Todo.")
+    repeat: typing.Optional[typing.List[SubstancePolymerRepeat]] = pydantic.Field(default=None, description="Todo.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

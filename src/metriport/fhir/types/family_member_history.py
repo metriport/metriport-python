@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .age import Age
 from .annotation import Annotation
@@ -31,88 +29,116 @@ class FamilyMemberHistory(BaseResource):
     Significant health conditions for a person related to the patient relevant in the context of care for the patient.
     """
 
-    resource_type: typing_extensions.Literal["FamilyMemberHistory"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["FamilyMemberHistory"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers assigned to this family member history by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Business identifiers assigned to this family member history by the performer or other systems which remain constant as the resource is updated and propagates from server to server.",
     )
     instantiates_canonical: typing.Optional[typing.List[Canonical]] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a FHIR-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this FamilyMemberHistory.",
     )
     instantiates_uri: typing.Optional[typing.List[Uri]] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an externally maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this FamilyMemberHistory.",
     )
     status: typing.Optional[FamilyMemberHistoryStatus] = pydantic.Field(
-        description="A code specifying the status of the record of the family history of a specific family member."
+        default=None,
+        description="A code specifying the status of the record of the family history of a specific family member.",
     )
     data_absent_reason: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="dataAbsentReason", description="Describes why the family member's history is not available."
+        alias="dataAbsentReason",
+        default=None,
+        description="Describes why the family member's history is not available.",
     )
     patient: Reference = pydantic.Field(description="The person who this history concerns.")
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and possibly time) when the family member history was recorded or last updated."
+        default=None,
+        description="The date (and possibly time) when the family member history was recorded or last updated.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description='This will either be a name or a description; e.g. "Aunt Susan", "my cousin with the red hair".'
+        default=None,
+        description='This will either be a name or a description; e.g. "Aunt Susan", "my cousin with the red hair".',
     )
     relationship: CodeableConcept = pydantic.Field(
         description="The type of relationship this person has to the patient (father, mother, brother etc.)."
     )
-    sex: typing.Optional[CodeableConcept] = pydantic.Field(description="The birth sex of the family member.")
+    sex: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="The birth sex of the family member."
+    )
     born_period: typing.Optional[Period] = pydantic.Field(
-        alias="bornPeriod", description="The actual or approximate date of birth of the relative."
+        alias="bornPeriod", default=None, description="The actual or approximate date of birth of the relative."
     )
     born_date: typing.Optional[str] = pydantic.Field(
-        alias="bornDate", description="The actual or approximate date of birth of the relative."
+        alias="bornDate", default=None, description="The actual or approximate date of birth of the relative."
     )
     born_string: typing.Optional[str] = pydantic.Field(
-        alias="bornString", description="The actual or approximate date of birth of the relative."
+        alias="bornString", default=None, description="The actual or approximate date of birth of the relative."
     )
     age_age: typing.Optional[Age] = pydantic.Field(
-        alias="ageAge", description="The age of the relative at the time the family member history is recorded."
+        alias="ageAge",
+        default=None,
+        description="The age of the relative at the time the family member history is recorded.",
     )
     age_range: typing.Optional[Range] = pydantic.Field(
-        alias="ageRange", description="The age of the relative at the time the family member history is recorded."
+        alias="ageRange",
+        default=None,
+        description="The age of the relative at the time the family member history is recorded.",
     )
     age_string: typing.Optional[str] = pydantic.Field(
-        alias="ageString", description="The age of the relative at the time the family member history is recorded."
+        alias="ageString",
+        default=None,
+        description="The age of the relative at the time the family member history is recorded.",
     )
     estimated_age: typing.Optional[bool] = pydantic.Field(
-        alias="estimatedAge", description="If true, indicates that the age value specified is an estimated value."
+        alias="estimatedAge",
+        default=None,
+        description="If true, indicates that the age value specified is an estimated value.",
     )
     deceased_boolean: typing.Optional[bool] = pydantic.Field(
         alias="deceasedBoolean",
+        default=None,
         description="Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.",
     )
     deceased_age: typing.Optional[Age] = pydantic.Field(
         alias="deceasedAge",
+        default=None,
         description="Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.",
     )
     deceased_range: typing.Optional[Range] = pydantic.Field(
         alias="deceasedRange",
+        default=None,
         description="Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.",
     )
     deceased_date: typing.Optional[str] = pydantic.Field(
         alias="deceasedDate",
+        default=None,
         description="Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.",
     )
     deceased_string: typing.Optional[str] = pydantic.Field(
         alias="deceasedString",
+        default=None,
         description="Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="reasonCode", description="Describes why the family member history occurred in coded or textual form."
+        alias="reasonCode",
+        default=None,
+        description="Describes why the family member history occurred in coded or textual form.",
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Indicates a Condition, Observation, AllergyIntolerance, or QuestionnaireResponse that justifies this family member history event.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="This property allows a non condition-specific note to the made about the related person. Ideally, the note would be in the condition property, but this is not always possible."
+        default=None,
+        description="This property allows a non condition-specific note to the made about the related person. Ideally, the note would be in the condition property, but this is not always possible.",
     )
     condition: typing.Optional[typing.List[FamilyMemberHistoryCondition]] = pydantic.Field(
-        description="The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition."
+        default=None,
+        description="The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -32,78 +30,96 @@ class Device(BaseResource):
     A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.
     """
 
-    resource_type: typing_extensions.Literal["Device"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Device"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Unique instance identifiers assigned to a device by manufacturers other organizations or owners."
+        default=None,
+        description="Unique instance identifiers assigned to a device by manufacturers other organizations or owners.",
     )
     definition: typing.Optional[Reference] = pydantic.Field(
-        description="The reference to the definition for the device."
+        default=None, description="The reference to the definition for the device."
     )
     udi_carrier: typing.Optional[typing.List[DeviceUdiCarrier]] = pydantic.Field(
         alias="udiCarrier",
+        default=None,
         description="Unique device identifier (UDI) assigned to device label or package. Note that the Device may include multiple udiCarriers as it either may include just the udiCarrier for the jurisdiction it is sold, or for multiple jurisdictions it could have been sold.",
     )
-    status: typing.Optional[DeviceStatus] = pydantic.Field(description="Status of the Device availability.")
+    status: typing.Optional[DeviceStatus] = pydantic.Field(
+        default=None, description="Status of the Device availability."
+    )
     status_reason: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="statusReason", description="Reason for the dtatus of the Device availability."
+        alias="statusReason", default=None, description="Reason for the dtatus of the Device availability."
     )
     distinct_identifier: typing.Optional[str] = pydantic.Field(
         alias="distinctIdentifier",
+        default=None,
         description="The distinct identification string as required by regulation for a human cell, tissue, or cellular and tissue-based product.",
     )
-    manufacturer: typing.Optional[str] = pydantic.Field(description="A name of the manufacturer.")
+    manufacturer: typing.Optional[str] = pydantic.Field(default=None, description="A name of the manufacturer.")
     manufacture_date: typing.Optional[DateTime] = pydantic.Field(
-        alias="manufactureDate", description="The date and time when the device was manufactured."
+        alias="manufactureDate", default=None, description="The date and time when the device was manufactured."
     )
     expiration_date: typing.Optional[DateTime] = pydantic.Field(
         alias="expirationDate",
+        default=None,
         description="The date and time beyond which this device is no longer valid or should not be used (if applicable).",
     )
     lot_number: typing.Optional[str] = pydantic.Field(
-        alias="lotNumber", description="Lot number assigned by the manufacturer."
+        alias="lotNumber", default=None, description="Lot number assigned by the manufacturer."
     )
     serial_number: typing.Optional[str] = pydantic.Field(
         alias="serialNumber",
+        default=None,
         description="The serial number assigned by the organization when the device was manufactured.",
     )
     device_name: typing.Optional[typing.List[DeviceDeviceName]] = pydantic.Field(
         alias="deviceName",
+        default=None,
         description="This represents the manufacturer's name of the device as provided by the device, from a UDI label, or by a person describing the Device. This typically would be used when a person provides the name(s) or when the device represents one of the names available from DeviceDefinition.",
     )
     model_number: typing.Optional[str] = pydantic.Field(
-        alias="modelNumber", description="The model number for the device."
+        alias="modelNumber", default=None, description="The model number for the device."
     )
-    part_number: typing.Optional[str] = pydantic.Field(alias="partNumber", description="The part number of the device.")
-    type: typing.Optional[CodeableConcept] = pydantic.Field(description="The kind or type of device.")
+    part_number: typing.Optional[str] = pydantic.Field(
+        alias="partNumber", default=None, description="The part number of the device."
+    )
+    type: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="The kind or type of device.")
     specialization: typing.Optional[typing.List[DeviceSpecialization]] = pydantic.Field(
-        description="The capabilities supported on a device, the standards to which the device conforms for a particular purpose, and used for the communication."
+        default=None,
+        description="The capabilities supported on a device, the standards to which the device conforms for a particular purpose, and used for the communication.",
     )
     version: typing.Optional[typing.List[DeviceVersion]] = pydantic.Field(
-        description="The actual design of the device or software version running on the device."
+        default=None, description="The actual design of the device or software version running on the device."
     )
     property: typing.Optional[typing.List[DeviceProperty]] = pydantic.Field(
-        description="The actual configuration settings of a device as it actually operates, e.g., regulation status, time properties."
+        default=None,
+        description="The actual configuration settings of a device as it actually operates, e.g., regulation status, time properties.",
     )
     patient: typing.Optional[Reference] = pydantic.Field(
-        description="Patient information, If the device is affixed to a person."
+        default=None, description="Patient information, If the device is affixed to a person."
     )
     owner: typing.Optional[Reference] = pydantic.Field(
-        description="An organization that is responsible for the provision and ongoing maintenance of the device."
+        default=None,
+        description="An organization that is responsible for the provision and ongoing maintenance of the device.",
     )
     contact: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="Contact details for an organization or a particular human that is responsible for the device."
+        default=None,
+        description="Contact details for an organization or a particular human that is responsible for the device.",
     )
-    location: typing.Optional[Reference] = pydantic.Field(description="The place where the device can be found.")
+    location: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="The place where the device can be found."
+    )
     url: typing.Optional[Uri] = pydantic.Field(
-        description="A network address on which the device may be contacted directly."
+        default=None, description="A network address on which the device may be contacted directly."
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Descriptive information, usage information or implantation information that is not captured in an existing element."
+        default=None,
+        description="Descriptive information, usage information or implantation information that is not captured in an existing element.",
     )
     safety: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Provides additional safety characteristics about a medical device. For example devices containing latex."
+        default=None,
+        description="Provides additional safety characteristics about a medical device. For example devices containing latex.",
     )
-    parent: typing.Optional[Reference] = pydantic.Field(description="The parent device.")
+    parent: typing.Optional[Reference] = pydantic.Field(default=None, description="The parent device.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

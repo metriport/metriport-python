@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -28,11 +26,13 @@ class Consent(BaseResource):
     A record of a healthcare consumer’s choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.
     """
 
-    resource_type: typing_extensions.Literal["Consent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Consent"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Unique identifier for this copy of the Consent Statement."
+        default=None, description="Unique identifier for this copy of the Consent Statement."
     )
-    status: typing.Optional[ConsentStatus] = pydantic.Field(description="Indicates the current state of this consent.")
+    status: typing.Optional[ConsentStatus] = pydantic.Field(
+        default=None, description="Indicates the current state of this consent."
+    )
     scope: CodeableConcept = pydantic.Field(
         description="A selector of the type of consent being presented: ADR, Privacy, Treatment, Research. This list is now extensible."
     )
@@ -40,36 +40,45 @@ class Consent(BaseResource):
         description="A classification of the type of consents found in the statement. This element supports indexing and retrieval of consent statements."
     )
     patient: typing.Optional[Reference] = pydantic.Field(
-        description="The patient/healthcare consumer to whom this consent applies."
+        default=None, description="The patient/healthcare consumer to whom this consent applies."
     )
     date_time: typing.Optional[DateTime] = pydantic.Field(
-        alias="dateTime", description="When this Consent was issued / created / indexed."
+        alias="dateTime", default=None, description="When this Consent was issued / created / indexed."
     )
     performer: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Either the Grantor, which is the entity responsible for granting the rights listed in a Consent Directive or the Grantee, which is the entity responsible for complying with the Consent Directive, including any obligations or limitations on authorizations and enforcement of prohibitions."
+        default=None,
+        description="Either the Grantor, which is the entity responsible for granting the rights listed in a Consent Directive or the Grantee, which is the entity responsible for complying with the Consent Directive, including any obligations or limitations on authorizations and enforcement of prohibitions.",
     )
     organization: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The organization that manages the consent, and the framework within which it is executed."
+        default=None,
+        description="The organization that manages the consent, and the framework within which it is executed.",
     )
     source_attachment: typing.Optional[Attachment] = pydantic.Field(
         alias="sourceAttachment",
+        default=None,
         description="The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document.",
     )
     source_reference: typing.Optional[Reference] = pydantic.Field(
         alias="sourceReference",
+        default=None,
         description="The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document.",
     )
     policy: typing.Optional[typing.List[ConsentPolicy]] = pydantic.Field(
-        description="The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law."
+        default=None,
+        description="The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law.",
     )
     policy_rule: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="policyRule", description="A reference to the specific base computable regulation or policy."
+        alias="policyRule",
+        default=None,
+        description="A reference to the specific base computable regulation or policy.",
     )
     verification: typing.Optional[typing.List[ConsentVerification]] = pydantic.Field(
-        description="Whether a treatment instruction (e.g. artificial respiration yes or no) was verified with the patient, his/her family or another authorized person."
+        default=None,
+        description="Whether a treatment instruction (e.g. artificial respiration yes or no) was verified with the patient, his/her family or another authorized person.",
     )
     provision: typing.Optional[ConsentProvision] = pydantic.Field(
-        description="An exception to the base policy of this consent. An exception can be an addition or removal of access permissions."
+        default=None,
+        description="An exception to the base policy of this consent. An exception can be an addition or removal of access permissions.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,76 +25,89 @@ class MedicinalProduct(BaseResource):
     Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g. regulatory use).
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProduct"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProduct"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifier for this product. Could be an MPID."
+        default=None, description="Business identifier for this product. Could be an MPID."
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Regulatory type, e.g. Investigational or Authorized."
+        default=None, description="Regulatory type, e.g. Investigational or Authorized."
     )
     domain: typing.Optional[Coding] = pydantic.Field(
-        description="If this medicine applies to human or veterinary uses."
+        default=None, description="If this medicine applies to human or veterinary uses."
     )
     combined_pharmaceutical_dose_form: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="combinedPharmaceuticalDoseForm",
+        default=None,
         description="The dose form for a single part product, or combined form of a multiple part product.",
     )
     legal_status_of_supply: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="legalStatusOfSupply",
+        default=None,
         description="The legal status of supply of the medicinal product as classified by the regulator.",
     )
     additional_monitoring_indicator: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="additionalMonitoringIndicator",
+        default=None,
         description="Whether the Medicinal Product is subject to additional monitoring for regulatory reasons.",
     )
     special_measures: typing.Optional[typing.List[str]] = pydantic.Field(
         alias="specialMeasures",
+        default=None,
         description="Whether the Medicinal Product is subject to special measures for regulatory reasons.",
     )
     paediatric_use_indicator: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="paediatricUseIndicator", description="If authorised for use in children."
+        alias="paediatricUseIndicator", default=None, description="If authorised for use in children."
     )
     product_classification: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="productClassification", description="Allows the product to be classified by various systems."
+        alias="productClassification",
+        default=None,
+        description="Allows the product to be classified by various systems.",
     )
     marketing_status: typing.Optional[typing.List[MarketingStatus]] = pydantic.Field(
         alias="marketingStatus",
+        default=None,
         description="Marketing status of the medicinal product, in contrast to marketing authorizaton.",
     )
     pharmaceutical_product: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="pharmaceuticalProduct", description="Pharmaceutical aspects of product."
+        alias="pharmaceuticalProduct", default=None, description="Pharmaceutical aspects of product."
     )
     packaged_medicinal_product: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="packagedMedicinalProduct", description="Package representation for the product."
+        alias="packagedMedicinalProduct", default=None, description="Package representation for the product."
     )
     attached_document: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="attachedDocument", description="Supporting documentation, typically for regulatory submission."
+        alias="attachedDocument",
+        default=None,
+        description="Supporting documentation, typically for regulatory submission.",
     )
     master_file: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="masterFile",
+        default=None,
         description="A master file for to the medicinal product (e.g. Pharmacovigilance System Master File).",
     )
     contact: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="A product specific contact, person (in a role), or an organization."
+        default=None, description="A product specific contact, person (in a role), or an organization."
     )
     clinical_trial: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="clinicalTrial", description="Clinical trials or studies that this product is involved in."
+        alias="clinicalTrial", default=None, description="Clinical trials or studies that this product is involved in."
     )
     name: typing.List[MedicinalProductName] = pydantic.Field(
         description="The product's name, including full name and possibly coded parts."
     )
     cross_reference: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         alias="crossReference",
+        default=None,
         description="Reference to another product, e.g. for linking authorised to investigational product.",
     )
     manufacturing_business_operation: typing.Optional[
         typing.List[MedicinalProductManufacturingBusinessOperation]
     ] = pydantic.Field(
         alias="manufacturingBusinessOperation",
+        default=None,
         description="An operation applied to the product, for manufacturing or adminsitrative purpose.",
     )
     special_designation: typing.Optional[typing.List[MedicinalProductSpecialDesignation]] = pydantic.Field(
         alias="specialDesignation",
+        default=None,
         description="Indicates if the medicinal product has an orphan designation for the treatment of a rare disease.",
     )
 

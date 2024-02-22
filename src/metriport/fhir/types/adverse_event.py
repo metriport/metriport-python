@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .adverse_event_actuality import AdverseEventActuality
 from .adverse_event_suspect_entity import AdverseEventSuspectEntity
@@ -25,64 +23,75 @@ class AdverseEvent(BaseResource):
     Actual or potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.
     """
 
-    resource_type: typing_extensions.Literal["AdverseEvent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AdverseEvent"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="Business identifiers assigned to this adverse event by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Business identifiers assigned to this adverse event by the performer or other systems which remain constant as the resource is updated and propagates from server to server.",
     )
     actuality: typing.Optional[AdverseEventActuality] = pydantic.Field(
-        description="Whether the event actually happened, or just had the potential to. Note that this is independent of whether anyone was affected or harmed or how severely."
+        default=None,
+        description="Whether the event actually happened, or just had the potential to. Note that this is independent of whether anyone was affected or harmed or how severely.",
     )
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The overall type of event, intended for search and filtering purposes."
+        default=None, description="The overall type of event, intended for search and filtering purposes."
     )
     event: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="This element defines the specific type of event that occurred or that was prevented from occurring."
+        default=None,
+        description="This element defines the specific type of event that occurred or that was prevented from occurring.",
     )
     subject: Reference = pydantic.Field(description="This subject or group impacted by the event.")
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The Encounter during which AdverseEvent was created or to which the creation of this record is tightly associated."
+        default=None,
+        description="The Encounter during which AdverseEvent was created or to which the creation of this record is tightly associated.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and perhaps time) when the adverse event occurred."
+        default=None, description="The date (and perhaps time) when the adverse event occurred."
     )
     detected: typing.Optional[DateTime] = pydantic.Field(
-        description="Estimated or actual date the AdverseEvent began, in the opinion of the reporter."
+        default=None, description="Estimated or actual date the AdverseEvent began, in the opinion of the reporter."
     )
     recorded_date: typing.Optional[DateTime] = pydantic.Field(
-        alias="recordedDate", description="The date on which the existence of the AdverseEvent was first recorded."
+        alias="recordedDate",
+        default=None,
+        description="The date on which the existence of the AdverseEvent was first recorded.",
     )
     resulting_condition: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="resultingCondition",
+        default=None,
         description="Includes information about the reaction that occurred as a result of exposure to a substance (for example, a drug or a chemical).",
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="The information about where the adverse event occurred."
+        default=None, description="The information about where the adverse event occurred."
     )
     seriousness: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Assessment whether this event was of real importance."
+        default=None, description="Assessment whether this event was of real importance."
     )
     severity: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Describes the severity of the adverse event, in relation to the subject. Contrast to AdverseEvent.seriousness - a severe rash might not be serious, but a mild heart problem is."
+        default=None,
+        description="Describes the severity of the adverse event, in relation to the subject. Contrast to AdverseEvent.seriousness - a severe rash might not be serious, but a mild heart problem is.",
     )
     outcome: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Describes the type of outcome from the adverse event."
+        default=None, description="Describes the type of outcome from the adverse event."
     )
     recorder: typing.Optional[Reference] = pydantic.Field(
-        description="Information on who recorded the adverse event. May be the patient or a practitioner."
+        default=None, description="Information on who recorded the adverse event. May be the patient or a practitioner."
     )
     contributor: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Parties that may or should contribute or have contributed information to the adverse event, which can consist of one or more activities. Such information includes information leading to the decision to perform the activity and how to perform the activity (e.g. consultant), information that the activity itself seeks to reveal (e.g. informant of clinical history), or information about what activity was performed (e.g. informant witness)."
+        default=None,
+        description="Parties that may or should contribute or have contributed information to the adverse event, which can consist of one or more activities. Such information includes information leading to the decision to perform the activity and how to perform the activity (e.g. consultant), information that the activity itself seeks to reveal (e.g. informant of clinical history), or information about what activity was performed (e.g. informant witness).",
     )
     suspect_entity: typing.Optional[typing.List[AdverseEventSuspectEntity]] = pydantic.Field(
-        alias="suspectEntity", description="Describes the entity that is suspected to have caused the adverse event."
+        alias="suspectEntity",
+        default=None,
+        description="Describes the entity that is suspected to have caused the adverse event.",
     )
     subject_medical_history: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="subjectMedicalHistory", description="AdverseEvent.subjectMedicalHistory."
+        alias="subjectMedicalHistory", default=None, description="AdverseEvent.subjectMedicalHistory."
     )
     reference_document: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="referenceDocument", description="AdverseEvent.referenceDocument."
+        alias="referenceDocument", default=None, description="AdverseEvent.referenceDocument."
     )
-    study: typing.Optional[typing.List[Reference]] = pydantic.Field(description="AdverseEvent.study.")
+    study: typing.Optional[typing.List[Reference]] = pydantic.Field(default=None, description="AdverseEvent.study.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

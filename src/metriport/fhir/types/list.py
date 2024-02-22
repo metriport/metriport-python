@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -27,37 +25,44 @@ class List(BaseResource):
     A list is a curated collection of resources.
     """
 
-    resource_type: typing_extensions.Literal["List"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["List"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier for the List assigned for business purposes outside the context of FHIR."
+        default=None, description="Identifier for the List assigned for business purposes outside the context of FHIR."
     )
-    status: typing.Optional[ListStatus] = pydantic.Field(description="Indicates the current state of this list.")
+    status: typing.Optional[ListStatus] = pydantic.Field(
+        default=None, description="Indicates the current state of this list."
+    )
     mode: typing.Optional[ListMode] = pydantic.Field(
-        description="How this list was prepared - whether it is a working list that is suitable for being maintained on an ongoing basis, or if it represents a snapshot of a list of items from another source, or whether it is a prepared list where items may be marked as added, modified or deleted."
+        default=None,
+        description="How this list was prepared - whether it is a working list that is suitable for being maintained on an ongoing basis, or if it represents a snapshot of a list of items from another source, or whether it is a prepared list where items may be marked as added, modified or deleted.",
     )
-    title: typing.Optional[str] = pydantic.Field(description="A label for the list assigned by the author.")
+    title: typing.Optional[str] = pydantic.Field(
+        default=None, description="A label for the list assigned by the author."
+    )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="This code defines the purpose of the list - why it was created."
+        default=None, description="This code defines the purpose of the list - why it was created."
     )
     subject: typing.Optional[Reference] = pydantic.Field(
-        description="The common subject (or patient) of the resources that are in the list if there is one."
+        default=None,
+        description="The common subject (or patient) of the resources that are in the list if there is one.",
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The encounter that is the context in which this list was created."
+        default=None, description="The encounter that is the context in which this list was created."
     )
-    date: typing.Optional[DateTime] = pydantic.Field(description="The date that the list was prepared.")
+    date: typing.Optional[DateTime] = pydantic.Field(default=None, description="The date that the list was prepared.")
     source: typing.Optional[Reference] = pydantic.Field(
-        description="The entity responsible for deciding what the contents of the list were. Where the list was created by a human, this is the same as the author of the list."
+        default=None,
+        description="The entity responsible for deciding what the contents of the list were. Where the list was created by a human, this is the same as the author of the list.",
     )
     ordered_by: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="orderedBy", description="What order applies to the items in the list."
+        alias="orderedBy", default=None, description="What order applies to the items in the list."
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Comments that apply to the overall list."
+        default=None, description="Comments that apply to the overall list."
     )
-    entry: typing.Optional[typing.List[ListEntry]] = pydantic.Field(description="Entries in this list.")
+    entry: typing.Optional[typing.List[ListEntry]] = pydantic.Field(default=None, description="Entries in this list.")
     empty_reason: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="emptyReason", description="If the list is empty, why the list is empty."
+        alias="emptyReason", default=None, description="If the list is empty, why the list is empty."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

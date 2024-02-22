@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -32,77 +30,93 @@ class Questionnaire(BaseResource):
     A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.
     """
 
-    resource_type: typing_extensions.Literal["Questionnaire"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Questionnaire"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this questionnaire when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this questionnaire is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the questionnaire is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this questionnaire when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this questionnaire is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the questionnaire is stored on different servers.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this questionnaire when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this questionnaire when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the questionnaire. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the questionnaire. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the questionnaire."
+        default=None, description="A short, descriptive, user-friendly title for the questionnaire."
     )
     derived_from: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        alias="derivedFrom", description="The URL of a Questionnaire that this Questionnaire is based on."
+        alias="derivedFrom", default=None, description="The URL of a Questionnaire that this Questionnaire is based on."
     )
     status: typing.Optional[QuestionnaireStatus] = pydantic.Field(
-        description="The status of this questionnaire. Enables tracking the life-cycle of the content."
+        default=None, description="The status of this questionnaire. Enables tracking the life-cycle of the content."
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this questionnaire is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this questionnaire is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     subject_type: typing.Optional[typing.List[Code]] = pydantic.Field(
         alias="subjectType",
+        default=None,
         description="The types of subjects that can be the subject of responses created for the questionnaire.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the questionnaire was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the questionnaire changes."
+        default=None,
+        description="The date (and optionally time) when the questionnaire was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the questionnaire changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the questionnaire."
+        default=None, description="The name of the organization or individual that published the questionnaire."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the questionnaire from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the questionnaire from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate questionnaire instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the questionnaire is intended to be used."
+        default=None, description="A legal or geographic region in which the questionnaire is intended to be used."
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this questionnaire is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this questionnaire is needed and why it has been designed as it has.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the questionnaire and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the questionnaire."
+        default=None,
+        description="A copyright statement relating to the questionnaire and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the questionnaire.",
     )
     approval_date: typing.Optional[dt.date] = pydantic.Field(
         alias="approvalDate",
+        default=None,
         description="The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.",
     )
     last_review_date: typing.Optional[dt.date] = pydantic.Field(
         alias="lastReviewDate",
+        default=None,
         description="The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.",
     )
     effective_period: typing.Optional[Period] = pydantic.Field(
         alias="effectivePeriod",
+        default=None,
         description="The period during which the questionnaire content was or is planned to be in active use.",
     )
     code: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="An identifier for this question or group of questions in a particular terminology such as LOINC."
+        default=None,
+        description="An identifier for this question or group of questions in a particular terminology such as LOINC.",
     )
     item: typing.Optional[typing.List[QuestionnaireItem]] = pydantic.Field(
-        description="A particular question, question grouping or display text that is part of the questionnaire."
+        default=None,
+        description="A particular question, question grouping or display text that is part of the questionnaire.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -21,33 +21,41 @@ class ConceptMapTarget(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     code: typing.Optional[Code] = pydantic.Field(
-        description="Identity (code or path) or the element/item that the map refers to."
+        default=None, description="Identity (code or path) or the element/item that the map refers to."
     )
     display: typing.Optional[str] = pydantic.Field(
-        description="The display for the code. The display is only provided to help editors when editing the concept map."
+        default=None,
+        description="The display for the code. The display is only provided to help editors when editing the concept map.",
     )
     equivalence: typing.Optional[ConceptMapTargetEquivalence] = pydantic.Field(
-        description="The equivalence between the source and target concepts (counting for the dependencies and products). The equivalence is read from target to source (e.g. the target is 'wider' than the source)."
+        default=None,
+        description="The equivalence between the source and target concepts (counting for the dependencies and products). The equivalence is read from target to source (e.g. the target is 'wider' than the source).",
     )
     comment: typing.Optional[str] = pydantic.Field(
-        description="A description of status/issues in mapping that conveys additional information not represented in the structured data."
+        default=None,
+        description="A description of status/issues in mapping that conveys additional information not represented in the structured data.",
     )
     depends_on: typing.Optional[typing.List[ConceptMapDependsOn]] = pydantic.Field(
         alias="dependsOn",
+        default=None,
         description="A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value.",
     )
     product: typing.Optional[typing.List[ConceptMapDependsOn]] = pydantic.Field(
-        description="A set of additional outcomes from this mapping to other elements. To properly execute this mapping, the specified element must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on."
+        default=None,
+        description="A set of additional outcomes from this mapping to other elements. To properly execute this mapping, the specified element must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

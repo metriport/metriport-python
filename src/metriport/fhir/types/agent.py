@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .agent_channel import AgentChannel
 from .agent_setting import AgentSetting
@@ -27,25 +25,34 @@ class Agent(pydantic.BaseModel):
     Configuration details for an instance of the Medplum agent application.
     """
 
-    resource_type: typing_extensions.Literal["Agent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Agent"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
-    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="An identifier for this agent.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
+    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
+        default=None, description="An identifier for this agent."
+    )
     name: str = pydantic.Field(description="The human readable friendly name of the agent.")
     status: AgentStatus = pydantic.Field(description="The status of the agent.")
     device: typing.Optional[Reference] = pydantic.Field(
-        description="Optional device resource representing the device running the agent."
+        default=None, description="Optional device resource representing the device running the agent."
     )
-    setting: typing.Optional[typing.List[AgentSetting]] = pydantic.Field(description="The settings for the agent.")
+    setting: typing.Optional[typing.List[AgentSetting]] = pydantic.Field(
+        default=None, description="The settings for the agent."
+    )
     channel: typing.List[AgentChannel] = pydantic.Field(
         description="Details where to send notifications when resources are received that meet the criteria."
     )

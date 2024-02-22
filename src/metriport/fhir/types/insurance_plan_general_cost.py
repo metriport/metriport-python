@@ -21,22 +21,25 @@ class InsurancePlanGeneralCost(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    type: typing.Optional[CodeableConcept] = pydantic.Field(description="Type of cost.")
+    type: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="Type of cost.")
     group_size: typing.Optional[PositiveInt] = pydantic.Field(
-        alias="groupSize", description="Number of participants enrolled in the plan."
+        alias="groupSize", default=None, description="Number of participants enrolled in the plan."
     )
-    cost: typing.Optional[Money] = pydantic.Field(description="Value of the cost.")
+    cost: typing.Optional[Money] = pydantic.Field(default=None, description="Value of the cost.")
     comment: typing.Optional[str] = pydantic.Field(
-        description="Additional information about the general costs associated with this plan."
+        default=None, description="Additional information about the general costs associated with this plan."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

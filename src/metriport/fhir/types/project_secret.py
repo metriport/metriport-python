@@ -18,10 +18,18 @@ class ProjectSecret(pydantic.BaseModel):
     """
 
     name: str = pydantic.Field(description="The secret name.")
-    value_string: typing.Optional[str] = pydantic.Field(alias="valueString", description="The secret value.")
-    value_boolean: typing.Optional[bool] = pydantic.Field(alias="valueBoolean", description="The secret value.")
-    value_decimal: typing.Optional[Decimal] = pydantic.Field(alias="valueDecimal", description="The secret value.")
-    value_integer: typing.Optional[int] = pydantic.Field(alias="valueInteger", description="The secret value.")
+    value_string: typing.Optional[str] = pydantic.Field(
+        alias="valueString", default=None, description="The secret value."
+    )
+    value_boolean: typing.Optional[bool] = pydantic.Field(
+        alias="valueBoolean", default=None, description="The secret value."
+    )
+    value_decimal: typing.Optional[Decimal] = pydantic.Field(
+        alias="valueDecimal", default=None, description="The secret value."
+    )
+    value_integer: typing.Optional[int] = pydantic.Field(
+        alias="valueInteger", default=None, description="The secret value."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

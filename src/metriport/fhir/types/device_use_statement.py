@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -27,51 +25,57 @@ class DeviceUseStatement(BaseResource):
     A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.
     """
 
-    resource_type: typing_extensions.Literal["DeviceUseStatement"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DeviceUseStatement"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="An external identifier for this statement such as an IRI."
+        default=None, description="An external identifier for this statement such as an IRI."
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description="A plan, proposal or order that is fulfilled in whole or in part by this DeviceUseStatement.",
     )
     status: typing.Optional[DeviceUseStatementStatus] = pydantic.Field(
-        description="A code representing the patient or other source's judgment about the state of the device used that this statement is about. Generally this will be active or completed."
+        default=None,
+        description="A code representing the patient or other source's judgment about the state of the device used that this statement is about. Generally this will be active or completed.",
     )
     subject: Reference = pydantic.Field(description="The patient who used the device.")
     derived_from: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="derivedFrom",
+        default=None,
         description="Allows linking the DeviceUseStatement to the underlying Request, or to other information that supports or is used to derive the DeviceUseStatement.",
     )
     timing_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="timingTiming", description="How often the device was used."
+        alias="timingTiming", default=None, description="How often the device was used."
     )
     timing_period: typing.Optional[Period] = pydantic.Field(
-        alias="timingPeriod", description="How often the device was used."
+        alias="timingPeriod", default=None, description="How often the device was used."
     )
     timing_date_time: typing.Optional[str] = pydantic.Field(
-        alias="timingDateTime", description="How often the device was used."
+        alias="timingDateTime", default=None, description="How often the device was used."
     )
     recorded_on: typing.Optional[DateTime] = pydantic.Field(
-        alias="recordedOn", description="The time at which the statement was made/recorded."
+        alias="recordedOn", default=None, description="The time at which the statement was made/recorded."
     )
     source: typing.Optional[Reference] = pydantic.Field(
-        description="Who reported the device was being used by the patient."
+        default=None, description="Who reported the device was being used by the patient."
     )
     device: Reference = pydantic.Field(description="The details of the device used.")
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="reasonCode", description="Reason or justification for the use of the device."
+        alias="reasonCode", default=None, description="Reason or justification for the use of the device."
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Indicates another resource whose existence justifies this DeviceUseStatement.",
     )
     body_site: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="bodySite",
+        default=None,
         description="Indicates the anotomic location on the subject's body where the device was used ( i.e. the target).",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement."
+        default=None,
+        description="Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -20,26 +20,31 @@ class GraphDefinitionLink(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     path: typing.Optional[str] = pydantic.Field(
-        description="A FHIR expression that identifies one of FHIR References to other resources."
+        default=None, description="A FHIR expression that identifies one of FHIR References to other resources."
     )
-    slice_name: typing.Optional[str] = pydantic.Field(alias="sliceName", description="Which slice (if profiled).")
-    min: typing.Optional[int] = pydantic.Field(description="Minimum occurrences for this link.")
-    max: typing.Optional[str] = pydantic.Field(description="Maximum occurrences for this link.")
+    slice_name: typing.Optional[str] = pydantic.Field(
+        alias="sliceName", default=None, description="Which slice (if profiled)."
+    )
+    min: typing.Optional[int] = pydantic.Field(default=None, description="Minimum occurrences for this link.")
+    max: typing.Optional[str] = pydantic.Field(default=None, description="Maximum occurrences for this link.")
     description: typing.Optional[str] = pydantic.Field(
-        description="Information about why this link is of interest in this graph definition."
+        default=None, description="Information about why this link is of interest in this graph definition."
     )
     target: typing.Optional[typing.List[GraphDefinitionTarget]] = pydantic.Field(
-        description="Potential target for the link."
+        default=None, description="Potential target for the link."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

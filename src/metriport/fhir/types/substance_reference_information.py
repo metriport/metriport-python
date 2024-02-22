@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .substance_reference_information_classification import SubstanceReferenceInformationClassification
@@ -23,16 +21,20 @@ class SubstanceReferenceInformation(BaseResource):
     Todo.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceReferenceInformation"] = pydantic.Field(alias="resourceType")
-    comment: typing.Optional[str] = pydantic.Field(description="Todo.")
-    gene: typing.Optional[typing.List[SubstanceReferenceInformationGene]] = pydantic.Field(description="Todo.")
+    resource_type: typing.Literal["SubstanceReferenceInformation"] = pydantic.Field(alias="resourceType")
+    comment: typing.Optional[str] = pydantic.Field(default=None, description="Todo.")
+    gene: typing.Optional[typing.List[SubstanceReferenceInformationGene]] = pydantic.Field(
+        default=None, description="Todo."
+    )
     gene_element: typing.Optional[typing.List[SubstanceReferenceInformationGeneElement]] = pydantic.Field(
-        alias="geneElement", description="Todo."
+        alias="geneElement", default=None, description="Todo."
     )
     classification: typing.Optional[typing.List[SubstanceReferenceInformationClassification]] = pydantic.Field(
-        description="Todo."
+        default=None, description="Todo."
     )
-    target: typing.Optional[typing.List[SubstanceReferenceInformationTarget]] = pydantic.Field(description="Todo.")
+    target: typing.Optional[typing.List[SubstanceReferenceInformationTarget]] = pydantic.Field(
+        default=None, description="Todo."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

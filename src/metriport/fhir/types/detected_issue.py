@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -28,41 +26,55 @@ class DetectedIssue(BaseResource):
     Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
     """
 
-    resource_type: typing_extensions.Literal["DetectedIssue"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DetectedIssue"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifier associated with the detected issue record."
+        default=None, description="Business identifier associated with the detected issue record."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="Indicates the status of the detected issue.")
+    status: typing.Optional[Code] = pydantic.Field(
+        default=None, description="Indicates the status of the detected issue."
+    )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Identifies the general type of issue identified."
+        default=None, description="Identifies the general type of issue identified."
     )
     severity: typing.Optional[DetectedIssueSeverity] = pydantic.Field(
-        description="Indicates the degree of importance associated with the identified issue based on the potential impact on the patient."
+        default=None,
+        description="Indicates the degree of importance associated with the identified issue based on the potential impact on the patient.",
     )
     patient: typing.Optional[Reference] = pydantic.Field(
-        description="Indicates the patient whose record the detected issue is associated with."
+        default=None, description="Indicates the patient whose record the detected issue is associated with."
     )
     identified_date_time: typing.Optional[str] = pydantic.Field(
-        alias="identifiedDateTime", description="The date or period when the detected issue was initially identified."
+        alias="identifiedDateTime",
+        default=None,
+        description="The date or period when the detected issue was initially identified.",
     )
     identified_period: typing.Optional[Period] = pydantic.Field(
-        alias="identifiedPeriod", description="The date or period when the detected issue was initially identified."
+        alias="identifiedPeriod",
+        default=None,
+        description="The date or period when the detected issue was initially identified.",
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="Individual or device responsible for the issue being raised. For example, a decision support application or a pharmacist conducting a medication review."
+        default=None,
+        description="Individual or device responsible for the issue being raised. For example, a decision support application or a pharmacist conducting a medication review.",
     )
     implicated: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Indicates the resource representing the current activity or proposed activity that is potentially problematic."
+        default=None,
+        description="Indicates the resource representing the current activity or proposed activity that is potentially problematic.",
     )
     evidence: typing.Optional[typing.List[DetectedIssueEvidence]] = pydantic.Field(
-        description="Supporting evidence or manifestations that provide the basis for identifying the detected issue such as a GuidanceResponse or MeasureReport."
+        default=None,
+        description="Supporting evidence or manifestations that provide the basis for identifying the detected issue such as a GuidanceResponse or MeasureReport.",
     )
-    detail: typing.Optional[str] = pydantic.Field(description="A textual explanation of the detected issue.")
+    detail: typing.Optional[str] = pydantic.Field(
+        default=None, description="A textual explanation of the detected issue."
+    )
     reference: typing.Optional[Uri] = pydantic.Field(
-        description="The literature, knowledge-base or similar reference that describes the propensity for the detected issue identified."
+        default=None,
+        description="The literature, knowledge-base or similar reference that describes the propensity for the detected issue identified.",
     )
     mitigation: typing.Optional[typing.List[DetectedIssueMitigation]] = pydantic.Field(
-        description="Indicates an action that has been taken or is committed to reduce or eliminate the likelihood of the risk identified by the detected issue from manifesting. Can also reflect an observation of known mitigating factors that may reduce/eliminate the need for any action."
+        default=None,
+        description="Indicates an action that has been taken or is committed to reduce or eliminate the likelihood of the risk identified by the detected issue from manifesting. Can also reflect an observation of known mitigating factors that may reduce/eliminate the need for any action.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

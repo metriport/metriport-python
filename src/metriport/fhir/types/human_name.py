@@ -20,27 +20,35 @@ class HumanName(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
-    use: typing.Optional[HumanNameUse] = pydantic.Field(description="Identifies the purpose for this name.")
+    use: typing.Optional[HumanNameUse] = pydantic.Field(
+        default=None, description="Identifies the purpose for this name."
+    )
     text: typing.Optional[str] = pydantic.Field(
-        description="Specifies the entire name as it should be displayed e.g. on an application UI. This may be provided instead of or as well as the specific parts."
+        default=None,
+        description="Specifies the entire name as it should be displayed e.g. on an application UI. This may be provided instead of or as well as the specific parts.",
     )
     family: typing.Optional[str] = pydantic.Field(
-        description="The part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father."
+        default=None,
+        description="The part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.",
     )
-    given: typing.Optional[typing.List[str]] = pydantic.Field(description="Given name.")
+    given: typing.Optional[typing.List[str]] = pydantic.Field(default=None, description="Given name.")
     prefix: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name."
+        default=None,
+        description="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name.",
     )
     suffix: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name."
+        default=None,
+        description="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.",
     )
     period: typing.Optional[Period] = pydantic.Field(
-        description="Indicates the period of time when this name was valid for the named person."
+        default=None, description="Indicates the period of time when this name was valid for the named person."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

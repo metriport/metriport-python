@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,43 +25,50 @@ class NamingSystem(BaseResource):
     A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc. Represents a "System" used within the Identifier and Coding data types.
     """
 
-    resource_type: typing_extensions.Literal["NamingSystem"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["NamingSystem"] = pydantic.Field(alias="resourceType")
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the naming system. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the naming system. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     status: typing.Optional[NamingSystemStatus] = pydantic.Field(
-        description="The status of this naming system. Enables tracking the life-cycle of the content."
+        default=None, description="The status of this naming system. Enables tracking the life-cycle of the content."
     )
     kind: typing.Optional[NamingSystemKind] = pydantic.Field(
-        description="Indicates the purpose for the naming system - what kinds of things does it make unique?"
+        default=None,
+        description="Indicates the purpose for the naming system - what kinds of things does it make unique?",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the naming system was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the naming system changes."
+        default=None,
+        description="The date (and optionally time) when the naming system was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the naming system changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the naming system."
+        default=None, description="The name of the organization or individual that published the naming system."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     responsible: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization that is responsible for issuing identifiers or codes for this namespace and ensuring their non-collision."
+        default=None,
+        description="The name of the organization that is responsible for issuing identifiers or codes for this namespace and ensuring their non-collision.",
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Categorizes a naming system for easier search by grouping related naming systems."
+        default=None, description="Categorizes a naming system for easier search by grouping related naming systems."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the naming system from a consumer's perspective. Details about what the namespace identifies including scope, granularity, version labeling, etc."
+        default=None,
+        description="A free text natural language description of the naming system from a consumer's perspective. Details about what the namespace identifies including scope, granularity, version labeling, etc.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate naming system instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the naming system is intended to be used."
+        default=None, description="A legal or geographic region in which the naming system is intended to be used."
     )
     usage: typing.Optional[str] = pydantic.Field(
-        description="Provides guidance on the use of the namespace, including the handling of formatting characters, use of upper vs. lower case, etc."
+        default=None,
+        description="Provides guidance on the use of the namespace, including the handling of formatting characters, use of upper vs. lower case, etc.",
     )
     unique_id: typing.List[NamingSystemUniqueId] = pydantic.Field(
         alias="uniqueId",

@@ -21,35 +21,44 @@ class VerificationResultPrimarySource(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    who: typing.Optional[Reference] = pydantic.Field(description="Reference to the primary source.")
+    who: typing.Optional[Reference] = pydantic.Field(default=None, description="Reference to the primary source.")
     type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Type of primary source (License Board; Primary Education; Continuing Education; Postal Service; Relationship owner; Registration Authority; legal source; issuing source; authoritative source)."
+        default=None,
+        description="Type of primary source (License Board; Primary Education; Continuing Education; Postal Service; Relationship owner; Registration Authority; legal source; issuing source; authoritative source).",
     )
     communication_method: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="communicationMethod", description="Method for communicating with the primary source (manual; API; Push)."
+        alias="communicationMethod",
+        default=None,
+        description="Method for communicating with the primary source (manual; API; Push).",
     )
     validation_status: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="validationStatus",
+        default=None,
         description="Status of the validation of the target against the primary source (successful; failed; unknown).",
     )
     validation_date: typing.Optional[DateTime] = pydantic.Field(
-        alias="validationDate", description="When the target was validated against the primary source."
+        alias="validationDate", default=None, description="When the target was validated against the primary source."
     )
     can_push_updates: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="canPushUpdates",
+        default=None,
         description="Ability of the primary source to push updates/alerts (yes; no; undetermined).",
     )
     push_type_available: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="pushTypeAvailable",
+        default=None,
         description="Type of alerts/updates the primary source can send (specific requested changes; any changes; as defined by source).",
     )
 

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -28,36 +26,43 @@ class MeasureReport(BaseResource):
     The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.
     """
 
-    resource_type: typing_extensions.Literal["MeasureReport"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MeasureReport"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this MeasureReport when it is represented in other formats or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this MeasureReport when it is represented in other formats or referenced in a specification, model, design or an instance.",
     )
     status: typing.Optional[MeasureReportStatus] = pydantic.Field(
-        description="The MeasureReport status. No data will be available until the MeasureReport status is complete."
+        default=None,
+        description="The MeasureReport status. No data will be available until the MeasureReport status is complete.",
     )
     type: typing.Optional[MeasureReportType] = pydantic.Field(
-        description="The type of measure report. This may be an individual report, which provides the score for the measure for an individual member of the population; a subject-listing, which returns the list of members that meet the various criteria in the measure; a summary report, which returns a population count for each of the criteria in the measure; or a data-collection, which enables the MeasureReport to be used to exchange the data-of-interest for a quality measure."
+        default=None,
+        description="The type of measure report. This may be an individual report, which provides the score for the measure for an individual member of the population; a subject-listing, which returns the list of members that meet the various criteria in the measure; a summary report, which returns a population count for each of the criteria in the measure; or a data-collection, which enables the MeasureReport to be used to exchange the data-of-interest for a quality measure.",
     )
     measure: Canonical = pydantic.Field(
         description="A reference to the Measure that was calculated to produce this report."
     )
     subject: typing.Optional[Reference] = pydantic.Field(
-        description="Optional subject identifying the individual or individuals the report is for."
+        default=None, description="Optional subject identifying the individual or individuals the report is for."
     )
-    date: typing.Optional[DateTime] = pydantic.Field(description="The date this measure report was generated.")
+    date: typing.Optional[DateTime] = pydantic.Field(
+        default=None, description="The date this measure report was generated."
+    )
     reporter: typing.Optional[Reference] = pydantic.Field(
-        description="The individual, location, or organization that is reporting the data."
+        default=None, description="The individual, location, or organization that is reporting the data."
     )
     period: Period = pydantic.Field(description="The reporting period for which the report was calculated.")
     improvement_notation: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="improvementNotation",
+        default=None,
         description="Whether improvement in the measure is noted by an increase or decrease in the measure score.",
     )
     group: typing.Optional[typing.List[MeasureReportGroup]] = pydantic.Field(
-        description="The results of the calculation, one for each population group in the measure."
+        default=None, description="The results of the calculation, one for each population group in the measure."
     )
     evaluated_resource: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="evaluatedResource",
+        default=None,
         description="A reference to a Bundle containing the Resources that were used in the calculation of this measure.",
     )
 

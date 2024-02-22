@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -29,50 +27,60 @@ class SubstanceSpecification(BaseResource):
     The detailed description of a substance, typically at a level beyond what is used for prescribing.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceSpecification"] = pydantic.Field(alias="resourceType")
-    identifier: typing.Optional[Identifier] = pydantic.Field(description="Identifier by which this substance is known.")
+    resource_type: typing.Literal["SubstanceSpecification"] = pydantic.Field(alias="resourceType")
+    identifier: typing.Optional[Identifier] = pydantic.Field(
+        default=None, description="Identifier by which this substance is known."
+    )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="High level categorization, e.g. polymer or nucleic acid."
+        default=None, description="High level categorization, e.g. polymer or nucleic acid."
     )
     status: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Status of substance within the catalogue e.g. approved."
+        default=None, description="Status of substance within the catalogue e.g. approved."
     )
     domain: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="If the substance applies to only human or veterinary use."
+        default=None, description="If the substance applies to only human or veterinary use."
     )
-    description: typing.Optional[str] = pydantic.Field(description="Textual description of the substance.")
-    source: typing.Optional[typing.List[Reference]] = pydantic.Field(description="Supporting literature.")
-    comment: typing.Optional[str] = pydantic.Field(description="Textual comment about this record of a substance.")
+    description: typing.Optional[str] = pydantic.Field(
+        default=None, description="Textual description of the substance."
+    )
+    source: typing.Optional[typing.List[Reference]] = pydantic.Field(default=None, description="Supporting literature.")
+    comment: typing.Optional[str] = pydantic.Field(
+        default=None, description="Textual comment about this record of a substance."
+    )
     moiety: typing.Optional[typing.List[SubstanceSpecificationMoiety]] = pydantic.Field(
-        description="Moiety, for structural modifications."
+        default=None, description="Moiety, for structural modifications."
     )
     property: typing.Optional[typing.List[SubstanceSpecificationProperty]] = pydantic.Field(
-        description="General specifications for this substance, including how it is related to other substances."
+        default=None,
+        description="General specifications for this substance, including how it is related to other substances.",
     )
     reference_information: typing.Optional[Reference] = pydantic.Field(
-        alias="referenceInformation", description="General information detailing this substance."
+        alias="referenceInformation", default=None, description="General information detailing this substance."
     )
-    structure: typing.Optional[SubstanceSpecificationStructure] = pydantic.Field(description="Structural information.")
+    structure: typing.Optional[SubstanceSpecificationStructure] = pydantic.Field(
+        default=None, description="Structural information."
+    )
     code: typing.Optional[typing.List[SubstanceSpecificationCode]] = pydantic.Field(
-        description="Codes associated with the substance."
+        default=None, description="Codes associated with the substance."
     )
     name: typing.Optional[typing.List[SubstanceSpecificationName]] = pydantic.Field(
-        description="Names applicable to this substance."
+        default=None, description="Names applicable to this substance."
     )
     molecular_weight: typing.Optional[typing.List[SubstanceSpecificationMolecularWeight]] = pydantic.Field(
         alias="molecularWeight",
+        default=None,
         description="The molecular weight or weight range (for proteins, polymers or nucleic acids).",
     )
     relationship: typing.Optional[typing.List[SubstanceSpecificationRelationship]] = pydantic.Field(
-        description="A link between this substance and another, with details of the relationship."
+        default=None, description="A link between this substance and another, with details of the relationship."
     )
     nucleic_acid: typing.Optional[Reference] = pydantic.Field(
-        alias="nucleicAcid", description="Data items specific to nucleic acids."
+        alias="nucleicAcid", default=None, description="Data items specific to nucleic acids."
     )
-    polymer: typing.Optional[Reference] = pydantic.Field(description="Data items specific to polymers.")
-    protein: typing.Optional[Reference] = pydantic.Field(description="Data items specific to proteins.")
+    polymer: typing.Optional[Reference] = pydantic.Field(default=None, description="Data items specific to polymers.")
+    protein: typing.Optional[Reference] = pydantic.Field(default=None, description="Data items specific to proteins.")
     source_material: typing.Optional[Reference] = pydantic.Field(
-        alias="sourceMaterial", description="Material or taxonomic/anatomical source for the substance."
+        alias="sourceMaterial", default=None, description="Material or taxonomic/anatomical source for the substance."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

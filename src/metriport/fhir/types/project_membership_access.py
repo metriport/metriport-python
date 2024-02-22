@@ -22,7 +22,7 @@ class ProjectMembershipAccess(pydantic.BaseModel):
         description="The base access policy used as a template. Variables in the template access policy are replaced by the values in the parameter."
     )
     parameter: typing.Optional[typing.List[ProjectMembershipAccessParameter]] = pydantic.Field(
-        description="User options that control the display of the application."
+        default=None, description="User options that control the display of the application."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

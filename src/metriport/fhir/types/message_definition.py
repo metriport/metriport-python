@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -33,84 +31,99 @@ class MessageDefinition(BaseResource):
     Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
     """
 
-    resource_type: typing_extensions.Literal["MessageDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MessageDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="The business identifier that is used to reference the MessageDefinition and _is_ expected to be consistent from server to server."
+        default=None,
+        description="The business identifier that is used to reference the MessageDefinition and _is_ expected to be consistent from server to server.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this message definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this message definition when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the message definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the message definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the message definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the message definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the message definition. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the message definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the message definition."
+        default=None, description="A short, descriptive, user-friendly title for the message definition."
     )
     replaces: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        description="A MessageDefinition that is superseded by this definition."
+        default=None, description="A MessageDefinition that is superseded by this definition."
     )
     status: typing.Optional[MessageDefinitionStatus] = pydantic.Field(
-        description="The status of this message definition. Enables tracking the life-cycle of the content."
+        default=None,
+        description="The status of this message definition. Enables tracking the life-cycle of the content.",
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this message definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this message definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the message definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the message definition changes."
+        default=None,
+        description="The date (and optionally time) when the message definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the message definition changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the message definition."
+        default=None, description="The name of the organization or individual that published the message definition."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the message definition from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the message definition from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate message definition instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the message definition is intended to be used."
+        default=None, description="A legal or geographic region in which the message definition is intended to be used."
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this message definition is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this message definition is needed and why it has been designed as it has.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the message definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the message definition."
+        default=None,
+        description="A copyright statement relating to the message definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the message definition.",
     )
     base: typing.Optional[Canonical] = pydantic.Field(
-        description="The MessageDefinition that is the basis for the contents of this resource."
+        default=None, description="The MessageDefinition that is the basis for the contents of this resource."
     )
     parent: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        description="Identifies a protocol or workflow that this MessageDefinition represents a step in."
+        default=None, description="Identifies a protocol or workflow that this MessageDefinition represents a step in."
     )
     event_coding: typing.Optional[Coding] = pydantic.Field(
-        alias="eventCoding", description="Event code or link to the EventDefinition."
+        alias="eventCoding", default=None, description="Event code or link to the EventDefinition."
     )
     event_uri: typing.Optional[str] = pydantic.Field(
-        alias="eventUri", description="Event code or link to the EventDefinition."
+        alias="eventUri", default=None, description="Event code or link to the EventDefinition."
     )
     category: typing.Optional[MessageDefinitionCategory] = pydantic.Field(
-        description="The impact of the content of the message."
+        default=None, description="The impact of the content of the message."
     )
     focus: typing.Optional[typing.List[MessageDefinitionFocus]] = pydantic.Field(
-        description="Identifies the resource (or resources) that are being addressed by the event. For example, the Encounter for an admit message or two Account records for a merge."
+        default=None,
+        description="Identifies the resource (or resources) that are being addressed by the event. For example, the Encounter for an admit message or two Account records for a merge.",
     )
     response_required: typing.Optional[MessageDefinitionResponseRequired] = pydantic.Field(
         alias="responseRequired",
+        default=None,
         description="Declare at a message definition level whether a response is required or only upon error or success, or never.",
     )
     allowed_response: typing.Optional[typing.List[MessageDefinitionAllowedResponse]] = pydantic.Field(
         alias="allowedResponse",
+        default=None,
         description="Indicates what types of messages may be sent as an application-level response to this message.",
     )
     graph: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        description="Canonical reference to a GraphDefinition. If a URL is provided, it is the canonical reference to a [[[GraphDefinition]]] that it controls what resources are to be added to the bundle when building the document. The GraphDefinition can also specify profiles that apply to the various resources."
+        default=None,
+        description="Canonical reference to a GraphDefinition. If a URL is provided, it is the canonical reference to a [[[GraphDefinition]]] that it controls what resources are to be added to the bundle when building the document. The GraphDefinition can also specify profiles that apply to the various resources.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

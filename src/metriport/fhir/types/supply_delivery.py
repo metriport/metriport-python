@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,45 +24,52 @@ class SupplyDelivery(BaseResource):
     Record of delivery of what is supplied.
     """
 
-    resource_type: typing_extensions.Literal["SupplyDelivery"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SupplyDelivery"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier for the supply delivery event that is used to identify it across multiple disparate systems."
+        default=None,
+        description="Identifier for the supply delivery event that is used to identify it across multiple disparate systems.",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="basedOn", description="A plan, proposal or order that is fulfilled in whole or in part by this event."
+        alias="basedOn",
+        default=None,
+        description="A plan, proposal or order that is fulfilled in whole or in part by this event.",
     )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="partOf", description="A larger event of which this particular event is a component or step."
+        alias="partOf",
+        default=None,
+        description="A larger event of which this particular event is a component or step.",
     )
     status: typing.Optional[SupplyDeliveryStatus] = pydantic.Field(
-        description="A code specifying the state of the dispense event."
+        default=None, description="A code specifying the state of the dispense event."
     )
     patient: typing.Optional[Reference] = pydantic.Field(
-        description="A link to a resource representing the person whom the delivered item is for."
+        default=None, description="A link to a resource representing the person whom the delivered item is for."
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Indicates the type of dispensing event that is performed. Examples include: Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc."
+        default=None,
+        description="Indicates the type of dispensing event that is performed. Examples include: Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc.",
     )
     supplied_item: typing.Optional[SupplyDeliverySuppliedItem] = pydantic.Field(
-        alias="suppliedItem", description="The item that is being delivered or has been supplied."
+        alias="suppliedItem", default=None, description="The item that is being delivered or has been supplied."
     )
     occurrence_date_time: typing.Optional[str] = pydantic.Field(
-        alias="occurrenceDateTime", description="The date or time(s) the activity occurred."
+        alias="occurrenceDateTime", default=None, description="The date or time(s) the activity occurred."
     )
     occurrence_period: typing.Optional[Period] = pydantic.Field(
-        alias="occurrencePeriod", description="The date or time(s) the activity occurred."
+        alias="occurrencePeriod", default=None, description="The date or time(s) the activity occurred."
     )
     occurrence_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="occurrenceTiming", description="The date or time(s) the activity occurred."
+        alias="occurrenceTiming", default=None, description="The date or time(s) the activity occurred."
     )
     supplier: typing.Optional[Reference] = pydantic.Field(
-        description="The individual responsible for dispensing the medication, supplier or device."
+        default=None, description="The individual responsible for dispensing the medication, supplier or device."
     )
     destination: typing.Optional[Reference] = pydantic.Field(
-        description="Identification of the facility/location where the Supply was shipped to, as part of the dispense event."
+        default=None,
+        description="Identification of the facility/location where the Supply was shipped to, as part of the dispense event.",
     )
     receiver: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Identifies the person who picked up the Supply."
+        default=None, description="Identifies the person who picked up the Supply."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

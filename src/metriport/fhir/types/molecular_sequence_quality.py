@@ -23,59 +23,74 @@ class MolecularSequenceQuality(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    type: typing.Optional[MolecularSequenceQualityType] = pydantic.Field(description="INDEL / SNP / Undefined variant.")
+    type: typing.Optional[MolecularSequenceQualityType] = pydantic.Field(
+        default=None, description="INDEL / SNP / Undefined variant."
+    )
     standard_sequence: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="standardSequence", description="Gold standard sequence used for comparing against."
+        alias="standardSequence", default=None, description="Gold standard sequence used for comparing against."
     )
     start: typing.Optional[int] = pydantic.Field(
-        description="Start position of the sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive."
+        default=None,
+        description="Start position of the sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive.",
     )
     end: typing.Optional[int] = pydantic.Field(
-        description="End position of the sequence. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position."
+        default=None,
+        description="End position of the sequence. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.",
     )
     score: typing.Optional[Quantity] = pydantic.Field(
-        description="The score of an experimentally derived feature such as a p-value ([SO:0001685](http://www.sequenceontology.org/browser/current_svn/term/SO:0001685))."
+        default=None,
+        description="The score of an experimentally derived feature such as a p-value ([SO:0001685](http://www.sequenceontology.org/browser/current_svn/term/SO:0001685)).",
     )
     method: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Which method is used to get sequence quality."
+        default=None, description="Which method is used to get sequence quality."
     )
     truth_tp: typing.Optional[Decimal] = pydantic.Field(
         alias="truthTP",
+        default=None,
         description="True positives, from the perspective of the truth data, i.e. the number of sites in the Truth Call Set for which there are paths through the Query Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event.",
     )
     query_tp: typing.Optional[Decimal] = pydantic.Field(
         alias="queryTP",
+        default=None,
         description="True positives, from the perspective of the query data, i.e. the number of sites in the Query Call Set for which there are paths through the Truth Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event.",
     )
     truth_fn: typing.Optional[Decimal] = pydantic.Field(
         alias="truthFN",
+        default=None,
         description="False negatives, i.e. the number of sites in the Truth Call Set for which there is no path through the Query Call Set that is consistent with all of the alleles at this site, or sites for which there is an inaccurate genotype call for the event. Sites with correct variant but incorrect genotype are counted here.",
     )
     query_fp: typing.Optional[Decimal] = pydantic.Field(
         alias="queryFP",
+        default=None,
         description="False positives, i.e. the number of sites in the Query Call Set for which there is no path through the Truth Call Set that is consistent with this site. Sites with correct variant but incorrect genotype are counted here.",
     )
     gt_fp: typing.Optional[Decimal] = pydantic.Field(
         alias="gtFP",
+        default=None,
         description="The number of false positives where the non-REF alleles in the Truth and Query Call Sets match (i.e. cases where the truth is 1/1 and the query is 0/1 or similar).",
     )
-    precision: typing.Optional[Decimal] = pydantic.Field(description="QUERY.TP / (QUERY.TP + QUERY.FP).")
-    recall: typing.Optional[Decimal] = pydantic.Field(description="TRUTH.TP / (TRUTH.TP + TRUTH.FN).")
+    precision: typing.Optional[Decimal] = pydantic.Field(default=None, description="QUERY.TP / (QUERY.TP + QUERY.FP).")
+    recall: typing.Optional[Decimal] = pydantic.Field(default=None, description="TRUTH.TP / (TRUTH.TP + TRUTH.FN).")
     f_score: typing.Optional[Decimal] = pydantic.Field(
         alias="fScore",
+        default=None,
         description="Harmonic mean of Recall and Precision, computed as: 2 _ precision _ recall / (precision + recall).",
     )
     roc: typing.Optional[MolecularSequenceRoc] = pydantic.Field(
-        description="Receiver Operator Characteristic (ROC) Curve to give sensitivity/specificity tradeoff."
+        default=None,
+        description="Receiver Operator Characteristic (ROC) Curve to give sensitivity/specificity tradeoff.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

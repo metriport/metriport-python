@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -23,18 +21,23 @@ class User(pydantic.BaseModel):
     Representation of a human user of the system.
     """
 
-    resource_type: typing_extensions.Literal["User"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["User"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
     first_name: str = pydantic.Field(
         alias="firstName",
         description="The first name or given name of the user. This is the value as entered when the user is created. It is used to populate the profile resource.",
@@ -44,25 +47,29 @@ class User(pydantic.BaseModel):
         description="The last name or family name of the user. This is the value as entered when the user is created. It is used to populate the profile resource.",
     )
     external_id: typing.Optional[str] = pydantic.Field(
-        alias="externalId", description="DEPRECATED Replaced by ProjectMembership.externalId."
+        alias="externalId", default=None, description="DEPRECATED Replaced by ProjectMembership.externalId."
     )
-    email: typing.Optional[str] = pydantic.Field(description="The email address that uniquely identifies the user.")
+    email: typing.Optional[str] = pydantic.Field(
+        default=None, description="The email address that uniquely identifies the user."
+    )
     email_verified: typing.Optional[bool] = pydantic.Field(
         alias="emailVerified",
+        default=None,
         description="Whether the system has verified that the user has access to the email address.",
     )
-    admin: typing.Optional[bool] = pydantic.Field(description="DEPRECATED")
+    admin: typing.Optional[bool] = pydantic.Field(default=None, description="DEPRECATED")
     password_hash: typing.Optional[str] = pydantic.Field(
-        alias="passwordHash", description="Encrypted hash of the user's password."
+        alias="passwordHash", default=None, description="Encrypted hash of the user's password."
     )
     mfa_secret: typing.Optional[str] = pydantic.Field(
-        alias="mfaSecret", description="Shared secret for MFA authenticator applications."
+        alias="mfaSecret", default=None, description="Shared secret for MFA authenticator applications."
     )
     mfa_enrolled: typing.Optional[bool] = pydantic.Field(
-        alias="mfaEnrolled", description="Whether the user has completed MFA enrollment."
+        alias="mfaEnrolled", default=None, description="Whether the user has completed MFA enrollment."
     )
     project: typing.Optional[Reference] = pydantic.Field(
-        description="Optional project if the user only exists for the project. This is used for the project-specific user database."
+        default=None,
+        description="Optional project if the user only exists for the project. This is used for the project-specific user database.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -26,56 +24,68 @@ class RiskAssessment(BaseResource):
     An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.
     """
 
-    resource_type: typing_extensions.Literal["RiskAssessment"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["RiskAssessment"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifier assigned to the risk assessment."
+        default=None, description="Business identifier assigned to the risk assessment."
     )
     based_on: typing.Optional[Reference] = pydantic.Field(
-        alias="basedOn", description="A reference to the request that is fulfilled by this risk assessment."
+        alias="basedOn",
+        default=None,
+        description="A reference to the request that is fulfilled by this risk assessment.",
     )
     parent: typing.Optional[Reference] = pydantic.Field(
-        description="A reference to a resource that this risk assessment is part of, such as a Procedure."
+        default=None, description="A reference to a resource that this risk assessment is part of, such as a Procedure."
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="The status of the RiskAssessment, using the same statuses as an Observation."
+        default=None, description="The status of the RiskAssessment, using the same statuses as an Observation."
     )
     method: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The algorithm, process or mechanism used to evaluate the risk."
+        default=None, description="The algorithm, process or mechanism used to evaluate the risk."
     )
-    code: typing.Optional[CodeableConcept] = pydantic.Field(description="The type of the risk assessment performed.")
+    code: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="The type of the risk assessment performed."
+    )
     subject: Reference = pydantic.Field(description="The patient or group the risk assessment applies to.")
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The encounter where the assessment was performed."
+        default=None, description="The encounter where the assessment was performed."
     )
     occurrence_date_time: typing.Optional[str] = pydantic.Field(
-        alias="occurrenceDateTime", description="The date (and possibly time) the risk assessment was performed."
+        alias="occurrenceDateTime",
+        default=None,
+        description="The date (and possibly time) the risk assessment was performed.",
     )
     occurrence_period: typing.Optional[Period] = pydantic.Field(
-        alias="occurrencePeriod", description="The date (and possibly time) the risk assessment was performed."
+        alias="occurrencePeriod",
+        default=None,
+        description="The date (and possibly time) the risk assessment was performed.",
     )
     condition: typing.Optional[Reference] = pydantic.Field(
-        description="For assessments or prognosis specific to a particular condition, indicates the condition being assessed."
+        default=None,
+        description="For assessments or prognosis specific to a particular condition, indicates the condition being assessed.",
     )
     performer: typing.Optional[Reference] = pydantic.Field(
-        description="The provider or software application that performed the assessment."
+        default=None, description="The provider or software application that performed the assessment."
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="reasonCode", description="The reason the risk assessment was performed."
+        alias="reasonCode", default=None, description="The reason the risk assessment was performed."
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="reasonReference", description="Resources supporting the reason the risk assessment was performed."
+        alias="reasonReference",
+        default=None,
+        description="Resources supporting the reason the risk assessment was performed.",
     )
     basis: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Indicates the source data considered as part of the assessment (for example, FamilyHistory, Observations, Procedures, Conditions, etc.)."
+        default=None,
+        description="Indicates the source data considered as part of the assessment (for example, FamilyHistory, Observations, Procedures, Conditions, etc.).",
     )
     prediction: typing.Optional[typing.List[RiskAssessmentPrediction]] = pydantic.Field(
-        description="Describes the expected outcome for the subject."
+        default=None, description="Describes the expected outcome for the subject."
     )
     mitigation: typing.Optional[str] = pydantic.Field(
-        description="A description of the steps that might be taken to reduce the identified risk(s)."
+        default=None, description="A description of the steps that might be taken to reduce the identified risk(s)."
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Additional comments about the risk assessment."
+        default=None, description="Additional comments about the risk assessment."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

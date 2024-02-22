@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .bundle_entry import BundleEntry
 from .bundle_link import BundleLink
@@ -29,38 +27,47 @@ class Bundle(pydantic.BaseModel):
     A container for a collection of resources.
     """
 
-    resource_type: typing_extensions.Literal["Bundle"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Bundle"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="A persistent identifier for the bundle that won't change as a bundle is copied from server to server."
+        default=None,
+        description="A persistent identifier for the bundle that won't change as a bundle is copied from server to server.",
     )
     type: typing.Optional[BundleType] = pydantic.Field(
-        description="Indicates the purpose of this bundle - how it is intended to be used."
+        default=None, description="Indicates the purpose of this bundle - how it is intended to be used."
     )
     timestamp: typing.Optional[Instant] = pydantic.Field(
-        description="The date/time that the bundle was assembled - i.e. when the resources were placed in the bundle."
+        default=None,
+        description="The date/time that the bundle was assembled - i.e. when the resources were placed in the bundle.",
     )
     total: typing.Optional[UnsignedInt] = pydantic.Field(
-        description="If a set of search matches, this is the total number of entries of type 'match' across all pages in the search. It does not include search.mode = 'include' or 'outcome' entries and it does not provide a count of the number of entries in the Bundle."
+        default=None,
+        description="If a set of search matches, this is the total number of entries of type 'match' across all pages in the search. It does not include search.mode = 'include' or 'outcome' entries and it does not provide a count of the number of entries in the Bundle.",
     )
     link: typing.Optional[typing.List[BundleLink]] = pydantic.Field(
-        description="A series of links that provide context to this bundle."
+        default=None, description="A series of links that provide context to this bundle."
     )
     entry: typing.Optional[typing.List[BundleEntry]] = pydantic.Field(
-        description="An entry in a bundle resource - will either contain a resource or information about a resource (transactions and history only)."
+        default=None,
+        description="An entry in a bundle resource - will either contain a resource or information about a resource (transactions and history only).",
     )
     signature: typing.Optional[Signature] = pydantic.Field(
-        description="Digital Signature - base64 encoded. XML-DSig or a JWT."
+        default=None, description="Digital Signature - base64 encoded. XML-DSig or a JWT."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

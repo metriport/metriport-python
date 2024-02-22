@@ -23,43 +23,54 @@ class SpecimenCollection(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    collector: typing.Optional[Reference] = pydantic.Field(description="Person who collected the specimen.")
+    collector: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="Person who collected the specimen."
+    )
     collected_date_time: typing.Optional[str] = pydantic.Field(
         alias="collectedDateTime",
+        default=None,
         description="Time when specimen was collected from subject - the physiologically relevant time.",
     )
     collected_period: typing.Optional[Period] = pydantic.Field(
         alias="collectedPeriod",
+        default=None,
         description="Time when specimen was collected from subject - the physiologically relevant time.",
     )
     duration: typing.Optional[Duration] = pydantic.Field(
-        description="The span of time over which the collection of a specimen occurred."
+        default=None, description="The span of time over which the collection of a specimen occurred."
     )
     quantity: typing.Optional[Quantity] = pydantic.Field(
-        description="The quantity of specimen collected; for instance the volume of a blood sample, or the physical measurement of an anatomic pathology sample."
+        default=None,
+        description="The quantity of specimen collected; for instance the volume of a blood sample, or the physical measurement of an anatomic pathology sample.",
     )
     method: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="A coded value specifying the technique that is used to perform the procedure."
+        default=None, description="A coded value specifying the technique that is used to perform the procedure."
     )
     body_site: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="bodySite",
+        default=None,
         description="Anatomical location from which the specimen was collected (if subject is a patient). This is the target site. This element is not used for environmental specimens.",
     )
     fasting_status_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="fastingStatusCodeableConcept",
+        default=None,
         description="Abstinence or reduction from some or all food, drink, or both, for a period of time prior to sample collection.",
     )
     fasting_status_duration: typing.Optional[Duration] = pydantic.Field(
         alias="fastingStatusDuration",
+        default=None,
         description="Abstinence or reduction from some or all food, drink, or both, for a period of time prior to sample collection.",
     )
 

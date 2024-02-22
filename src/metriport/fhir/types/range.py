@@ -19,13 +19,19 @@ class Range(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
-    low: typing.Optional[Quantity] = pydantic.Field(description="The low limit. The boundary is inclusive.")
-    high: typing.Optional[Quantity] = pydantic.Field(description="The high limit. The boundary is inclusive.")
+    low: typing.Optional[Quantity] = pydantic.Field(
+        default=None, description="The low limit. The boundary is inclusive."
+    )
+    high: typing.Optional[Quantity] = pydantic.Field(
+        default=None, description="The high limit. The boundary is inclusive."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -22,43 +20,53 @@ class JsonWebKey(pydantic.BaseModel):
     A JSON object that represents a cryptographic key. The members of the object represent properties of the key, including its value.
     """
 
-    resource_type: typing_extensions.Literal["JsonWebKey"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["JsonWebKey"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
-    active: typing.Optional[bool] = pydantic.Field(description="Whether this key is in active use.")
-    alg: typing.Optional[str] = pydantic.Field(description="The specific cryptographic algorithm used with the key.")
-    kty: typing.Optional[str] = pydantic.Field(description="The family of cryptographic algorithms used with the key.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
+    active: typing.Optional[bool] = pydantic.Field(default=None, description="Whether this key is in active use.")
+    alg: typing.Optional[str] = pydantic.Field(
+        default=None, description="The specific cryptographic algorithm used with the key."
+    )
+    kty: typing.Optional[str] = pydantic.Field(
+        default=None, description="The family of cryptographic algorithms used with the key."
+    )
     use: typing.Optional[str] = pydantic.Field(
-        description="How the key was meant to be used; sig represents the signature."
+        default=None, description="How the key was meant to be used; sig represents the signature."
     )
     key_ops: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="The operation(s) for which the key is intended to be used."
+        default=None, description="The operation(s) for which the key is intended to be used."
     )
     x_5_c: typing.Optional[typing.List[str]] = pydantic.Field(
         alias="x5c",
+        default=None,
         description="The x.509 certificate chain. The first entry in the array is the certificate to use for token verification; the other certificates can be used to verify this first certificate.",
     )
-    n: typing.Optional[str] = pydantic.Field(description="The modulus for the RSA public key.")
-    e: typing.Optional[str] = pydantic.Field(description="The exponent for the RSA public key.")
-    kid: typing.Optional[str] = pydantic.Field(description="The unique identifier for the key.")
+    n: typing.Optional[str] = pydantic.Field(default=None, description="The modulus for the RSA public key.")
+    e: typing.Optional[str] = pydantic.Field(default=None, description="The exponent for the RSA public key.")
+    kid: typing.Optional[str] = pydantic.Field(default=None, description="The unique identifier for the key.")
     x_5_t: typing.Optional[str] = pydantic.Field(
-        alias="x5t", description="The thumbprint of the x.509 cert (SHA-1 thumbprint)."
+        alias="x5t", default=None, description="The thumbprint of the x.509 cert (SHA-1 thumbprint)."
     )
-    d: typing.Optional[str] = pydantic.Field(description="The exponent for the RSA private key.")
-    p: typing.Optional[str] = pydantic.Field(description="The first prime factor.")
-    q: typing.Optional[str] = pydantic.Field(description="The second prime factor.")
-    dp: typing.Optional[str] = pydantic.Field(description="The first factor CRT exponent.")
-    dq: typing.Optional[str] = pydantic.Field(description="The second factor CRT exponent.")
-    qi: typing.Optional[str] = pydantic.Field(description="The first CRT coefficient.")
+    d: typing.Optional[str] = pydantic.Field(default=None, description="The exponent for the RSA private key.")
+    p: typing.Optional[str] = pydantic.Field(default=None, description="The first prime factor.")
+    q: typing.Optional[str] = pydantic.Field(default=None, description="The second prime factor.")
+    dp: typing.Optional[str] = pydantic.Field(default=None, description="The first factor CRT exponent.")
+    dq: typing.Optional[str] = pydantic.Field(default=None, description="The second factor CRT exponent.")
+    qi: typing.Optional[str] = pydantic.Field(default=None, description="The first CRT coefficient.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .contact_point import ContactPoint
@@ -23,20 +21,27 @@ class Subscription(BaseResource):
     The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined "channel" so that another system can take an appropriate action.
     """
 
-    resource_type: typing_extensions.Literal["Subscription"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Subscription"] = pydantic.Field(alias="resourceType")
     status: typing.Optional[SubscriptionStatus] = pydantic.Field(
-        description="The status of the subscription, which marks the server state for managing the subscription."
+        default=None,
+        description="The status of the subscription, which marks the server state for managing the subscription.",
     )
     contact: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting."
+        default=None,
+        description="Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.",
     )
-    end: typing.Optional[Instant] = pydantic.Field(description="The time for the server to turn the subscription off.")
-    reason: typing.Optional[str] = pydantic.Field(description="A description of why this subscription is defined.")
+    end: typing.Optional[Instant] = pydantic.Field(
+        default=None, description="The time for the server to turn the subscription off."
+    )
+    reason: typing.Optional[str] = pydantic.Field(
+        default=None, description="A description of why this subscription is defined."
+    )
     criteria: typing.Optional[str] = pydantic.Field(
-        description="The rules that the server should use to determine when to generate notifications for this subscription."
+        default=None,
+        description="The rules that the server should use to determine when to generate notifications for this subscription.",
     )
     error: typing.Optional[str] = pydantic.Field(
-        description="A record of the last error that occurred when the server processed a notification."
+        default=None, description="A record of the last error that occurred when the server processed a notification."
     )
     channel: SubscriptionChannel = pydantic.Field(
         description="Details where to send notifications when resources are received that meet the criteria."

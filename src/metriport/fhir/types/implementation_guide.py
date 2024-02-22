@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -33,71 +31,88 @@ class ImplementationGuide(BaseResource):
     A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
     """
 
-    resource_type: typing_extensions.Literal["ImplementationGuide"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ImplementationGuide"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this implementation guide when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this implementation guide is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the implementation guide is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this implementation guide when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this implementation guide is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the implementation guide is stored on different servers.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the implementation guide when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the implementation guide author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the implementation guide when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the implementation guide author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the implementation guide. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the implementation guide. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the implementation guide."
+        default=None, description="A short, descriptive, user-friendly title for the implementation guide."
     )
     status: typing.Optional[ImplementationGuideStatus] = pydantic.Field(
-        description="The status of this implementation guide. Enables tracking the life-cycle of the content."
+        default=None,
+        description="The status of this implementation guide. Enables tracking the life-cycle of the content.",
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this implementation guide is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this implementation guide is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the implementation guide was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the implementation guide changes."
+        default=None,
+        description="The date (and optionally time) when the implementation guide was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the implementation guide changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the implementation guide."
+        default=None, description="The name of the organization or individual that published the implementation guide."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the implementation guide from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the implementation guide from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate implementation guide instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the implementation guide is intended to be used."
+        default=None,
+        description="A legal or geographic region in which the implementation guide is intended to be used.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the implementation guide and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the implementation guide."
+        default=None,
+        description="A copyright statement relating to the implementation guide and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the implementation guide.",
     )
     package_id: typing.Optional[Id] = pydantic.Field(
         alias="packageId",
+        default=None,
         description="The NPM package name for this Implementation Guide, used in the NPM package distribution, which is the primary mechanism by which FHIR based tooling manages IG dependencies. This value must be globally unique, and should be assigned with care.",
     )
     license: typing.Optional[ImplementationGuideLicense] = pydantic.Field(
-        description="The license that applies to this Implementation Guide, using an SPDX license code, or 'not-open-source'."
+        default=None,
+        description="The license that applies to this Implementation Guide, using an SPDX license code, or 'not-open-source'.",
     )
     fhir_version: typing.Optional[typing.List[ImplementationGuideFhirVersionItem]] = pydantic.Field(
         alias="fhirVersion",
+        default=None,
         description="The version(s) of the FHIR specification that this ImplementationGuide targets - e.g. describes how to use. The value of this element is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 4.0.1. for this version.",
     )
     depends_on: typing.Optional[typing.List[ImplementationGuideDependsOn]] = pydantic.Field(
         alias="dependsOn",
+        default=None,
         description="Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.",
     )
     global_: typing.Optional[typing.List[ImplementationGuideGlobal]] = pydantic.Field(
         alias="global",
+        default=None,
         description="A set of profiles that all resources covered by this implementation guide must conform to.",
     )
     definition: typing.Optional[ImplementationGuideDefinition] = pydantic.Field(
-        description="The information needed by an IG publisher tool to publish the whole implementation guide."
+        default=None,
+        description="The information needed by an IG publisher tool to publish the whole implementation guide.",
     )
     manifest: typing.Optional[ImplementationGuideManifest] = pydantic.Field(
-        description="Information about an assembled implementation guide, created by the publication tooling."
+        default=None,
+        description="Information about an assembled implementation guide, created by the publication tooling.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

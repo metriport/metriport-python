@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -30,15 +28,15 @@ class Immunization(BaseResource):
     Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.
     """
 
-    resource_type: typing_extensions.Literal["Immunization"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Immunization"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this immunization record."
+        default=None, description="A unique identifier assigned to this immunization record."
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="Indicates the current status of the immunization event."
+        default=None, description="Indicates the current status of the immunization event."
     )
     status_reason: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="statusReason", description="Indicates the reason the immunization event was not performed."
+        alias="statusReason", default=None, description="Indicates the reason the immunization event was not performed."
     )
     vaccine_code: CodeableConcept = pydantic.Field(
         alias="vaccineCode", description="Vaccine that was administered or was to be administered."
@@ -47,77 +45,90 @@ class Immunization(BaseResource):
         description="The patient who either received or did not receive the immunization."
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The visit or admission or other contact between patient and health care provider the immunization was performed as part of."
+        default=None,
+        description="The visit or admission or other contact between patient and health care provider the immunization was performed as part of.",
     )
     occurrence_date_time: typing.Optional[str] = pydantic.Field(
-        alias="occurrenceDateTime", description="Date vaccine administered or was to be administered."
+        alias="occurrenceDateTime", default=None, description="Date vaccine administered or was to be administered."
     )
     occurrence_string: typing.Optional[str] = pydantic.Field(
-        alias="occurrenceString", description="Date vaccine administered or was to be administered."
+        alias="occurrenceString", default=None, description="Date vaccine administered or was to be administered."
     )
     recorded: typing.Optional[DateTime] = pydantic.Field(
-        description="The date the occurrence of the immunization was first captured in the record - potentially significantly after the occurrence of the event."
+        default=None,
+        description="The date the occurrence of the immunization was first captured in the record - potentially significantly after the occurrence of the event.",
     )
     primary_source: typing.Optional[bool] = pydantic.Field(
         alias="primarySource",
+        default=None,
         description="An indication that the content of the record is based on information from the person who administered the vaccine. This reflects the context under which the data was originally recorded.",
     )
     report_origin: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="reportOrigin",
+        default=None,
         description="The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.",
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="The service delivery location where the vaccine administration occurred."
+        default=None, description="The service delivery location where the vaccine administration occurred."
     )
-    manufacturer: typing.Optional[Reference] = pydantic.Field(description="Name of vaccine manufacturer.")
+    manufacturer: typing.Optional[Reference] = pydantic.Field(default=None, description="Name of vaccine manufacturer.")
     lot_number: typing.Optional[str] = pydantic.Field(
-        alias="lotNumber", description="Lot number of the vaccine product."
+        alias="lotNumber", default=None, description="Lot number of the vaccine product."
     )
     expiration_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="expirationDate", description="Date vaccine batch expires."
+        alias="expirationDate", default=None, description="Date vaccine batch expires."
     )
-    site: typing.Optional[CodeableConcept] = pydantic.Field(description="Body site where vaccine was administered.")
+    site: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="Body site where vaccine was administered."
+    )
     route: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The path by which the vaccine product is taken into the body."
+        default=None, description="The path by which the vaccine product is taken into the body."
     )
     dose_quantity: typing.Optional[Quantity] = pydantic.Field(
-        alias="doseQuantity", description="The quantity of vaccine product that was administered."
+        alias="doseQuantity", default=None, description="The quantity of vaccine product that was administered."
     )
     performer: typing.Optional[typing.List[ImmunizationPerformer]] = pydantic.Field(
-        description="Indicates who performed the immunization event."
+        default=None, description="Indicates who performed the immunization event."
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Extra information about the immunization that is not conveyed by the other attributes."
+        default=None,
+        description="Extra information about the immunization that is not conveyed by the other attributes.",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="reasonCode", description="Reasons why the vaccine was administered."
+        alias="reasonCode", default=None, description="Reasons why the vaccine was administered."
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Condition, Observation or DiagnosticReport that supports why the immunization was administered.",
     )
     is_subpotent: typing.Optional[bool] = pydantic.Field(
         alias="isSubpotent",
+        default=None,
         description="Indication if a dose is considered to be subpotent. By default, a dose should be considered to be potent.",
     )
     subpotent_reason: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="subpotentReason", description="Reason why a dose is considered to be subpotent."
+        alias="subpotentReason", default=None, description="Reason why a dose is considered to be subpotent."
     )
     education: typing.Optional[typing.List[ImmunizationEducation]] = pydantic.Field(
-        description="Educational material presented to the patient (or guardian) at the time of vaccine administration."
+        default=None,
+        description="Educational material presented to the patient (or guardian) at the time of vaccine administration.",
     )
     program_eligibility: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="programEligibility", description="Indicates a patient's eligibility for a funding program."
+        alias="programEligibility", default=None, description="Indicates a patient's eligibility for a funding program."
     )
     funding_source: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="fundingSource",
+        default=None,
         description="Indicates the source of the vaccine actually administered. This may be different than the patient eligibility (e.g. the patient may be eligible for a publically purchased vaccine but due to inventory issues, vaccine purchased with private funds was actually administered).",
     )
     reaction: typing.Optional[typing.List[ImmunizationReaction]] = pydantic.Field(
-        description="Categorical data indicating that an adverse event is associated in time to an immunization."
+        default=None,
+        description="Categorical data indicating that an adverse event is associated in time to an immunization.",
     )
     protocol_applied: typing.Optional[typing.List[ImmunizationProtocolApplied]] = pydantic.Field(
         alias="protocolApplied",
+        default=None,
         description="The protocol (set of recommendations) being followed by the provider who administered the dose.",
     )
 

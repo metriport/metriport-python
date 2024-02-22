@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,37 +25,42 @@ class Provenance(BaseResource):
     Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
     """
 
-    resource_type: typing_extensions.Literal["Provenance"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Provenance"] = pydantic.Field(alias="resourceType")
     target: typing.List[Reference] = pydantic.Field(
         description="The Reference(s) that were generated or updated by the activity described in this resource. A provenance can point to more than one target if multiple resources were created/updated by the same activity."
     )
     occurred_period: typing.Optional[Period] = pydantic.Field(
-        alias="occurredPeriod", description="The period during which the activity occurred."
+        alias="occurredPeriod", default=None, description="The period during which the activity occurred."
     )
     occurred_date_time: typing.Optional[str] = pydantic.Field(
-        alias="occurredDateTime", description="The period during which the activity occurred."
+        alias="occurredDateTime", default=None, description="The period during which the activity occurred."
     )
     recorded: typing.Optional[Instant] = pydantic.Field(
-        description="The instant of time at which the activity was recorded."
+        default=None, description="The instant of time at which the activity was recorded."
     )
     policy: typing.Optional[typing.List[Uri]] = pydantic.Field(
-        description="Policy or plan the activity was defined by. Typically, a single activity may have multiple applicable policy documents, such as patient consent, guarantor funding, etc."
+        default=None,
+        description="Policy or plan the activity was defined by. Typically, a single activity may have multiple applicable policy documents, such as patient consent, guarantor funding, etc.",
     )
-    location: typing.Optional[Reference] = pydantic.Field(description="Where the activity occurred, if relevant.")
+    location: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="Where the activity occurred, if relevant."
+    )
     reason: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The reason that the activity was taking place."
+        default=None, description="The reason that the activity was taking place."
     )
     activity: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities."
+        default=None,
+        description="An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.",
     )
     agent: typing.List[ProvenanceAgent] = pydantic.Field(
         description="An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
     )
     entity: typing.Optional[typing.List[ProvenanceEntity]] = pydantic.Field(
-        description="An entity used in this activity."
+        default=None, description="An entity used in this activity."
     )
     signature: typing.Optional[typing.List[Signature]] = pydantic.Field(
-        description="A digital signature on the target Reference(s). The signer should match a Provenance.agent. The purpose of the signature is indicated."
+        default=None,
+        description="A digital signature on the target Reference(s). The signer should match a Provenance.agent. The purpose of the signature is indicated.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

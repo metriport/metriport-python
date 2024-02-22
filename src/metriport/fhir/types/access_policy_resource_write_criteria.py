@@ -17,10 +17,11 @@ class AccessPolicyResourceWriteCriteria(pydantic.BaseModel):
     """
 
     pre: typing.Optional[str] = pydantic.Field(
-        description="Invariant to check against the state of the resource before modification."
+        default=None, description="Invariant to check against the state of the resource before modification."
     )
     post: typing.Optional[str] = pydantic.Field(
-        description="Invariant to check against the state of the resource with modifications tentatively applied."
+        default=None,
+        description="Invariant to check against the state of the resource with modifications tentatively applied.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

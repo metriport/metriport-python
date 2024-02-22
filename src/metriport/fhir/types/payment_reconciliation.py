@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -29,45 +27,52 @@ class PaymentReconciliation(BaseResource):
     This resource provides the details including amount of a payment and allocates the payment items being paid.
     """
 
-    resource_type: typing_extensions.Literal["PaymentReconciliation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PaymentReconciliation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this payment reconciliation."
+        default=None, description="A unique identifier assigned to this payment reconciliation."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
     period: typing.Optional[Period] = pydantic.Field(
-        description="The period of time for which payments have been gathered into this bulk payment for settlement."
+        default=None,
+        description="The period of time for which payments have been gathered into this bulk payment for settlement.",
     )
-    created: typing.Optional[DateTime] = pydantic.Field(description="The date when the resource was created.")
+    created: typing.Optional[DateTime] = pydantic.Field(
+        default=None, description="The date when the resource was created."
+    )
     payment_issuer: typing.Optional[Reference] = pydantic.Field(
-        alias="paymentIssuer", description="The party who generated the payment."
+        alias="paymentIssuer", default=None, description="The party who generated the payment."
     )
-    request: typing.Optional[Reference] = pydantic.Field(description="Original request resource reference.")
+    request: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="Original request resource reference."
+    )
     requestor: typing.Optional[Reference] = pydantic.Field(
-        description="The practitioner who is responsible for the services rendered to the patient."
+        default=None, description="The practitioner who is responsible for the services rendered to the patient."
     )
     outcome: typing.Optional[PaymentReconciliationOutcome] = pydantic.Field(
-        description="The outcome of a request for a reconciliation."
+        default=None, description="The outcome of a request for a reconciliation."
     )
     disposition: typing.Optional[str] = pydantic.Field(
-        description="A human readable description of the status of the request for the reconciliation."
+        default=None, description="A human readable description of the status of the request for the reconciliation."
     )
     payment_date: typing.Optional[dt.date] = pydantic.Field(
-        alias="paymentDate", description="The date of payment as indicated on the financial instrument."
+        alias="paymentDate", default=None, description="The date of payment as indicated on the financial instrument."
     )
     payment_amount: Money = pydantic.Field(
         alias="paymentAmount", description="Total payment amount as indicated on the financial instrument."
     )
     payment_identifier: typing.Optional[Identifier] = pydantic.Field(
-        alias="paymentIdentifier", description="Issuer's unique identifier for the payment instrument."
+        alias="paymentIdentifier", default=None, description="Issuer's unique identifier for the payment instrument."
     )
     detail: typing.Optional[typing.List[PaymentReconciliationDetail]] = pydantic.Field(
-        description="Distribution of the payment amount for a previously acknowledged payable."
+        default=None, description="Distribution of the payment amount for a previously acknowledged payable."
     )
     form_code: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="formCode", description="A code for the form to be used for printing the content."
+        alias="formCode", default=None, description="A code for the form to be used for printing the content."
     )
     process_note: typing.Optional[typing.List[PaymentReconciliationProcessNote]] = pydantic.Field(
-        alias="processNote", description="A note that describes or explains the processing in a human readable form."
+        alias="processNote",
+        default=None,
+        description="A note that describes or explains the processing in a human readable form.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -24,18 +24,22 @@ class ProjectSite(pydantic.BaseModel):
     )
     google_client_id: typing.Optional[str] = pydantic.Field(
         alias="googleClientId",
+        default=None,
         description="The publicly visible Google Client ID for the site. This is used to authenticate users with Google. This value is available in the Google Developer Console.",
     )
     google_client_secret: typing.Optional[str] = pydantic.Field(
         alias="googleClientSecret",
+        default=None,
         description="The private Google Client Secret for the site. This value is available in the Google Developer Console.",
     )
     recaptcha_site_key: typing.Optional[str] = pydantic.Field(
         alias="recaptchaSiteKey",
+        default=None,
         description="The publicly visible reCAPTCHA site key. This value is generated when you create a new reCAPTCHA site in the reCAPTCHA admin console. Use this site key in the HTML code your site serves to users.",
     )
     recaptcha_secret_key: typing.Optional[str] = pydantic.Field(
         alias="recaptchaSecretKey",
+        default=None,
         description="The private reCAPTCHA secret key. This value is generated when you create a new reCAPTCHA site in the reCAPTCHA admin console. Use this secret key for communication between your site and reCAPTCHA.",
     )
 

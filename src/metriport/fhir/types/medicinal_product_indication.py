@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,35 +22,43 @@ class MedicinalProductIndication(BaseResource):
     Indication for the Medicinal Product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductIndication"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductIndication"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The medication for which this is an indication."
+        default=None, description="The medication for which this is an indication."
     )
     disease_symptom_procedure: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="diseaseSymptomProcedure",
+        default=None,
         description="The disease, symptom or procedure that is the indication for treatment.",
     )
     disease_status: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="diseaseStatus", description="The status of the disease or symptom for which the indication applies."
+        alias="diseaseStatus",
+        default=None,
+        description="The status of the disease or symptom for which the indication applies.",
     )
     comorbidity: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Comorbidity (concurrent condition) or co-infection as part of the indication."
+        default=None, description="Comorbidity (concurrent condition) or co-infection as part of the indication."
     )
     intended_effect: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="intendedEffect", description="The intended effect, aim or strategy to be achieved by the indication."
+        alias="intendedEffect",
+        default=None,
+        description="The intended effect, aim or strategy to be achieved by the indication.",
     )
     duration: typing.Optional[Quantity] = pydantic.Field(
-        description="Timing or duration information as part of the indication."
+        default=None, description="Timing or duration information as part of the indication."
     )
     other_therapy: typing.Optional[typing.List[MedicinalProductIndicationOtherTherapy]] = pydantic.Field(
         alias="otherTherapy",
+        default=None,
         description="Information about the use of the medicinal product in relation to other therapies described as part of the indication.",
     )
     undesirable_effect: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="undesirableEffect", description="Describe the undesirable effects of the medicinal product."
+        alias="undesirableEffect",
+        default=None,
+        description="Describe the undesirable effects of the medicinal product.",
     )
     population: typing.Optional[typing.List[Population]] = pydantic.Field(
-        description="The population group to which this applies."
+        default=None, description="The population group to which this applies."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,24 +20,28 @@ class MedicinalProductInteraction(BaseResource):
     The interactions of the medicinal product with other medicinal products, or other forms of interactions.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductInteraction"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductInteraction"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The medication for which this is a described interaction."
+        default=None, description="The medication for which this is a described interaction."
     )
-    description: typing.Optional[str] = pydantic.Field(description="The interaction described.")
+    description: typing.Optional[str] = pydantic.Field(default=None, description="The interaction described.")
     interactant: typing.Optional[typing.List[MedicinalProductInteractionInteractant]] = pydantic.Field(
-        description="The specific medication, food or laboratory test that interacts."
+        default=None, description="The specific medication, food or laboratory test that interacts."
     )
     type: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The type of the interaction e.g. drug-drug interaction, drug-food interaction, drug-lab test interaction."
+        default=None,
+        description="The type of the interaction e.g. drug-drug interaction, drug-food interaction, drug-lab test interaction.",
     )
     effect: typing.Optional[CodeableConcept] = pydantic.Field(
-        description='The effect of the interaction, for example "reduced gastric absorption of primary medication".'
+        default=None,
+        description='The effect of the interaction, for example "reduced gastric absorption of primary medication".',
     )
     incidence: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The incidence of the interaction, e.g. theoretical, observed."
+        default=None, description="The incidence of the interaction, e.g. theoretical, observed."
     )
-    management: typing.Optional[CodeableConcept] = pydantic.Field(description="Actions for managing the interaction.")
+    management: typing.Optional[CodeableConcept] = pydantic.Field(
+        default=None, description="Actions for managing the interaction."
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

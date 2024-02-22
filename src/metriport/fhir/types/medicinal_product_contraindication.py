@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -23,29 +21,33 @@ class MedicinalProductContraindication(BaseResource):
     The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductContraindication"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductContraindication"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The medication for which this is an indication."
+        default=None, description="The medication for which this is an indication."
     )
     disease: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The disease, symptom or procedure for the contraindication."
+        default=None, description="The disease, symptom or procedure for the contraindication."
     )
     disease_status: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="diseaseStatus", description="The status of the disease or symptom for the contraindication."
+        alias="diseaseStatus",
+        default=None,
+        description="The status of the disease or symptom for the contraindication.",
     )
     comorbidity: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A comorbidity (concurrent condition) or coinfection."
+        default=None, description="A comorbidity (concurrent condition) or coinfection."
     )
     therapeutic_indication: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="therapeuticIndication",
+        default=None,
         description="Information about the use of the medicinal product in relation to other therapies as part of the indication.",
     )
     other_therapy: typing.Optional[typing.List[MedicinalProductContraindicationOtherTherapy]] = pydantic.Field(
         alias="otherTherapy",
+        default=None,
         description="Information about the use of the medicinal product in relation to other therapies described as part of the indication.",
     )
     population: typing.Optional[typing.List[Population]] = pydantic.Field(
-        description="The population group to which this applies."
+        default=None, description="The population group to which this applies."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

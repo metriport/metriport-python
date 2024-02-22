@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -25,55 +23,65 @@ class ObservationDefinition(BaseResource):
     Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.
     """
 
-    resource_type: typing_extensions.Literal["ObservationDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ObservationDefinition"] = pydantic.Field(alias="resourceType")
     publisher: typing.Optional[Reference] = pydantic.Field(
-        description="The name of the individual or organization that published the ObservationDefinition."
+        default=None, description="The name of the individual or organization that published the ObservationDefinition."
     )
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A code that classifies the general type of observation."
+        default=None, description="A code that classifies the general type of observation."
     )
     code: CodeableConcept = pydantic.Field(
         description='Describes what will be observed. Sometimes this is called the observation "name".'
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this ObservationDefinition artifact."
+        default=None, description="A unique identifier assigned to this ObservationDefinition artifact."
     )
     permitted_data_type: typing.Optional[typing.List[ObservationDefinitionPermittedDataTypeItem]] = pydantic.Field(
         alias="permittedDataType",
+        default=None,
         description="The data types allowed for the value element of the instance observations conforming to this ObservationDefinition.",
     )
     multiple_results_allowed: typing.Optional[bool] = pydantic.Field(
         alias="multipleResultsAllowed",
+        default=None,
         description="Multiple results allowed for observations conforming to this ObservationDefinition.",
     )
     method: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The method or technique used to perform the observation."
+        default=None, description="The method or technique used to perform the observation."
     )
     preferred_report_name: typing.Optional[str] = pydantic.Field(
         alias="preferredReportName",
+        default=None,
         description="The preferred name to be used when reporting the results of observations conforming to this ObservationDefinition.",
     )
     quantitative_details: typing.Optional[ObservationDefinitionQuantitativeDetails] = pydantic.Field(
-        alias="quantitativeDetails", description="Characteristics for quantitative results of this observation."
+        alias="quantitativeDetails",
+        default=None,
+        description="Characteristics for quantitative results of this observation.",
     )
     qualified_interval: typing.Optional[typing.List[ObservationDefinitionQualifiedInterval]] = pydantic.Field(
         alias="qualifiedInterval",
+        default=None,
         description="Multiple ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.",
     )
     valid_coded_value_set: typing.Optional[Reference] = pydantic.Field(
         alias="validCodedValueSet",
+        default=None,
         description="The set of valid coded results for the observations conforming to this ObservationDefinition.",
     )
     normal_coded_value_set: typing.Optional[Reference] = pydantic.Field(
         alias="normalCodedValueSet",
+        default=None,
         description="The set of normal coded results for the observations conforming to this ObservationDefinition.",
     )
     abnormal_coded_value_set: typing.Optional[Reference] = pydantic.Field(
         alias="abnormalCodedValueSet",
+        default=None,
         description="The set of abnormal coded results for the observation conforming to this ObservationDefinition.",
     )
     critical_coded_value_set: typing.Optional[Reference] = pydantic.Field(
         alias="criticalCodedValueSet",
+        default=None,
         description="The set of critical coded results for the observation conforming to this ObservationDefinition.",
     )
 

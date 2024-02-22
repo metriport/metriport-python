@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -25,41 +23,49 @@ class QuestionnaireResponse(BaseResource):
     A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.
     """
 
-    resource_type: typing_extensions.Literal["QuestionnaireResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["QuestionnaireResponse"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="A business identifier assigned to a particular completed (or partially completed) questionnaire."
+        default=None,
+        description="A business identifier assigned to a particular completed (or partially completed) questionnaire.",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description="The order, proposal or plan that is fulfilled in whole or in part by this QuestionnaireResponse. For example, a ServiceRequest seeking an intake assessment or a decision support recommendation to assess for post-partum depression.",
     )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="partOf",
+        default=None,
         description="A procedure or observation that this questionnaire was performed as part of the execution of. For example, the surgery a checklist was executed as part of.",
     )
     questionnaire: typing.Optional[Canonical] = pydantic.Field(
-        description="The Questionnaire that defines and organizes the questions for which answers are being provided."
+        default=None,
+        description="The Questionnaire that defines and organizes the questions for which answers are being provided.",
     )
     status: typing.Optional[QuestionnaireResponseStatus] = pydantic.Field(
-        description="The position of the questionnaire response within its overall lifecycle."
+        default=None, description="The position of the questionnaire response within its overall lifecycle."
     )
     subject: typing.Optional[Reference] = pydantic.Field(
-        description="The subject of the questionnaire response. This could be a patient, organization, practitioner, device, etc. This is who/what the answers apply to, but is not necessarily the source of information."
+        default=None,
+        description="The subject of the questionnaire response. This could be a patient, organization, practitioner, device, etc. This is who/what the answers apply to, but is not necessarily the source of information.",
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The Encounter during which this questionnaire response was created or to which the creation of this record is tightly associated."
+        default=None,
+        description="The Encounter during which this questionnaire response was created or to which the creation of this record is tightly associated.",
     )
     authored: typing.Optional[DateTime] = pydantic.Field(
-        description="The date and/or time that this set of answers were last changed."
+        default=None, description="The date and/or time that this set of answers were last changed."
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system."
+        default=None,
+        description="Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system.",
     )
     source: typing.Optional[Reference] = pydantic.Field(
-        description="The person who answered the questions about the subject."
+        default=None, description="The person who answered the questions about the subject."
     )
     item: typing.Optional[typing.List[QuestionnaireResponseItem]] = pydantic.Field(
-        description="A group or question item from the original questionnaire for which answers are provided."
+        default=None,
+        description="A group or question item from the original questionnaire for which answers are provided.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

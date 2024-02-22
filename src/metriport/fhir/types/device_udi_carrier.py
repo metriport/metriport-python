@@ -21,35 +21,43 @@ class DeviceUdiCarrier(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     device_identifier: typing.Optional[str] = pydantic.Field(
         alias="deviceIdentifier",
+        default=None,
         description="The device identifier (DI) is a mandatory, fixed portion of a UDI that identifies the labeler and the specific version or model of a device.",
     )
     issuer: typing.Optional[Uri] = pydantic.Field(
-        description="Organization that is charged with issuing UDIs for devices. For example, the US FDA issuers include : 1) GS1: http://hl7.org/fhir/NamingSystem/gs1-di, 2) HIBCC: http://hl7.org/fhir/NamingSystem/hibcc-dI, 3) ICCBBA for blood containers: http://hl7.org/fhir/NamingSystem/iccbba-blood-di, 4) ICCBA for other devices: http://hl7.org/fhir/NamingSystem/iccbba-other-di."
+        default=None,
+        description="Organization that is charged with issuing UDIs for devices. For example, the US FDA issuers include : 1) GS1: http://hl7.org/fhir/NamingSystem/gs1-di, 2) HIBCC: http://hl7.org/fhir/NamingSystem/hibcc-dI, 3) ICCBBA for blood containers: http://hl7.org/fhir/NamingSystem/iccbba-blood-di, 4) ICCBA for other devices: http://hl7.org/fhir/NamingSystem/iccbba-other-di.",
     )
     jurisdiction: typing.Optional[Uri] = pydantic.Field(
-        description="The identity of the authoritative source for UDI generation within a jurisdiction. All UDIs are globally unique within a single namespace with the appropriate repository uri as the system. For example, UDIs of devices managed in the U.S. by the FDA, the value is http://hl7.org/fhir/NamingSystem/fda-udi."
+        default=None,
+        description="The identity of the authoritative source for UDI generation within a jurisdiction. All UDIs are globally unique within a single namespace with the appropriate repository uri as the system. For example, UDIs of devices managed in the U.S. by the FDA, the value is http://hl7.org/fhir/NamingSystem/fda-udi.",
     )
     carrier_aidc: typing.Optional[Base64Binary] = pydantic.Field(
         alias="carrierAIDC",
+        default=None,
         description="The full UDI carrier of the Automatic Identification and Data Capture (AIDC) technology representation of the barcode string as printed on the packaging of the device - e.g., a barcode or RFID. Because of limitations on character sets in XML and the need to round-trip JSON data through XML, AIDC Formats _SHALL_ be base64 encoded.",
     )
     carrier_hrf: typing.Optional[str] = pydantic.Field(
         alias="carrierHRF",
+        default=None,
         description="The full UDI carrier as the human readable form (HRF) representation of the barcode string as printed on the packaging of the device.",
     )
     entry_type: typing.Optional[DeviceUdiCarrierEntryType] = pydantic.Field(
-        alias="entryType", description="A coded entry to indicate how the data was entered."
+        alias="entryType", default=None, description="A coded entry to indicate how the data was entered."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

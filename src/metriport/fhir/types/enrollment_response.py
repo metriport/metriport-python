@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -24,24 +22,29 @@ class EnrollmentResponse(BaseResource):
     This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.
     """
 
-    resource_type: typing_extensions.Literal["EnrollmentResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["EnrollmentResponse"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="The Response business identifier."
+        default=None, description="The Response business identifier."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
-    request: typing.Optional[Reference] = pydantic.Field(description="Original request resource reference.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
+    request: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="Original request resource reference."
+    )
     outcome: typing.Optional[EnrollmentResponseOutcome] = pydantic.Field(
-        description="Processing status: error, complete."
+        default=None, description="Processing status: error, complete."
     )
-    disposition: typing.Optional[str] = pydantic.Field(description="A description of the status of the adjudication.")
+    disposition: typing.Optional[str] = pydantic.Field(
+        default=None, description="A description of the status of the adjudication."
+    )
     created: typing.Optional[DateTime] = pydantic.Field(
-        description="The date when the enclosed suite of services were performed or completed."
+        default=None, description="The date when the enclosed suite of services were performed or completed."
     )
     organization: typing.Optional[Reference] = pydantic.Field(
-        description="The Insurer who produced this adjudicated response."
+        default=None, description="The Insurer who produced this adjudicated response."
     )
     request_provider: typing.Optional[Reference] = pydantic.Field(
         alias="requestProvider",
+        default=None,
         description="The practitioner who is responsible for the services rendered to the patient.",
     )
 

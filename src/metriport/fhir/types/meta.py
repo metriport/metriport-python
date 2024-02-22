@@ -23,39 +23,47 @@ class Meta(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     version_id: typing.Optional[Id] = pydantic.Field(
         alias="versionId",
+        default=None,
         description="The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.",
     )
     last_updated: typing.Optional[Instant] = pydantic.Field(
-        alias="lastUpdated", description="When the resource last changed - e.g. when the version changed."
+        alias="lastUpdated", default=None, description="When the resource last changed - e.g. when the version changed."
     )
     source: typing.Optional[Uri] = pydantic.Field(
-        description="A uri that identifies the source system of the resource. This provides a minimal amount of [[[Provenance]]] information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc."
+        default=None,
+        description="A uri that identifies the source system of the resource. This provides a minimal amount of [[[Provenance]]] information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.",
     )
     profile: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        description="A list of profiles (references to [[[StructureDefinition]]] resources) that this resource claims to conform to. The URL is a reference to [[[StructureDefinition.url]]]."
+        default=None,
+        description="A list of profiles (references to [[[StructureDefinition]]] resources) that this resource claims to conform to. The URL is a reference to [[[StructureDefinition.url]]].",
     )
     security: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure."
+        default=None,
+        description="Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.",
     )
     tag: typing.Optional[typing.List[Coding]] = pydantic.Field(
-        description="Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource."
+        default=None,
+        description="Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.",
     )
-    project: typing.Optional[Uri] = pydantic.Field(description="The project that contains this resource.")
+    project: typing.Optional[Uri] = pydantic.Field(default=None, description="The project that contains this resource.")
     author: typing.Optional[Reference] = pydantic.Field(
-        description="The individual, device or organization who initiated the last change."
+        default=None, description="The individual, device or organization who initiated the last change."
     )
     account: typing.Optional[Reference] = pydantic.Field(
-        description="Optional account reference that can be used for sub-project compartments."
+        default=None, description="Optional account reference that can be used for sub-project compartments."
     )
     compartment: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The list of compartments containing this resource. This is readonly and is set by the server."
+        default=None,
+        description="The list of compartments containing this resource. This is readonly and is set by the server.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

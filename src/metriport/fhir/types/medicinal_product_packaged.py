@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -25,27 +23,30 @@ class MedicinalProductPackaged(BaseResource):
     A medicinal product in a container or package.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductPackaged"] = pydantic.Field(alias="resourceType")
-    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="Unique identifier.")
-    subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The product with this is a pack for."
+    resource_type: typing.Literal["MedicinalProductPackaged"] = pydantic.Field(alias="resourceType")
+    identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
+        default=None, description="Unique identifier."
     )
-    description: typing.Optional[str] = pydantic.Field(description="Textual description.")
+    subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
+        default=None, description="The product with this is a pack for."
+    )
+    description: typing.Optional[str] = pydantic.Field(default=None, description="Textual description.")
     legal_status_of_supply: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="legalStatusOfSupply",
+        default=None,
         description="The legal status of supply of the medicinal product as classified by the regulator.",
     )
     marketing_status: typing.Optional[typing.List[MarketingStatus]] = pydantic.Field(
-        alias="marketingStatus", description="Marketing information."
+        alias="marketingStatus", default=None, description="Marketing information."
     )
     marketing_authorization: typing.Optional[Reference] = pydantic.Field(
-        alias="marketingAuthorization", description="Manufacturer of this Package Item."
+        alias="marketingAuthorization", default=None, description="Manufacturer of this Package Item."
     )
     manufacturer: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Manufacturer of this Package Item."
+        default=None, description="Manufacturer of this Package Item."
     )
     batch_identifier: typing.Optional[typing.List[MedicinalProductPackagedBatchIdentifier]] = pydantic.Field(
-        alias="batchIdentifier", description="Batch numbering."
+        alias="batchIdentifier", default=None, description="Batch numbering."
     )
     package_item: typing.List[MedicinalProductPackagedPackageItem] = pydantic.Field(
         alias="packageItem",

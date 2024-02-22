@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .appointment_participant import AppointmentParticipant
 from .appointment_status import AppointmentStatus
@@ -29,68 +27,91 @@ class Appointment(BaseResource):
     A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).
     """
 
-    resource_type: typing_extensions.Literal["Appointment"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Appointment"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="This records identifiers associated with this appointment concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
+        default=None,
+        description="This records identifiers associated with this appointment concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).",
     )
     status: typing.Optional[AppointmentStatus] = pydantic.Field(
-        description="The overall status of the Appointment. Each of the participants has their own participation status which indicates their involvement in the process, however this status indicates the shared status."
+        default=None,
+        description="The overall status of the Appointment. Each of the participants has their own participation status which indicates their involvement in the process, however this status indicates the shared status.",
     )
     cancelation_reason: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="cancelationReason",
+        default=None,
         description="The coded reason for the appointment being cancelled. This is often used in reporting/billing/futher processing to determine if further actions are required, or specific fees apply.",
     )
     service_category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="serviceCategory",
+        default=None,
         description="A broad categorization of the service that is to be performed during this appointment.",
     )
     service_type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="serviceType", description="The specific service that is to be performed during this appointment."
+        alias="serviceType",
+        default=None,
+        description="The specific service that is to be performed during this appointment.",
     )
     specialty: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The specialty of a practitioner that would be required to perform the service requested in this appointment."
+        default=None,
+        description="The specialty of a practitioner that would be required to perform the service requested in this appointment.",
     )
     appointment_type: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="appointmentType",
+        default=None,
         description="The style of appointment or patient that has been booked in the slot (not service type).",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="reasonCode",
+        default=None,
         description="The coded reason that this appointment is being scheduled. This is more clinical than administrative.",
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Reason the appointment has been scheduled to take place, as specified using information from another resource. When the patient arrives and the encounter begins it may be used as the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure.",
     )
     priority: typing.Optional[UnsignedInt] = pydantic.Field(
-        description="The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority)."
+        default=None,
+        description="The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority).",
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="The brief description of the appointment as would be shown on a subject line in a meeting request, or appointment list. Detailed or expanded information should be put in the comment field."
+        default=None,
+        description="The brief description of the appointment as would be shown on a subject line in a meeting request, or appointment list. Detailed or expanded information should be put in the comment field.",
     )
     supporting_information: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="supportingInformation",
+        default=None,
         description="Additional information to support the appointment provided when making the appointment.",
     )
-    start: typing.Optional[Instant] = pydantic.Field(description="Date/Time that the appointment is to take place.")
-    end: typing.Optional[Instant] = pydantic.Field(description="Date/Time that the appointment is to conclude.")
+    start: typing.Optional[Instant] = pydantic.Field(
+        default=None, description="Date/Time that the appointment is to take place."
+    )
+    end: typing.Optional[Instant] = pydantic.Field(
+        default=None, description="Date/Time that the appointment is to conclude."
+    )
     minutes_duration: typing.Optional[PositiveInt] = pydantic.Field(
         alias="minutesDuration",
+        default=None,
         description="Number of minutes that the appointment is to take. This can be less than the duration between the start and end times. For example, where the actual time of appointment is only an estimate or if a 30 minute appointment is being requested, but any time would work. Also, if there is, for example, a planned 15 minute break in the middle of a long appointment, the duration may be 15 minutes less than the difference between the start and end.",
     )
     slot: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The slots from the participants' schedules that will be filled by the appointment."
+        default=None, description="The slots from the participants' schedules that will be filled by the appointment."
     )
     created: typing.Optional[DateTime] = pydantic.Field(
-        description="The date that this appointment was initially created. This could be different to the meta.lastModified value on the initial entry, as this could have been before the resource was created on the FHIR server, and should remain unchanged over the lifespan of the appointment."
+        default=None,
+        description="The date that this appointment was initially created. This could be different to the meta.lastModified value on the initial entry, as this could have been before the resource was created on the FHIR server, and should remain unchanged over the lifespan of the appointment.",
     )
-    comment: typing.Optional[str] = pydantic.Field(description="Additional comments about the appointment.")
+    comment: typing.Optional[str] = pydantic.Field(
+        default=None, description="Additional comments about the appointment."
+    )
     patient_instruction: typing.Optional[str] = pydantic.Field(
         alias="patientInstruction",
+        default=None,
         description="While Appointment.comment contains information for internal use, Appointment.patientInstructions is used to capture patient facing information about the Appointment (e.g. please bring your referral or fast from 8pm night before).",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description="The service request this appointment is allocated to assess (e.g. incoming referral or procedure request).",
     )
     participant: typing.List[AppointmentParticipant] = pydantic.Field(
@@ -98,6 +119,7 @@ class Appointment(BaseResource):
     )
     requested_period: typing.Optional[typing.List[Period]] = pydantic.Field(
         alias="requestedPeriod",
+        default=None,
         description="A set of date ranges (potentially including times) that the appointment is preferred to be scheduled within. The duration (usually in minutes) could also be provided to indicate the length of the appointment to fill and populate the start/end times for the actual allocated time. However, in other situations the duration may be calculated by the scheduling system.",
     )
 

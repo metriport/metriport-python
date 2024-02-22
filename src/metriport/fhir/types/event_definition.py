@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -31,96 +29,119 @@ class EventDefinition(BaseResource):
     The EventDefinition resource provides a reusable description of when a particular event can occur.
     """
 
-    resource_type: typing_extensions.Literal["EventDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["EventDefinition"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this event definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this event definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the event definition is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this event definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this event definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the event definition is stored on different servers.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this event definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this event definition when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the event definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the event definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the event definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the event definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the event definition. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the event definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the event definition."
+        default=None, description="A short, descriptive, user-friendly title for the event definition."
     )
     subtitle: typing.Optional[str] = pydantic.Field(
-        description="An explanatory or alternate title for the event definition giving additional information about its content."
+        default=None,
+        description="An explanatory or alternate title for the event definition giving additional information about its content.",
     )
     status: typing.Optional[EventDefinitionStatus] = pydantic.Field(
-        description="The status of this event definition. Enables tracking the life-cycle of the content."
+        default=None, description="The status of this event definition. Enables tracking the life-cycle of the content."
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this event definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this event definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     subject_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="subjectCodeableConcept",
+        default=None,
         description="A code or group definition that describes the intended subject of the event definition.",
     )
     subject_reference: typing.Optional[Reference] = pydantic.Field(
         alias="subjectReference",
+        default=None,
         description="A code or group definition that describes the intended subject of the event definition.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the event definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the event definition changes."
+        default=None,
+        description="The date (and optionally time) when the event definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the event definition changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the event definition."
+        default=None, description="The name of the organization or individual that published the event definition."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the event definition from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the event definition from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate event definition instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the event definition is intended to be used."
+        default=None, description="A legal or geographic region in which the event definition is intended to be used."
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this event definition is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this event definition is needed and why it has been designed as it has.",
     )
     usage: typing.Optional[str] = pydantic.Field(
-        description="A detailed description of how the event definition is used from a clinical perspective."
+        default=None,
+        description="A detailed description of how the event definition is used from a clinical perspective.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the event definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the event definition."
+        default=None,
+        description="A copyright statement relating to the event definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the event definition.",
     )
     approval_date: typing.Optional[dt.date] = pydantic.Field(
         alias="approvalDate",
+        default=None,
         description="The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.",
     )
     last_review_date: typing.Optional[dt.date] = pydantic.Field(
         alias="lastReviewDate",
+        default=None,
         description="The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.",
     )
     effective_period: typing.Optional[Period] = pydantic.Field(
         alias="effectivePeriod",
+        default=None,
         description="The period during which the event definition content was or is planned to be in active use.",
     )
     topic: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Descriptive topics related to the module. Topics provide a high-level categorization of the module that can be useful for filtering and searching."
+        default=None,
+        description="Descriptive topics related to the module. Topics provide a high-level categorization of the module that can be useful for filtering and searching.",
     )
     author: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individiual or organization primarily involved in the creation and maintenance of the content."
+        default=None,
+        description="An individiual or organization primarily involved in the creation and maintenance of the content.",
     )
     editor: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization primarily responsible for internal coherence of the content."
+        default=None,
+        description="An individual or organization primarily responsible for internal coherence of the content.",
     )
     reviewer: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization primarily responsible for review of some aspect of the content."
+        default=None,
+        description="An individual or organization primarily responsible for review of some aspect of the content.",
     )
     endorser: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="An individual or organization responsible for officially endorsing the content for use in some setting."
+        default=None,
+        description="An individual or organization responsible for officially endorsing the content for use in some setting.",
     )
     related_artifact: typing.Optional[typing.List[RelatedArtifact]] = pydantic.Field(
         alias="relatedArtifact",
+        default=None,
         description="Related resources such as additional documentation, justification, or bibliographic references.",
     )
     trigger: typing.List[TriggerDefinition] = pydantic.Field(

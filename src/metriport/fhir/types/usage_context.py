@@ -19,28 +19,34 @@ class UsageContext(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     code: Coding = pydantic.Field(
         description="A code that identifies the type of context being specified by this usage context."
     )
     value_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="valueCodeableConcept",
+        default=None,
         description="A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.",
     )
     value_quantity: typing.Optional[Quantity] = pydantic.Field(
         alias="valueQuantity",
+        default=None,
         description="A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.",
     )
     value_range: typing.Optional[Range] = pydantic.Field(
         alias="valueRange",
+        default=None,
         description="A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.",
     )
     value_reference: typing.Optional[Reference] = pydantic.Field(
         alias="valueReference",
+        default=None,
         description="A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.",
     )
 

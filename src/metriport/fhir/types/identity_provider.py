@@ -28,7 +28,9 @@ class IdentityProvider(pydantic.BaseModel):
     client_id: str = pydantic.Field(alias="clientId", description="External Identity Provider client ID.")
     client_secret: str = pydantic.Field(alias="clientSecret", description="External Identity Provider client secret.")
     use_subject: typing.Optional[bool] = pydantic.Field(
-        alias="useSubject", description="Optional flag to use the subject field instead of the email field."
+        alias="useSubject",
+        default=None,
+        description="Optional flag to use the subject field instead of the email field.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

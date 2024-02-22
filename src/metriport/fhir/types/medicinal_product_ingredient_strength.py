@@ -21,13 +21,16 @@ class MedicinalProductIngredientStrength(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     presentation: Ratio = pydantic.Field(
@@ -35,21 +38,27 @@ class MedicinalProductIngredientStrength(pydantic.BaseModel):
     )
     presentation_low_limit: typing.Optional[Ratio] = pydantic.Field(
         alias="presentationLowLimit",
+        default=None,
         description="A lower limit for the quantity of substance in the unit of presentation. For use when there is a range of strengths, this is the lower limit, with the presentation attribute becoming the upper limit.",
     )
-    concentration: typing.Optional[Ratio] = pydantic.Field(description="The strength per unitary volume (or mass).")
+    concentration: typing.Optional[Ratio] = pydantic.Field(
+        default=None, description="The strength per unitary volume (or mass)."
+    )
     concentration_low_limit: typing.Optional[Ratio] = pydantic.Field(
         alias="concentrationLowLimit",
+        default=None,
         description="A lower limit for the strength per unitary volume (or mass), for when there is a range. The concentration attribute then becomes the upper limit.",
     )
     measurement_point: typing.Optional[str] = pydantic.Field(
-        alias="measurementPoint", description="For when strength is measured at a particular point or distance."
+        alias="measurementPoint",
+        default=None,
+        description="For when strength is measured at a particular point or distance.",
     )
     country: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The country or countries for which the strength range applies."
+        default=None, description="The country or countries for which the strength range applies."
     )
     reference_strength: typing.Optional[typing.List[MedicinalProductIngredientReferenceStrength]] = pydantic.Field(
-        alias="referenceStrength", description="Strength expressed in terms of a reference substance."
+        alias="referenceStrength", default=None, description="Strength expressed in terms of a reference substance."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

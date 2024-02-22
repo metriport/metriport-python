@@ -21,40 +21,52 @@ class VerificationResultAttestation(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     who: typing.Optional[Reference] = pydantic.Field(
-        description="The individual or organization attesting to information."
+        default=None, description="The individual or organization attesting to information."
     )
     on_behalf_of: typing.Optional[Reference] = pydantic.Field(
-        alias="onBehalfOf", description="When the who is asserting on behalf of another (organization or individual)."
+        alias="onBehalfOf",
+        default=None,
+        description="When the who is asserting on behalf of another (organization or individual).",
     )
     communication_method: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="communicationMethod",
+        default=None,
         description="The method by which attested information was submitted/retrieved (manual; API; Push).",
     )
-    date: typing.Optional[dt.date] = pydantic.Field(description="The date the information was attested to.")
+    date: typing.Optional[dt.date] = pydantic.Field(
+        default=None, description="The date the information was attested to."
+    )
     source_identity_certificate: typing.Optional[str] = pydantic.Field(
         alias="sourceIdentityCertificate",
+        default=None,
         description="A digital identity certificate associated with the attestation source.",
     )
     proxy_identity_certificate: typing.Optional[str] = pydantic.Field(
         alias="proxyIdentityCertificate",
+        default=None,
         description="A digital identity certificate associated with the proxy entity submitting attested information on behalf of the attestation source.",
     )
     proxy_signature: typing.Optional[Signature] = pydantic.Field(
         alias="proxySignature",
+        default=None,
         description="Signed assertion by the proxy entity indicating that they have the right to submit attested information on behalf of the attestation source.",
     )
     source_signature: typing.Optional[Signature] = pydantic.Field(
         alias="sourceSignature",
+        default=None,
         description="Signed assertion by the attestation source that they have attested to the information.",
     )
 

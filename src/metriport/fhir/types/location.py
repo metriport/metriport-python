@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .base_resource import BaseResource
@@ -29,58 +27,70 @@ class Location(BaseResource):
     Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.
     """
 
-    resource_type: typing_extensions.Literal["Location"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Location"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Unique code or number identifying the location to its users."
+        default=None, description="Unique code or number identifying the location to its users."
     )
     status: typing.Optional[LocationStatus] = pydantic.Field(
-        description="The status property covers the general availability of the resource, not the current value which may be covered by the operationStatus, or by a schedule/slots if they are configured for the location."
+        default=None,
+        description="The status property covers the general availability of the resource, not the current value which may be covered by the operationStatus, or by a schedule/slots if they are configured for the location.",
     )
     operational_status: typing.Optional[Coding] = pydantic.Field(
         alias="operationalStatus",
+        default=None,
         description="The operational status covers operation values most relevant to beds (but can also apply to rooms/units/chairs/etc. such as an isolation unit/dialysis chair). This typically covers concepts such as contamination, housekeeping, and other activities like maintenance.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="Name of the location as used by humans. Does not need to be unique."
+        default=None, description="Name of the location as used by humans. Does not need to be unique."
     )
     alias: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="A list of alternate names that the location is known as, or was known as, in the past."
+        default=None,
+        description="A list of alternate names that the location is known as, or was known as, in the past.",
     )
     description: typing.Optional[str] = pydantic.Field(
-        description="Description of the Location, which helps in finding or referencing the place."
+        default=None, description="Description of the Location, which helps in finding or referencing the place."
     )
     mode: typing.Optional[LocationMode] = pydantic.Field(
-        description="Indicates whether a resource instance represents a specific location or a class of locations."
+        default=None,
+        description="Indicates whether a resource instance represents a specific location or a class of locations.",
     )
     type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Indicates the type of function performed at the location."
+        default=None, description="Indicates the type of function performed at the location."
     )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="The contact details of communication devices available at the location. This can include phone numbers, fax numbers, mobile numbers, email addresses and web sites."
+        default=None,
+        description="The contact details of communication devices available at the location. This can include phone numbers, fax numbers, mobile numbers, email addresses and web sites.",
     )
-    address: typing.Optional[Address] = pydantic.Field(description="Physical location.")
+    address: typing.Optional[Address] = pydantic.Field(default=None, description="Physical location.")
     physical_type: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="physicalType", description="Physical form of the location, e.g. building, room, vehicle, road."
+        alias="physicalType",
+        default=None,
+        description="Physical form of the location, e.g. building, room, vehicle, road.",
     )
     position: typing.Optional[LocationPosition] = pydantic.Field(
-        description="The absolute geographic location of the Location, expressed using the WGS84 datum (This is the same co-ordinate system used in KML)."
+        default=None,
+        description="The absolute geographic location of the Location, expressed using the WGS84 datum (This is the same co-ordinate system used in KML).",
     )
     managing_organization: typing.Optional[Reference] = pydantic.Field(
         alias="managingOrganization",
+        default=None,
         description="The organization responsible for the provisioning and upkeep of the location.",
     )
     part_of: typing.Optional[Reference] = pydantic.Field(
-        alias="partOf", description="Another Location of which this Location is physically a part of."
+        alias="partOf", default=None, description="Another Location of which this Location is physically a part of."
     )
     hours_of_operation: typing.Optional[typing.List[LocationHoursOfOperation]] = pydantic.Field(
-        alias="hoursOfOperation", description="What days/times during a week is this location usually open."
+        alias="hoursOfOperation",
+        default=None,
+        description="What days/times during a week is this location usually open.",
     )
     availability_exceptions: typing.Optional[str] = pydantic.Field(
         alias="availabilityExceptions",
+        default=None,
         description="A description of when the locations opening ours are different to normal, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as detailed in the opening hours Times.",
     )
     endpoint: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Technical endpoints providing access to services operated for the location."
+        default=None, description="Technical endpoints providing access to services operated for the location."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

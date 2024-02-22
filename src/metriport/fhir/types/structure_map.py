@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -30,58 +28,69 @@ class StructureMap(BaseResource):
     A Map of relationships between 2 structures that can be used to transform data.
     """
 
-    resource_type: typing_extensions.Literal["StructureMap"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["StructureMap"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this structure map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this structure map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the structure map is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this structure map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this structure map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the structure map is stored on different servers.",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A formal identifier that is used to identify this structure map when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this structure map when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the structure map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the structure map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the structure map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the structure map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the structure map. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the structure map. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the structure map."
+        default=None, description="A short, descriptive, user-friendly title for the structure map."
     )
     status: typing.Optional[StructureMapStatus] = pydantic.Field(
-        description="The status of this structure map. Enables tracking the life-cycle of the content."
+        default=None, description="The status of this structure map. Enables tracking the life-cycle of the content."
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this structure map is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this structure map is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the structure map was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the structure map changes."
+        default=None,
+        description="The date (and optionally time) when the structure map was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the structure map changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the structure map."
+        default=None, description="The name of the organization or individual that published the structure map."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the structure map from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the structure map from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate structure map instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the structure map is intended to be used."
+        default=None, description="A legal or geographic region in which the structure map is intended to be used."
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this structure map is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this structure map is needed and why it has been designed as it has.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the structure map and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the structure map."
+        default=None,
+        description="A copyright statement relating to the structure map and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the structure map.",
     )
     structure: typing.Optional[typing.List[StructureMapStructure]] = pydantic.Field(
-        description="A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced."
+        default=None,
+        description="A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced.",
     )
     import_: typing.Optional[typing.List[Canonical]] = pydantic.Field(
-        alias="import", description="Other maps used by this map (canonical URLs)."
+        alias="import", default=None, description="Other maps used by this map (canonical URLs)."
     )
     group: typing.List[StructureMapGroup] = pydantic.Field(
         description="Organizes the mapping into manageable chunks for human review/ease of maintenance."

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -29,48 +27,55 @@ class CoverageEligibilityRequest(BaseResource):
     The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
     """
 
-    resource_type: typing_extensions.Literal["CoverageEligibilityRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["CoverageEligibilityRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this coverage eligiblity request."
+        default=None, description="A unique identifier assigned to this coverage eligiblity request."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
     priority: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="When the requestor expects the processor to complete processing."
+        default=None, description="When the requestor expects the processor to complete processing."
     )
     purpose: typing.Optional[typing.List[CoverageEligibilityRequestPurposeItem]] = pydantic.Field(
-        description="Code to specify whether requesting: prior authorization requirements for some service categories or billing codes; benefits for coverages specified or discovered; discovery and return of coverages for the patient; and/or validation that the specified coverage is in-force at the date/period specified or 'now' if not specified."
+        default=None,
+        description="Code to specify whether requesting: prior authorization requirements for some service categories or billing codes; benefits for coverages specified or discovered; discovery and return of coverages for the patient; and/or validation that the specified coverage is in-force at the date/period specified or 'now' if not specified.",
     )
     patient: Reference = pydantic.Field(
         description="The party who is the beneficiary of the supplied coverage and for whom eligibility is sought."
     )
     serviced_date: typing.Optional[str] = pydantic.Field(
         alias="servicedDate",
+        default=None,
         description="The date or dates when the enclosed suite of services were performed or completed.",
     )
     serviced_period: typing.Optional[Period] = pydantic.Field(
         alias="servicedPeriod",
+        default=None,
         description="The date or dates when the enclosed suite of services were performed or completed.",
     )
-    created: typing.Optional[DateTime] = pydantic.Field(description="The date when this resource was created.")
-    enterer: typing.Optional[Reference] = pydantic.Field(description="Person who created the request.")
+    created: typing.Optional[DateTime] = pydantic.Field(
+        default=None, description="The date when this resource was created."
+    )
+    enterer: typing.Optional[Reference] = pydantic.Field(default=None, description="Person who created the request.")
     provider: typing.Optional[Reference] = pydantic.Field(
-        description="The provider which is responsible for the request."
+        default=None, description="The provider which is responsible for the request."
     )
     insurer: Reference = pydantic.Field(
         description="The Insurer who issued the coverage in question and is the recipient of the request."
     )
     facility: typing.Optional[Reference] = pydantic.Field(
-        description="Facility where the services are intended to be provided."
+        default=None, description="Facility where the services are intended to be provided."
     )
     supporting_info: typing.Optional[typing.List[CoverageEligibilityRequestSupportingInfo]] = pydantic.Field(
         alias="supportingInfo",
+        default=None,
         description="Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues.",
     )
     insurance: typing.Optional[typing.List[CoverageEligibilityRequestInsurance]] = pydantic.Field(
-        description="Financial instruments for reimbursement for the health care products and services."
+        default=None, description="Financial instruments for reimbursement for the health care products and services."
     )
     item: typing.Optional[typing.List[CoverageEligibilityRequestItem]] = pydantic.Field(
-        description="Service categories or billable services for which benefit details and/or an authorization prior to service delivery may be required by the payor."
+        default=None,
+        description="Service categories or billable services for which benefit details and/or an authorization prior to service delivery may be required by the payor.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

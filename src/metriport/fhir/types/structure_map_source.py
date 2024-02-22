@@ -51,201 +51,298 @@ class StructureMapSource(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    context: typing.Optional[Id] = pydantic.Field(description="Type or variable this rule applies to.")
+    context: typing.Optional[Id] = pydantic.Field(default=None, description="Type or variable this rule applies to.")
     min: typing.Optional[int] = pydantic.Field(
-        description="Specified minimum cardinality for the element. This is optional; if present, it acts an implicit check on the input content."
+        default=None,
+        description="Specified minimum cardinality for the element. This is optional; if present, it acts an implicit check on the input content.",
     )
     max: typing.Optional[str] = pydantic.Field(
-        description='Specified maximum cardinality for the element - a number or a "_". This is optional; if present, it acts an implicit check on the input content (_ just serves as documentation; it\'s the default value).'
+        default=None,
+        description='Specified maximum cardinality for the element - a number or a "_". This is optional; if present, it acts an implicit check on the input content (_ just serves as documentation; it\'s the default value).',
     )
     type: typing.Optional[str] = pydantic.Field(
-        description="Specified type for the element. This works as a condition on the mapping - use for polymorphic elements."
+        default=None,
+        description="Specified type for the element. This works as a condition on the mapping - use for polymorphic elements.",
     )
     default_value_base_64_binary: typing.Optional[str] = pydantic.Field(
         alias="defaultValueBase64Binary",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_boolean: typing.Optional[bool] = pydantic.Field(
-        alias="defaultValueBoolean", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueBoolean",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_canonical: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueCanonical", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueCanonical",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_code: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueCode", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueCode",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_date: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueDate", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueDate",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_date_time: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueDateTime", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueDateTime",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_decimal: typing.Optional[float] = pydantic.Field(
-        alias="defaultValueDecimal", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueDecimal",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_id: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueId", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueId",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_instant: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueInstant", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueInstant",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_integer: typing.Optional[float] = pydantic.Field(
-        alias="defaultValueInteger", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueInteger",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_markdown: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueMarkdown", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueMarkdown",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_oid: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueOid", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueOid",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_positive_int: typing.Optional[float] = pydantic.Field(
         alias="defaultValuePositiveInt",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_string: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueString", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueString",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_time: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueTime", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueTime",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_unsigned_int: typing.Optional[float] = pydantic.Field(
         alias="defaultValueUnsignedInt",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_uri: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueUri", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueUri",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_url: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueUrl", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueUrl",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_uuid: typing.Optional[str] = pydantic.Field(
-        alias="defaultValueUuid", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueUuid",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_address: typing.Optional[Address] = pydantic.Field(
-        alias="defaultValueAddress", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueAddress",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_age: typing.Optional[Age] = pydantic.Field(
-        alias="defaultValueAge", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueAge",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_annotation: typing.Optional[Annotation] = pydantic.Field(
-        alias="defaultValueAnnotation", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueAnnotation",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_attachment: typing.Optional[Attachment] = pydantic.Field(
-        alias="defaultValueAttachment", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueAttachment",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="defaultValueCodeableConcept",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_coding: typing.Optional[Coding] = pydantic.Field(
-        alias="defaultValueCoding", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueCoding",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_contact_point: typing.Optional[ContactPoint] = pydantic.Field(
         alias="defaultValueContactPoint",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_count: typing.Optional[Count] = pydantic.Field(
-        alias="defaultValueCount", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueCount",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_distance: typing.Optional[Distance] = pydantic.Field(
-        alias="defaultValueDistance", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueDistance",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_duration: typing.Optional[Duration] = pydantic.Field(
-        alias="defaultValueDuration", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueDuration",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_human_name: typing.Optional[HumanName] = pydantic.Field(
-        alias="defaultValueHumanName", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueHumanName",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_identifier: typing.Optional[Identifier] = pydantic.Field(
-        alias="defaultValueIdentifier", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueIdentifier",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_money: typing.Optional[Money] = pydantic.Field(
-        alias="defaultValueMoney", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueMoney",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_period: typing.Optional[Period] = pydantic.Field(
-        alias="defaultValuePeriod", description="A value to use if there is no existing value in the source object."
+        alias="defaultValuePeriod",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_quantity: typing.Optional[Quantity] = pydantic.Field(
-        alias="defaultValueQuantity", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueQuantity",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_range: typing.Optional[Range] = pydantic.Field(
-        alias="defaultValueRange", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueRange",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_ratio: typing.Optional[Ratio] = pydantic.Field(
-        alias="defaultValueRatio", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueRatio",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="defaultValueReference", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueReference",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_sampled_data: typing.Optional[SampledData] = pydantic.Field(
         alias="defaultValueSampledData",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_signature: typing.Optional[Signature] = pydantic.Field(
-        alias="defaultValueSignature", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueSignature",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="defaultValueTiming", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueTiming",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_contact_detail: typing.Optional[ContactDetail] = pydantic.Field(
         alias="defaultValueContactDetail",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_contributor: typing.Optional[Contributor] = pydantic.Field(
         alias="defaultValueContributor",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_data_requirement: typing.Optional[DataRequirement] = pydantic.Field(
         alias="defaultValueDataRequirement",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_expression: typing.Optional[Expression] = pydantic.Field(
-        alias="defaultValueExpression", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueExpression",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_parameter_definition: typing.Optional[ParameterDefinition] = pydantic.Field(
         alias="defaultValueParameterDefinition",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_related_artifact: typing.Optional[RelatedArtifact] = pydantic.Field(
         alias="defaultValueRelatedArtifact",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_trigger_definition: typing.Optional[TriggerDefinition] = pydantic.Field(
         alias="defaultValueTriggerDefinition",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_usage_context: typing.Optional[UsageContext] = pydantic.Field(
         alias="defaultValueUsageContext",
+        default=None,
         description="A value to use if there is no existing value in the source object.",
     )
     default_value_dosage: typing.Optional[Dosage] = pydantic.Field(
-        alias="defaultValueDosage", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueDosage",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
     default_value_meta: typing.Optional[Meta] = pydantic.Field(
-        alias="defaultValueMeta", description="A value to use if there is no existing value in the source object."
+        alias="defaultValueMeta",
+        default=None,
+        description="A value to use if there is no existing value in the source object.",
     )
-    element: typing.Optional[str] = pydantic.Field(description="Optional field for this source.")
+    element: typing.Optional[str] = pydantic.Field(default=None, description="Optional field for this source.")
     list_mode: typing.Optional[StructureMapSourceListMode] = pydantic.Field(
-        alias="listMode", description="How to handle the list mode for this element."
+        alias="listMode", default=None, description="How to handle the list mode for this element."
     )
-    variable: typing.Optional[Id] = pydantic.Field(description="Named context for field, if a field is specified.")
+    variable: typing.Optional[Id] = pydantic.Field(
+        default=None, description="Named context for field, if a field is specified."
+    )
     condition: typing.Optional[str] = pydantic.Field(
-        description="FHIRPath expression - must be true or the rule does not apply."
+        default=None, description="FHIRPath expression - must be true or the rule does not apply."
     )
     check: typing.Optional[str] = pydantic.Field(
-        description="FHIRPath expression - must be true or the mapping engine throws an error instead of completing."
+        default=None,
+        description="FHIRPath expression - must be true or the mapping engine throws an error instead of completing.",
     )
     log_message: typing.Optional[str] = pydantic.Field(
         alias="logMessage",
+        default=None,
         description="A FHIRPath expression which specifies a message to put in the transform log when content matching the source rule is found.",
     )
 

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -23,23 +21,28 @@ class SmartAppLaunch(pydantic.BaseModel):
     This resource contains context details for a SMART App Launch.
     """
 
-    resource_type: typing_extensions.Literal["SmartAppLaunch"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SmartAppLaunch"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
     patient: typing.Optional[Reference] = pydantic.Field(
-        description="Optional patient indicating that the app was launched in the patient context."
+        default=None, description="Optional patient indicating that the app was launched in the patient context."
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="Optional encounter indicating that the app was launched in the encounter context."
+        default=None, description="Optional encounter indicating that the app was launched in the encounter context."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

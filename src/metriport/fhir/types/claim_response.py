@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -34,85 +32,100 @@ class ClaimResponse(BaseResource):
     This resource provides the adjudication details from the processing of a Claim resource.
     """
 
-    resource_type: typing_extensions.Literal["ClaimResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ClaimResponse"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="A unique identifier assigned to this claim response."
+        default=None, description="A unique identifier assigned to this claim response."
     )
-    status: typing.Optional[Code] = pydantic.Field(description="The status of the resource instance.")
+    status: typing.Optional[Code] = pydantic.Field(default=None, description="The status of the resource instance.")
     type: CodeableConcept = pydantic.Field(
         description="A finer grained suite of claim type codes which may convey additional information such as Inpatient vs Outpatient and/or a specialty service."
     )
     sub_type: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="subType",
+        default=None,
         description="A finer grained suite of claim type codes which may convey additional information such as Inpatient vs Outpatient and/or a specialty service.",
     )
     use: typing.Optional[Code] = pydantic.Field(
-        description="A code to indicate whether the nature of the request is: to request adjudication of products and services previously rendered; or requesting authorization and adjudication for provision in the future; or requesting the non-binding adjudication of the listed products and services which could be provided in the future."
+        default=None,
+        description="A code to indicate whether the nature of the request is: to request adjudication of products and services previously rendered; or requesting authorization and adjudication for provision in the future; or requesting the non-binding adjudication of the listed products and services which could be provided in the future.",
     )
     patient: Reference = pydantic.Field(
         description="The party to whom the professional services and/or products have been supplied or are being considered and for whom actual for facast reimbursement is sought."
     )
-    created: typing.Optional[DateTime] = pydantic.Field(description="The date this resource was created.")
+    created: typing.Optional[DateTime] = pydantic.Field(default=None, description="The date this resource was created.")
     insurer: Reference = pydantic.Field(
         description="The party responsible for authorization, adjudication and reimbursement."
     )
     requestor: typing.Optional[Reference] = pydantic.Field(
-        description="The provider which is responsible for the claim, predetermination or preauthorization."
+        default=None,
+        description="The provider which is responsible for the claim, predetermination or preauthorization.",
     )
-    request: typing.Optional[Reference] = pydantic.Field(description="Original request resource reference.")
+    request: typing.Optional[Reference] = pydantic.Field(
+        default=None, description="Original request resource reference."
+    )
     outcome: typing.Optional[Code] = pydantic.Field(
-        description="The outcome of the claim, predetermination, or preauthorization processing."
+        default=None, description="The outcome of the claim, predetermination, or preauthorization processing."
     )
     disposition: typing.Optional[str] = pydantic.Field(
-        description="A human readable description of the status of the adjudication."
+        default=None, description="A human readable description of the status of the adjudication."
     )
     pre_auth_ref: typing.Optional[str] = pydantic.Field(
         alias="preAuthRef",
+        default=None,
         description="Reference from the Insurer which is used in later communications which refers to this adjudication.",
     )
     pre_auth_period: typing.Optional[Period] = pydantic.Field(
-        alias="preAuthPeriod", description="The time frame during which this authorization is effective."
+        alias="preAuthPeriod", default=None, description="The time frame during which this authorization is effective."
     )
     payee_type: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="payeeType", description="Type of Party to be reimbursed: subscriber, provider, other."
+        alias="payeeType", default=None, description="Type of Party to be reimbursed: subscriber, provider, other."
     )
     item: typing.Optional[typing.List[ClaimResponseItem]] = pydantic.Field(
-        description="A claim line. Either a simple (a product or service) or a 'group' of details which can also be a simple items or groups of sub-details."
+        default=None,
+        description="A claim line. Either a simple (a product or service) or a 'group' of details which can also be a simple items or groups of sub-details.",
     )
     add_item: typing.Optional[typing.List[ClaimResponseAddItem]] = pydantic.Field(
-        alias="addItem", description="The first-tier service adjudications for payor added product or service lines."
+        alias="addItem",
+        default=None,
+        description="The first-tier service adjudications for payor added product or service lines.",
     )
     adjudication: typing.Optional[typing.List[ClaimResponseAdjudication]] = pydantic.Field(
-        description="The adjudication results which are presented at the header level rather than at the line-item or add-item levels."
+        default=None,
+        description="The adjudication results which are presented at the header level rather than at the line-item or add-item levels.",
     )
     total: typing.Optional[typing.List[ClaimResponseTotal]] = pydantic.Field(
-        description="Categorized monetary totals for the adjudication."
+        default=None, description="Categorized monetary totals for the adjudication."
     )
     payment: typing.Optional[ClaimResponsePayment] = pydantic.Field(
-        description="Payment details for the adjudication of the claim."
+        default=None, description="Payment details for the adjudication of the claim."
     )
     funds_reserve: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="fundsReserve",
+        default=None,
         description="A code, used only on a response to a preauthorization, to indicate whether the benefits payable have been reserved and for whom.",
     )
     form_code: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="formCode", description="A code for the form to be used for printing the content."
+        alias="formCode", default=None, description="A code for the form to be used for printing the content."
     )
     form: typing.Optional[Attachment] = pydantic.Field(
-        description="The actual form, by reference or inclusion, for printing the content or an EOB."
+        default=None, description="The actual form, by reference or inclusion, for printing the content or an EOB."
     )
     process_note: typing.Optional[typing.List[ClaimResponseProcessNote]] = pydantic.Field(
         alias="processNote",
+        default=None,
         description="A note that describes or explains adjudication results in a human readable form.",
     )
     communication_request: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="communicationRequest", description="Request for additional supporting or authorizing information."
+        alias="communicationRequest",
+        default=None,
+        description="Request for additional supporting or authorizing information.",
     )
     insurance: typing.Optional[typing.List[ClaimResponseInsurance]] = pydantic.Field(
-        description="Financial instruments for reimbursement for the health care products and services specified on the claim."
+        default=None,
+        description="Financial instruments for reimbursement for the health care products and services specified on the claim.",
     )
     error: typing.Optional[typing.List[ClaimResponseError]] = pydantic.Field(
-        description="Errors encountered during the processing of the adjudication."
+        default=None, description="Errors encountered during the processing of the adjudication."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

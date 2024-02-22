@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .base_resource import BaseResource
@@ -25,32 +23,36 @@ class Organization(BaseResource):
     A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action. Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
     """
 
-    resource_type: typing_extensions.Literal["Organization"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Organization"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifier for the organization that is used to identify the organization across multiple disparate systems."
+        default=None,
+        description="Identifier for the organization that is used to identify the organization across multiple disparate systems.",
     )
     active: typing.Optional[bool] = pydantic.Field(
-        description="Whether the organization's record is still in active use."
+        default=None, description="Whether the organization's record is still in active use."
     )
     type: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="The kind(s) of organization that this is."
+        default=None, description="The kind(s) of organization that this is."
     )
-    name: typing.Optional[str] = pydantic.Field(description="A name associated with the organization.")
+    name: typing.Optional[str] = pydantic.Field(default=None, description="A name associated with the organization.")
     alias: typing.Optional[typing.List[str]] = pydantic.Field(
-        description="A list of alternate names that the organization is known as, or was known as in the past."
+        default=None,
+        description="A list of alternate names that the organization is known as, or was known as in the past.",
     )
     telecom: typing.Optional[typing.List[ContactPoint]] = pydantic.Field(
-        description="A contact detail for the organization."
+        default=None, description="A contact detail for the organization."
     )
-    address: typing.Optional[typing.List[Address]] = pydantic.Field(description="An address for the organization.")
+    address: typing.Optional[typing.List[Address]] = pydantic.Field(
+        default=None, description="An address for the organization."
+    )
     part_of: typing.Optional[Reference] = pydantic.Field(
-        alias="partOf", description="The organization of which this organization forms a part."
+        alias="partOf", default=None, description="The organization of which this organization forms a part."
     )
     contact: typing.Optional[typing.List[OrganizationContact]] = pydantic.Field(
-        description="Contact for the organization for a certain purpose."
+        default=None, description="Contact for the organization for a certain purpose."
     )
     endpoint: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Technical endpoints providing access to services operated for the organization."
+        default=None, description="Technical endpoints providing access to services operated for the organization."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

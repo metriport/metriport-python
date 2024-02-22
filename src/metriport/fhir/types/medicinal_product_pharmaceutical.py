@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -26,20 +24,20 @@ class MedicinalProductPharmaceutical(BaseResource):
     A pharmaceutical product described in terms of its composition and dose form.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductPharmaceutical"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductPharmaceutical"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="An identifier for the pharmaceutical medicinal product."
+        default=None, description="An identifier for the pharmaceutical medicinal product."
     )
     administrable_dose_form: CodeableConcept = pydantic.Field(
         alias="administrableDoseForm", description="The administrable dose form, after necessary reconstitution."
     )
     unit_of_presentation: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="unitOfPresentation", description="Todo."
+        alias="unitOfPresentation", default=None, description="Todo."
     )
-    ingredient: typing.Optional[typing.List[Reference]] = pydantic.Field(description="Ingredient.")
-    device: typing.Optional[typing.List[Reference]] = pydantic.Field(description="Accompanying device.")
+    ingredient: typing.Optional[typing.List[Reference]] = pydantic.Field(default=None, description="Ingredient.")
+    device: typing.Optional[typing.List[Reference]] = pydantic.Field(default=None, description="Accompanying device.")
     characteristics: typing.Optional[typing.List[MedicinalProductPharmaceuticalCharacteristics]] = pydantic.Field(
-        description="Characteristics e.g. a products onset of action."
+        default=None, description="Characteristics e.g. a products onset of action."
     )
     route_of_administration: typing.List[MedicinalProductPharmaceuticalRouteOfAdministration] = pydantic.Field(
         alias="routeOfAdministration",

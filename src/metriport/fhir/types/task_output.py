@@ -49,165 +49,168 @@ class TaskOutput(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     type: CodeableConcept = pydantic.Field(description="The name of the Output parameter.")
     value_base_64_binary: typing.Optional[str] = pydantic.Field(
-        alias="valueBase64Binary", description="The value of the Output parameter as a basic type."
+        alias="valueBase64Binary", default=None, description="The value of the Output parameter as a basic type."
     )
     value_boolean: typing.Optional[bool] = pydantic.Field(
-        alias="valueBoolean", description="The value of the Output parameter as a basic type."
+        alias="valueBoolean", default=None, description="The value of the Output parameter as a basic type."
     )
     value_canonical: typing.Optional[str] = pydantic.Field(
-        alias="valueCanonical", description="The value of the Output parameter as a basic type."
+        alias="valueCanonical", default=None, description="The value of the Output parameter as a basic type."
     )
     value_code: typing.Optional[str] = pydantic.Field(
-        alias="valueCode", description="The value of the Output parameter as a basic type."
+        alias="valueCode", default=None, description="The value of the Output parameter as a basic type."
     )
     value_date: typing.Optional[str] = pydantic.Field(
-        alias="valueDate", description="The value of the Output parameter as a basic type."
+        alias="valueDate", default=None, description="The value of the Output parameter as a basic type."
     )
     value_date_time: typing.Optional[str] = pydantic.Field(
-        alias="valueDateTime", description="The value of the Output parameter as a basic type."
+        alias="valueDateTime", default=None, description="The value of the Output parameter as a basic type."
     )
     value_decimal: typing.Optional[float] = pydantic.Field(
-        alias="valueDecimal", description="The value of the Output parameter as a basic type."
+        alias="valueDecimal", default=None, description="The value of the Output parameter as a basic type."
     )
     value_id: typing.Optional[str] = pydantic.Field(
-        alias="valueId", description="The value of the Output parameter as a basic type."
+        alias="valueId", default=None, description="The value of the Output parameter as a basic type."
     )
     value_instant: typing.Optional[str] = pydantic.Field(
-        alias="valueInstant", description="The value of the Output parameter as a basic type."
+        alias="valueInstant", default=None, description="The value of the Output parameter as a basic type."
     )
     value_integer: typing.Optional[float] = pydantic.Field(
-        alias="valueInteger", description="The value of the Output parameter as a basic type."
+        alias="valueInteger", default=None, description="The value of the Output parameter as a basic type."
     )
     value_markdown: typing.Optional[str] = pydantic.Field(
-        alias="valueMarkdown", description="The value of the Output parameter as a basic type."
+        alias="valueMarkdown", default=None, description="The value of the Output parameter as a basic type."
     )
     value_oid: typing.Optional[str] = pydantic.Field(
-        alias="valueOid", description="The value of the Output parameter as a basic type."
+        alias="valueOid", default=None, description="The value of the Output parameter as a basic type."
     )
     value_positive_int: typing.Optional[float] = pydantic.Field(
-        alias="valuePositiveInt", description="The value of the Output parameter as a basic type."
+        alias="valuePositiveInt", default=None, description="The value of the Output parameter as a basic type."
     )
     value_string: typing.Optional[str] = pydantic.Field(
-        alias="valueString", description="The value of the Output parameter as a basic type."
+        alias="valueString", default=None, description="The value of the Output parameter as a basic type."
     )
     value_time: typing.Optional[str] = pydantic.Field(
-        alias="valueTime", description="The value of the Output parameter as a basic type."
+        alias="valueTime", default=None, description="The value of the Output parameter as a basic type."
     )
     value_unsigned_int: typing.Optional[float] = pydantic.Field(
-        alias="valueUnsignedInt", description="The value of the Output parameter as a basic type."
+        alias="valueUnsignedInt", default=None, description="The value of the Output parameter as a basic type."
     )
     value_uri: typing.Optional[str] = pydantic.Field(
-        alias="valueUri", description="The value of the Output parameter as a basic type."
+        alias="valueUri", default=None, description="The value of the Output parameter as a basic type."
     )
     value_url: typing.Optional[str] = pydantic.Field(
-        alias="valueUrl", description="The value of the Output parameter as a basic type."
+        alias="valueUrl", default=None, description="The value of the Output parameter as a basic type."
     )
     value_uuid: typing.Optional[str] = pydantic.Field(
-        alias="valueUuid", description="The value of the Output parameter as a basic type."
+        alias="valueUuid", default=None, description="The value of the Output parameter as a basic type."
     )
     value_address: typing.Optional[Address] = pydantic.Field(
-        alias="valueAddress", description="The value of the Output parameter as a basic type."
+        alias="valueAddress", default=None, description="The value of the Output parameter as a basic type."
     )
     value_age: typing.Optional[Age] = pydantic.Field(
-        alias="valueAge", description="The value of the Output parameter as a basic type."
+        alias="valueAge", default=None, description="The value of the Output parameter as a basic type."
     )
     value_annotation: typing.Optional[Annotation] = pydantic.Field(
-        alias="valueAnnotation", description="The value of the Output parameter as a basic type."
+        alias="valueAnnotation", default=None, description="The value of the Output parameter as a basic type."
     )
     value_attachment: typing.Optional[Attachment] = pydantic.Field(
-        alias="valueAttachment", description="The value of the Output parameter as a basic type."
+        alias="valueAttachment", default=None, description="The value of the Output parameter as a basic type."
     )
     value_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="valueCodeableConcept", description="The value of the Output parameter as a basic type."
+        alias="valueCodeableConcept", default=None, description="The value of the Output parameter as a basic type."
     )
     value_coding: typing.Optional[Coding] = pydantic.Field(
-        alias="valueCoding", description="The value of the Output parameter as a basic type."
+        alias="valueCoding", default=None, description="The value of the Output parameter as a basic type."
     )
     value_contact_point: typing.Optional[ContactPoint] = pydantic.Field(
-        alias="valueContactPoint", description="The value of the Output parameter as a basic type."
+        alias="valueContactPoint", default=None, description="The value of the Output parameter as a basic type."
     )
     value_count: typing.Optional[Count] = pydantic.Field(
-        alias="valueCount", description="The value of the Output parameter as a basic type."
+        alias="valueCount", default=None, description="The value of the Output parameter as a basic type."
     )
     value_distance: typing.Optional[Distance] = pydantic.Field(
-        alias="valueDistance", description="The value of the Output parameter as a basic type."
+        alias="valueDistance", default=None, description="The value of the Output parameter as a basic type."
     )
     value_duration: typing.Optional[Duration] = pydantic.Field(
-        alias="valueDuration", description="The value of the Output parameter as a basic type."
+        alias="valueDuration", default=None, description="The value of the Output parameter as a basic type."
     )
     value_human_name: typing.Optional[HumanName] = pydantic.Field(
-        alias="valueHumanName", description="The value of the Output parameter as a basic type."
+        alias="valueHumanName", default=None, description="The value of the Output parameter as a basic type."
     )
     value_identifier: typing.Optional[Identifier] = pydantic.Field(
-        alias="valueIdentifier", description="The value of the Output parameter as a basic type."
+        alias="valueIdentifier", default=None, description="The value of the Output parameter as a basic type."
     )
     value_money: typing.Optional[Money] = pydantic.Field(
-        alias="valueMoney", description="The value of the Output parameter as a basic type."
+        alias="valueMoney", default=None, description="The value of the Output parameter as a basic type."
     )
     value_period: typing.Optional[Period] = pydantic.Field(
-        alias="valuePeriod", description="The value of the Output parameter as a basic type."
+        alias="valuePeriod", default=None, description="The value of the Output parameter as a basic type."
     )
     value_quantity: typing.Optional[Quantity] = pydantic.Field(
-        alias="valueQuantity", description="The value of the Output parameter as a basic type."
+        alias="valueQuantity", default=None, description="The value of the Output parameter as a basic type."
     )
     value_range: typing.Optional[Range] = pydantic.Field(
-        alias="valueRange", description="The value of the Output parameter as a basic type."
+        alias="valueRange", default=None, description="The value of the Output parameter as a basic type."
     )
     value_ratio: typing.Optional[Ratio] = pydantic.Field(
-        alias="valueRatio", description="The value of the Output parameter as a basic type."
+        alias="valueRatio", default=None, description="The value of the Output parameter as a basic type."
     )
     value_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="valueReference", description="The value of the Output parameter as a basic type."
+        alias="valueReference", default=None, description="The value of the Output parameter as a basic type."
     )
     value_sampled_data: typing.Optional[SampledData] = pydantic.Field(
-        alias="valueSampledData", description="The value of the Output parameter as a basic type."
+        alias="valueSampledData", default=None, description="The value of the Output parameter as a basic type."
     )
     value_signature: typing.Optional[Signature] = pydantic.Field(
-        alias="valueSignature", description="The value of the Output parameter as a basic type."
+        alias="valueSignature", default=None, description="The value of the Output parameter as a basic type."
     )
     value_timing: typing.Optional[Timing] = pydantic.Field(
-        alias="valueTiming", description="The value of the Output parameter as a basic type."
+        alias="valueTiming", default=None, description="The value of the Output parameter as a basic type."
     )
     value_contact_detail: typing.Optional[ContactDetail] = pydantic.Field(
-        alias="valueContactDetail", description="The value of the Output parameter as a basic type."
+        alias="valueContactDetail", default=None, description="The value of the Output parameter as a basic type."
     )
     value_contributor: typing.Optional[Contributor] = pydantic.Field(
-        alias="valueContributor", description="The value of the Output parameter as a basic type."
+        alias="valueContributor", default=None, description="The value of the Output parameter as a basic type."
     )
     value_data_requirement: typing.Optional[DataRequirement] = pydantic.Field(
-        alias="valueDataRequirement", description="The value of the Output parameter as a basic type."
+        alias="valueDataRequirement", default=None, description="The value of the Output parameter as a basic type."
     )
     value_expression: typing.Optional[Expression] = pydantic.Field(
-        alias="valueExpression", description="The value of the Output parameter as a basic type."
+        alias="valueExpression", default=None, description="The value of the Output parameter as a basic type."
     )
     value_parameter_definition: typing.Optional[ParameterDefinition] = pydantic.Field(
-        alias="valueParameterDefinition", description="The value of the Output parameter as a basic type."
+        alias="valueParameterDefinition", default=None, description="The value of the Output parameter as a basic type."
     )
     value_related_artifact: typing.Optional[RelatedArtifact] = pydantic.Field(
-        alias="valueRelatedArtifact", description="The value of the Output parameter as a basic type."
+        alias="valueRelatedArtifact", default=None, description="The value of the Output parameter as a basic type."
     )
     value_trigger_definition: typing.Optional[TriggerDefinition] = pydantic.Field(
-        alias="valueTriggerDefinition", description="The value of the Output parameter as a basic type."
+        alias="valueTriggerDefinition", default=None, description="The value of the Output parameter as a basic type."
     )
     value_usage_context: typing.Optional[UsageContext] = pydantic.Field(
-        alias="valueUsageContext", description="The value of the Output parameter as a basic type."
+        alias="valueUsageContext", default=None, description="The value of the Output parameter as a basic type."
     )
     value_dosage: typing.Optional[Dosage] = pydantic.Field(
-        alias="valueDosage", description="The value of the Output parameter as a basic type."
+        alias="valueDosage", default=None, description="The value of the Output parameter as a basic type."
     )
     value_meta: typing.Optional[Meta] = pydantic.Field(
-        alias="valueMeta", description="The value of the Output parameter as a basic type."
+        alias="valueMeta", default=None, description="The value of the Output parameter as a basic type."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

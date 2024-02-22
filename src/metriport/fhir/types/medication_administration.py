@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -28,73 +26,90 @@ class MedicationAdministration(BaseResource):
     Describes the event of a patient consuming or otherwise being administered a medication. This may be as simple as swallowing a tablet or it may be a long running infusion. Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner.
     """
 
-    resource_type: typing_extensions.Literal["MedicationAdministration"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicationAdministration"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Identifiers associated with this Medication Administration that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Identifiers associated with this Medication Administration that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server.",
     )
     instantiates: typing.Optional[typing.List[Uri]] = pydantic.Field(
-        description="A protocol, guideline, orderset, or other definition that was adhered to in whole or in part by this event."
+        default=None,
+        description="A protocol, guideline, orderset, or other definition that was adhered to in whole or in part by this event.",
     )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="partOf", description="A larger event of which this particular event is a component or step."
+        alias="partOf",
+        default=None,
+        description="A larger event of which this particular event is a component or step.",
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="Will generally be set to show that the administration has been completed. For some long running administrations such as infusions, it is possible for an administration to be started but not completed or it may be paused while some other process is under way."
+        default=None,
+        description="Will generally be set to show that the administration has been completed. For some long running administrations such as infusions, it is possible for an administration to be started but not completed or it may be paused while some other process is under way.",
     )
     status_reason: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="statusReason", description="A code indicating why the administration was not performed."
+        alias="statusReason", default=None, description="A code indicating why the administration was not performed."
     )
     category: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="Indicates where the medication is expected to be consumed or administered."
+        default=None, description="Indicates where the medication is expected to be consumed or administered."
     )
     medication_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="medicationCodeableConcept",
+        default=None,
         description="Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.",
     )
     medication_reference: typing.Optional[Reference] = pydantic.Field(
         alias="medicationReference",
+        default=None,
         description="Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.",
     )
     subject: Reference = pydantic.Field(description="The person or animal or group receiving the medication.")
     context: typing.Optional[Reference] = pydantic.Field(
-        description="The visit, admission, or other contact between patient and health care provider during which the medication administration was performed."
+        default=None,
+        description="The visit, admission, or other contact between patient and health care provider during which the medication administration was performed.",
     )
     supporting_information: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="supportingInformation",
+        default=None,
         description="Additional information (for example, patient height and weight) that supports the administration of the medication.",
     )
     effective_date_time: typing.Optional[str] = pydantic.Field(
         alias="effectiveDateTime",
+        default=None,
         description="A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.",
     )
     effective_period: typing.Optional[Period] = pydantic.Field(
         alias="effectivePeriod",
+        default=None,
         description="A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.",
     )
     performer: typing.Optional[typing.List[MedicationAdministrationPerformer]] = pydantic.Field(
-        description="Indicates who or what performed the medication administration and how they were involved."
+        default=None,
+        description="Indicates who or what performed the medication administration and how they were involved.",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="reasonCode", description="A code indicating why the medication was given."
+        alias="reasonCode", default=None, description="A code indicating why the medication was given."
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="reasonReference",
+        default=None,
         description="Condition or observation that supports why the medication was administered.",
     )
     request: typing.Optional[Reference] = pydantic.Field(
-        description="The original request, instruction or authority to perform the administration."
+        default=None, description="The original request, instruction or authority to perform the administration."
     )
     device: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="The device used in administering the medication to the patient. For example, a particular infusion pump."
+        default=None,
+        description="The device used in administering the medication to the patient. For example, a particular infusion pump.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Extra information about the medication administration that is not conveyed by the other attributes."
+        default=None,
+        description="Extra information about the medication administration that is not conveyed by the other attributes.",
     )
     dosage: typing.Optional[MedicationAdministrationDosage] = pydantic.Field(
-        description="Describes the medication dosage information details e.g. dose, rate, site, route, etc."
+        default=None,
+        description="Describes the medication dosage information details e.g. dose, rate, site, route, etc.",
     )
     event_history: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="eventHistory",
+        default=None,
         description="A summary of the events of interest that have occurred, such as when the administration was verified.",
     )
 

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -28,71 +26,85 @@ class ConceptMap(BaseResource):
     A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.
     """
 
-    resource_type: typing_extensions.Literal["ConceptMap"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ConceptMap"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this concept map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this concept map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the concept map is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this concept map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this concept map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the concept map is stored on different servers.",
     )
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="A formal identifier that is used to identify this concept map when it is represented in other formats, or referenced in a specification, model, design or an instance."
+        default=None,
+        description="A formal identifier that is used to identify this concept map when it is represented in other formats, or referenced in a specification, model, design or an instance.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the concept map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the concept map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the concept map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the concept map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the concept map. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the concept map. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the concept map."
+        default=None, description="A short, descriptive, user-friendly title for the concept map."
     )
     status: typing.Optional[ConceptMapStatus] = pydantic.Field(
-        description="The status of this concept map. Enables tracking the life-cycle of the content."
+        default=None, description="The status of this concept map. Enables tracking the life-cycle of the content."
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this concept map is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this concept map is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the concept map was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the concept map changes."
+        default=None,
+        description="The date (and optionally time) when the concept map was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the concept map changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the concept map."
+        default=None, description="The name of the organization or individual that published the concept map."
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the concept map from a consumer's perspective."
+        default=None,
+        description="A free text natural language description of the concept map from a consumer's perspective.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate concept map instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the concept map is intended to be used."
+        default=None, description="A legal or geographic region in which the concept map is intended to be used."
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this concept map is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this concept map is needed and why it has been designed as it has.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the concept map and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the concept map."
+        default=None,
+        description="A copyright statement relating to the concept map and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the concept map.",
     )
     source_uri: typing.Optional[str] = pydantic.Field(
         alias="sourceUri",
+        default=None,
         description="Identifier for the source value set that contains the concepts that are being mapped and provides context for the mappings.",
     )
     source_canonical: typing.Optional[str] = pydantic.Field(
         alias="sourceCanonical",
+        default=None,
         description="Identifier for the source value set that contains the concepts that are being mapped and provides context for the mappings.",
     )
     target_uri: typing.Optional[str] = pydantic.Field(
         alias="targetUri",
+        default=None,
         description="The target value set provides context for the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.",
     )
     target_canonical: typing.Optional[str] = pydantic.Field(
         alias="targetCanonical",
+        default=None,
         description="The target value set provides context for the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.",
     )
     group: typing.Optional[typing.List[ConceptMapGroup]] = pydantic.Field(
-        description="A group of mappings that all have the same source and target system."
+        default=None, description="A group of mappings that all have the same source and target system."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

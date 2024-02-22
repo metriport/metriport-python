@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -23,25 +21,27 @@ class MedicinalProductManufactured(BaseResource):
     The manufactured item as contained in the packaged medicinal product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductManufactured"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductManufactured"] = pydantic.Field(alias="resourceType")
     manufactured_dose_form: CodeableConcept = pydantic.Field(
         alias="manufacturedDoseForm",
         description="Dose form as manufactured and before any transformation into the pharmaceutical product.",
     )
     unit_of_presentation: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="unitOfPresentation",
+        default=None,
         description="The “real world” units in which the quantity of the manufactured item is described.",
     )
     quantity: Quantity = pydantic.Field(description='The quantity or "count number" of the manufactured item.')
     manufacturer: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description='Manufacturer of the item (Note that this should be named "manufacturer" but it currently causes technical issues).'
+        default=None,
+        description='Manufacturer of the item (Note that this should be named "manufacturer" but it currently causes technical issues).',
     )
-    ingredient: typing.Optional[typing.List[Reference]] = pydantic.Field(description="Ingredient.")
+    ingredient: typing.Optional[typing.List[Reference]] = pydantic.Field(default=None, description="Ingredient.")
     physical_characteristics: typing.Optional[ProdCharacteristic] = pydantic.Field(
-        alias="physicalCharacteristics", description="Dimensions, color etc."
+        alias="physicalCharacteristics", default=None, description="Dimensions, color etc."
     )
     other_characteristics: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="otherCharacteristics", description="Other codeable characteristics."
+        alias="otherCharacteristics", default=None, description="Other codeable characteristics."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

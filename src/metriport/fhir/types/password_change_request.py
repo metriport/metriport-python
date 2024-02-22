@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .code import Code
 from .id import Id
@@ -24,28 +22,35 @@ class PasswordChangeRequest(pydantic.BaseModel):
     Password change request for the 'forgot password' flow.
     """
 
-    resource_type: typing_extensions.Literal["PasswordChangeRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PasswordChangeRequest"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
-        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+        default=None,
+        description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
     )
     meta: typing.Optional[Meta] = pydantic.Field(
-        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource."
+        default=None,
+        description="The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
     )
     implicit_rules: typing.Optional[Uri] = pydantic.Field(
         alias="implicitRules",
+        default=None,
         description="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.",
     )
-    language: typing.Optional[Code] = pydantic.Field(description="The base language in which the resource is written.")
+    language: typing.Optional[Code] = pydantic.Field(
+        default=None, description="The base language in which the resource is written."
+    )
     type: typing.Optional[PasswordChangeRequestType] = pydantic.Field(
-        description="The type of password change request (invite or reset)."
+        default=None, description="The type of password change request (invite or reset)."
     )
     user: Reference = pydantic.Field(description="The user requesting the password change.")
     secret: str = pydantic.Field(description="Secret string used to verify the identity of the user.")
     used: typing.Optional[bool] = pydantic.Field(
-        description="Whether this request has been used, and is therefore no longer valid."
+        default=None, description="Whether this request has been used, and is therefore no longer valid."
     )
     redirect_uri: typing.Optional[Uri] = pydantic.Field(
-        alias="redirectUri", description="Redirect URI used when redirecting a client back to the client application."
+        alias="redirectUri",
+        default=None,
+        description="Redirect URI used when redirecting a client back to the client application.",
     )
 
     def json(self, **kwargs: typing.Any) -> str:

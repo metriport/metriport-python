@@ -26,51 +26,67 @@ class ContractValuedItem(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     entity_codeable_concept: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="entityCodeableConcept", description="Specific type of Contract Valued Item that may be priced."
+        alias="entityCodeableConcept",
+        default=None,
+        description="Specific type of Contract Valued Item that may be priced.",
     )
     entity_reference: typing.Optional[Reference] = pydantic.Field(
-        alias="entityReference", description="Specific type of Contract Valued Item that may be priced."
+        alias="entityReference", default=None, description="Specific type of Contract Valued Item that may be priced."
     )
-    identifier: typing.Optional[Identifier] = pydantic.Field(description="Identifies a Contract Valued Item instance.")
+    identifier: typing.Optional[Identifier] = pydantic.Field(
+        default=None, description="Identifies a Contract Valued Item instance."
+    )
     effective_time: typing.Optional[DateTime] = pydantic.Field(
         alias="effectiveTime",
+        default=None,
         description="Indicates the time during which this Contract ValuedItem information is effective.",
     )
     quantity: typing.Optional[Quantity] = pydantic.Field(
-        description="Specifies the units by which the Contract Valued Item is measured or counted, and quantifies the countable or measurable Contract Valued Item instances."
+        default=None,
+        description="Specifies the units by which the Contract Valued Item is measured or counted, and quantifies the countable or measurable Contract Valued Item instances.",
     )
     unit_price: typing.Optional[Money] = pydantic.Field(
-        alias="unitPrice", description="A Contract Valued Item unit valuation measure."
+        alias="unitPrice", default=None, description="A Contract Valued Item unit valuation measure."
     )
     factor: typing.Optional[Decimal] = pydantic.Field(
-        description="A real number that represents a multiplier used in determining the overall value of the Contract Valued Item delivered. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount."
+        default=None,
+        description="A real number that represents a multiplier used in determining the overall value of the Contract Valued Item delivered. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount.",
     )
     points: typing.Optional[Decimal] = pydantic.Field(
-        description="An amount that expresses the weighting (based on difficulty, cost and/or resource intensiveness) associated with the Contract Valued Item delivered. The concept of Points allows for assignment of point values for a Contract Valued Item, such that a monetary amount can be assigned to each point."
+        default=None,
+        description="An amount that expresses the weighting (based on difficulty, cost and/or resource intensiveness) associated with the Contract Valued Item delivered. The concept of Points allows for assignment of point values for a Contract Valued Item, such that a monetary amount can be assigned to each point.",
     )
     net: typing.Optional[Money] = pydantic.Field(
-        description="Expresses the product of the Contract Valued Item unitQuantity and the unitPriceAmt. For example, the formula: unit Quantity _ unit Price (Cost per Point) _ factor Number \* points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied."
+        default=None,
+        description="Expresses the product of the Contract Valued Item unitQuantity and the unitPriceAmt. For example, the formula: unit Quantity _ unit Price (Cost per Point) _ factor Number \* points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied.",
     )
-    payment: typing.Optional[str] = pydantic.Field(description="Terms of valuation.")
-    payment_date: typing.Optional[DateTime] = pydantic.Field(alias="paymentDate", description="When payment is due.")
-    responsible: typing.Optional[Reference] = pydantic.Field(description="Who will make payment.")
-    recipient: typing.Optional[Reference] = pydantic.Field(description="Who will receive payment.")
+    payment: typing.Optional[str] = pydantic.Field(default=None, description="Terms of valuation.")
+    payment_date: typing.Optional[DateTime] = pydantic.Field(
+        alias="paymentDate", default=None, description="When payment is due."
+    )
+    responsible: typing.Optional[Reference] = pydantic.Field(default=None, description="Who will make payment.")
+    recipient: typing.Optional[Reference] = pydantic.Field(default=None, description="Who will receive payment.")
     link_id: typing.Optional[typing.List[str]] = pydantic.Field(
         alias="linkId",
+        default=None,
         description="Id of the clause or question text related to the context of this valuedItem in the referenced form or QuestionnaireResponse.",
     )
     security_label_number: typing.Optional[typing.List[UnsignedInt]] = pydantic.Field(
         alias="securityLabelNumber",
+        default=None,
         description="A set of security labels that define which terms are controlled by this condition.",
     )
 

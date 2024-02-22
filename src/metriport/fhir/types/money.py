@@ -21,13 +21,17 @@ class Money(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
-    value: typing.Optional[Decimal] = pydantic.Field(description="Numerical value (with implicit precision).")
-    currency: typing.Optional[Code] = pydantic.Field(description="ISO 4217 Currency Code.")
+    value: typing.Optional[Decimal] = pydantic.Field(
+        default=None, description="Numerical value (with implicit precision)."
+    )
+    currency: typing.Optional[Code] = pydantic.Field(default=None, description="ISO 4217 Currency Code.")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

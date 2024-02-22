@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -35,82 +33,101 @@ class TerminologyCapabilities(BaseResource):
     A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
     """
 
-    resource_type: typing_extensions.Literal["TerminologyCapabilities"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["TerminologyCapabilities"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
-        description="An absolute URI that is used to identify this terminology capabilities when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this terminology capabilities is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the terminology capabilities is stored on different servers."
+        default=None,
+        description="An absolute URI that is used to identify this terminology capabilities when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this terminology capabilities is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the terminology capabilities is stored on different servers.",
     )
     version: typing.Optional[str] = pydantic.Field(
-        description="The identifier that is used to identify this version of the terminology capabilities when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the terminology capabilities author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
+        default=None,
+        description="The identifier that is used to identify this version of the terminology capabilities when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the terminology capabilities author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
     )
     name: typing.Optional[str] = pydantic.Field(
-        description="A natural language name identifying the terminology capabilities. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+        default=None,
+        description="A natural language name identifying the terminology capabilities. This name should be usable as an identifier for the module by machine processing applications such as code generation.",
     )
     title: typing.Optional[str] = pydantic.Field(
-        description="A short, descriptive, user-friendly title for the terminology capabilities."
+        default=None, description="A short, descriptive, user-friendly title for the terminology capabilities."
     )
     status: typing.Optional[TerminologyCapabilitiesStatus] = pydantic.Field(
-        description="The status of this terminology capabilities. Enables tracking the life-cycle of the content."
+        default=None,
+        description="The status of this terminology capabilities. Enables tracking the life-cycle of the content.",
     )
     experimental: typing.Optional[bool] = pydantic.Field(
-        description="A Boolean value to indicate that this terminology capabilities is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
+        default=None,
+        description="A Boolean value to indicate that this terminology capabilities is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.",
     )
     date: typing.Optional[DateTime] = pydantic.Field(
-        description="The date (and optionally time) when the terminology capabilities was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the terminology capabilities changes."
+        default=None,
+        description="The date (and optionally time) when the terminology capabilities was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the terminology capabilities changes.",
     )
     publisher: typing.Optional[str] = pydantic.Field(
-        description="The name of the organization or individual that published the terminology capabilities."
+        default=None,
+        description="The name of the organization or individual that published the terminology capabilities.",
     )
     contact: typing.Optional[typing.List[ContactDetail]] = pydantic.Field(
-        description="Contact details to assist a user in finding and communicating with the publisher."
+        default=None, description="Contact details to assist a user in finding and communicating with the publisher."
     )
     description: typing.Optional[Markdown] = pydantic.Field(
-        description="A free text natural language description of the terminology capabilities from a consumer's perspective. Typically, this is used when the capability statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP."
+        default=None,
+        description="A free text natural language description of the terminology capabilities from a consumer's perspective. Typically, this is used when the capability statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP.",
     )
     use_context: typing.Optional[typing.List[UsageContext]] = pydantic.Field(
         alias="useContext",
+        default=None,
         description="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate terminology capabilities instances.",
     )
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="A legal or geographic region in which the terminology capabilities is intended to be used."
+        default=None,
+        description="A legal or geographic region in which the terminology capabilities is intended to be used.",
     )
     purpose: typing.Optional[Markdown] = pydantic.Field(
-        description="Explanation of why this terminology capabilities is needed and why it has been designed as it has."
+        default=None,
+        description="Explanation of why this terminology capabilities is needed and why it has been designed as it has.",
     )
     copyright: typing.Optional[Markdown] = pydantic.Field(
-        description="A copyright statement relating to the terminology capabilities and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the terminology capabilities."
+        default=None,
+        description="A copyright statement relating to the terminology capabilities and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the terminology capabilities.",
     )
     kind: typing.Optional[Code] = pydantic.Field(
-        description="The way that this statement is intended to be used, to describe an actual running instance of software, a particular product (kind, not instance of software) or a class of implementation (e.g. a desired purchase)."
+        default=None,
+        description="The way that this statement is intended to be used, to describe an actual running instance of software, a particular product (kind, not instance of software) or a class of implementation (e.g. a desired purchase).",
     )
     software: typing.Optional[TerminologyCapabilitiesSoftware] = pydantic.Field(
-        description="Software that is covered by this terminology capability statement. It is used when the statement describes the capabilities of a particular software version, independent of an installation."
+        default=None,
+        description="Software that is covered by this terminology capability statement. It is used when the statement describes the capabilities of a particular software version, independent of an installation.",
     )
     implementation: typing.Optional[TerminologyCapabilitiesImplementation] = pydantic.Field(
-        description="Identifies a specific implementation instance that is described by the terminology capability statement - i.e. a particular installation, rather than the capabilities of a software program."
+        default=None,
+        description="Identifies a specific implementation instance that is described by the terminology capability statement - i.e. a particular installation, rather than the capabilities of a software program.",
     )
     locked_date: typing.Optional[bool] = pydantic.Field(
-        alias="lockedDate", description="Whether the server supports lockedDate."
+        alias="lockedDate", default=None, description="Whether the server supports lockedDate."
     )
     code_system: typing.Optional[typing.List[TerminologyCapabilitiesCodeSystem]] = pydantic.Field(
         alias="codeSystem",
+        default=None,
         description="Identifies a code system that is supported by the server. If there is a no code system URL, then this declares the general assumptions a client can make about support for any CodeSystem resource.",
     )
     expansion: typing.Optional[TerminologyCapabilitiesExpansion] = pydantic.Field(
-        description="Information about the [ValueSet/$expand](valueset-operation-expand.html) operation."
+        default=None, description="Information about the [ValueSet/$expand](valueset-operation-expand.html) operation."
     )
     code_search: typing.Optional[TerminologyCapabilitiesCodeSearch] = pydantic.Field(
         alias="codeSearch",
+        default=None,
         description="The degree to which the server supports the code search parameter on ValueSet, if it is supported.",
     )
     validate_code: typing.Optional[TerminologyCapabilitiesValidateCode] = pydantic.Field(
         alias="validateCode",
+        default=None,
         description="Information about the [ValueSet/$validate-code](valueset-operation-validate-code.html) operation.",
     )
     translation: typing.Optional[TerminologyCapabilitiesTranslation] = pydantic.Field(
-        description="Information about the [ConceptMap/$translate](conceptmap-operation-translate.html) operation."
+        default=None,
+        description="Information about the [ConceptMap/$translate](conceptmap-operation-translate.html) operation.",
     )
     closure: typing.Optional[TerminologyCapabilitiesClosure] = pydantic.Field(
-        description="Whether the $closure operation is supported."
+        default=None, description="Whether the $closure operation is supported."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

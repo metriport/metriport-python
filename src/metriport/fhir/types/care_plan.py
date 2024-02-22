@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -29,75 +27,95 @@ class CarePlan(BaseResource):
     Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.
     """
 
-    resource_type: typing_extensions.Literal["CarePlan"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["CarePlan"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers assigned to this care plan by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
+        default=None,
+        description="Business identifiers assigned to this care plan by the performer or other systems which remain constant as the resource is updated and propagates from server to server.",
     )
     instantiates_canonical: typing.Optional[typing.List[Canonical]] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a FHIR-defined protocol, guideline, questionnaire or other definition that is adhered to in whole or in part by this CarePlan.",
     )
     instantiates_uri: typing.Optional[typing.List[Uri]] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an externally maintained protocol, guideline, questionnaire or other definition that is adhered to in whole or in part by this CarePlan.",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="basedOn", description="A care plan that is fulfilled in whole or in part by this care plan."
+        alias="basedOn",
+        default=None,
+        description="A care plan that is fulfilled in whole or in part by this care plan.",
     )
     replaces: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Completed or terminated care plan whose function is taken by this new care plan."
+        default=None, description="Completed or terminated care plan whose function is taken by this new care plan."
     )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="partOf", description="A larger care plan of which this particular care plan is a component or step."
+        alias="partOf",
+        default=None,
+        description="A larger care plan of which this particular care plan is a component or step.",
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record."
+        default=None,
+        description="Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record.",
     )
     intent: typing.Optional[Code] = pydantic.Field(
-        description="Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain."
+        default=None,
+        description="Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain.",
     )
     category: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description='Identifies what "kind" of plan this is to support differentiation between multiple co-existing plans; e.g. "Home health", "psychiatric", "asthma", "disease management", "wellness plan", etc.'
+        default=None,
+        description='Identifies what "kind" of plan this is to support differentiation between multiple co-existing plans; e.g. "Home health", "psychiatric", "asthma", "disease management", "wellness plan", etc.',
     )
-    title: typing.Optional[str] = pydantic.Field(description="Human-friendly name for the care plan.")
-    description: typing.Optional[str] = pydantic.Field(description="A description of the scope and nature of the plan.")
+    title: typing.Optional[str] = pydantic.Field(default=None, description="Human-friendly name for the care plan.")
+    description: typing.Optional[str] = pydantic.Field(
+        default=None, description="A description of the scope and nature of the plan."
+    )
     subject: Reference = pydantic.Field(
         description="Identifies the patient or group whose intended care is described by the plan."
     )
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The Encounter during which this CarePlan was created or to which the creation of this record is tightly associated."
+        default=None,
+        description="The Encounter during which this CarePlan was created or to which the creation of this record is tightly associated.",
     )
     period: typing.Optional[Period] = pydantic.Field(
-        description="Indicates when the plan did (or is intended to) come into effect and end."
+        default=None, description="Indicates when the plan did (or is intended to) come into effect and end."
     )
     created: typing.Optional[DateTime] = pydantic.Field(
-        description="Represents when this particular CarePlan record was created in the system, which is often a system-generated date."
+        default=None,
+        description="Represents when this particular CarePlan record was created in the system, which is often a system-generated date.",
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="When populated, the author is responsible for the care plan. The care plan is attributed to the author."
+        default=None,
+        description="When populated, the author is responsible for the care plan. The care plan is attributed to the author.",
     )
     contributor: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Identifies the individual(s) or organization who provided the contents of the care plan."
+        default=None,
+        description="Identifies the individual(s) or organization who provided the contents of the care plan.",
     )
     care_team: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="careTeam",
+        default=None,
         description="Identifies all people and organizations who are expected to be involved in the care envisioned by this plan.",
     )
     addresses: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan."
+        default=None,
+        description="Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan.",
     )
     supporting_info: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="supportingInfo",
+        default=None,
         description="Identifies portions of the patient's record that specifically influenced the formation of the plan. These might include comorbidities, recent procedures, limitations, recent assessments, etc.",
     )
     goal: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Describes the intended objective(s) of carrying out the care plan."
+        default=None, description="Describes the intended objective(s) of carrying out the care plan."
     )
     activity: typing.Optional[typing.List[CarePlanActivity]] = pydantic.Field(
-        description="Identifies a planned action to occur as part of the plan. For example, a medication to be used, lab tests to perform, self-monitoring, education, etc."
+        default=None,
+        description="Identifies a planned action to occur as part of the plan. For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="General notes about the care plan not covered elsewhere."
+        default=None, description="General notes about the care plan not covered elsewhere."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

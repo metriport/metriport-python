@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .age import Age
 from .annotation import Annotation
@@ -31,114 +29,138 @@ class Procedure(BaseResource):
     An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
     """
 
-    resource_type: typing_extensions.Literal["Procedure"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Procedure"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="Business identifiers assigned to this procedure by the performer or other systems which remain constant as the resource is updated and is propagated from server to server."
+        default=None,
+        description="Business identifiers assigned to this procedure by the performer or other systems which remain constant as the resource is updated and is propagated from server to server.",
     )
     instantiates_canonical: typing.Optional[typing.List[Canonical]] = pydantic.Field(
         alias="instantiatesCanonical",
+        default=None,
         description="The URL pointing to a FHIR-defined protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure.",
     )
     instantiates_uri: typing.Optional[typing.List[Uri]] = pydantic.Field(
         alias="instantiatesUri",
+        default=None,
         description="The URL pointing to an externally maintained protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure.",
     )
     based_on: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="basedOn",
+        default=None,
         description="A reference to a resource that contains details of the request for this procedure.",
     )
     part_of: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="partOf", description="A larger event of which this particular procedure is a component or step."
+        alias="partOf",
+        default=None,
+        description="A larger event of which this particular procedure is a component or step.",
     )
     status: typing.Optional[Code] = pydantic.Field(
-        description="A code specifying the state of the procedure. Generally, this will be the in-progress or completed state."
+        default=None,
+        description="A code specifying the state of the procedure. Generally, this will be the in-progress or completed state.",
     )
     status_reason: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="statusReason", description="Captures the reason for the current state of the procedure."
+        alias="statusReason", default=None, description="Captures the reason for the current state of the procedure."
     )
     category: typing.Optional[CodeableConcept] = pydantic.Field(
-        description='A code that classifies the procedure for searching, sorting and display purposes (e.g. "Surgical Procedure").'
+        default=None,
+        description='A code that classifies the procedure for searching, sorting and display purposes (e.g. "Surgical Procedure").',
     )
     code: typing.Optional[CodeableConcept] = pydantic.Field(
-        description='The specific procedure that is performed. Use text if the exact nature of the procedure cannot be coded (e.g. "Laparoscopic Appendectomy").'
+        default=None,
+        description='The specific procedure that is performed. Use text if the exact nature of the procedure cannot be coded (e.g. "Laparoscopic Appendectomy").',
     )
     subject: Reference = pydantic.Field(description="The person, animal or group on which the procedure was performed.")
     encounter: typing.Optional[Reference] = pydantic.Field(
-        description="The Encounter during which this Procedure was created or performed or to which the creation of this record is tightly associated."
+        default=None,
+        description="The Encounter during which this Procedure was created or performed or to which the creation of this record is tightly associated.",
     )
     performed_date_time: typing.Optional[str] = pydantic.Field(
         alias="performedDateTime",
+        default=None,
         description="Estimated or actual date, date-time, period, or age when the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.",
     )
     performed_period: typing.Optional[Period] = pydantic.Field(
         alias="performedPeriod",
+        default=None,
         description="Estimated or actual date, date-time, period, or age when the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.",
     )
     performed_string: typing.Optional[str] = pydantic.Field(
         alias="performedString",
+        default=None,
         description="Estimated or actual date, date-time, period, or age when the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.",
     )
     performed_age: typing.Optional[Age] = pydantic.Field(
         alias="performedAge",
+        default=None,
         description="Estimated or actual date, date-time, period, or age when the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.",
     )
     performed_range: typing.Optional[Range] = pydantic.Field(
         alias="performedRange",
+        default=None,
         description="Estimated or actual date, date-time, period, or age when the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.",
     )
     recorder: typing.Optional[Reference] = pydantic.Field(
-        description="Individual who recorded the record and takes responsibility for its content."
+        default=None, description="Individual who recorded the record and takes responsibility for its content."
     )
     asserter: typing.Optional[Reference] = pydantic.Field(
-        description="Individual who is making the procedure statement."
+        default=None, description="Individual who is making the procedure statement."
     )
     performer: typing.Optional[typing.List[ProcedurePerformer]] = pydantic.Field(
-        description='Limited to "real" people rather than equipment.'
+        default=None, description='Limited to "real" people rather than equipment.'
     )
     location: typing.Optional[Reference] = pydantic.Field(
-        description="The location where the procedure actually happened. E.g. a newborn at home, a tracheostomy at a restaurant."
+        default=None,
+        description="The location where the procedure actually happened. E.g. a newborn at home, a tracheostomy at a restaurant.",
     )
     reason_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="reasonCode",
+        default=None,
         description="The coded reason why the procedure was performed. This may be a coded entity of some type, or may simply be present as text.",
     )
     reason_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        alias="reasonReference", description="The justification of why the procedure was performed."
+        alias="reasonReference", default=None, description="The justification of why the procedure was performed."
     )
     body_site: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="bodySite",
+        default=None,
         description="Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion.",
     )
     outcome: typing.Optional[CodeableConcept] = pydantic.Field(
-        description="The outcome of the procedure - did it resolve the reasons for the procedure being performed?"
+        default=None,
+        description="The outcome of the procedure - did it resolve the reasons for the procedure being performed?",
     )
     report: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="This could be a histology result, pathology report, surgical report, etc."
+        default=None, description="This could be a histology result, pathology report, surgical report, etc."
     )
     complication: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any 'post procedure' issues."
+        default=None,
+        description="Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any 'post procedure' issues.",
     )
     complication_detail: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="complicationDetail",
+        default=None,
         description="Any complications that occurred during the procedure, or in the immediate post-performance period.",
     )
     follow_up: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
         alias="followUp",
+        default=None,
         description="If the procedure required specific follow up - e.g. removal of sutures. The follow up may be represented as a simple note or could potentially be more complex, in which case the CarePlan resource can be used.",
     )
     note: typing.Optional[typing.List[Annotation]] = pydantic.Field(
-        description="Any other notes and comments about the procedure."
+        default=None, description="Any other notes and comments about the procedure."
     )
     focal_device: typing.Optional[typing.List[ProcedureFocalDevice]] = pydantic.Field(
         alias="focalDevice",
+        default=None,
         description="A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure.",
     )
     used_reference: typing.Optional[typing.List[Reference]] = pydantic.Field(
         alias="usedReference",
+        default=None,
         description="Identifies medications, devices and any other substance used as part of the procedure.",
     )
     used_code: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        alias="usedCode", description="Identifies coded items that were used as part of the procedure."
+        alias="usedCode", default=None, description="Identifies coded items that were used as part of the procedure."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

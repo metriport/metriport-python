@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .linkage_item import LinkageItem
@@ -21,12 +19,13 @@ class Linkage(BaseResource):
     Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
     """
 
-    resource_type: typing_extensions.Literal["Linkage"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Linkage"] = pydantic.Field(alias="resourceType")
     active: typing.Optional[bool] = pydantic.Field(
-        description='Indicates whether the asserted set of linkages are considered to be "in effect".'
+        default=None, description='Indicates whether the asserted set of linkages are considered to be "in effect".'
     )
     author: typing.Optional[Reference] = pydantic.Field(
-        description="Identifies the user or organization responsible for asserting the linkages as well as the user or organization who establishes the context in which the nature of each linkage is evaluated."
+        default=None,
+        description="Identifies the user or organization responsible for asserting the linkages as well as the user or organization who establishes the context in which the nature of each linkage is evaluated.",
     )
     item: typing.List[LinkageItem] = pydantic.Field(
         description="Identifies which record considered as the reference to the same real-world occurrence as well as how the items should be evaluated within the collection of linked items."

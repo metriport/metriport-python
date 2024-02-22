@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,22 +22,23 @@ class MedicinalProductIngredient(BaseResource):
     An ingredient of a manufactured item or pharmaceutical product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductIngredient"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductIngredient"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
-        description="The identifier(s) of this Ingredient that are assigned by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate."
+        default=None,
+        description="The identifier(s) of this Ingredient that are assigned by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate.",
     )
     role: CodeableConcept = pydantic.Field(description="Ingredient role e.g. Active ingredient, excipient.")
     allergenic_indicator: typing.Optional[bool] = pydantic.Field(
-        alias="allergenicIndicator", description="If the ingredient is a known or suspected allergen."
+        alias="allergenicIndicator", default=None, description="If the ingredient is a known or suspected allergen."
     )
     manufacturer: typing.Optional[typing.List[Reference]] = pydantic.Field(
-        description="Manufacturer of this Ingredient."
+        default=None, description="Manufacturer of this Ingredient."
     )
     specified_substance: typing.Optional[typing.List[MedicinalProductIngredientSpecifiedSubstance]] = pydantic.Field(
-        alias="specifiedSubstance", description="A specified substance that comprises this ingredient."
+        alias="specifiedSubstance", default=None, description="A specified substance that comprises this ingredient."
     )
     substance: typing.Optional[MedicinalProductIngredientSubstance] = pydantic.Field(
-        description="The ingredient substance."
+        default=None, description="The ingredient substance."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -21,27 +21,30 @@ class MedicinalProductAuthorizationJurisdictionalAuthorization(pydantic.BaseMode
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
-        description="The assigned number for the marketing authorization."
+        default=None, description="The assigned number for the marketing authorization."
     )
-    country: typing.Optional[CodeableConcept] = pydantic.Field(description="Country of authorization.")
+    country: typing.Optional[CodeableConcept] = pydantic.Field(default=None, description="Country of authorization.")
     jurisdiction: typing.Optional[typing.List[CodeableConcept]] = pydantic.Field(
-        description="Jurisdiction within a country."
+        default=None, description="Jurisdiction within a country."
     )
     legal_status_of_supply: typing.Optional[CodeableConcept] = pydantic.Field(
-        alias="legalStatusOfSupply", description="The legal status of supply in a jurisdiction or region."
+        alias="legalStatusOfSupply", default=None, description="The legal status of supply in a jurisdiction or region."
     )
     validity_period: typing.Optional[Period] = pydantic.Field(
-        alias="validityPeriod", description="The start and expected end date of the authorization."
+        alias="validityPeriod", default=None, description="The start and expected end date of the authorization."
     )
 
     def json(self, **kwargs: typing.Any) -> str:

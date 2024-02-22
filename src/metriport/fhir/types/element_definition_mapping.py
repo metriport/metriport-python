@@ -20,24 +20,29 @@ class ElementDefinitionMapping(pydantic.BaseModel):
     """
 
     id: typing.Optional[str] = pydantic.Field(
-        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
+        default=None,
+        description="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
     )
     extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
-        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
+        default=None,
+        description="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
     )
     modifier_extension: typing.Optional[typing.List[Extension]] = pydantic.Field(
         alias="modifierExtension",
+        default=None,
         description="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions. Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
     )
-    identity: typing.Optional[Id] = pydantic.Field(description="An internal reference to the definition of a mapping.")
+    identity: typing.Optional[Id] = pydantic.Field(
+        default=None, description="An internal reference to the definition of a mapping."
+    )
     language: typing.Optional[Code] = pydantic.Field(
-        description="Identifies the computable language in which mapping.map is expressed."
+        default=None, description="Identifies the computable language in which mapping.map is expressed."
     )
     map: typing.Optional[str] = pydantic.Field(
-        description="Expresses what part of the target specification corresponds to this element."
+        default=None, description="Expresses what part of the target specification corresponds to this element."
     )
     comment: typing.Optional[str] = pydantic.Field(
-        description="Comments that provide information about the mapping or its use."
+        default=None, description="Comments that provide information about the mapping or its use."
     )
 
     def json(self, **kwargs: typing.Any) -> str:
