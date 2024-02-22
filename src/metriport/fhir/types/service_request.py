@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -32,7 +30,7 @@ class ServiceRequest(BaseResource):
     A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
     """
 
-    resource_type: typing_extensions.Literal["ServiceRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ServiceRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifiers assigned to this order instance by the orderer and/or the receiver and/or order fulfiller."
     )

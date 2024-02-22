@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .identifier import Identifier
@@ -23,7 +21,7 @@ class ResearchSubject(BaseResource):
     A physical entity which is the primary unit of operational and/or administrative interest in a study.
     """
 
-    resource_type: typing_extensions.Literal["ResearchSubject"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ResearchSubject"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifiers assigned to this research subject for a study."
     )

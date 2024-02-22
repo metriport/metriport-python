@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .agent_channel import AgentChannel
 from .agent_setting import AgentSetting
@@ -27,7 +25,7 @@ class Agent(pydantic.BaseModel):
     Configuration details for an instance of the Medplum agent application.
     """
 
-    resource_type: typing_extensions.Literal["Agent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Agent"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

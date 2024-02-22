@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -33,7 +31,7 @@ class Observation(BaseResource):
     Measurements and simple assertions made about a patient, device or other subject.
     """
 
-    resource_type: typing_extensions.Literal["Observation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Observation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this observation."
     )

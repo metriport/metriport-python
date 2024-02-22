@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -23,7 +21,7 @@ class EnrollmentRequest(BaseResource):
     This resource provides the insurance enrollment details to the insurer regarding a specified coverage.
     """
 
-    resource_type: typing_extensions.Literal["EnrollmentRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["EnrollmentRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="The Response business identifier."
     )

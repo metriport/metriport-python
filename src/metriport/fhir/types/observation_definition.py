@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -25,7 +23,7 @@ class ObservationDefinition(BaseResource):
     Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.
     """
 
-    resource_type: typing_extensions.Literal["ObservationDefinition"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ObservationDefinition"] = pydantic.Field(alias="resourceType")
     publisher: typing.Optional[Reference] = pydantic.Field(
         description="The name of the individual or organization that published the ObservationDefinition."
     )

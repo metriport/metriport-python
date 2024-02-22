@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -35,7 +33,7 @@ class MedicationKnowledge(BaseResource):
     Information about a medication that is used to support knowledge.
     """
 
-    resource_type: typing_extensions.Literal["MedicationKnowledge"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicationKnowledge"] = pydantic.Field(alias="resourceType")
     code: typing.Optional[CodeableConcept] = pydantic.Field(
         description="A code that specifies this medication, or a textual description if no code is available. Usage note: This could be a standard medication code such as a code from RxNorm, SNOMED CT, IDMP etc. It could also be a national or local formulary code, optionally with translations to other code systems."
     )

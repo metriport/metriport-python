@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .date_time import DateTime
@@ -29,7 +27,7 @@ class TestReport(BaseResource):
     A summary of information based on the results of executing a TestScript.
     """
 
-    resource_type: typing_extensions.Literal["TestReport"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["TestReport"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
         description="Identifier for the TestScript assigned for external purposes outside the context of FHIR."
     )

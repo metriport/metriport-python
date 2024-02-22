@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .address import Address
 from .attachment import Attachment
@@ -29,7 +27,7 @@ class RelatedPerson(BaseResource):
     Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.
     """
 
-    resource_type: typing_extensions.Literal["RelatedPerson"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["RelatedPerson"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier for a person within a particular scope."
     )

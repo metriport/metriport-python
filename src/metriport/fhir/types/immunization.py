@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -30,7 +28,7 @@ class Immunization(BaseResource):
     Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.
     """
 
-    resource_type: typing_extensions.Literal["Immunization"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Immunization"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this immunization record."
     )

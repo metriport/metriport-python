@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -25,7 +23,7 @@ class Goal(BaseResource):
     Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.
     """
 
-    resource_type: typing_extensions.Literal["Goal"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Goal"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this goal by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )

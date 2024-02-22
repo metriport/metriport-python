@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -28,7 +26,7 @@ class RequestGroup(BaseResource):
     A group of related requests that can be used to capture intended activities that have inter-dependencies such as "give this medication after that one".
     """
 
-    resource_type: typing_extensions.Literal["RequestGroup"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["RequestGroup"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Allows a service to provide a unique, business identifier for the request."
     )

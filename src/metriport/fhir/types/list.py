@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -27,7 +25,7 @@ class List(BaseResource):
     A list is a curated collection of resources.
     """
 
-    resource_type: typing_extensions.Literal["List"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["List"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier for the List assigned for business purposes outside the context of FHIR."
     )

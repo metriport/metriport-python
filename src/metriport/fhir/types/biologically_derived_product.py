@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .biologically_derived_product_collection import BiologicallyDerivedProductCollection
@@ -28,7 +26,7 @@ class BiologicallyDerivedProduct(BaseResource):
     A material substance originating from a biological entity intended to be transplanted or infused into another (possibly the same) biological entity.
     """
 
-    resource_type: typing_extensions.Literal["BiologicallyDerivedProduct"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["BiologicallyDerivedProduct"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="This records identifiers associated with this biologically derived product instance that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -28,7 +26,7 @@ class Communication(BaseResource):
     An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.
     """
 
-    resource_type: typing_extensions.Literal["Communication"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Communication"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this communication by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )

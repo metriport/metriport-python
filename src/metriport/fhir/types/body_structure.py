@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -23,7 +21,7 @@ class BodyStructure(BaseResource):
     Record details about an anatomical structure. This resource may be used when a coded concept does not provide the necessary detail needed for the use case.
     """
 
-    resource_type: typing_extensions.Literal["BodyStructure"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["BodyStructure"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier for this instance of the anatomical structure."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -27,7 +25,7 @@ class Coverage(BaseResource):
     Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.
     """
 
-    resource_type: typing_extensions.Literal["Coverage"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Coverage"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this coverage."
     )

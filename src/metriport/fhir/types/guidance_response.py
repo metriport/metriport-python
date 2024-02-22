@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -26,7 +24,7 @@ class GuidanceResponse(BaseResource):
     A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.
     """
 
-    resource_type: typing_extensions.Literal["GuidanceResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["GuidanceResponse"] = pydantic.Field(alias="resourceType")
     request_identifier: typing.Optional[Identifier] = pydantic.Field(
         alias="requestIdentifier",
         description="The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.",

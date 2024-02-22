@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .substance_reference_information_classification import SubstanceReferenceInformationClassification
@@ -23,7 +21,7 @@ class SubstanceReferenceInformation(BaseResource):
     Todo.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceReferenceInformation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SubstanceReferenceInformation"] = pydantic.Field(alias="resourceType")
     comment: typing.Optional[str] = pydantic.Field(description="Todo.")
     gene: typing.Optional[typing.List[SubstanceReferenceInformationGene]] = pydantic.Field(description="Todo.")
     gene_element: typing.Optional[typing.List[SubstanceReferenceInformationGeneElement]] = pydantic.Field(

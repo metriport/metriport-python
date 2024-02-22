@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,7 +25,7 @@ class InsurancePlan(BaseResource):
     Details of a Health Insurance product/plan provided by an organization.
     """
 
-    resource_type: typing_extensions.Literal["InsurancePlan"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["InsurancePlan"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this health insurance product which remain constant as the resource is updated and propagates from server to server."
     )

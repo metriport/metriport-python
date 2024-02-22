@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -23,7 +21,7 @@ class Schedule(BaseResource):
     A container for slots of time that may be available for booking appointments.
     """
 
-    resource_type: typing_extensions.Literal["Schedule"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Schedule"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(description="External Ids for this item.")
     active: typing.Optional[bool] = pydantic.Field(
         description="Whether this schedule record is in active use or should not be used (such as was entered in error)."

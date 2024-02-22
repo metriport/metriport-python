@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -32,7 +30,7 @@ class Encounter(BaseResource):
     An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
     """
 
-    resource_type: typing_extensions.Literal["Encounter"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Encounter"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifier(s) by which this encounter is known."
     )

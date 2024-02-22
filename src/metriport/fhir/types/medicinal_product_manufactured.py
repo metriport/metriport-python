@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -23,7 +21,7 @@ class MedicinalProductManufactured(BaseResource):
     The manufactured item as contained in the packaged medicinal product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductManufactured"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductManufactured"] = pydantic.Field(alias="resourceType")
     manufactured_dose_form: CodeableConcept = pydantic.Field(
         alias="manufacturedDoseForm",
         description="Dose form as manufactured and before any transformation into the pharmaceutical product.",

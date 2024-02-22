@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,7 +22,7 @@ class Flag(BaseResource):
     Prospective warnings of potential issues when providing care to the patient.
     """
 
-    resource_type: typing_extensions.Literal["Flag"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Flag"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this flag by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )

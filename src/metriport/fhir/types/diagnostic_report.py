@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -27,7 +25,7 @@ class DiagnosticReport(BaseResource):
     The findings and interpretation of diagnostic tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.
     """
 
-    resource_type: typing_extensions.Literal["DiagnosticReport"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DiagnosticReport"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Identifiers assigned to this report by the performer or other systems."
     )

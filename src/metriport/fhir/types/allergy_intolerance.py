@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .age import Age
 from .allergy_intolerance_category_item import AllergyIntoleranceCategoryItem
@@ -31,7 +29,7 @@ class AllergyIntolerance(BaseResource):
     Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance.
     """
 
-    resource_type: typing_extensions.Literal["AllergyIntolerance"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AllergyIntolerance"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this AllergyIntolerance by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )

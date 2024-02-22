@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -25,7 +23,7 @@ class PaymentNotice(BaseResource):
     This resource provides the status of the payment for goods and services rendered, and the request and response resource references.
     """
 
-    resource_type: typing_extensions.Literal["PaymentNotice"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PaymentNotice"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this payment notice."
     )

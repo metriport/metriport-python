@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,7 +25,7 @@ class DeviceMetric(BaseResource):
     Describes a measurement, calculation or setting capability of a medical device.
     """
 
-    resource_type: typing_extensions.Literal["DeviceMetric"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DeviceMetric"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique instance identifiers assigned to a device by the device or gateway software, manufacturers, other organizations or owners. For example: handle ID."
     )

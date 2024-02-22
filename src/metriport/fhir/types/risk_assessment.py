@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -26,7 +24,7 @@ class RiskAssessment(BaseResource):
     An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.
     """
 
-    resource_type: typing_extensions.Literal["RiskAssessment"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["RiskAssessment"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifier assigned to the risk assessment."
     )

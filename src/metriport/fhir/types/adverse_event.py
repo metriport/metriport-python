@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .adverse_event_actuality import AdverseEventActuality
 from .adverse_event_suspect_entity import AdverseEventSuspectEntity
@@ -25,7 +23,7 @@ class AdverseEvent(BaseResource):
     Actual or potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.
     """
 
-    resource_type: typing_extensions.Literal["AdverseEvent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AdverseEvent"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
         description="Business identifiers assigned to this adverse event by the performer or other systems which remain constant as the resource is updated and propagates from server to server."
     )

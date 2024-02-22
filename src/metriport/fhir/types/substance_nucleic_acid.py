@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -21,7 +19,7 @@ class SubstanceNucleicAcid(BaseResource):
     Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceNucleicAcid"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SubstanceNucleicAcid"] = pydantic.Field(alias="resourceType")
     sequence_type: typing.Optional[CodeableConcept] = pydantic.Field(
         alias="sequenceType",
         description="The type of the sequence shall be specified based on a controlled vocabulary.",

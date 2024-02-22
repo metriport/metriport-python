@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -33,7 +31,7 @@ class Contract(BaseResource):
     Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
     """
 
-    resource_type: typing_extensions.Literal["Contract"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Contract"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique identifier for this Contract or a derivative that references a Source Contract."
     )

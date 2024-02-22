@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -30,7 +28,7 @@ class StructureMap(BaseResource):
     A Map of relationships between 2 structures that can be used to transform data.
     """
 
-    resource_type: typing_extensions.Literal["StructureMap"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["StructureMap"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this structure map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this structure map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the structure map is stored on different servers."
     )

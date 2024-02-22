@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .audit_event_action import AuditEventAction
 from .audit_event_agent import AuditEventAgent
@@ -28,7 +26,7 @@ class AuditEvent(BaseResource):
     A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.
     """
 
-    resource_type: typing_extensions.Literal["AuditEvent"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AuditEvent"] = pydantic.Field(alias="resourceType")
     type: Coding = pydantic.Field(
         description="Identifier for a family of the event. For example, a menu item, program, rule, policy, function code, application name or URL. It identifies the performed function."
     )

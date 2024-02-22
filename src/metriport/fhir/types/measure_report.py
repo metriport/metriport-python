@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .canonical import Canonical
@@ -28,7 +26,7 @@ class MeasureReport(BaseResource):
     The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.
     """
 
-    resource_type: typing_extensions.Literal["MeasureReport"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MeasureReport"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A formal identifier that is used to identify this MeasureReport when it is represented in other formats or referenced in a specification, model, design or an instance."
     )

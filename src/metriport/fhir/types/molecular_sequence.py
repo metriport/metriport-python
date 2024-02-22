@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .identifier import Identifier
@@ -28,7 +26,7 @@ class MolecularSequence(BaseResource):
     Raw data describing a biological sequence.
     """
 
-    resource_type: typing_extensions.Literal["MolecularSequence"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MolecularSequence"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier for this particular sequence instance. This is a FHIR-defined id."
     )

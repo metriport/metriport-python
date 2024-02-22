@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -33,7 +31,7 @@ class Task(BaseResource):
     A task to be performed.
     """
 
-    resource_type: typing_extensions.Literal["Task"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Task"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="The business identifier for this task."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -32,7 +30,7 @@ class EvidenceVariable(BaseResource):
     The EvidenceVariable resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
     """
 
-    resource_type: typing_extensions.Literal["EvidenceVariable"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["EvidenceVariable"] = pydantic.Field(alias="resourceType")
     url: typing.Optional[Uri] = pydantic.Field(
         description="An absolute URI that is used to identify this evidence variable when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this evidence variable is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the evidence variable is stored on different servers."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -29,7 +27,7 @@ class SupplyRequest(BaseResource):
     A record of a request for a medication, substance or device used in the healthcare setting.
     """
 
-    resource_type: typing_extensions.Literal["SupplyRequest"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SupplyRequest"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifiers assigned to this SupplyRequest by the author and/or other systems. These identifiers remain constant as the resource is updated and propagates from server to server."
     )

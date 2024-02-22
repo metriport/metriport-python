@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -27,7 +25,7 @@ class MedicinalProduct(BaseResource):
     Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g. regulatory use).
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProduct"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProduct"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifier for this product. Could be an MPID."
     )

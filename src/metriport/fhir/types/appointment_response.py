@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -24,7 +22,7 @@ class AppointmentResponse(BaseResource):
     A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.
     """
 
-    resource_type: typing_extensions.Literal["AppointmentResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["AppointmentResponse"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="This records identifiers associated with this appointment response concern that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate."
     )

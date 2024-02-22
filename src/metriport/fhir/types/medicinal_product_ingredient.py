@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -24,7 +22,7 @@ class MedicinalProductIngredient(BaseResource):
     An ingredient of a manufactured item or pharmaceutical product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductIngredient"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductIngredient"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(
         description="The identifier(s) of this Ingredient that are assigned by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate."
     )

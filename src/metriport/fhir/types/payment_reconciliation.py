@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -29,7 +27,7 @@ class PaymentReconciliation(BaseResource):
     This resource provides the details including amount of a payment and allocates the payment items being paid.
     """
 
-    resource_type: typing_extensions.Literal["PaymentReconciliation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["PaymentReconciliation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this payment reconciliation."
     )

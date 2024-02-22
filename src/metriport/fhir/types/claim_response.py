@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -34,7 +32,7 @@ class ClaimResponse(BaseResource):
     This resource provides the adjudication details from the processing of a Claim resource.
     """
 
-    resource_type: typing_extensions.Literal["ClaimResponse"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ClaimResponse"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this claim response."
     )

@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_64_binary import Base64Binary
 from .code import Code
@@ -24,7 +22,7 @@ class Binary(pydantic.BaseModel):
     A resource that represents the data of a single raw artifact as digital content accessible in its native format. A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.
     """
 
-    resource_type: typing_extensions.Literal["Binary"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Binary"] = pydantic.Field(alias="resourceType")
     id: typing.Optional[Id] = pydantic.Field(
         description="The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
     )

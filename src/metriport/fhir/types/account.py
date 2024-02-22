@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .account_coverage import AccountCoverage
 from .account_guarantor import AccountGuarantor
@@ -26,7 +24,7 @@ class Account(BaseResource):
     A financial tool for tracking value accrued for a particular purpose. In the healthcare field, used to track charges for a patient, cost centers, etc.
     """
 
-    resource_type: typing_extensions.Literal["Account"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Account"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Unique identifier used to reference the account. Might or might not be intended for human use (e.g. credit card number)."
     )

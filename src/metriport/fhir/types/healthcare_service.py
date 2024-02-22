@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .attachment import Attachment
 from .base_resource import BaseResource
@@ -28,7 +26,7 @@ class HealthcareService(BaseResource):
     The details of a healthcare service available at a location.
     """
 
-    resource_type: typing_extensions.Literal["HealthcareService"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["HealthcareService"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="External identifiers for this item."
     )

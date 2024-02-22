@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -29,7 +27,7 @@ class SubstanceSpecification(BaseResource):
     The detailed description of a substance, typically at a level beyond what is used for prescribing.
     """
 
-    resource_type: typing_extensions.Literal["SubstanceSpecification"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["SubstanceSpecification"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[Identifier] = pydantic.Field(description="Identifier by which this substance is known.")
     type: typing.Optional[CodeableConcept] = pydantic.Field(
         description="High level categorization, e.g. polymer or nucleic acid."

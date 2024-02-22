@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .codeable_concept import CodeableConcept
@@ -22,7 +20,7 @@ class MedicinalProductUndesirableEffect(BaseResource):
     Describe the undesirable effects of the medicinal product.
     """
 
-    resource_type: typing_extensions.Literal["MedicinalProductUndesirableEffect"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["MedicinalProductUndesirableEffect"] = pydantic.Field(alias="resourceType")
     subject: typing.Optional[typing.List[Reference]] = pydantic.Field(
         description="The medication for which this is an indication."
     )

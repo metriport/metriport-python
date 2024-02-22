@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -28,7 +26,7 @@ class DetectedIssue(BaseResource):
     Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
     """
 
-    resource_type: typing_extensions.Literal["DetectedIssue"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DetectedIssue"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifier associated with the detected issue record."
     )

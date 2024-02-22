@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .annotation import Annotation
 from .base_resource import BaseResource
@@ -27,7 +25,7 @@ class DeviceUseStatement(BaseResource):
     A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.
     """
 
-    resource_type: typing_extensions.Literal["DeviceUseStatement"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["DeviceUseStatement"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="An external identifier for this statement such as an IRI."
     )

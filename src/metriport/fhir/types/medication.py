@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -26,7 +24,7 @@ class Medication(BaseResource):
     This resource is primarily used for the identification and definition of a medication for the purposes of prescribing, dispensing, and administering a medication as well as for making statements about medication use.
     """
 
-    resource_type: typing_extensions.Literal["Medication"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["Medication"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="Business identifier for this medication."
     )

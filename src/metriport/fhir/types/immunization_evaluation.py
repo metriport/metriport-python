@@ -3,8 +3,6 @@
 import datetime as dt
 import typing
 
-import typing_extensions
-
 from ...core.datetime_utils import serialize_datetime
 from .base_resource import BaseResource
 from .code import Code
@@ -24,7 +22,7 @@ class ImmunizationEvaluation(BaseResource):
     Describes a comparison of an immunization event against published recommendations to determine if the administration is "valid" in relation to those recommendations.
     """
 
-    resource_type: typing_extensions.Literal["ImmunizationEvaluation"] = pydantic.Field(alias="resourceType")
+    resource_type: typing.Literal["ImmunizationEvaluation"] = pydantic.Field(alias="resourceType")
     identifier: typing.Optional[typing.List[Identifier]] = pydantic.Field(
         description="A unique identifier assigned to this immunization evaluation record."
     )
