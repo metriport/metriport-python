@@ -413,7 +413,11 @@ class DocumentClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def start_bulk_get_document_url(
-        self, *, patient_id: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        patient_id: str,
+        request: typing.Optional[typing.Dict[str, str]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> BulkGetDocumentUrlQuery:
         """
         Triggers a process to generate a list of download URLs for all of the patient's documents.
@@ -425,6 +429,8 @@ class DocumentClient:
         Parameters:
             - patient_id: str. The ID of the patient for which to initiate the bulk URL generation.
 
+            - request: typing.Optional[typing.Dict[str, str]].
+
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
         from metriport.client import Metriport
@@ -434,6 +440,7 @@ class DocumentClient:
         )
         client.medical.document.start_bulk_get_document_url(
             patient_id="12345678",
+            request={"youCan": "putAny", "stringKeyValue": "pairsHere"},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -451,9 +458,12 @@ class DocumentClient:
                     }
                 )
             ),
-            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
-            if request_options is not None
-            else None,
+            json=jsonable_encoder(request)
+            if request_options is None or request_options.get("additional_body_parameters") is None
+            else {
+                **jsonable_encoder(request),
+                **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
+            },
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -862,7 +872,11 @@ class AsyncDocumentClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def start_bulk_get_document_url(
-        self, *, patient_id: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        patient_id: str,
+        request: typing.Optional[typing.Dict[str, str]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> BulkGetDocumentUrlQuery:
         """
         Triggers a process to generate a list of download URLs for all of the patient's documents.
@@ -874,6 +888,8 @@ class AsyncDocumentClient:
         Parameters:
             - patient_id: str. The ID of the patient for which to initiate the bulk URL generation.
 
+            - request: typing.Optional[typing.Dict[str, str]].
+
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
         from metriport.client import AsyncMetriport
@@ -883,6 +899,7 @@ class AsyncDocumentClient:
         )
         await client.medical.document.start_bulk_get_document_url(
             patient_id="12345678",
+            request={"youCan": "putAny", "stringKeyValue": "pairsHere"},
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -900,9 +917,12 @@ class AsyncDocumentClient:
                     }
                 )
             ),
-            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
-            if request_options is not None
-            else None,
+            json=jsonable_encoder(request)
+            if request_options is None or request_options.get("additional_body_parameters") is None
+            else {
+                **jsonable_encoder(request),
+                **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
+            },
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
