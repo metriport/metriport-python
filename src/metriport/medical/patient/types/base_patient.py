@@ -3,10 +3,8 @@
 import datetime as dt
 import typing
 
-from ....commons.types.address import Address
 from ....core.datetime_utils import serialize_datetime
-from .contact import Contact
-from .personal_identifier import PersonalIdentifier
+from .demographics import Demographics
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
@@ -14,28 +12,7 @@ except ImportError:
     import pydantic  # type: ignore
 
 
-class BasePatient(pydantic.BaseModel):
-    first_name: str = pydantic.Field(
-        alias="firstName",
-        description=(
-            "The Patient's first name(s).\n"
-            "You may provide a comma/space delimited string to specify\n"
-            "multiple first and last names. For example, the following inputs\n"
-            'would be equivalent: "John,Jonathan" & "John Jonathan"\n'
-        ),
-    )
-    last_name: str = pydantic.Field(alias="lastName", description="The Patient's last name(s).")
-    dob: str = pydantic.Field(description="The Patient's date of birth (DOB), formatted `YYYY-MM-DD` as per ISO 8601.")
-    gender_at_birth: str = pydantic.Field(
-        alias="genderAtBirth", description="The Patient's gender at birth, can be one of `M` or `F`."
-    )
-    personal_identifiers: typing.Optional[typing.List[PersonalIdentifier]] = pydantic.Field(
-        alias="personalIdentifiers",
-        default=None,
-        description=("An array of the Patient's personal IDs, such as a driver's license.\n" "May be empty.\n"),
-    )
-    address: typing.List[Address]
-    contact: typing.Optional[typing.List[Contact]] = None
+class BasePatient(Demographics):
     external_id: typing.Optional[str] = pydantic.Field(
         alias="externalId", default=None, description="An external Patient ID to associate to a Patient in Metriport."
     )

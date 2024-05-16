@@ -24,6 +24,7 @@ from .organization import OrgType, Organization, OrganizationCreate
 from .patient import (
     BasePatient,
     Contact,
+    Demographics,
     DriversLicense,
     FacilityId,
     ListPatientsResponse,
@@ -54,6 +55,7 @@ __all__ = [
     "ConsolidatedWebhookStatus",
     "Contact",
     "ConversionType",
+    "Demographics",
     "DocumentQuery",
     "DocumentQueryStatus",
     "DocumentUrl",

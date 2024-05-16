@@ -10,6 +10,7 @@ from ...core.jsonable_encoder import jsonable_encoder
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
 from .types.base_patient import BasePatient
+from .types.demographics import Demographics
 from .types.list_patients_response import ListPatientsResponse
 from .types.medical_record_status import MedicalRecordStatus
 from .types.patient import Patient
@@ -411,6 +412,80 @@ class PatientClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def match(self, *, request: Demographics, request_options: typing.Optional[RequestOptions] = None) -> Patient:
+        """
+        Searches for a Patient previously created in Metriport, based on demographic data.
+
+        Parameters:
+            - request: Demographics.
+
+            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from metriport import Address, UsState
+        from metriport.client import Metriport
+        from metriport.medical import Demographics, PersonalIdentifier_DriversLicense
+
+        client = Metriport(
+            api_key="YOUR_API_KEY",
+        )
+        client.medical.patient.match(
+            request=Demographics(
+                first_name="Karen",
+                last_name="Lynch",
+                dob="1963-12-30",
+                gender_at_birth="F",
+                personal_identifiers=[
+                    PersonalIdentifier_DriversLicense(
+                        type="driversLicense",
+                        state=UsState.CA,
+                        value="51227265",
+                    )
+                ],
+                address=[
+                    Address(
+                        address_line_1="2261 Market Street",
+                        address_line_2="#4818",
+                        city="San Francisco",
+                        state=UsState.CA,
+                        zip="94114",
+                        country="USA",
+                    )
+                ],
+            ),
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/patient/match"),
+            params=jsonable_encoder(
+                request_options.get("additional_query_parameters") if request_options is not None else None
+            ),
+            json=jsonable_encoder(request)
+            if request_options is None or request_options.get("additional_body_parameters") is None
+            else {
+                **jsonable_encoder(request),
+                **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
+            },
+            headers=jsonable_encoder(
+                remove_none_from_dict(
+                    {
+                        **self._client_wrapper.get_headers(),
+                        **(request_options.get("additional_headers", {}) if request_options is not None else {}),
+                    }
+                )
+            ),
+            timeout=request_options.get("timeout_in_seconds")
+            if request_options is not None and request_options.get("timeout_in_seconds") is not None
+            else 60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(Patient, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncPatientClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -794,6 +869,80 @@ class AsyncPatientClient:
         )
         if 200 <= _response.status_code < 300:
             return pydantic.parse_obj_as(MedicalRecordStatus, _response.json())  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def match(self, *, request: Demographics, request_options: typing.Optional[RequestOptions] = None) -> Patient:
+        """
+        Searches for a Patient previously created in Metriport, based on demographic data.
+
+        Parameters:
+            - request: Demographics.
+
+            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from metriport import Address, UsState
+        from metriport.client import AsyncMetriport
+        from metriport.medical import Demographics, PersonalIdentifier_DriversLicense
+
+        client = AsyncMetriport(
+            api_key="YOUR_API_KEY",
+        )
+        await client.medical.patient.match(
+            request=Demographics(
+                first_name="Karen",
+                last_name="Lynch",
+                dob="1963-12-30",
+                gender_at_birth="F",
+                personal_identifiers=[
+                    PersonalIdentifier_DriversLicense(
+                        type="driversLicense",
+                        state=UsState.CA,
+                        value="51227265",
+                    )
+                ],
+                address=[
+                    Address(
+                        address_line_1="2261 Market Street",
+                        address_line_2="#4818",
+                        city="San Francisco",
+                        state=UsState.CA,
+                        zip="94114",
+                        country="USA",
+                    )
+                ],
+            ),
+        )
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "medical/v1/patient/match"),
+            params=jsonable_encoder(
+                request_options.get("additional_query_parameters") if request_options is not None else None
+            ),
+            json=jsonable_encoder(request)
+            if request_options is None or request_options.get("additional_body_parameters") is None
+            else {
+                **jsonable_encoder(request),
+                **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
+            },
+            headers=jsonable_encoder(
+                remove_none_from_dict(
+                    {
+                        **self._client_wrapper.get_headers(),
+                        **(request_options.get("additional_headers", {}) if request_options is not None else {}),
+                    }
+                )
+            ),
+            timeout=request_options.get("timeout_in_seconds")
+            if request_options is not None and request_options.get("timeout_in_seconds") is not None
+            else 60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(Patient, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

@@ -3,6 +3,7 @@
 from .types import (
     BasePatient,
     Contact,
+    Demographics,
     DriversLicense,
     FacilityId,
     ListPatientsResponse,
@@ -16,6 +17,7 @@ from .types import (
 __all__ = [
     "BasePatient",
     "Contact",
+    "Demographics",
     "DriversLicense",
     "FacilityId",
     "ListPatientsResponse",

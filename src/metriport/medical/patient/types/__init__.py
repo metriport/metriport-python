@@ -2,6 +2,7 @@
 
 from .base_patient import BasePatient
 from .contact import Contact
+from .demographics import Demographics
 from .drivers_license import DriversLicense
 from .facility_id import FacilityId
 from .list_patients_response import ListPatientsResponse
@@ -13,6 +14,7 @@ from .record_status import RecordStatus
 __all__ = [
     "BasePatient",
     "Contact",
+    "Demographics",
     "DriversLicense",
     "FacilityId",
     "ListPatientsResponse",
